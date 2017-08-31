@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="icon" type="shortcut icon" sizes="32x32" href="./assets/images/icon.png" />
+	<title>商户营销管理系统</title>
+</head>
+<body>
+<div class="container">
+	<div class="nav">
+		<span>商家红包后台</span>
+	</div>
+	<div class="box">
+		<span class="right">&#10004</span><span>支付成功</span>
+		<div class="prompt">页面将在 <span id="num">5</span>秒 后自动关闭</div>
+	</div>
+</div>
+</body>
+
+</html>
+<script>
+
+	window.onload = function ()
+	{
+		var s = 5;
+		var timer = setInterval(function ()
+		{
+			--s;
+			document.getElementById("num").innerHTML = s;
+			if (s == 0)
+			{
+				clearInterval(timer);
+				window.close();
+			}
+		}, 1000)
+	}
+</script>
+<style>
+	html {
+		height: 100%;
+	}
+
+	body {
+		background-color: #f6f6f6;
+		height: 100%;
+		margin: 0;
+		font-size: 30px;
+		color: #666666;
+		font-family: "Microsoft YaHei", tahoma, arial, Hiragino Sans GB, \5b8b\4f53;
+		word-spacing: 2px;
+	}
+
+	#num {
+		color: #da3610;
+	}
+
+	.container {
+		width: 100%;
+		height: 100%;
+		margin: auto;
+		background-color: #f6f6f6;
+	}
+
+	.box {
+		width: calc(100% - 40px);
+		height: calc(80% - 106px);
+		margin: 20px;
+		padding-top: 10%;
+		text-align: center;
+		background: #ffffff;
+	}
+
+	.right {
+		display: inline-block;
+		height: 40px;
+		width: 40px;
+		line-height: 40px;
+		text-align: center;
+		border: 2px solid #da3610;
+		border-radius: 50%;
+		color: #da3610;
+		font-size: 28px;
+		margin-right: 20px;
+	}
+
+	.prompt {
+		font-size: 14px;
+		margin: auto;
+		margin-top: 30px;
+		width: 80%;
+
+	}
+
+	.nav {
+		height: 66px;
+		position: relative;
+		background: #191818;
+		padding: 0 52px;
+		box-sizing: border-box;
+		line-height: 66px;
+		font-size: 21px;
+	}
+
+</style>
+
+
+

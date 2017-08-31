@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>安全支付</title>
+  </head>
+  <body>
+  </body>
+
+</html>
+
+<script>
+
+  window.onload=function(){
+    document.body.innerHTML=JSON.parse(window.localStorage.getItem('pay')).data;
+    document.forms['punchout_form'].submit();
+  }
+</script>
+
+
+

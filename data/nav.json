@@ -1,0 +1,106 @@
+[
+  {
+	"id": "qrcode",
+	"name": "商品二维码管理",
+	"icon": "mycode",
+	"nav": [
+	  {
+		"name": "我的二维码",
+		"path": "/qrcode",
+		"highLightList": ["/qrcode"]
+	  }
+	]
+  },
+  {
+	"id": "activity",
+	"name": "红包活动管理",
+	"icon": "bag",
+	"nav": [
+	  {
+		"name": "我的活动",
+		"path": "/activity",
+		"highLightList": ["/activity", "/activitydetail", "/addactivity"]
+	  }
+	]
+  },
+  {
+	"id": "member",
+	"name": "顾客会员管理",
+	"icon": "member",
+	"nav": [
+	  {
+		"name": "顾客分析",
+		"path": "/member",
+		"highLightList": ["/member"]
+	  }, {
+		"name": "会员设置",
+		"path": "/membermanage",
+		"highLightList": ["/membermanage"]
+	  }
+	]
+  },
+  {
+	"id": "bill",
+	"name": "财务管理",
+	"icon": "money",
+	"nav": [
+	  {
+		"name": "二维码购买账单",
+		"path": "/bill",
+		"highLightList": ["/bill"]
+	  }, {
+		"name": "红包发放账单",
+		"path": "/bag",
+		"highLightList": ["/bag"]
+	  }, {
+		"name": "余额报警",
+		"path": "/warning",
+		"highLightList": ["/warning"]
+	  }
+	]
+  },
+  {
+	"id": "data",
+	"name": "数据统计",
+	"icon": "data",
+	"nav": [
+	  {
+		"name": "数据概览",
+		"path": "/data",
+		"highLightList": ["/data"]
+	  }
+	]
+  }, {
+  "id": "role",
+  "name": "权限管理",
+  "icon": "account",
+  "nav": [
+	{
+	  "name": "我的员工",
+	  "path": "/staff",
+	  "highLightList": ["/staff", "/addstaff"]
+	}, {
+	  "name": "权限设置",
+	  "path": "/role",
+	  "highLightList": ["/role"]
+	}
+  ]
+}, {
+  "id": "help",
+  "name": "帮助中心",
+  "icon": "help",
+  "nav": [
+	{
+	  "name": "使用说明",
+	  "path": "/explain",
+	  "highLightList": ["/explain"]
+	}
+  ]
+}
+]
+
+
+
+
+
+

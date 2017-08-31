@@ -1,0 +1,77 @@
+.account-header {
+  display: flex;
+  height: 138px;
+  .base-info {
+	flex: 1;
+	background: #fff;
+	border: 1px solid #dbdee7;
+	text-align: center;
+	line-height: 138px;
+  }
+  .company-info {
+	margin-left: 60px;
+  }
+  .current-item {
+	border: 1px solid #01aaef;
+	color: #01aaef;
+  }
+}
+
+.personal-box {
+  //background: #ffffff;
+  //margin-top: 20px;
+  //border-radius: 4px;
+  border: 1px solid #efefef;
+  padding-top: 5px;
+  font-size: 14px;
+  padding-left: 60px;
+  .detail-info {
+	margin-top: 42px;
+	overflow: hidden;
+	.title {
+	  float: left;
+	  margin-right: 35px;
+	  text-align: right;
+	  width: 85px;
+	  line-height: 40px;
+	}
+	.title-content {
+	  float: left;
+	  line-height: 40px;
+	  .phone-number {
+		float: left;
+	  }
+	  .mod-number {
+		//float: left;
+		//color: #ef4f4f;
+		//margin-left: 25px;
+		//background: url("../../assets/images/modify.png") no-repeat left center;
+		//padding-left: 20px;
+	  }
+	}
+	.name {
+	  padding-left: 38px;
+	}
+	input {
+	  width: 330px;
+	  height: 40px;
+	  line-height: 40px;
+	  outline: none;
+	  border: 1px solid #efefef;
+	  border-radius: 4px;
+	  padding-left: 20px;
+	  float: left;
+	}
+  }
+  .save-mod {
+	margin-left: 120px;
+  }
+}
+
+.cancel-btn {
+  border-radius: 4px;
+  border: 1px solid #ef4f4f;
+  background: none;
+  color: #ef4f4f;
+  margin-left: 50px;
+}

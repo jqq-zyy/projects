@@ -1,0 +1,59 @@
+.add-button{
+  width: 178px;
+  height: 38px;
+  font-size: 18px;
+  line-height: 38px;
+  margin-left: 68px;
+}
+
+.admin-calendar-table{
+  td{
+	position: relative;
+	.drop-icon {
+	  top: 20px;
+	}
+	.rotate {
+	  top: 30px;
+	}
+	.frozen{
+	  color: #f2687a;
+	}
+	.thaw{
+	  color: #01aef2;
+	}
+  }
+}
+.staff-bar{
+  height: 100px;
+  border-radius: 4px;
+  border: 1px solid #efefef;
+  //margin-top: 20px;
+  background: #ffffff;
+  line-height: 100px;
+  font-size: 16px;
+  padding-left: 40px;
+  p{
+	float: left;
+	.staff-number{
+	  font-style: normal;
+	  font-size: 40px;
+
+	}
+  }
+  .search-box{
+	float: right;
+	margin-right: 142px;
+	.search{
+	  width: 240px;
+	  height: 36px;
+	  line-height: 36px;
+	  border-radius: 4px;
+	  border: 1px solid #efefef;
+	  padding-left: 40px;
+	  background: url("../../assets/images/search.png") no-repeat 14px center;
+	}
+	.search-btn{
+	  margin-left: 30px;
+	}
+  }
+}
