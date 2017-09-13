@@ -1,102 +1,82 @@
 [
   {
-	"id": "qrcode",
-	"name": "商品二维码管理",
+	"id": "user",
+	"name": "商户列表",
 	"icon": "mycode",
-	"nav": [
-	  {
-		"name": "我的二维码",
-		"path": "/qrcode",
-		"highLightList": ["/qrcode"]
-	  }
-	]
+	"path": "/user",
+	"highLightList": ["/user","/userdetail"]
   },
   {
 	"id": "activity",
-	"name": "红包活动管理",
+	"name": "活动列表页",
 	"icon": "bag",
-	"nav": [
-	  {
-		"name": "我的活动",
-		"path": "/activity",
-		"highLightList": ["/activity", "/activitydetail", "/addactivity"]
-	  }
-	]
+	"path": "/activity",
+	"highLightList": ["/activity", "/activitydetail"]
   },
   {
-	"id": "member",
-	"name": "顾客会员管理",
+	"id": "business",
+	"name": "商家财务信息",
 	"icon": "member",
 	"nav": [
 	  {
-		"name": "顾客分析",
-		"path": "/member",
-		"highLightList": ["/member"]
+		"name": "二维码账户",
+		"path": "/qrcode",
+		"highLightList": ["/qrcode"]
 	  }, {
-		"name": "会员设置",
-		"path": "/membermanage",
-		"highLightList": ["/membermanage"]
+		"name": "红包账户",
+		"path": "/bag",
+		"highLightList": ["/bag"]
+	  },{
+		"name": "红包账户详情页",
+		"path": "/bagdetail",
+		"highLightList": [ "/bagdetail"]
 	  }
 	]
   },
   {
-	"id": "bill",
-	"name": "财务管理",
+	"id": "platform",
+	"name": "平台财务信息",
 	"icon": "money",
-	"nav": [
-	  {
-		"name": "二维码购买账单",
-		"path": "/bill",
-		"highLightList": ["/bill"]
-	  }, {
-		"name": "红包发放账单",
-		"path": "/bag",
-		"highLightList": ["/bag"]
-	  }, {
-		"name": "余额报警",
-		"path": "/warning",
-		"highLightList": ["/warning"]
-	  }
-	]
+	"path": "/platform",
+	"highLightList": ["/platform", "/addplatform"]
   },
   {
 	"id": "data",
-	"name": "数据统计",
+	"name": "图表分析",
 	"icon": "data",
+	"path": "/data",
+	"highLightList": ["/data"]
+  },
+  {
+	"id": "rule",
+	"name": "规则设置",
+	"icon": "data",
+	"path": "/rule",
+	"highLightList": ["/rule"]
+  },
+  {
+	"id": "role",
+	"name": "员工管理",
+	"icon": "account",
 	"nav": [
 	  {
-		"name": "数据概览",
-		"path": "/data",
-		"highLightList": ["/data"]
+		"name": "我的员工",
+		"path": "/staff",
+		"highLightList": ["/staff", "/addstaff"]
+	  }, {
+		"name": "权限管理",
+		"path": "/role",
+		"highLightList": ["/role"]
 	  }
 	]
-  }, {
-  "id": "role",
-  "name": "权限管理",
-  "icon": "account",
-  "nav": [
-	{
-	  "name": "我的员工",
-	  "path": "/staff",
-	  "highLightList": ["/staff", "/addstaff"]
-	}, {
-	  "name": "权限设置",
-	  "path": "/role",
-	  "highLightList": ["/role"]
-	}
-  ]
-}, {
-  "id": "help",
-  "name": "帮助中心",
-  "icon": "help",
-  "nav": [
-	{
-	  "name": "使用说明",
-	  "path": "/explain",
-	  "highLightList": ["/explain"]
-	}
-  ]
-}
+  },
+  {
+	"id": "checkqrcode",
+	"name": "查找二维码",
+	"icon": "help",
+	"path": "/explain",
+	"highLightList": ["/explain"]
+  }
 ]
 
 

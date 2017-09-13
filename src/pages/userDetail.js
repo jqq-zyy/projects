@@ -4,11 +4,11 @@
 export default function (to, next)
 {
 	var id = to.query.id;
-	g.net.call("/activity/queryActivityDetail",{
+	g.net.call("/getActivityDetail",{
 		"id":id
 	}).then(($data) =>
 	{
-		g.data.activityDetailPool.update($data);
+		g.data.userDetailPool.update($data);
 		next();
 	}, (err) =>
 	{

@@ -3,13 +3,12 @@
  */
 var _list = [];
 var _hash = Object.create(null);
-var _unpublishedCount = 0;
-var _unstartedCount = 0;
-var _onCount = 0;
-var _pauseCount = 0;
-var _completeCount = 0;
 var _totalPage = 0;
 var _total = 0;
+var _totalQrCodeNum = 0;
+var _totalScanCount = 0;
+var _totalUseRpAmount = 0;
+var _totalUseRpAmountDesc = 0;
 
 export default class ActivityPool {
 	constructor()
@@ -18,20 +17,17 @@ export default class ActivityPool {
 
 	update($dObj)
 	{
-		$dObj.hasOwnProperty('unpublishedCount') && (_unpublishedCount = $dObj.unpublishedCount);
-		$dObj.hasOwnProperty('unstartedCount') && (_unstartedCount = $dObj.unstartedCount);
-		$dObj.hasOwnProperty('ongoingCount') && (_onCount = $dObj.ongoingCount);
-		$dObj.hasOwnProperty('pauseCount') && (_pauseCount = $dObj.pauseCount);
-		$dObj.hasOwnProperty('completeCount') && (_completeCount = $dObj.completeCount);
-		_total = _unpublishedCount + _unstartedCount + _onCount + _pauseCount + _completeCount;
-		if ($dObj.resultPageList)
+		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
+		if ($dObj.model)
 		{
-			$dObj.resultPageList.hasOwnProperty('totalPage') && (_totalPage = $dObj.resultPageList.totalPage);
-			//$dObj.resultPageList.hasOwnProperty('total') && (_total = $dObj.resultPageList.total);
-			for (var item of $dObj.resultPageList.data)
-			{
-				this.add(item);
-			}
+			$dObj.model.hasOwnProperty('totalQrCodeNum') && (_totalQrCodeNum = $dObj.model.totalQrCodeNum);
+			$dObj.model.hasOwnProperty('totalScanCount') && (_totalScanCount = $dObj.model.totalScanCount);
+			$dObj.model.hasOwnProperty('totalUseRpAmount') && (_totalUseRpAmount = $dObj.model.totalUseRpAmount);
+			$dObj.model.hasOwnProperty('totalUseRpAmountDesc') && (_totalUseRpAmountDesc = $dObj.model.totalUseRpAmountDesc);
+		}
+		for (var item of $dObj.data)
+		{
+			this.add(item);
 		}
 
 	}
@@ -60,24 +56,24 @@ export default class ActivityPool {
 		return _list;
 	}
 
-	get unpublishedCount()
+	get totalQrCodeNum()
 	{
-		return _unpublishedCount;
+		return _totalQrCodeNum;
 	}
 
-	get unstartedCount()
+	get totalScanCount()
 	{
-		return _unstartedCount;
+		return _totalScanCount;
 	}
 
-	get onCount()
+	get totalUseRpAmount()
 	{
-		return _onCount;
+		return _totalUseRpAmount;
 	}
 
-	get pauseCount()
+	get totalUseRpAmountDesc()
 	{
-		return _pauseCount;
+		return _totalUseRpAmountDesc;
 	}
 
 	get completeCount()
@@ -111,18 +107,21 @@ function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
-	d.activityNo = '';
 	d.shopId = 0;
 	d.activityName = '';
-	d.startTime = "";
-	d.endTime = "";
-	d.creacteTime = "";
-	d.status = 0;
-	d.receivedCount = 0;
-	d.relateCount = 0;
-	d.receivedAmount = 0;
-	d.relateStatus = 0;
-	d.statusStr = "";
+	d.companyName = '';
+	d.brandName = '';
+	d.activityStatus = 0;
+	d.activityStatusDesc = 0;
+	d.createTime = 0;
+	d.startTime = 0;
+	d.endTime = 0;
+	d.createTime = 0;
+	d.createTimeDesc = 0;
+	d.qrCodeNum = 0;
+	d.totalScanCount = 0;
+	d.useRpAmount = 0;
+	d.useRpAmountDesc = 0;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -131,22 +130,17 @@ function createData($dObj)
 function updateData($dObj)
 {
 	$dObj.hasOwnProperty('activityId') && (this.id = $dObj.activityId);
-	$dObj.hasOwnProperty('activityNo') && (this.activityNo = $dObj.activityNo);
 	$dObj.hasOwnProperty('shopId') && (this.shopId = $dObj.shopId);
 	$dObj.hasOwnProperty('activityName') && (this.activityName = $dObj.activityName);
-	$dObj.hasOwnProperty('activityStartTimeStr') && (this.startTime = $dObj.activityStartTimeStr);
-	$dObj.hasOwnProperty('activityEndTimeStr') && (this.endTime = $dObj.activityEndTimeStr);
+	$dObj.hasOwnProperty('brandName') && (this.brandName = $dObj.brandName);
+	$dObj.hasOwnProperty('companyFullName') && (this.companyName = $dObj.companyFullName);
+	$dObj.hasOwnProperty('activityStatus') && (this.activityStatus = $dObj.activityStatus);
+	$dObj.hasOwnProperty('activityStatusDesc') && (this.activityStatusDesc = $dObj.activityStatusDesc);
 	$dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
-	$dObj.hasOwnProperty('activityStatus') && (this.status = $dObj.activityStatus);
-	$dObj.hasOwnProperty('activityStatusStr') && (this.statusStr = $dObj.activityStatusStr);
-	$dObj.hasOwnProperty('receivedCount') && (this.receivedCount = $dObj.receivedCount);
-	$dObj.hasOwnProperty('receivedAmount') && (this.receivedAmount = $dObj.receivedAmount);
-	$dObj.hasOwnProperty('relateQrCodeCount') && (this.relateCount = $dObj.relateQrCodeCount);
-	$dObj.hasOwnProperty('relateStatus') && (this.relateStatus = $dObj.relateStatus);
+	$dObj.hasOwnProperty('createTimeDesc') && (this.createTimeDesc = $dObj.createTimeDesc);
+	$dObj.hasOwnProperty('qrCodeNum') && (this.qrCodeNum = $dObj.qrCodeNum);
+	$dObj.hasOwnProperty('totalScanCount') && (this.totalScanCount = $dObj.totalScanCount);
+	$dObj.hasOwnProperty('useRpAmount') && (this.useRpAmount = $dObj.useRpAmount);
+	$dObj.hasOwnProperty('useRpAmountDesc') && (this.useRpAmountDesc = $dObj.useRpAmountDesc);
+
 }
-
-
-
-
-
-

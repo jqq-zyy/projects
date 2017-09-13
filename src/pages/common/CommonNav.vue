@@ -2,7 +2,7 @@
 	<div class="nav-navicon">
 		<div>
 			<header class="header">
-				商户营销管理系统
+				运营管理后台
 			</header>
 			<section class="nav-body">
 				<div class="am-icon-volume-up" v-for="navClass in navClassList">
@@ -12,7 +12,9 @@
 							 :src="g.config.path.images+'/'+navClass.icon+onConfirm_isCurrent(navClass.id)+'.png'">
 						<p :class="[onConfirm_isCurrent(navClass.id)? 'content-blue':'']">{{navClass.name}}</p>
 
-						<img class="icon-r" :src="g.config.path.images+'/icon-r'+onConfirm_isCurrent(navClass.id)+'.png'" alt="">
+						<img class="icon-r"
+							 v-show="navClass.nav!=''"
+							 :src="g.config.path.images+'/icon-r'+onConfirm_isCurrent(navClass.id)+'.png'">
 					</div>
 					<!--<transition name="nav">-->
 					<ul class="nav-column" v-show="currSelectNavIdList.indexOf(navClass.id) >= 0">
@@ -39,7 +41,6 @@
 
 	export default {
 		created(){
-
 //			var permissionId = g.data.get("userInfo").permissionIds;
 //			this.idList = permissionId.split(",");
 			var tempList = g.data.navPool.list.concat();
@@ -94,8 +95,15 @@
 		methods: {
 			onClick_navClassItem($navClassId)
 			{
+				var currentObj = g.data.navPool.getDataById($navClassId);
 				var index = this.currSelectNavIdList.indexOf($navClassId);
-				this.currSelectNavIdList = [];
+				if(currentObj.path == this.currPath){
+					return
+				}
+				if(currentObj.nav==""){
+					g.url = currentObj.path;
+				}
+//				this.currSelectNavIdList = [];
 				if (index < 0)
 				{
 					this.currSelectNavIdList.push($navClassId);

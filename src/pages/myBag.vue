@@ -2,7 +2,8 @@
 	<main-layout :isLoad="isLoad">
 		<div slot="content" class="content-box">
 			<div class="admin-main-wrap">
-				<common-nav :nav="'bill'"></common-nav>
+				<common-nav :nav="'business'"></common-nav>
+
 				<div class="right-content-wrap">
 					<common-top-nav></common-top-nav>
 					<div class="admin-data-items">

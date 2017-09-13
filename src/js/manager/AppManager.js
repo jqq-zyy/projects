@@ -13,7 +13,7 @@ import socketManager from "./SocketManager";
 
 var _initList = [];
 _initList.push(initGlobal);
-_initList.push(initLogin);
+//_initList.push(initLogin);
 _initList.push(initStaticData);
 _initList.push(initSocket);
 
@@ -35,13 +35,15 @@ export function init($callback)
 }
 
 //初始化登录状态
-function initLogin()
-{
-	loginManager.init(()=>
-	{
-		this.apply();
-	});
-}
+//function initLogin()
+//{
+//	loginManager.init(()=>
+//	{
+//		this.apply();
+//	});
+//}
+
+
 
 //初始化全局方法
 function initGlobal()

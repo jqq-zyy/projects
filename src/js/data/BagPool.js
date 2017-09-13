@@ -3,20 +3,18 @@
  */
 var _list = [];
 var _hash = Object.create(null);
-var _qrcodeNum = 0;
-var _qrcodeAmount = 0;
+var _rpAmount = 0;
 var _total = 0;
 var _totalPage = 0;
 
-export default class QRcodePool {
+export default class BagPool {
 	constructor()
 	{
 	}
 
 	update($dObj)
 	{
-		$dObj.model.hasOwnProperty('qrcodeNum') && (_qrcodeNum = $dObj.model.qrcodeNum);
-		$dObj.model.hasOwnProperty('qrcodeAmount') && (_qrcodeAmount = $dObj.model.qrcodeAmount);
+		$dObj.model.hasOwnProperty('rpAmount') && (_rpAmount = $dObj.model.rpAmount);
 		$dObj.hasOwnProperty('total') && (_total = $dObj.total);
 		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
 		for (var item of $dObj.data)
@@ -49,14 +47,9 @@ export default class QRcodePool {
 		return _list;
 	}
 
-	get qrcodeNum()
+	get rpAmount()
 	{
-		return _qrcodeNum;
-	}
-
-	get qrcodeAmount()
-	{
-		return _qrcodeAmount;
+		return _rpAmount;
 	}
 
 	get totalPage()
@@ -73,15 +66,14 @@ export default class QRcodePool {
 	{
 		return _hash[$id];
 	}
-	
+
 	removeAll()
 	{
 		_list = [];
 		_hash = Object.create(null);
 		_total = 0;
 		_totalPage = 0;
-		_qrcodeNum = 0;
-		_qrcodeAmount = 0;
+		_rpAmount = 0;
 	}
 }
 
@@ -92,8 +84,7 @@ function createData($dObj)
 	d.shopId = 0;
 	d.orderType = 0;
 	d.orderTypeDesc = "";
-	d.qrcodeRefundNum = 0;
-	d.refundUnitPrice = 0;
+	d.orderAmount = 0;
 	d.payWay = 0;
 	d.payWayDesc = "";
 	d.orderStatus = 0;
@@ -111,8 +102,6 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('shopId') && (this.shopId = $dObj.shopId);
 	$dObj.hasOwnProperty('orderType') && (this.orderType = $dObj.orderType);
 	$dObj.hasOwnProperty('orderTypeDesc') && (this.orderTypeDesc = $dObj.orderTypeDesc);
-	$dObj.hasOwnProperty('qrcodeRefundNum') && (this.qrcodeRefundNum = $dObj.qrcodeRefundNum);
-	$dObj.hasOwnProperty('refundUnitPrice') && (this.refundUnitPrice = $dObj.refundUnitPrice);
 	$dObj.hasOwnProperty('orderAmount') && (this.orderAmount = $dObj.orderAmount);
 	$dObj.hasOwnProperty('payWay') && (this.payWay = $dObj.payWay);
 	$dObj.hasOwnProperty('payWayDesc') && (this.payWayDesc = $dObj.payWayDesc);

@@ -275,8 +275,3 @@
 	/*@import "../css/myBill.scss";*/
 	@import "../css/allData.scss";
 </style>
-
-
-
-
-

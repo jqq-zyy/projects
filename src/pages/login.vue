@@ -20,8 +20,8 @@
 			<!--登录-->
 			<transition name="bounce">
 				<div class="affix-box default-pos-type" v-show="isShow_loginPop">
-					<div class="pop-edit-passwor pop-edit login-pop">
-						<div class="show-close-btn close-btn" @click="onClick_closeBtn">
+					<div class="pop-edit-passwor pop-edit login-pop" ref="loginBox">
+						<div class="show-close-btn close-btn" @click="onClick_closeBtn('login')">
 							<img :src="g.config.path.images+'/close1.png'" />
 						</div>
 						<div class="pop-head">{{g.lang("登录")}}</div>
@@ -53,7 +53,7 @@
 					</div>
 				</div>
 			</transition>
-			<!--重置密码-->
+ 			<!--重置密码-->
 			<transition name="bounce">
 				<div class="affix-box default-pos-type" v-show="isShow_modPwdPop">
 					<div class="pop-edit-password reset-pop pop-edit" ref="modPwdBox">

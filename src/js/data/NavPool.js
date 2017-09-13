@@ -59,7 +59,9 @@ function createData($dObj)
 	d.id = 0;
 	d.name = '';
 	d.nav = '';
-	d.role = '';
+	d.icon = '';
+	d.path = '';
+	d.highLightList = [];
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -71,5 +73,6 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('name') && (this.name = $dObj.name);
 	$dObj.hasOwnProperty('icon') && (this.icon = $dObj.icon);
 	$dObj.hasOwnProperty('nav') && (this.nav = $dObj.nav);
-	$dObj.hasOwnProperty('role') && (this.role = $dObj.role);
+	$dObj.hasOwnProperty('path') && (this.path = $dObj.path);
+	$dObj.hasOwnProperty('highLightList') && (this.highLightList = $dObj.highLightList);
 }

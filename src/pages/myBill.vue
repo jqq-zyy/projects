@@ -146,7 +146,7 @@
 	import BillDetailPop from '../components/BillPop/billDetailPop.vue';
 	import qrcodeRefundPop from '../components/QRcodePop/QRcodeRefundPop.vue';
 	import {Popup} from 'mint-ui';
-	import {getQrcode} from './myQRcode';
+	import {getQrcode} from './userList';
 	import Calendar from './common/Calendar.vue';
 	import CommonFooter from './common/CommonFooter.vue';
 	import CommonPrompt from './common/CommonPrompt.vue';

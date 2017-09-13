@@ -15,10 +15,10 @@ var WEB_CONFIG = {
 
 	url: {
 		domain: "",
-		server: "http://192.168.12.5:8080/rp-mms-web/mms-web",
+//		server: "http://192.168.12.5:8080/rp-mms-web/mms-web",
 		socket: "http://192.168.12.5:8081/rp-mms-web/message",
 		//server: "http://192.168.12.4:8084/mms-web",
-		//server: "",
+		server: "",
 		adminPage: ""
 	},
 
@@ -48,7 +48,7 @@ var WEB_CONFIG = {
 	},
 
 	file: {
-		staticData: "{$data}/staticData_513912253682275.data",
+		staticData: "{$data}/staticData_502312040469088.data",
 
 	},
 

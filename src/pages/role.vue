@@ -16,6 +16,7 @@
 											 class="pointer icon-close " @click="onClick_deleteBtn(item.id)">
 										<div class="panel-heading">
 											<img :src="g.config.path.images+'/people.png'" alt="">
+
 										</div>
 										<div class="panel-body ">
 											<p >职务名称：<span>{{item.roleName}}</span></p>
@@ -71,7 +72,6 @@
 									<tree-menu :model="menu" ref="tree" :menuList="menu" :label="index"
 											   :selectKeys="selectKeys"></tree-menu>
 								</div>
-
 							</div>
 							<div class="line"></div>
 							<div class="m-title">

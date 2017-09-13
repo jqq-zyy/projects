@@ -3,46 +3,43 @@
  */
 import Index from "./pages/index.vue";
 import IndexMain from "./pages/index";
-import ActivityDetail from "./pages/activityDetail.vue";
-import ActivityDetailMain from "./pages/activityDetail";
-import AddActivity from "./pages/addActivity.vue";
-import AddActivityMain from "./pages/addActivity";
-import AddStaff from "./pages/addStaff.vue";
-import AddStaffMain from "./pages/addStaff";
 import AllData from "./pages/allData.vue";
 import AllDataMain from "./pages/allData";
-import CompanyInfo from "./pages/companyInfo.vue";
-import CompanyInfoMain from "./pages/companyInfo";
-import Explain from "./pages/explain.vue";
-import ExplainMain from "./pages/explain";
-import Login from "./pages/login.vue";
-import LoginMain from "./pages/login";
 import MemberList from "./pages/memberList.vue";
 import MemberListMain from "./pages/memberList";
 import MemberManage from "./pages/memberManage.vue";
 import MemberManageMain from "./pages/memberManage";
 import ModPwd from "./pages/modPwd.vue";
 import ModPwdMain from "./pages/modPwd";
-import MyActivity from "./pages/myActivity.vue";
-import MyActivityMain from "./pages/myActivity";
 import MyBill from "./pages/myBill.vue";
 import MyBillMain from "./pages/myBill";
-import MyQRcode from "./pages/myQRcode.vue";
-import MyQRcodeMain from "./pages/myQRcode";
 import myStaff from "./pages/myStaff.vue";
 import myStaffMain from "./pages/myStaff";
-import PersonalInfo from "./pages/personalInfo.vue";
-import PersonalInfoMain from "./pages/personalInfo";
 import Role from "./pages/role.vue";
 import RoleMain from "./pages/role";
-import Sign from "./pages/sign.vue";
-import SignMain from "./pages/sign";
-import Warning from "./pages/warning.vue";
-import WarningMain from "./pages/warning";
-import MyBag from "./pages/myBag.vue";
-import MyBagMain from "./pages/myBag";
-import BindAlipay from "./pages/bindAlipay.vue";
-import BindAlipayMain from "./pages/bindAlipay";
+
+import Activity from "./pages/activity.vue";
+import ActivityMain from "./pages/activity";
+import Login from "./pages/login.vue";
+import LoginMain from "./pages/login";
+import userDetail from "./pages/userDetail.vue";
+import userDetailMain from "./pages/userDetail";
+import UserList from "./pages/userList.vue";
+import UserListMain from "./pages/userList";
+import ActivityDetail from "./pages/activityDetail.vue";
+import ActivityDetailMain from "./pages/activityDetail";
+import QrcodeAccount from "./pages/qrcodeAccount.vue";
+import QrcodeAccountMain from "./pages/qrcodeAccount";
+import BagAccount from "./pages/bagAccount.vue";
+import BagAccountMain from "./pages/bagAccount";
+import BagDetail from "./pages/bagDetail.vue";
+import BagDetailMain from "./pages/bagDetail";
+import Addplatform from "./pages/addplatform.vue";
+import AddplatformMain from "./pages/addplatform";
+import Platform from "./pages/platform.vue";
+import PlatformMain from "./pages/platform";
+import Rule from "./pages/rule.vue";
+import RuleMain from "./pages/rule";
 
 export default [
 	{
@@ -51,35 +48,45 @@ export default [
 		component: Index,
 		preload: IndexMain
 	}, {
+		path: '/activity',
+		name: "活动列表页",
+		component: Activity,
+		preload: ActivityMain
+	}, {
 		path: '/activitydetail',
 		name: "活动详情",
 		component: ActivityDetail,
 		preload: ActivityDetailMain
 	}, {
-		path: '/addactivity',
-		name: "添加活动",
-		component: AddActivity,
-		preload: AddActivityMain
+		path: '/qrcode',
+		name: "二维码账户",
+		component: QrcodeAccount,
+		preload: QrcodeAccountMain
 	}, {
-		path: '/addstaff',
-		name: "添加员工",
-		component: AddStaff,
-		preload: AddStaffMain
+		path: '/bag',
+		name: "红包账户",
+		component: BagAccount,
+		preload: BagAccountMain
+	}, {
+		path: '/bagdetail',
+		name: "红包账户详情",
+		component: BagDetail,
+		preload: BagDetailMain
+	}, {
+		path: '/platform',
+		name: "红包账户详情",
+		component: Platform,
+		preload: PlatformMain
+	} ,{
+		path: '/addplatform',
+		name: "红包账户详情",
+		component: Addplatform,
+		preload: AddplatformMain
 	}, {
 		path: '/data',
 		name: "数据概览",
 		component: AllData,
 		preload: AllDataMain
-	}, {
-		path: '/companyinfo',
-		name: "企业认证信息",
-		component: CompanyInfo,
-		preload: CompanyInfoMain
-	}, {
-		path: '/explain',
-		name: "使用说明",
-		component: Explain,
-		preload: ExplainMain
 	}, {
 		path: '/login',
 		name: "登录",
@@ -101,55 +108,30 @@ export default [
 		component: ModPwd,
 		preload: ModPwdMain
 	}, {
-		path: '/activity',
-		name: "我的活动",
-		component: MyActivity,
-		preload: MyActivityMain
-	}, {
 		path: '/bill',
 		name: "我的账单充值消费记录",
 		component: MyBill,
 		preload: MyBillMain
 	}, {
-		path: '/qrcode',
-		name: "我的二维码",
-		component: MyQRcode,
-		preload: MyQRcodeMain
+		path: '/user',
+		name: "商户列表",
+		component: UserList,
+		preload: UserListMain
 	}, {
 		path: '/staff',
 		name: "我的员工",
 		component: myStaff,
 		preload: myStaffMain
 	}, {
-		path: '/personal',
-		name: "基本信息",
-		component: PersonalInfo,
-		preload: PersonalInfoMain
+		path: '/userdetail',
+		name: "商户详情",
+		component: userDetail,
+		preload: userDetailMain
 	}, {
 		path: '/role',
 		name: "权限设置",
 		component: Role,
 		preload: RoleMain
-	}, {
-		path: '/sign',
-		name: "注册",
-		component: Sign,
-		preload: SignMain
-	}, {
-		path: '/warning',
-		name: "余额报警",
-		component: Warning,
-		preload: WarningMain
-	},{
-		path: '/bag',
-		name: "红包使用记录",
-		component: MyBag,
-		preload: MyBagMain
-	},{
-		path: '/alipay',
-		name: "红包使用记录",
-		component:BindAlipay,
-		preload: BindAlipayMain
 	}
 ];
 

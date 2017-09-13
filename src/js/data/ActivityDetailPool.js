@@ -3,10 +3,13 @@
  */
 var _list = [];
 var _hash = Object.create(null);
-var _relateCount = 0;
-var _receiveCount = 0;
-var _totalAmount = 0;
-var _totalPage = 0;
+var _totalQrCodeNum = 0;
+var _remainQrCodeNum = 0;
+var _totalMakedAmount = 0;
+var _totalMakedRpCount = 0;
+var _activityInfo = {};
+var _activityRpInfo = {};
+var _activityRules = [];
 
 export default class ActivityDetailPool {
 	constructor()
@@ -15,65 +18,48 @@ export default class ActivityDetailPool {
 
 	update($dObj)
 	{
-		$dObj.hasOwnProperty('relateQrcodeCount') && (_relateCount = $dObj.relateQrcodeCount);
-		$dObj.hasOwnProperty('qrcodeReceiveCount') && (_receiveCount = $dObj.qrcodeReceiveCount);
-		$dObj.hasOwnProperty('activityTotalReceiveAmount') && (_totalAmount = $dObj.activityTotalReceiveAmount);
-		if($dObj.pageResult){
-			$dObj.pageResult.hasOwnProperty('totalPage') && (_totalPage = $dObj.pageResult.totalPage);
-			for (var item of $dObj.pageResult.data)
-			{
-				this.add(item);
-			}
-		}
+		$dObj.hasOwnProperty('totalQrCodeNum') && (_totalQrCodeNum = $dObj.totalQrCodeNum);
+		$dObj.hasOwnProperty('remainQrCodeNum') && (_remainQrCodeNum = $dObj.remainQrCodeNum);
+		$dObj.hasOwnProperty('totalMakedAmount') && (_totalMakedAmount = $dObj.totalMakedAmount);
+		$dObj.hasOwnProperty('totalMakedRpCount') && (_totalMakedRpCount = $dObj.totalMakedRpCount);
+		$dObj.hasOwnProperty('activityInfo') && (_activityInfo = $dObj.activityInfo);
+		$dObj.hasOwnProperty('activityRpInfo') && (_activityRpInfo = $dObj.activityRpInfo);
+		$dObj.hasOwnProperty('activityRules') && (_activityRules = $dObj.activityRules);
 	}
 
-	add($dObj)
+	get totalQrCodeNum()
 	{
-		var itemData = createData($dObj);
-		if (!_hash[itemData.id])
-		{
-			_hash[itemData.id] = itemData;
-			_list.push(itemData);
-		}
+		return _totalQrCodeNum;
 	}
 
-	remove($id)
+	get remainQrCodeNum()
 	{
-		var index = _list.indexOf(_hash[$id]);
-		if (index != -1)
-		{
-			_list.splice(index, 1);
-		}
+		return _remainQrCodeNum;
 	}
 
-	get list()
+	get totalMakedAmount()
 	{
-		return _list;
+		return _totalMakedAmount
 	}
 
-	get relateCount()
+	get totalMakedRpCount()
 	{
-		return _relateCount;
+		return _totalMakedRpCount
 	}
 
-	get receiveCount()
+	get activityInfo()
 	{
-		return _receiveCount;
+		return _activityInfo
 	}
 
-	get totalAmount()
+	get activityRpInfo()
 	{
-		return _totalAmount;
+		return _activityRpInfo
 	}
 
-	get totalPage()
+	get activityRules()
 	{
-		return _totalPage;
-	}
-
-	getDataById($id)
-	{
-		return _hash[$id];
+		return _activityRules
 	}
 
 	removeAll()
@@ -81,30 +67,4 @@ export default class ActivityDetailPool {
 		_list = [];
 		_hash = Object.create(null);
 	}
-}
-
-function createData($dObj)
-{
-	var d = {};
-	d.id = 0;
-	d.batchNo = '';
-	d.batchUse ="";
-	d.qrcodeNo = '';
-	d.status = "";
-	d.statusDesc = "";
-	d.relTime = "";
-	d.update = updateData.bind(d);
-	d.update($dObj);
-	return d;
-}
-
-function updateData($dObj)
-{
-	$dObj.hasOwnProperty('id') && (this.id = $dObj.id);
-	$dObj.hasOwnProperty('batchNo') && (this.batchNo = $dObj.batchNo);
-	$dObj.hasOwnProperty('batchUse') && (this.batchUse = $dObj.batchUse);
-	$dObj.hasOwnProperty('qrcodeNo') && (this.qrcodeNo = $dObj.qrcodeNo);
-	$dObj.hasOwnProperty('qrcodeStatus') && (this.status = $dObj.qrcodeStatus);
-	$dObj.hasOwnProperty('qrcodeStatusDesc') && (this.statusDesc = $dObj.qrcodeStatusDesc);
-	$dObj.hasOwnProperty('relActivityTime') && (this.relTime = $dObj.relActivityTime);
 }
