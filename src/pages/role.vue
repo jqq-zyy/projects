@@ -116,7 +116,7 @@
 	import MainLayout from './common/mainLayout.vue';
 	import CommonNav from './common/CommonNav.vue';
 	import CommonTopNav from './common/CommonTopNav.vue';
-	import treeMenu from './common/CommonTree.vue';
+//	import treeMenu from './common/CommonTree.vue';
 	import CommonFooter from './common/CommonFooter.vue';
 
 	export default {
@@ -144,7 +144,7 @@
 			MainLayout,
 			CommonNav,
 			CommonTopNav,
-			treeMenu,
+//			treeMenu,
 			CommonFooter
 		},
 		methods: {

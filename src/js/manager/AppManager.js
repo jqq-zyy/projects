@@ -10,11 +10,15 @@ import Mint from "mint-ui";
 import "mint-ui/lib/style.css";
 import * as loginManager from "./LoginManager";
 import socketManager from "./SocketManager";
+import Vue from "vue";
+import Comp from "./../../buildComp/main";
 
 var _initList = [];
 _initList.push(initGlobal);
 //_initList.push(initLogin);
 _initList.push(initStaticData);
+_initList.push(initBuildComp);
+_initList.push(initSocket);
 _initList.push(initSocket);
 
 export function init($callback)
@@ -43,8 +47,6 @@ export function init($callback)
 //	});
 //}
 
-
-
 //初始化全局方法
 function initGlobal()
 {
@@ -59,11 +61,18 @@ function initStaticData()
 	this.apply();
 }
 
+function initBuildComp()
+{
+	Vue.use(Comp);
+	this.apply();
+}
+
 function initSocket()
 {
 	trace(socketManager)
 	socketManager.init();
-	if(loginManager.isLogin){
+	if (loginManager.isLogin)
+	{
 		socketManager.connectSocket()
 	}
 	this.apply();

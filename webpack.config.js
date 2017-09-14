@@ -68,8 +68,8 @@ module.exports = {
 				loader: 'style!css'
 			},
 			{
-				test: /\.(png|jpg|gif|svg)$/,
-				loader: 'file',
+				test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+				loader: 'url',
 				query: {
 					name: 'images/[name].[ext]?[hash]',
 					limit: 10000

@@ -38,7 +38,6 @@
 		</div>
 	</main-layout>
 </template>
-
 <script type="text/ecmascript-6">
 	import g from '../global';
 	import MainLayout from './common/mainLayout.vue';

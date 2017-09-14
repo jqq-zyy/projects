@@ -17,7 +17,6 @@ import myStaff from "./pages/myStaff.vue";
 import myStaffMain from "./pages/myStaff";
 import Role from "./pages/role.vue";
 import RoleMain from "./pages/role";
-
 import Activity from "./pages/activity.vue";
 import ActivityMain from "./pages/activity";
 import Login from "./pages/login.vue";
@@ -38,8 +37,6 @@ import Addplatform from "./pages/addplatform.vue";
 import AddplatformMain from "./pages/addplatform";
 import Platform from "./pages/platform.vue";
 import PlatformMain from "./pages/platform";
-import Rule from "./pages/rule.vue";
-import RuleMain from "./pages/rule";
 
 export default [
 	{
@@ -77,7 +74,7 @@ export default [
 		name: "红包账户详情",
 		component: Platform,
 		preload: PlatformMain
-	} ,{
+	}, {
 		path: '/addplatform',
 		name: "红包账户详情",
 		component: Addplatform,
@@ -132,6 +129,38 @@ export default [
 		name: "权限设置",
 		component: Role,
 		preload: RoleMain
+	},
+	{
+		path: '/date',
+		name: "日期",
+		component: (resolve) =>
+		{
+			require(['./pages/dateBox.vue'], resolve)
+		},
+	},
+	{
+		path: '/page',
+		name: "分页",
+		component: (resolve) =>
+		{
+			require(['./pages/page.vue'], resolve)
+		},
+	},
+	{
+		path: '/table',
+		name: "表格",
+		component: (resolve) =>
+		{
+			require(['./pages/table.vue'], resolve)
+		},
+	},
+	{
+		path: '/tree',
+		name: "树形结构",
+		component: (resolve) =>
+		{
+			require(['./pages/list.vue'], resolve)
+		},
 	}
 ];
 

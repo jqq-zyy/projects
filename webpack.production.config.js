@@ -18,10 +18,10 @@ for (var i = 0; i < netList.length; i++)
 
 var projectRoot = path.resolve(__dirname, './src')
 
-var cssLoaderConf={ sourceMap: false, extract: true };
+var cssLoaderConf = {sourceMap: false, extract: true};
 
 module.exports = {
- 	context: path.resolve(__dirname, './src'),
+	context: path.resolve(__dirname, './src'),
 	entry: {
 		"index": './main.js'
 	},
@@ -53,11 +53,11 @@ module.exports = {
 	},
 
 	vue: {
-  	    loaders: cssLoaders(cssLoaderConf),
+		loaders: cssLoaders(cssLoaderConf),
 //		loaders:{"scss":ExtractTextPlugin.extract('vue-style-loader', "css-loader!scss-loader")},
 		postcss: [
 			require('autoprefixer')({
-				browsers: ['last 3 versions','ie>=9']
+				browsers: ['last 3 versions', 'ie>=9']
 			})
 		]
 	},
@@ -75,14 +75,14 @@ module.exports = {
 				exclude: /node_modules/
 			},
 			{
-				test: /\.(png|jpg|gif|svg)$/,
-				loader: 'file',
+				test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+				loader: 'url',
 				query: {
 					name: '../assets/images/[name].[ext]?[hash]',
 					limit: 10000
 				}
-			}
-			,styleLoaders(cssLoaderConf)
+			},
+			styleLoaders(cssLoaderConf)
 		]
 	},
 	plugins: [
@@ -135,7 +135,6 @@ module.exports = {
 	]
 }
 
-
 function cssLoaders(options)
 {
 	options = options || {}
@@ -178,10 +177,12 @@ function cssLoaders(options)
 	}
 }
 
-function styleLoaders(options) {
+function styleLoaders(options)
+{
 	var output = []
 	var loaders = cssLoaders(options)
-	for (var extension in loaders) {
+	for (var extension in loaders)
+	{
 		var loader = loaders[extension]
 		output.push({
 			test: new RegExp('\\.' + extension + '$'),
