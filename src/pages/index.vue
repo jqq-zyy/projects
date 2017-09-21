@@ -26,7 +26,7 @@
 										<input type="text" placeholder="搜索内容" v-model="dataObj.messageContent"
 											   @keyup.enter="onClick_searchBtn">
 										<span class="button pointer bg-btn"
-											  @click="onClick_searchBtn">{{g.lang("查询")}}</span>
+											  @click="onClick_searchBtn">{{g.lang("查找")}}</span>
 									</div>
 								</div>
 							</div>

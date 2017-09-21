@@ -35,6 +35,9 @@
 </script>
 
 <style>
+	..sortBox{
+		margin-left: 5px;
+	}
 	.position,.desc,.asc{
 		position: relative;
 	}
@@ -42,8 +45,8 @@
 		content: "";
 		width: 26px;
 		height: 22px;
-		border: 1px solid #dbdee7;
-		border-radius: 4px;
+		/*border: 1px solid #dbdee7;*/
+		border-radius: 2px;
 		display: inline-block;
 		position: absolute;
 		top: 0;
@@ -54,45 +57,43 @@
 		/*content: "\e150";*/
 		content: "";
 		position: absolute;
-		top: 5px;
+		top: 7px;
 		left: 8px;
 		/*font-family: 'Glyphicons Halflings';*/
-		width: 0;
-		height: 0;
-		border-left: 5px solid transparent;
-		border-right: 5px solid transparent;
-		border-bottom: 10px solid #b7b8ba;
+		width: 8px;
+		height: 8px;
+		border-left: 2px solid #666;
+		border-bottom: 2px solid #666;
 		cursor: pointer;
+		transform: rotate(135deg);
 	}
 
 	.asc:after {
 		content: "";
-		width: 0;
-		height: 0;
-		border-left: 5px solid transparent;
-		border-right: 5px solid transparent;
-		/*border-bottom: 10px solid #b7b8ba;*/
-		border-bottom: 10px solid #01aaef;
+		width: 8px;
+		height: 8px;
+		border-left: 2px solid #666;
+		border-bottom: 2px solid #666;
 		position: absolute;
 		left: 8px;
-		top: 7px;
+		top: 9px;
 		transition: transform .2s;
-		transform: rotate(-180deg);
+		transform: rotate(135deg);
 	}
 
 	.desc:after {
 		content: "";
-		width: 0;
-		height: 0;
-		border-left: 5px solid transparent;
-		border-right: 5px solid transparent;
+		width: 8px;
+		height: 8px;
+		border-left: 2px solid #666;
+		/*border-right: 5px solid transparent;*/
 		/*border-bottom: 10px solid #b7b8ba;*/
-		border-bottom: 10px solid #01aaef;
+		border-bottom: 2px solid #666;
 		position: absolute;
 		left: 8px;
-		top: 7px;
+		top: 3px;
 		transition: transform .2s;
-		transform: rotate(0deg);
+		transform: rotate(-45deg);
 	}
 
 </style>  

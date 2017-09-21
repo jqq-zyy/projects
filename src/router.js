@@ -69,7 +69,7 @@ export default [
 		name: "红包账户详情",
 		component: BagDetail,
 		preload: BagDetailMain
-	}, {
+	},{
 		path: '/platform',
 		name: "红包账户详情",
 		component: Platform,

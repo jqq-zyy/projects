@@ -9,157 +9,156 @@
 					</common-top-nav>
 					<div class="admin-data-items">
 						<div class="right-body">
-							<div class="right-bar">
-								<p class="g-title">
-									活动列表
-								</p>
-								<div class="activity-bar-top">
-									<div class="type-item pointer " @click="onClick_changeType(0)"
-										 :class="{'acticity-process':isCurrentType(0)}">
-										<span>全部活动</span>
-									</div>
-									<div class="type-item pointer" v-for="item in statusList"
-										 @click="onClick_changeType(item.stateCode)"
-										 :class="{'acticity-process':isCurrentType(item.stateCode)}">
-										{{item.stateDesc}}
-									</div>
+							<p class="g-title">
+								活动列表
+							</p>
+							<div class="bar-box">
+								<div class="bar-top">
+									<ul>
+										<li>活动状态:</li>
+										<li class="type-item pointer " @click="onClick_changeType(0)"
+											:class="{'acticity-process':isCurrentType(0)}">
+											<span>全部活动</span>
+										</li>
+										<li class="type-item pointer" v-for="item in statusList"
+											@click="onClick_changeType(item.stateCode)"
+											:class="{'acticity-process':isCurrentType(item.stateCode)}">
+											{{item.stateDesc}}
+										</li>
+									</ul>
 								</div>
-							</div>
-							<div class="drop-box pointer">
-								<div @click.stop="onClick_dropListBtn">
-									{{typeList[dataObj.inOutType]}}
+								<div class="bar-bottom">
+									<div class="drop-box pointer">
+										<div @click.stop="onClick_dropListBtn">
+											{{typeList[dataObj.inOutType]}}
 											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"
 												  @click.stop="onClick_dropListBtn"></span>
+										</div>
+										<ul class="droplist" v-show="isShow_dropList">
+											<li v-for="(item,index) in typeList" class="pointer"
+												@click="onClick_dropItem(index)">{{item}}
+											</li>
+										</ul>
+									</div>
+									<input type="text" v-model="dataObj.inOutContent" class="float-left search-input">
+								<span class="btn pointer search-btn border-btn hb-fill-middle2-bg"
+									  @click="onClick_searchBtn">查找</span>
+									<div class="clearfix"></div>
 								</div>
-								<ul class="droplist" v-show="isShow_dropList">
-									<li v-for="(item,index) in typeList" class="pointer"
-										@click="onClick_dropItem(index)">{{item}}
-									</li>
-								</ul>
 							</div>
-							<input type="text" v-model="dataObj.inOutContent">
-							<div class="button pointer search-btn bg-btn" @click="onClick_searchBtn">查询</div>
+							<div class="all-out">
+								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right
+									" @click="onClick_exportBtn">导出全部
+								</div>
+							</div>
 							<div class="admin-calendar-table">
-								<div @click="onClick_exportBtn">导出全部</div>
 								<table>
 									<thead>
 									<tr>
 										<th class="first-col">{{g.lang("活动名称")}}</th>
-										<th class="s-col">企业全称</th>
-										<th>品牌名称</th>
+										<th class="s-col"><span>|</span>企业全称</th>
+										<th><span>|</span>品牌名称</th>
 										<th @click="onClick_sortBtn('received_amount')" class="pointer m-width">
-											<div>
-												状态
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'received_amount'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-											</div>
+											<span>|</span>
+											状态
+											<common-sort :type="dataObj.sortOrder"
+														 :target="'received_amount'"
+														 :currentField="dataObj.sortField"
+											></common-sort>
+
 										</th>
 										<th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
+											<span>|</span>
+											创建时间
 
-											<div>
-												创建时间
-
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'activity_start_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-											</div>
+											<common-sort :type="dataObj.sortOrder"
+														 :target="'activity_start_time'"
+														 :currentField="dataObj.sortField"
+											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
+											<span>|</span>
+											{{g.lang("开始日期")}}
 
-											<div>
-												{{g.lang("开始日期")}}
-
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'activity_start_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-											</div>
+											<common-sort :type="dataObj.sortOrder"
+														 :target="'activity_start_time'"
+														 :currentField="dataObj.sortField"
+											></common-sort>
 										</th>
 										<th class="pointer m-width">
-											<div>
-												{{g.lang("结束日期")}}
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'activity_end_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-											</div>
+											<span>|</span>
+											{{g.lang("结束日期")}}
+											<common-sort :type="dataObj.sortOrder"
+														 :target="'activity_end_time'"
+														 :currentField="dataObj.sortField"
+											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<div>
-												绑定二维码数
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'create_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
+											<span>|</span>
+											绑定二维码数
+											<common-sort :type="dataObj.sortOrder"
+														 :target="'create_time'"
+														 :currentField="dataObj.sortField"
+											></common-sort>
 
-											</div>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<div>
-												累计扫码数
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'create_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-
-											</div>
+											<span>|</span>
+											累计扫码数
+											<common-sort :type="dataObj.sortOrder"
+														 :target="'create_time'"
+														 :currentField="dataObj.sortField"
+											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<div>
-												红包领取金额
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'create_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-
-											</div>
+											<span>|</span>
+											红包领取金额
+											<common-sort :type="dataObj.sortOrder"
+														 :target="'create_time'"
+														 :currentField="dataObj.sortField"
+											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<div>
-												平台红包领取金额
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'create_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-
-											</div>
+											<span>|</span>
+											平台红包领取金额
+											<common-sort :type="dataObj.sortOrder"
+														 :target="'create_time'"
+														 :currentField="dataObj.sortField"
+											></common-sort>
 										</th>
-										<th class="activity-last-col">{{g.lang("操作")}}</th>
+										<th class="activity-last-col"><span>|</span>{{g.lang("操作")}}</th>
 									</tr>
 									</thead>
 									<tbody>
-										<tr v-for="item in activityList">
-											<td @click="onClick_detailBtn(item.id)">
-												{{item.activityName}}
-											</td>
-											<td>{{item.companyName}}</td>
-											<td>{{item.brandName}}</td>
-											<td>{{item.activityStatusDesc}}</td>
-											<td>{{item.createTime}}</td>
-											<td>{{item.startTime}}</td>
-											<td>{{item.endTime}}</td>
-											<td>{{item.qrCodeNum}}</td>
-											<td>{{item.totalScanCount}}</td>
-											<td>{{item.useRpAmount}}</td>
-											<td>{{item.useRpAmount}}</td>
-											<td>
+									<tr v-for="item in activityList">
+										<td @click="onClick_detailBtn(item.id)">
+											{{item.activityName}}
+										</td>
+										<td>{{item.companyName}}</td>
+										<td>{{item.brandName}}</td>
+										<td>{{item.activityStatusDesc}}</td>
+										<td>{{item.createTime}}</td>
+										<td>{{item.startTime}}</td>
+										<td>{{item.endTime}}</td>
+										<td>{{item.qrCodeNum}}</td>
+										<td>{{item.totalScanCount}}</td>
+										<td>{{item.useRpAmount}}</td>
+										<td>{{item.useRpAmount}}</td>
+										<td>
 												<span v-text="onConfirm_operation(item.freezeStatus)"
 													  @click="onClick_activityItem(item.freezeStatus,item.id)"></span>
-											</td>
-										</tr>
+										</td>
+									</tr>
 									</tbody>
 									<tfoot>
-										<tr>
-											<td colspan="7"></td>
-											<td>{{resultTotalObj.totalQrCodeNum}}</td>
-											<td>{{resultTotalObj.totalScanCount}}</td>
-											<td>{{resultTotalObj.RpAmount}}</td>
-											<td>{{resultTotalObj.platformAmount}}</td>
-											<td></td>
-										</tr>
+									<tr>
+										<td colspan="7"></td>
+										<td>{{resultTotalObj.totalQrCodeNum}}</td>
+										<td>{{resultTotalObj.totalScanCount}}</td>
+										<td>{{resultTotalObj.RpAmount}}</td>
+										<td>{{resultTotalObj.platformAmount}}</td>
+										<td></td>
+									</tr>
 									</tfoot>
 								</table>
 							</div>
@@ -192,7 +191,7 @@
 		data(){
 			return {
 				isLoad: false,
-				isShow_dropList:false,
+				isShow_dropList: false,
 				g: g,
 				totalPage: 10,
 				statusList: [],
@@ -206,15 +205,15 @@
 					activityStatusList: [0],
 					sortField: "create_time",
 					sortOrder: "desc",
-					inOutType:0,
-					inOutContent:""
+					inOutType: 0,
+					inOutContent: ""
 				},
-				typeList:['活动名称','品牌名称','企业名称'],
-				resultTotalObj:{
-					totalQrCodeNum:0,
-					totalScanCount:0,
-					RpAmount:0,
-					platformAmount:0
+				typeList: ['活动名称', '品牌名称', '企业名称'],
+				resultTotalObj: {
+					totalQrCodeNum: 0,
+					totalScanCount: 0,
+					RpAmount: 0,
+					platformAmount: 0
 				}
 
 			}
@@ -364,13 +363,16 @@
 				return false
 			},
 			onConfirm_operation($type){
-				if($type ==1){
+				if ($type == 1)
+				{
 					return "冻结"
-				}else{
+				}
+				else
+				{
 					return "解冻"
 				}
 			},
-			onClick_activityItem($type,$id){
+			onClick_activityItem($type, $id){
 
 			},
 			onClick_exportBtn(){

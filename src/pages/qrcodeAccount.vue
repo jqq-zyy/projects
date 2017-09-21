@@ -9,38 +9,49 @@
 					</common-top-nav>
 					<div class="admin-data-items">
 						<div class="right-body">
-							<div class="right-bar">
-								<p class="g-title">
-									二维码账户
-								</p>
-								<div class="activity-bar-top">
-									<div class="type-item pointer " @click="onClick_changeType(-1)"
-										 :class="{'acticity-process':isCurrentType(-1)}">
-										<span>全部</span>
-									</div>
-									<div class="type-item pointer" v-for="(item,index) in statusList"
-										 @click="onClick_changeType(index)"
-										 :class="{'acticity-process':isCurrentType(index)}">
-										{{item}}
-									</div>
+							<p class="g-title">
+								二维码账户
+							</p>
+							<div class="bar-box">
+								<div class="bar-top">
+									<ul>
+										<li>状态：</li>
+										<li class="type-item pointer " @click="onClick_changeType(-1)"
+											:class="{'acticity-process':isCurrentType(-1)}">
+											<span>全部</span>
+										</li>
+										<li class="type-item pointer" v-for="(item,index) in statusList"
+											@click="onClick_changeType(index)"
+											:class="{'acticity-process':isCurrentType(index)}">
+											{{item}}
+										</li>
+									</ul>
 								</div>
-							</div>
-							<div class="drop-box pointer">
-								<div @click.stop="onClick_dropListBtn">
-									{{typeList[dataObj.inOutType]}}
+								<div class="bar-bottom">
+									<div class="drop-box pointer">
+										<div @click.stop="onClick_dropListBtn">
+											{{typeList[dataObj.inOutType]}}
 											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"
 												  @click.stop="onClick_dropListBtn"></span>
+										</div>
+										<ul class="droplist" v-show="isShow_dropList">
+											<li v-for="(item,index) in typeList" class="pointer"
+												@click="onClick_dropItem(index)">{{item}}
+											</li>
+										</ul>
+									</div>
+									<input type="text" v-model="dataObj.inOutContent" class="search-input">
+									<span class="btn pointer search-btn border-btn hb-fill-middle2-bg"
+										  @click="onClick_searchBtn">查找</span>
 								</div>
-								<ul class="droplist" v-show="isShow_dropList">
-									<li v-for="(item,index) in typeList" class="pointer"
-										@click="onClick_dropItem(index)">{{item}}
-									</li>
-								</ul>
 							</div>
-							<input type="text" v-model="dataObj.inOutContent">
-							<div class="button pointer search-btn bg-btn" @click="onClick_searchBtn">查询</div>
+							<div class="all-out">
+									<span class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right
+									" @click="onClick_exportBtn">导出全部
+									</span>
+								<div class="clearfix"></div>
+							</div>
 							<div class="admin-calendar-table">
-								<div @click="onClick_exportBtn">导出全部</div>
 								<table>
 									<thead>
 									<tr>
@@ -156,6 +167,7 @@
 									</tfoot>
 								</table>
 							</div>
+
 							<common-page :index="dataObj.page" :total="totalPage"
 										 @change="onChange_currentPage" v-show="totalPage>1"></common-page>
 							<common-prompt v-show="qrcodeList.length==0"></common-prompt>

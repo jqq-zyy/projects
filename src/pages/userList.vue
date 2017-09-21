@@ -8,27 +8,31 @@
 					<div class="admin-data-items">
 						<div class="right-body bill-right-body">
 							<div class="g-title">商户列表</div>
-
-							<div class="recharge-record bill-bar-code">
-								<div class="recharge-record-bottom">
-									<div>
-										<span>运营状态：
-											<span v-for="(item ,index) in freezeStatusList"
-												  @click="onClick_freezeStatusItem(index)"
-												  :class="{'currentStatus':index==searchObj.freezeStatus}"
-												  class="pointer"
-											>{{item}}</span>
-										</span>
-										<span>认证状态：
-											<span v-for="(item, index) in authStatusList"
-												  @click="onClick_authStatusItem(index)"
-												  :class="{'currentStatus':index==searchObj.authStatus}"
-												  class="pointer"
-											>{{item}}</span>
-										</span>
-
-									</div>
+							<div class="bar-box">
+								<div class="bar-top">
+									<ul>
+										<li>运营状态：</li>
+										<li v-for="(item ,index) in freezeStatusList"
+											@click="onClick_freezeStatusItem(index)"
+											:class="{'currentStatus':index==searchObj.freezeStatus}"
+											class="pointer"
+										>{{item}}
+										</li>
+									</ul>
+									<ul>
+										<li>认证状态：</li>
+										<li v-for="(item, index) in authStatusList"
+											@click="onClick_authStatusItem(index)"
+											:class="{'currentStatus':index==searchObj.authStatus}"
+											class="pointer"
+										>{{item}}
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+								<div class="bar-bottom">
 									<div class="date-box">
+										<span class="creat-time">创建时间：从</span>
 										<div class="date-from">
 											<input type="text" class="startTime date-input pointer"
 												   v-model="date.startTimeStr"
@@ -39,7 +43,7 @@
 													  ref="timeBox" :isCanBefore="true"></calendar>
 										</div>
 									</div>
-									<span class="goto">-</span>
+									<span class="goto">至</span>
 									<div class="date-box">
 										<div class="date-from">
 											<input type="text" class="endTime date-input pointer"
@@ -62,11 +66,14 @@
 											</li>
 										</ul>
 									</div>
-									<input type="text" v-model="searchObj.inOutContent">
-									<div class="button pointer search-btn bg-btn" @click="onClick_searchBtn">查询</div>
-									<div class="button pointer search-btn bg-btn" @click="onClick_exportBtn">导出全部</div>
+									<input type="text" v-model="searchObj.inOutContent" class="search-input">
+									<div class="btn pointer search-btn border-btn hb-fill-middle2-bg" @click="onClick_searchBtn">查找</div>
+									<div class="clearfix"></div>
 								</div>
-
+							</div>
+							<div class="all-out">
+								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right
+									" @click="onClick_exportBtn">导出全部</div>
 							</div>
 							<div class="recharge-table admin-calendar-table ">
 								<table>
@@ -78,12 +85,12 @@
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
-										<th>创建时间</th>
-										<th>企业全称</th>
-										<th>运营状态</th>
-										<th>用户名</th>
-										<th>手机号</th>
-										<th>认证状态</th>
+										<th><span>|</span>创建时间</th>
+										<th><span>|</span>企业全称</th>
+										<th><span>|</span>运营状态</th>
+										<th><span>|</span>用户名</th>
+										<th><span>|</span>手机号</th>
+										<th><span>|</span>认证状态</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
 											商家红包金额
 											<common-sort :type="searchObj.sortOrder"
@@ -92,69 +99,69 @@
 											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											平台红包金额
+											<span>|</span>平台红包金额
 											<common-sort :type="searchObj.sortOrder"
 														 :target="'create_time'"
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											平台红包发放数
+											<span>|</span>平台红包发放数
 											<common-sort :type="searchObj.sortOrder"
 														 :target="'create_time'"
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											扫码量
+											<span>|</span>扫码量
 											<common-sort :type="searchObj.sortOrder"
 														 :target="'create_time'"
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											绑定二维码数
+											<span>|</span>绑定二维码数
 											<common-sort :type="searchObj.sortOrder"
 														 :target="'create_time'"
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											导出二维码数
+											<span>|</span>导出二维码数
 											<common-sort :type="searchObj.sortOrder"
 														 :target="'create_time'"
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											未导出二维码数
+											<span>|</span>未导出二维码数
 											<common-sort :type="searchObj.sortOrder"
 														 :target="'create_time'"
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											已购二维码数
+											<span>|</span>已购二维码数
 											<common-sort :type="searchObj.sortOrder"
 														 :target="'create_time'"
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											退款二维码数
+											<span>|</span>退款二维码数
 											<common-sort :type="searchObj.sortOrder"
 														 :target="'create_time'"
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
 										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											红包账户余额
+											<span>|</span>红包账户余额
 											<common-sort :type="searchObj.sortOrder"
 														 :target="'create_time'"
 														 :currentField="searchObj.sortField"
 											></common-sort>
 										</th>
-										<th>操作</th>
+										<th><span>|</span>操作</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -422,13 +429,16 @@
 				return this.authStatusList[$type - 0 + 1]
 			},
 			onConfirm_operation($type){
-				if($type ==1){
+				if ($type == 1)
+				{
 					return "冻结"
-				}else{
+				}
+				else
+				{
 					return "解冻"
 				}
 			},
-			onClick_userItem($type,$id){
+			onClick_userItem($type, $id){
 
 			},
 			onClick_lookItem($id){
@@ -443,13 +453,14 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common.scss";
 	@import "../css/myBill.scss";
-
 	.date-input {
-		background: url("../../assets/images/date.png") no-repeat 160px center;
+		/*background: url("../../assets/images/date.png") no-repeat 160px center;*/
 	}
 
 	.currentStatus {
-		color: red;
+		color: #01aaef;
+		border: 1px solid #01aaef;
+
 	}
 </style>
 

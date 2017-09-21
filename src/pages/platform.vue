@@ -9,50 +9,58 @@
 					</common-top-nav>
 					<div class="admin-data-items">
 						<div class="right-body">
-							<div class="right-bar">
-								<p class="g-title">
+							<p class="g-title">
 								平台财务流水
-								</p>
-								<div class="activity-bar-top">
-									<div>
-										<span>总收入：{{totalAmount}}</span>
-										<span>总支出：{{payAmount}}</span>
-										<span>余额：{{balanceAmount}}</span>
-									</div>
-									<div class="type-item pointer" v-for="item in statusList"
-										 @click="onClick_changeType(item.typeCode)"
-										 :class="{'acticity-process':isCurrentType(item.typeCode)}">
-										{{item.typeDesc}}
-									</div>
+							</p>
+							<div class="bar-box">
+								<div class="bar-top">
+									<ul>
+										<li>总收入：{{totalAmount}}</li>
+										<li>总支出：{{payAmount}}</li>
+										<li>余额：{{balanceAmount}}</li>
+									</ul>
+									<ul>
+										<li>流水类型:</li>
+										<li class="type-item pointer" v-for="item in statusList"
+											@click="onClick_changeType(item.typeCode)"
+											:class="{'acticity-process':isCurrentType(item.typeCode)}">
+											{{item.typeDesc}}
+										</li>
+									</ul>
 								</div>
-							</div>
-
-							<div class="drop-box pointer">
-								<div @click.stop="onClick_dropListBtn">
-									{{currentType}}
+								<div class="bar-bottom">
+									<div class="drop-box pointer">
+										<div @click.stop="onClick_dropListBtn">
+											{{currentType}}
 											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"
 												  @click.stop="onClick_dropListBtn"></span>
+										</div>
+										<ul class="droplist" v-show="isShow_dropList">
+											<li v-for="(item,index) in typeList" class="pointer"
+												@click="onClick_dropItem(index,item)">{{item}}
+											</li>
+										</ul>
+									</div>
+
+									<input type="text" v-model="dataObj.inOutContent" class="search-input">
+									<span class="btn pointer search-btn border-btn hb-fill-middle2-bg" @click="onClick_searchBtn">查找</span>
 								</div>
-								<ul class="droplist" v-show="isShow_dropList">
-									<li v-for="(item,index) in typeList" class="pointer"
-										@click="onClick_dropItem(index,item)">{{item}}
-									</li>
-								</ul>
 							</div>
-							<input type="text" v-model="dataObj.inOutContent">
-							<div class="button pointer search-btn bg-btn" @click="onClick_searchBtn">查询</div>
+							<div class="all-out">
+								<div @click="onClick_exportBtn" class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right" >导出全部</div>
+								<div @click="onClick_addBtn" class=" pointer all-out-btn border-btn hb-fill-middle2-bg float-right" style="margin-right: 30px">新建流水</div>
+							</div>
 							<div class="admin-calendar-table">
-								<div @click="onClick_exportBtn" class="button pointer">导出全部</div>
-								<div @click="onClick_addBtn" class="button pointer">新建流水</div>
+
 								<table>
 									<thead>
 									<tr>
 										<th>流水ID</th>
-										<th>流水类型</th>
-										<th>发起人</th>
-										<th>发起时间</th>
-										<th>金额</th>
-										<th>备注</th>
+										<th><span>|</span>流水类型</th>
+										<th><span>|</span>发起人</th>
+										<th><span>|</span>发起时间</th>
+										<th><span>|</span>金额</th>
+										<th><span>|</span>备注</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -80,7 +88,7 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
 						<div class="step-about-tit show-recharge-tips">
 							平台流水详情
@@ -122,28 +130,28 @@
 			return {
 				isLoad: false,
 				isShow_dropList: false,
-				isShow_detailPop:false,
+				isShow_detailPop: false,
 				g: g,
 				totalPage: 1,
 				statusList: [],
 				typeList: ['流水ID', '发起人'],
-				currentType:'流水ID',
+				currentType: '流水ID',
 				platformList: [],
-				currnetPlatform:{},
+				currnetPlatform: {},
 				dataObj: {
 					'recordTypes': [-1],
 					'beginTimeStart': "",
-					'beginTimeEnd':"",
-					"recordId":"",
-					"author":"",
+					'beginTimeEnd': "",
+					"recordId": "",
+					"author": "",
 					'page': 1,
 					'pageSize': g.param.pageSizeList[0],
 					'sortField': "",
 					'sortOrder': "desc"
 				},
-				totalAmount:0,
-				payAmount:0,
-				balanceAmount:0
+				totalAmount: 0,
+				payAmount: 0,
+				balanceAmount: 0
 			}
 		},
 		components: {
@@ -187,7 +195,7 @@
 //					g.func.dealErr(err);
 //				});
 			},
-			onClick_dropItem($type,$item){
+			onClick_dropItem($type, $item){
 				this.currentType = $item;
 				this.dataObj.inOutType = $type;
 				this.isShow_dropList = false;
@@ -203,7 +211,7 @@
 				}
 			},
 			onClick_changeType($typeId){
-			    $typeId = Number($typeId);
+				$typeId = Number($typeId);
 				this.dataObj.page = 1;
 				var recordTypes = this.dataObj.recordTypes;
 				if ($typeId == -1)

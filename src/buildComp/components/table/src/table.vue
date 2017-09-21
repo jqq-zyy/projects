@@ -1,7 +1,7 @@
 <template>
 	<div class="out-box relative" :class="inlineBorder?'out-box-border':''" ref="scrollCon"
 		 :style="{height:boxHeight+'px',width:boxWidth+'px'}">
-		<div class="header header-vertical body-row"
+		<div class="table-header header-vertical body-row"
 			 :style="{height:headerHeight+'px',top:offsetTop+'px',width:getTypeWidth('total')+'px'}">
 			<div class="left-header"
 				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
@@ -336,12 +336,12 @@
 		border: 1px solid #444444;
 	}
 
-	.header, .body {
+	.table-header, .body {
 		white-space: nowrap;
 		position: relative;
 	}
 
-	.header {
+	.table-header {
 		z-index: 1000;
 		box-shadow: 0px 3px 3px #999999;
 	}

@@ -39,7 +39,7 @@
 													  :isCanBefore="true"></calendar>
 										</div>
 									</div>
-									<div class="button pointer search-btn bg-btn" @click="onClick_searchBtn">查询</div>
+									<div class="button pointer search-btn bg-btn" @click="onClick_searchBtn">查找</div>
 								</div>
 							</div>
 							<div class="admin-calendar-table">

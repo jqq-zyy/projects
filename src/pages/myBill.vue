@@ -51,7 +51,7 @@
 											</li>
 										</ul>
 									</div>
-									<div class="button pointer search-btn bg-btn" @click="onClick_searchBtn">查询</div>
+									<div class="button pointer search-btn bg-btn" @click="onClick_searchBtn">查找</div>
 								</div>
 
 							</div>
@@ -382,7 +382,7 @@
 	@import "../css/myBill.scss";
 
 	.date-input {
-		background: url("../../assets/images/date.png") no-repeat 160px center;
+		/*background: url("../../assets/images/date.png") no-repeat 160px center;*/
 	}
 </style>
 

@@ -37,7 +37,7 @@
 													  :isCanBefore="true"></calendar>
 										</div>
 									</div>
-									<span class="pointer search-btn border-btn" @click="onClick_searchBtn">查询</span>
+									<span class="pointer search-btn border-btn" @click="onClick_searchBtn">查找</span>
 								</div>
 							</div>
 							<div class="data-title-box">

@@ -105,7 +105,7 @@
 				<div class="m-search" v-show="relateData.relateType ==2">
 					<span class="m-border">从</span> <input type="text" v-model="startStr">
 					<span class="m-border p-margin">到</span> <input type="text" v-model="endStr">
-					<div class="border-btn add-btn pointer" @click="onClick_searchBtn">查询</div>
+					<div class="border-btn add-btn pointer" @click="onClick_searchBtn">查找</div>
 				</div>
 				<div class="m-number">
 

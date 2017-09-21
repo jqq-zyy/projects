@@ -6,90 +6,102 @@
 				<div class="right-content-wrap">
 					<common-top-nav></common-top-nav>
 					<div class="admin-data-items">
-						<div class="right-body personal-box">
+						<div class="right-body">
 							<div class="g-title"><span>商户列表</span>/商户详情</div>
-							<div class="admin-calendar-table">
-								<div>基本信息</div>
-								<span>商户ID:{{infoObj.shopId}}</span>
-								<span>用户名:{{infoObj.logon}}</span>
-								<span>手机号：{{infoObj.telphone}}</span>
-								<span>企业联系人：{{infoObj.contacts}}</span>
-								<span>联系邮箱：{{infoObj.mail}}</span>
-								<span>状态：{{infoObj.freezeStatusDesc}}
-									<span class="button pointer" v-text="onConfirm_freezeStatus(infoObj.freezeStatus)"
-										  @click="onClick_changeStatus(infoObj.freezeStatus)"></span>
-								</span>
-								<span>创建时间：{{infoObj.createTime}}</span>
-							</div>
-							<div class="admin-calendar-table">
-								<div>企业认证信息 <span>{{infoObj.authStatusDesc}}</span></div>
-								<div>企业证照：
-									<div>
-										<img :src="infoObj.businessLicense" alt="" v-show="infoObj.businessLicense">
-										<span v-show="infoObj.businessLicense==''">暂无</span>
-										<span>营业执照</span>
+							<div class="admin-calendar-table user-detail-box">
+								<div class="detail-msg">
+									<div class="msg-title">基本信息</div>
+									<span class="msg-info">商户ID:{{infoObj.shopId}}</span>
+									<span class="msg-info">用户名:{{infoObj.logon}}</span>
+									<span class="msg-info">手机号：{{infoObj.telphone}}</span>
+									<span class="msg-info">企业联系人：{{infoObj.contacts}}</span>
+									<span class="msg-info">联系邮箱：{{infoObj.mail}}</span>
+									<span class="msg-info">状态：{{infoObj.freezeStatusDesc}}
+										<span class="border-btn pointer status-btn	hb-fill-middle2-bg"
+											  v-text="onConfirm_freezeStatus(infoObj.freezeStatus)"
+											  @click="onClick_changeStatus(infoObj.freezeStatus)"></span>
+									</span>
+									<span class="msg-info">创建时间：{{infoObj.createTime}}</span>
+								</div>
+								<div class="detail-msg">
+									<div class="msg-title">企业认证信息 <span>{{infoObj.authStatusDesc}}</span></div>
+									<div class="upload-box">
+										<span class="company">企业证照：</span>
+										<div class="enterprise-msg">
+											<img :src="infoObj.businessLicense" alt="" v-show="infoObj.businessLicense">
+											<span v-show="infoObj.businessLicense==''">暂无</span>
+											<span>营业执照</span>
+										</div>
+										<div class="enterprise-msg">
+											<img :src="infoObj.taxRegister" alt="" v-show="infoObj.taxRegister">
+											<span v-show="infoObj.taxRegister==''">暂无</span>
+											<span>税务登记证</span>
+										</div>
+										<div class="enterprise-msg">
+											<img :src="infoObj.organizeCertificate" alt=""
+												 v-show="infoObj.organizeCertificate">
+											<span v-show="infoObj.organizeCertificate==''">暂无</span>
+											<span>组织结构代码证</span>
+										</div>
+
 									</div>
-									<div>
-										<img :src="infoObj.taxRegister" alt="" v-show="infoObj.taxRegister">
-										<span v-show="infoObj.taxRegister==''">暂无</span>
-										<span>税务登记证</span>
+									<div class="upload-box">
+										<span class="company">法人身份证照：</span>
+										<div class="enterprise-msg">
+											<img :src="infoObj.idcardImagA" alt="" w-show="infoObj.idcardImagA">
+											<span v-show="infoObj.idcardImagA==''">暂无</span>
+											<span>正面</span>
+										</div>
+										<div class="enterprise-msg">
+											<img :src="infoObj.idcardImagB" alt="" w-show="infoObj.idcardImagB">
+											<span v-show="infoObj.idcardImagB==''">暂无</span>
+											<span>反面</span>
+										</div>
 									</div>
-									<div>
-										<img :src="infoObj.organizeCertificate" alt=""
-											 v-show="infoObj.organizeCertificate">
-										<span v-show="infoObj.organizeCertificate==''">暂无</span>
-										<span>组织结构代码证</span>
+									<div class="enterprise-name upload-box">
+
+										<span class="company">企业全称：</span>{{infoObj.companyFullName}}
+									</div>
+									<div class="upload-box">
+										<span class="company">企业logo：</span>
+										<div class="enterprise-msg">
+											<img :src="infoObj.shopLogo" alt="">
+										</div>
+										<div class="enterprise-msg">
+											<img :src="infoObj.shopLogo" alt="" w-show="infoObj.shopLogo">
+											<span v-show="infoObj.shopLogo==''">暂无</span>
+										</div>
+									</div>
+									<div class="upload-box">
+										<span class="company">品牌授权书：</span>
+										<div v-for="item in infoObj.brandList" class="enterprise-msg">
+											<img :src="item.brandAuthorize" alt="">
+											<span>{{item.brandName}}</span>
+										</div>
+									</div>
+									<div v-show="infoObj.authStatus==3" class="status-button-box">
+										<div class="applicate-btn pointer border-btn ">通过申请</div>
+										<div class=" applicate-btn pointer bg-btn" @click="onClick_refuseBtn">拒绝申请</div>
 									</div>
 
 								</div>
-								<div>法人身份证照：
+								<div class="detail-msg">
+									<div class="msg-title">活动信息</div>
 									<div>
-										<img :src="infoObj.idcardImagA" alt="" w-show="infoObj.idcardImagA">
-										<span v-show="infoObj.idcardImagA==''">暂无</span>
-										<span>正面</span>
+										<span class="msg-info">全部活动数：{{infoObj.activityTotalNum}}</span>
+										<span class="msg-info">进行中的活动数：{{infoObj.activityIngNum}}</span>
+										<span class="msg-info">全部活动数：{{infoObj.activityFreezeNum}}</span>
 									</div>
-									<div>
-										<img :src="infoObj.idcardImagB" alt="" w-show="infoObj.idcardImagB">
-										<span v-show="infoObj.idcardImagB==''">暂无</span>
-										<span>反面</span>
-									</div>
-								</div>
-								<div>
-									企业全称：{{infoObj.companyFullName}}
-								</div>
-								<div>企业logo:
-									<img :src="infoObj.shopLogo" alt="">
-									<div>
-										<img :src="infoObj.shopLogo" alt="" w-show="infoObj.shopLogo">
-										<span v-show="infoObj.shopLogo==''">暂无</span>
-									</div>
-								</div>
-								<div>品牌授权书：
-									<div v-for="item in infoObj.brandList">
-										<img :src="item.brandAuthorize" alt="">{{item.brandName}}
-									</div>
-								</div>
-								<div v-show="infoObj.authStatus==3">
-									<div class="button pointer">通过申请</div>
-									<div class="button pointer" @click="onClick_refuseBtn">拒绝申请</div>
 								</div>
 
-							</div>
-							<div class="admin-calendar-table">
-								<div>活动信息</div>
-								<div>
-									<span>全部活动数：{{infoObj.activityTotalNum}}</span>
-									<span>进行中的活动数：{{infoObj.activityIngNum}}</span>
-									<span>全部活动数：{{infoObj.activityFreezeNum}}</span>
-								</div>
-							</div>
-							<div class="admin-calendar-table">
-								<div>财务流水信息</div>
-								<div>
-									<span>二维码购买笔数：{{infoObj.qrcodeBuyTime}}（总金额：¥{{infoObj.qrcodeBuyAmount}}）</span>
-									<span>二维码退款笔数：{{infoObj.qrcodeRefundTime}}（总金额：¥{{infoObj.qrcodeRefundAmount}}）</span>
-									<span>红包账户充值笔数：{{infoObj.rpRechargeTime}}（总金额：¥{{infoObj.rpRechargeAmount}}）</span>
-									<span>红包账户退款笔数：{{infoObj.rpRefundTime}}（总金额：¥{{infoObj.rpRefundAmount}}）</span>
+								<div class="detail-msg">
+									<div class="msg-title">财务流水信息</div>
+									<div>
+										<span class="msg-info msf-info-width">二维码购买笔数：{{infoObj.qrcodeBuyTime}}（总金额：¥{{infoObj.qrcodeBuyAmount}}）</span>
+										<span class="msg-info msf-info-width">二维码退款笔数：{{infoObj.qrcodeRefundTime}}（总金额：¥{{infoObj.qrcodeRefundAmount}}）</span>
+										<span class="msg-info msf-info-width">红包账户充值笔数：{{infoObj.rpRechargeTime}}（总金额：¥{{infoObj.rpRechargeAmount}}）</span>
+										<span class="msg-info msf-info-width">红包账户退款笔数：{{infoObj.rpRefundTime}}（总金额：¥{{infoObj.rpRefundAmount}}）</span>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -102,13 +114,14 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
-						<div class="pop-body tree-box">
-							<div>确认{{currentTypeDesc}}该用户么</div>
-							<div class="m-title">
-								<div class="button pointer" @click="onClick_closeBtn">暂不{{currentTypeDesc}}</div>
-								<div class="button pointer" @click="onClick_confirmChange">确认{{currentTypeDesc}}</div>
+						<div class="pop-tit"></div>
+						<div class="pop-body">
+							<div class="m-title text-center">确认{{currentTypeDesc}}该用户么</div>
+							<div class="m-title button-box">
+								<div class="border-btn pointer button hb-fill-middle2-bg" @click="onClick_closeBtn">暂不{{currentTypeDesc}}</div>
+								<div class="bg-btn pointer button hb-fill-middle2-rev" @click="onClick_confirmChange">确认{{currentTypeDesc}}</div>
 							</div>
 						</div>
 					</div>
@@ -119,15 +132,16 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
-						<div class="pop-body add-level-body">
+						<div class="pop-tit"></div>
+						<div class="pop-body">
 							<div class="m-title"><span class="name">请输入拒绝原因：</span>
 								<textarea name="" id="" cols="30" rows="10" class="describle-reasons"
-										  v-model="refuseContent"  @focus="onFocus_refuseInput"></textarea>
+										  v-model="refuseContent" @focus="onFocus_refuseInput"></textarea>
 								<div v-show="isShow_hasError">拒绝原因不能为空</div>
 							</div>
-							<div class="m-title">
+							<div class="m-title button-box">
 								<div class="save-button pointer bg-btn" @click="onClick_closeBtn">暂不拒绝</div>
 								<div class="save-button pointer bg-btn" @click="onClick_sumbitBtn">确认拒绝并告知商户</div>
 							</div>
@@ -249,11 +263,12 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-
 	@import "../css/common.scss";
+	@import "../css/pop.scss";
 </style>
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/personlInfo.scss";
+	@import "../css/userDetail.scss";
 
 	img {
 		width: 50px;
