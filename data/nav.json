@@ -41,11 +41,11 @@
 	"highLightList": ["/platform", "/addplatform"]
   },
   {
-	"id": "data",
+	"id": "chart",
 	"name": "图表分析",
 	"icon": "data",
-	"path": "/data",
-	"highLightList": ["/data"]
+	"path": "/chart",
+	"highLightList": ["/chart"]
   },
   {
 	"id": "rule",
@@ -74,8 +74,8 @@
 	"id": "checkqrcode",
 	"name": "查找二维码",
 	"icon": "help",
-	"path": "/explain",
-	"highLightList": ["/explain"]
+	"path": "/checkqrcode",
+	"highLightList": ["/checkqrcode"]
   }
 ]
 

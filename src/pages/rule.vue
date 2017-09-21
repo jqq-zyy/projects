@@ -2,36 +2,12 @@
 	<main-layout :isLoad="isLoad">
 		<div slot="content" class="content-box">
 			<div class="admin-main-wrap">
-				<common-nav></common-nav>
+				<common-nav :nav="'rule'"></common-nav>
 				<div class="right-content-wrap">
 					<common-top-nav></common-top-nav>
 					<div class="admin-data-items">
-						<div class="right-body personal-box">
-							<div class="g-title"><span>商户列表</span>/活动详情</div>
-							<div class="admin-calendar-table">
-								<div>基本信息</div>
-								<span>活动名称:{{activityInfo.activityName}}</span>
-								<span>创建时间:{{activityInfo.createTime}}</span>
-								<span>基础红包设定：</span>
-								<span>状态：{{activityInfo.activityStartTimeStr}}
-									<span class="button pointer" v-text="onConfirm_freezeStatus(activityInfo.freezeStatus)"
-										  @click="onClick_changeStatus(activityInfo.freezeStatus)"></span></span>
-								<span>开始时间：{{activityInfo.activityStartTimeStr}}</span>
-								<span>结束时间：{{activityInfo.activityEndTimeStr}}</span>
-								<span>剩余数量/二维码数量：{{remainQrCodeNum}}/{{totalQrCodeNum}}</span>
-								<span>已发放金额：{{totalMakedAmount}}</span>
-								<span>是否接受平台红包：</span>
-								<span>活动地区：</span>
-								<span>会员奖励：</span>
-							</div>
-							<div class="admin-calendar-table">
-								<div>红包信息</div>
-								<div>
-									<span>标题：{{activityRpInfo.rpTitle}}</span>
-									<span>祝福文字：{{activityRpInfo.rpWish}}</span>
-									<span>显示图片：<img :src="activityRpInfo.rpLogoUrl" alt=""></span>
-								</div>
-							</div>
+						<div class="right-body">
+							<div class="g-title">规则设置</div>
 						</div>
 						<common-footer></common-footer>
 					</div>

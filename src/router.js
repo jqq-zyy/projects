@@ -37,7 +37,9 @@ import Addplatform from "./pages/addplatform.vue";
 import AddplatformMain from "./pages/addplatform";
 import Platform from "./pages/platform.vue";
 import PlatformMain from "./pages/platform";
-
+import Chart from "./pages/chart.vue";
+import Rule from "./pages/rule.vue";
+import CheckQrcode from "./pages/checkQrcode.vue";
 export default [
 	{
 		path: '/',
@@ -69,7 +71,7 @@ export default [
 		name: "红包账户详情",
 		component: BagDetail,
 		preload: BagDetailMain
-	},{
+	}, {
 		path: '/platform',
 		name: "红包账户详情",
 		component: Platform,
@@ -80,6 +82,17 @@ export default [
 		component: Addplatform,
 		preload: AddplatformMain
 	}, {
+		path: '/chart',
+		name: "图表分析",
+		component: Chart
+//		preload: ChartMain
+	},
+	{
+		path: '/rule',
+		name: "规则设置",
+		component: Rule
+	},
+	{
 		path: '/data',
 		name: "数据概览",
 		component: AllData,
@@ -129,6 +142,11 @@ export default [
 		name: "权限设置",
 		component: Role,
 		preload: RoleMain
+	},{
+		path: '/checkqrcode',
+		name: "查找二维码",
+		component: CheckQrcode,
+//		preload: checkQrcodeMain
 	},
 	{
 		path: '/date',
