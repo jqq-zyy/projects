@@ -9,25 +9,29 @@
 						<div class="right-body personal-box">
 							<div class="g-title"><span>平台财务流水</span>/新建平台流水</div>
 							<div class="admin-calendar-table">
-								<div>基本信息</div>
-								<span>发起人:小黑</span>
-								<span>流水类型：
+								<div class="base-info">基本信息</div>
+								<div class="base-master">发起人: <span>小黑</span></div>
+								<div>流水类型：
 									<input type="radio" name="status" v-model="paramObj.recordType" value="1">平台红包充值
 									<input type="radio" name="status" v-model="paramObj.recordType" value="2">提现支出
-								</span>
-								<span>
+								</div>
+								<div>
 									流水金额：<input type="text" v-model="paramObj.amount">
-								</span>
-								<span>备注：
-									<textarea id="" cols="30" rows="10" v-model="paramObj.remarks"></textarea></span>
-								<span>支付方式：
-								支付宝
-								</span>
-								<span>来源账户：
+								</div>
+								<div>备注：
+									<textarea id="" cols="30" rows="10" v-model="paramObj.remarks"
+											  placeholder="不超过50字"></textarea></div>
+								<div class="base-way">支付方式：
+									支付宝
+								</div>
+								<div class="base-origin">来源账户：
 									<input type="text" placeholder="支付宝账号" v-model="paramObj.account">
-								</span>
-								<div class="button" @click="onClick_resetBtn">取消</div>
-								<div class="button" @click="onClick_saveBtn">保存</div>
+								</div>
+								<div class="base-operate">
+									<div class="button hb-fill-middle2-bg" @click="onClick_resetBtn">取消</div>
+									<div class="button hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
+								</div>
+
 							</div>
 
 						</div>
@@ -135,14 +139,12 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-
 	@import "../css/common.scss";
 </style>
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/personlInfo.scss";
 
 </style>
-
 
 
 
