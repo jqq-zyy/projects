@@ -20,54 +20,6 @@
 								</div>-->
 							</div>
 
-							<div class="admin-calendar-table">
-								<table>
-									<thead>
-									<tr>
-										<th>员工用户名</th>
-										<th>职能</th>
-										<th>联系电话</th>
-										<th class="pointer">
-											<div @click.stop="onClick_showTypeBtn">
-												账号状态/{{statusList[searchObj.userStatus]}}
-												<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"></span>
-												<ul class="droplist" v-show="isShow_dropList">
-													<li class="pointer" v-for="(item,index) in statusList"
-														@click="onClick_typeItem(index)">{{item}}
-													</li>
-												</ul>
-											</div>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											创建时间
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th>上次冻结时间</th>
-										<th>操作</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr v-for="item in staffList">
-										<td>{{item.userName}}</td>
-										<td>{{item.roleName}}</td>
-										<td>{{item.telphone}}</td>
-										<td>{{item.userStatusDesc}}</td>
-										<td>{{item.createTime}}</td>
-										<td></td>
-										<td>
-												<span class="pointer frozen" v-show="item.userStatus==1"
-													  @click="onClick_changeType(item.id,item.userStatus)">冻结
-												</span>
-												<span class="pointer thaw" v-show="item.userStatus==2"
-													  @click="onClick_changeType(item.id,item.userStatus)">解冻</span>
-										</td>
-									</tr>
-									</tbody>
-								</table>
-							</div>
 							<common-page :index="searchObj.page" :total="totalPage"
 										 @change="onChange_searchItem" v-show="totalPage>1"></common-page>
 							<common-prompt v-show="staffList.length==0"></common-prompt>
@@ -77,47 +29,6 @@
 					</div>
 				</div>
 			</div>
-			<transition name="bounce">
-				<div class="affix-box default-pos-type" v-show="isShow_addStaffPop">
-					<div class="pop-edit-password pop-edit add-staff-pop">
-						<div class="show-close-btn">
-							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn" />
-						</div>
-						<div class="pop-tit">添加新员工</div>
-						<div class="pop-body add-staff-body">
-							<div class="m-title msg-box">
-								<span class="name">员工用户名:</span>
-								<input type="text" placeholder="请输入用户名" v-model="staffObj.logon">
-							</div>
-							<div class="msg-box m-title">
-								<span class="staff-meg name">职能权限:</span>
-								<div class="choose-function pointer" @click.stop="onClick_dropListBtn">
-									{{roleName}}
-
-								</div>
-								<ul class="droplist function-list" v-show="isShow_FunctionList">
-									<li v-for="item in roleList"
-										@click="onClick_roleItem(item.id,item.roleName)">
-										{{item.roleName}}
-									</li>
-								</ul>
-								<div class="clearfix"></div>
-							</div>
-							<div class="msg-box m-title">
-								<span class="staff-meg name">初始密码:</span>
-								<span>888888</span>
-							</div>
-							<div class="m-title msg-box staff-button">
-								<div class="staff-btn pointer bg-btn" @click="onClick_confirmBtn">确认添加</div>
-								<div class="staff-btn pointer border-btn" @click="onClick_closeBtn">取消</div>
-
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</transition>
 		</div>
 	</main-layout>
 </template>

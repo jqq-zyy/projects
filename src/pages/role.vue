@@ -8,104 +8,14 @@
 					<div class="admin-data-items">
 
 						<div class="right-body">
-							<div class="g-title">权限设置</div>
-							<div class="member-manage">
-								<div class="col-4" v-for="item in roleList">
-									<div class="level-panel role-panel">
-										<img :src="g.config.path.images+'/close2.png'"
-											 class="pointer icon-close " @click="onClick_deleteBtn(item.id)">
-										<div class="panel-heading">
-											<img :src="g.config.path.images+'/people.png'" alt="">
+							<div class="g-title">管理</div>
 
-										</div>
-										<div class="panel-body ">
-											<p >职务名称：<span>{{item.roleName}}</span></p>
-										</div>
-										<div class="panel-footer">
-											<span class="edit-button pointer bg-btn"
-												  @click="onClick_setRoleBtn(item.id)">设置权限
-											</span>
-											<span class="edit-button edit-name pointer border-btn"
-												  @click="onClick_editBtn(item.id)">编辑名称</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-4">
-									<div class="level-panel add-panel role-add-panel pointer" @click="onClick_addBtn">
-										<p>添加新职能</p>
-										<p>
-											<span class="h-line"></span>
-											<span class="v-line"></span>
-										</p>
-									</div>
-								</div>
-							</div>
 						</div>
 						<common-footer></common-footer>
 					</div>
 				</div>
 			</div>
-			<transition name="bounce">
-				<div class="affix-box default-pos-type" v-show="isShow_setRolePop">
-					<div class="pop-edit-password pop-edit">
-						<div class="show-close-btn">
-							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
-						</div>
-						<div class="pop-tit" v-show="!isAdd">
-							职能权限
-						</div>
-						<div class="pop-tit" v-show="isAdd">
-							添加新职能
-						</div>
 
-						<div class="pop-body tree-box">
-							<div v-show="isAdd" class="m-title"><span class="name">职务名称</span>
-								<input type="text" placeholder="请输入职务名称" v-model="roleName">
-							</div>
-							<div class="m-title">
-								<span class="name">选择权限</span>
-							</div>
-							<div class="line"></div>
-							<div class="" style="height: auto;">
-								<div v-for="(menu, index) in powerList" :key="index">
-									<tree-menu :model="menu" ref="tree" :menuList="menu" :label="index"
-											   :selectKeys="selectKeys"></tree-menu>
-								</div>
-							</div>
-							<div class="line"></div>
-							<div class="m-title">
-								<div class="button pointer" @click="onClick_saveTreeBtn" v-show="!isAdd">保存修改</div>
-								<div class="button pointer" @click="onClick_saveAddBtn" v-show="isAdd">保存</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</transition>
-
-			<transition name="bounce">
-				<div class="affix-box default-pos-type" v-show="isShow_editNamePop">
-					<div class="pop-edit-password pop-edit post-pop">
-						<div class="show-close-btn">
-							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
-						</div>
-						<div class="pop-tit" >
-							职务名称
-						</div>
-						<div class="pop-body ">
-							<div class="m-title">
-								<span class="name">职务名称:</span>
-								<input type="text" placeholder="请输入职务名称" v-model="roleName">
-							</div>
-							<div class="m-title">
-								<div class="save-button pointer" @click="onClick_saveNameBtn">保存修改</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</transition>
 
 		</div>
 	</main-layout>
