@@ -1,0 +1,25 @@
+.my-activity .me-checkbox-core {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.pop-edit{
+  overflow: hidden;
+  .show-recharge-tips{
+	margin-top: 20px;
+	text-align: center;
+	font-size: 16px;
+  }
+  .tree-box{
+	font-size: 14px;
+	div{
+	  line-height: 30px;
+	  width: 50%;
+	  float: left;
+	}
+	.base-info{
+	  width: 100%;
+	  margin:10px 0;
+	  font-size: 16px;
+	}
+  }
+}

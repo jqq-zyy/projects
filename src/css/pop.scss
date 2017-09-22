@@ -59,6 +59,7 @@ div.mint-popup {
 
 .pop-edit {
   min-width: 600px;
+  overflow: hidden;
   //height: 690px;
   .pop-body {
 	padding: 2px 50px 30px;
@@ -217,7 +218,6 @@ div.mint-popup {
 	}
   }
 
-
 }
 
 div.login-pop {
@@ -373,4 +373,8 @@ div.reset-pop {
 }
 .button:last-child{
   margin-left: 30px;
+}
+
+.pop-edit{
+  
 }

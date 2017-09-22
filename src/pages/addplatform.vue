@@ -10,21 +10,32 @@
 							<div class="g-title"><span>平台财务流水</span>/新建平台流水</div>
 							<div class="admin-calendar-table">
 								<div class="base-info">基本信息</div>
-								<div class="base-master">发起人: <span>小黑</span></div>
-								<div>流水类型：
-									<input type="radio" name="status" v-model="paramObj.recordType" value="1">平台红包充值
-									<input type="radio" name="status" v-model="paramObj.recordType" value="2">提现支出
+								<div class="base-master">
+									<p>发起人: </p>
+									<span>小黑</span></div>
+								<div>
+									<p>流水类型：</p>
+									<label for="recharge">
+										<input type="radio" name="status" v-model="paramObj.recordType" value="1" id="recharge">平台红包充值
+									</label>
+									<label for="cash">
+										<input type="radio" name="status" v-model="paramObj.recordType" value="2" id="cash">提现支出
+									</label>
 								</div>
 								<div>
-									流水金额：<input type="text" v-model="paramObj.amount">
+									<p>流水金额：</p>
+									<input type="text" v-model="paramObj.amount">
 								</div>
-								<div>备注：
+								<div>
+									<p>备注：</p>
 									<textarea id="" cols="30" rows="10" v-model="paramObj.remarks"
 											  placeholder="不超过50字"></textarea></div>
-								<div class="base-way">支付方式：
-									支付宝
+								<div class="base-way">
+									<p>支付方式：</p>
+									<span>支付宝</span>
 								</div>
-								<div class="base-origin">来源账户：
+								<div class="base-origin">
+									<p>来源账户：</p>
 									<input type="text" placeholder="支付宝账号" v-model="paramObj.account">
 								</div>
 								<div class="base-operate">

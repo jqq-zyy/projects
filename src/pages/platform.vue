@@ -94,7 +94,7 @@
 							平台流水详情
 						</div>
 						<div class="pop-body tree-box">
-							<div>基本信息</div>
+							<div class="base-info">基本信息</div>
 							<div>流水ID:2356</div>
 							<div>发起人：</div>
 							<div>流水类型：</div>
@@ -291,6 +291,8 @@
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common";
+</style>
+<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/myActivity";
 
 	.my-activity .me-checkbox-core {
@@ -298,3 +300,5 @@
 		margin-right: 10px;
 	}
 </style>
+
+
