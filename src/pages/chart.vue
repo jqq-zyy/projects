@@ -5,7 +5,6 @@
                 <common-nav :nav="'chart'"></common-nav>
                 <div class="right-content-wrap">
                     <common-top-nav>
-
                         <input type="text">
                     </common-top-nav>
                     <div class="admin-data-items">
@@ -30,7 +29,7 @@
                             平台流水详情
                         </div>
                         <div class="pop-body tree-box">
-                            <div>基本信息</div>
+                            <div class="base-info">基本信息1111</div>
                             <div>流水ID:2356</div>
                             <div>发起人：</div>
                             <div>流水类型：</div>
@@ -230,8 +229,4 @@
     @import "../css/common";
     @import "../css/myActivity";
 
-    .my-activity .me-checkbox-core {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
 </style>
