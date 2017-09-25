@@ -80,7 +80,8 @@
 										</div>
 									</div>
 									<div v-show="infoObj.authStatus==3" class="status-button-box">
-										<div class="applicate-btn pointer border-btn ">通过申请</div>
+										<div class="applicate-btn pointer border-btn " @click="onClick_passBtn">通过申请
+										</div>
 										<div class=" applicate-btn pointer bg-btn" @click="onClick_refuseBtn">拒绝申请</div>
 									</div>
 
@@ -114,14 +115,18 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn" />
+								 @click="onClick_closeBtn"/>
 						</div>
 						<div class="pop-tit"></div>
 						<div class="pop-body">
 							<div class="m-title text-center">确认{{currentTypeDesc}}该用户么</div>
 							<div class="m-title button-box">
-								<div class="border-btn pointer button hb-fill-middle2-bg" @click="onClick_closeBtn">暂不{{currentTypeDesc}}</div>
-								<div class="bg-btn pointer button hb-fill-middle2-rev" @click="onClick_confirmChange">确认{{currentTypeDesc}}</div>
+								<div class="border-btn pointer button hb-fill-middle2-bg" @click="onClick_closeBtn">
+									暂不{{currentTypeDesc}}
+								</div>
+								<div class="bg-btn pointer button hb-fill-middle2-rev" @click="onClick_confirmChange">
+									确认{{currentTypeDesc}}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -132,7 +137,7 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn" />
+								 @click="onClick_closeBtn"/>
 						</div>
 						<div class="pop-tit"></div>
 						<div class="pop-body">
@@ -254,6 +259,29 @@
 					this.isShow_hasError = true;
 					return
 				}
+				g.net.call("user/updateShopAuth", {
+					"shopId": this.shopId,
+					"auditStatus":3,
+					"remark":this.refuseContent
+				}).then(($data) =>
+				{
+
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				});
+			},
+			onClick_passBtn(){
+				g.net.call("user/updateShopAuth", {
+					"shopId": this.shopId,
+					"auditStatus":2
+				}).then(($data) =>
+				{
+
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				});
 			},
 			onFocus_refuseInput(){
 				this.isShow_hasError = false

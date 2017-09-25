@@ -28,19 +28,64 @@
 									</ul>
 								</div>
 								<div class="bar-bottom">
-									<div class="drop-box pointer">
-										<div @click.stop="onClick_dropListBtn">
-											{{typeList[dataObj.inOutType]}}
-											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"
-												  @click.stop="onClick_dropListBtn"></span>
+									<div class="date-box">
+										<span class="creat-time">开始时间：从</span>
+										<div class="date-from">
+											<input type="text" class="startTime date-input pointer"
+												   v-model="activitySQueryBeginTime"
+												   readonly="true"
+												   @click.stop="onClick_showCalendar('isShow_SQueryBeginTime')">
+											<hw-date type="date" skin="simple" @change="onClick_chooseSQueryBeginTime"
+													 v-model="isShow_dataObj.isShow_SQueryBeginTime"></hw-date>
+										</div>
+									</div>
+									<span class="goto">至</span>
+									<div class="date-box">
+										<div class="date-from">
+											<input type="text" class="endTime date-input pointer"
+												   v-model="activitySQueryEndTime"
+												   readonly="true" @click.stop="onClick_showCalendar('isShow_SQueryEndTime')">
+											<span @click="onClick_resetTime('activitySQueryEndTime')">X</span>
+											<hw-date type="date" skin="simple" @change="onClick_chooseSQueryEndTime"
+													 v-model="isShow_dataObj.isShow_SQueryEndTime"></hw-date>
+										</div>
+									</div>
+									<div class="date-box">
+										<span class="creat-time">结束时间：从</span>
+										<div class="date-from">
+											<input type="text" class="startTime date-input pointer"
+												   v-model="activityEQueryStartTime"
+												   readonly="true"
+												   @click.stop="onClick_showCalendar('isShow_EQueryStartTime')">
+											<span @click="onClick_resetTime('activityEQueryStartTime')">X</span>
+											<hw-date type="date" skin="simple" @change="onClick_chooseEQueryStartTime"
+													 v-model="isShow_dataObj.isShow_EQueryStartTime"></hw-date>
+										</div>
+									</div>
+									<span class="goto">至</span>
+									<div class="date-box">
+										<div class="date-from">
+											<input type="text" class="endTime date-input pointer"
+												   v-model="activityEQueryEndTime"
+												   readonly="true" @click.stop="onClick_showCalendar('isShow_EQueryEndTime')">
+											<span @click="onClick_resetTime('activityEQueryEndTime')">X</span>
+											<hw-date type="date" skin="simple" @change="onClick_chooseEQueryEndTime"
+													 v-model="isShow_dataObj.isShow_EQueryEndTime"></hw-date>
+										</div>
+									</div>
+									<div class="drop-box pointer" @click.stop="onClick_dropListBtn">
+										<div >
+											{{currentSearchType}}
+											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"></span>
 										</div>
 										<ul class="droplist" v-show="isShow_dropList">
-											<li v-for="(item,index) in typeList" class="pointer"
-												@click="onClick_dropItem(index)">{{item}}
+											<li v-for="item in typeList" class="pointer"
+												@click.stop="onClick_dropItem(item.id)">{{item.name}}
+
 											</li>
 										</ul>
 									</div>
-									<input type="text" v-model="dataObj.inOutContent" class="float-left search-input">
+									<input type="text" v-model="inputContent" class="float-left search-input">
 								<span class="btn pointer search-btn border-btn hb-fill-middle2-bg"
 									  @click="onClick_searchBtn">查找</span>
 									<div class="clearfix"></div>
@@ -146,7 +191,7 @@
 										<td>{{item.useRpAmount}}</td>
 										<td>
 												<span v-text="onConfirm_operation(item.freezeStatus)"
-													  @click="onClick_activityItem(item.freezeStatus,item.id)"></span>
+													  @click="onClick_activityItem(item.id)"></span>
 										</td>
 									</tr>
 									</tbody>
@@ -190,25 +235,40 @@
 		},
 		data(){
 			return {
+				g: g,
 				isLoad: false,
 				isShow_dropList: false,
-				g: g,
+				isShow_dataObj:{
+					isShow_SQueryBeginTime:false,
+					isShow_SQueryEndTime:false,
+					isShow_EQueryStartTime:false,
+					isShow_EQueryEndTime:false
+				},
 				totalPage: 10,
 				statusList: [],
 				activityId: 0,
 				activityList: [],
-				dataObj: {
-					ruleType: "",
-					activityName: "",
-					page: 1,
-					pageSize: g.param.pageSizeList[0],
-					activityStatusList: [0],
-					sortField: "create_time",
-					sortOrder: "desc",
-					inOutType: 0,
-					inOutContent: ""
-				},
-				typeList: ['活动名称', '品牌名称', '企业名称'],
+				activitySQueryBeginTime:'',
+				activitySQueryEndTime:'',
+				activityEQueryStartTime:'',
+				activityEQueryEndTime:'',
+				dataObj: {},
+				currentType: "",
+				inputContent:"",
+				typeList: [
+					{
+						id: 'activityName',
+						name: '活动名称'
+					}, {
+						id: "brandName",
+						name: "品牌名称"
+					}, {
+						id: "companyName",
+						name: "企业名称"
+					}
+
+				],
+				activityStatus:[0],
 				resultTotalObj: {
 					totalQrCodeNum: 0,
 					totalScanCount: 0,
@@ -227,8 +287,25 @@
 			CommonPrompt,
 			CommonSort
 		},
+		computed: {
+			currentSearchType(){
+				for (var i = 0; i < this.typeList.length; i++)
+				{
+					if (this.typeList[i].id == this.currentType)
+					{
+						return this.typeList[i].name
+					}
+				}
+			}
+		},
 		methods: {
 			init(){
+
+				this.initSearchData();
+				this.initData();
+
+			},
+			initData(){
 				var info = g.data.activityPool;
 				this.totalPage = info.totalPage;
 				this.activityList = info.list;
@@ -238,7 +315,30 @@
 				this.resultTotalObj.RpAmount = info.totalUseRpAmount;
 				this.resultTotalObj.platformAmount = info.totalUseRpAmountDesc;
 			},
+			initDate(){
+				this.dataObj.activitySQueryBeginTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
+				this.dataObj.activitySQueryEndTime = this.dataObj.activitySQueryBeginTime;
+				this.dataObj.activityEQueryStartTime = this.dataObj.activitySQueryBeginTime;
+				this.dataObj.activityEQueryEndTime = this.dataObj.activitySQueryBeginTime;
+				this.activitySQueryBeginTime = g.timeTool.getDate(this.dataObj.activitySQueryBeginTime, true);
+				this.activitySQueryEndTime = this.activitySQueryBeginTime;
+				this.activityEQueryStartTime = this.activitySQueryBeginTime;
+				this.activityEQueryEndTime = this.activitySQueryBeginTime;
+			},
+			initSearchData(){
+				this.dataObj= {
+					page: 1,
+					pageSize: g.param.pageSizeList[0],
+					activityStatus: "",
+					sortField: "create_time",
+					sortOrder: "desc",
+					activitySQueryBeginTime:'',
+					activitySQueryEndTime:'',
+					activityEQueryStartTime:'',
+					activityEQueryEndTime:''
+				}
 
+			},
 			onChange_currentPage($page, $pageSize){
 				this.dataObj.page = $page;
 				this.dataObj.pageSize = $pageSize;
@@ -246,23 +346,24 @@
 			},
 			onUpdate_activityList(){
 				g.ui.showLoading();
+				this.dataObj.activityStatus  = this.activityStatus.join(",");
+				this.dataObj[this.currentType] = this.inputContent;
 				g.net.call("/activity/queryActivityStatisticByPage", this.dataObj).then(($data) =>
 				{
 					g.data.activityPool.removeAll();
-					var obj = {};
-					obj.resultPageList = $data;
-					g.data.activityPool.update(obj);
-					this.activityList = g.data.activityPool.list;
+					g.data.activityPool.update($data);
 					g.ui.hideLoading();
 					this.initData();
+					this.dataObj[this.currentType] = "";
 				}, (err) =>
 				{
 					g.func.dealErr(err);
 				});
 			},
 			onClick_dropItem($type){
-				this.dataObj.inOutType = $type;
+				this.currentType = $type;
 				this.isShow_dropList = false;
+
 			},
 			onClick_dropListBtn(){
 				if (this.isShow_dropList)
@@ -276,26 +377,26 @@
 			},
 			onClick_changeType($typeId){
 				this.dataObj.page = 1;
-				var activityStatusList = this.dataObj.activityStatusList;
+				var activityStatusList = this.activityStatus;
 				if ($typeId == 0)
 				{
-					this.dataObj.activityStatusList = [0]
+					this.activityStatus = [0]
 				}
 				else
 				{
 					if (activityStatusList.indexOf(0) > -1)
 					{
-						this.dataObj.activityStatusList = []
+						this.activityStatus = []
 
 					}
 					var index = activityStatusList.indexOf($typeId);
 					if (index > -1)
 					{
-						this.dataObj.activityStatusList.splice(index, 1)
+						this.activityStatus.splice(index, 1)
 					}
 					else
 					{
-						this.dataObj.activityStatusList.push($typeId)
+						this.activityStatus.push($typeId)
 					}
 				}
 
@@ -347,16 +448,13 @@
 					this.isShow_dropList = true;
 				}
 			},
-			onClick_detailBtn($id, $name){
-				g.url = ({
-					"path": "/activitydetail",
-					"query": {
-						"id": $id
-					}
-				})
+			onClick_detailBtn($id){
+
+				g.url = ("/activitydetail?id=" + $id)
+
 			},
 			isCurrentType($type){
-				if (this.dataObj.activityStatusList.indexOf($type) > -1)
+				if (this.activityStatus.indexOf($type) > -1)
 				{
 					return true
 				}
@@ -372,15 +470,76 @@
 					return "解冻"
 				}
 			},
-			onClick_activityItem($type, $id){
+			onClick_activityItem( $id){
+				g.url = ("/activitydetail?id=" + $id)
 
 			},
 			onClick_exportBtn(){
 
+			},
+			onClick_showCalendar($str){
+				trace(this.isShow_dataObj)
+				for(var key in this.isShow_dataObj){
+					if(key ==$str){
+						if (this.isShow_dataObj[key])
+						{
+							this.isShow_dataObj[key] = false;
+						}
+						else
+						{
+							this.isShow_dataObj[key] = true;
+						}
+					}else{
+						this.isShow_dataObj[key] = false;
+					}
+				}
+				trace(this.isShow_dataObj);
+			},
+			onClick_chooseSQueryBeginTime($timeStamp){
+				this.dataObj.activitySQueryBeginTime = $timeStamp;
+				this.activitySQueryBeginTime = g.timeTool.getDate($timeStamp, true);
+				if (this.dataObj.activitySQueryBeginTime > this.dataObj.activitySQueryEndTime)
+				{
+					this.onClick_chooseSQueryEndTime($timeStamp);
+				}
+				this.isShow_dataObj.isShow_SQueryBeginTime = false;
+
+			},
+
+			onClick_chooseSQueryEndTime($timeStamp){
+				this.dataObj.activitySQueryEndTime = $timeStamp;
+				this.activitySQueryEndTime = g.timeTool.getDate($timeStamp, true);
+				if (this.dataObj.activitySQueryEndTime < this.dataObj.activitySQueryBeginTime)
+				{
+					this.onClick_chooseSQueryBeginTime($timeStamp);
+				}
+				this.isShow_dataObj.isShow_SQueryEndTime = false;
+			},
+			onClick_chooseEQueryStartTime($timeStamp){
+				this.dataObj.activityEQueryStartTime = $timeStamp;
+				this.activityEQueryStartTime = g.timeTool.getDate($timeStamp, true);
+				if (this.dataObj.activityEQueryStartTime > this.dataObj.activityEQueryEndTime)
+				{
+					this.onClick_chooseEQueryEndTime($timeStamp);
+				}
+				this.isShow_dataObj.isShow_EQueryStartTime = false;
+			},
+			onClick_chooseEQueryEndTime($timeStamp){
+				this.dataObj.activityEQueryEndTime = $timeStamp;
+				this.activityEQueryEndTime = g.timeTool.getDate($timeStamp, true);
+				if (this.dataObj.activityEQueryEndTime < this.dataObj.activityEQueryStartTime)
+				{
+					this.onClick_chooseEQueryStartTime($timeStamp);
+				}
+				this.isShow_dataObj.isShow_EQueryEndTime = false;
+			},
+			onClick_resetTime($resetType){
+				this.dataObj[$resetType] ="";
+				this[$resetType] ="";
+
+
 			}
-
 		}
-
 	}
 
 </script>

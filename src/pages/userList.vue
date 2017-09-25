@@ -38,9 +38,8 @@
 												   v-model="date.startTimeStr"
 												   readonly="true"
 												   @click.stop="onClick_showCalendar('start')">
-											<calendar @click="onClick_chooseDateStart" v-show="isShowStartTime"
-													  class="drop-time"
-													  ref="timeBox" :isCanBefore="true"></calendar>
+											<hw-date type="date" skin="simple" @change="onClick_chooseDateStart"
+													 v-model="isShowStartTime"></hw-date>
 										</div>
 									</div>
 									<span class="goto">至</span>
@@ -49,31 +48,32 @@
 											<input type="text" class="endTime date-input pointer"
 												   v-model="date.endTimeStr"
 												   readonly="true" @click.stop="onClick_showCalendar('end')">
-											<calendar @click="onClick_chooseDateEnd" v-show="isShowEndTime"
-													  class="drop-time" :startTime="date.startTime"
-													  :isCanBefore="true"></calendar>
+											<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd"
+													 v-model="isShowEndTime"></hw-date>
 										</div>
 									</div>
-									<div class="drop-box pointer">
+									<div class="drop-box pointer" @click.stop="onClick_dropListBtn">
 										<div @click.stop="onClick_dropListBtn">
-											{{typeList[searchObj.inOutType]}}
-											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"
-												  @click.stop="onClick_dropListBtn"></span>
+											{{currentSearchType}}
+											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"></span>
 										</div>
 										<ul class="droplist" v-show="isShow_dropList">
-											<li v-for="(item,index) in typeList" class="pointer"
-												@click="onClick_dropItem(index)">{{item}}
+											<li v-for="item in typeList" class="pointer"
+												@click.stop="onClick_dropItem(item.id)">{{item.name}}
 											</li>
 										</ul>
 									</div>
-									<input type="text" v-model="searchObj.inOutContent" class="search-input">
-									<div class="btn pointer search-btn border-btn hb-fill-middle2-bg" @click="onClick_searchBtn">查找</div>
+									<input type="text" v-model="inputContent" class="search-input">
+									<div class="btn pointer search-btn border-btn hb-fill-middle2-bg"
+										 @click="onClick_searchBtn">查找
+									</div>
 									<div class="clearfix"></div>
 								</div>
 							</div>
 							<div class="all-out">
 								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right
-									" @click="onClick_exportBtn">导出全部</div>
+									" @click="onClick_exportBtn">导出全部
+								</div>
 							</div>
 							<div class="recharge-table admin-calendar-table ">
 								<table>
@@ -166,7 +166,7 @@
 									</thead>
 									<tbody>
 									<tr v-for="item in userList">
-										<td>{{item.id}}</td>
+										<td @click="onClick_userItem(item.id)">{{item.id}}</td>
 										<td>{{item.createTime}}</td>
 										<td>{{item.name}}</td>
 										<td v-text="freezeContent(item.freezeStatus)"></td>
@@ -185,7 +185,7 @@
 										<td>{{item.rpCurrentAccount}}</td>
 										<td>
 											<span v-text="onConfirm_operation(item.freezeStatus)"
-												  @click="onClick_userItem(item.freezeStatus,item.id)"></span>
+												  @click="onClick_userItem(item.id)"></span>
 											<span v-show="item.authStatus=1"
 												  @click="onClick_lookItem(item.id)">审核</span>
 										</td>
@@ -256,12 +256,36 @@
 				userList: [],
 				modelObj: {},
 				totalPage: 10,
-				typeList: ['企业全称', '用户名', '手机号'],
+				currentType: "",
+				inputContent: "",
+				typeList: [
+					{
+						id: 'logon',
+						name: '用户名'
+					}, {
+						id: "telphone",
+						name: "手机号"
+					}, {
+						id: "companyName",
+						name: "企业全称"
+					}
+				],
 				freezeStatusList: ['全部', '正常', '冻结'],
-				authStatusList: ['全部', '已认证', '未认证']
+				authStatusList: ['全部', '未认证', '已认证']
 			}
 		},
 		watch: {},
+		computed: {
+			currentSearchType(){
+				for (var i = 0; i < this.typeList.length; i++)
+				{
+					if (this.typeList[i].id == this.currentType)
+					{
+						return this.typeList[i].name
+					}
+				}
+			}
+		},
 		components: {
 			MainLayout,
 			CommonNav,
@@ -277,11 +301,25 @@
 				this.initDate();
 				this.initSearchData();
 				this.initList();
+
 			},
 			initList(){
 				this.userList = g.data.userPool.list;
 				this.totalPage = g.data.userPool.totalPage;
-				this.modelObj = g.data.userPool.model;
+				this.initTotal();
+			},
+			initTotal(){
+				var userPool = g.data.userPool;
+				this.modelObj.shopAllAmount = userPool.shopAllAmount;
+				this.modelObj.platformAllAmount = userPool.platformAllAmount;
+				this.modelObj.rpSendAllNum = userPool.rpSendAllNum;
+				this.modelObj.qrcodeScanAllNum = userPool.qrcodeScanAllNum;
+				this.modelObj.qrcodeBindAllNum = userPool.qrcodeBindAllNum;
+				this.modelObj.qrcodeExportAllNum = userPool.qrcodeExportAllNum;
+				this.modelObj.qrcodeUnExportAllNum = userPool.qrcodeUnExportAllNum;
+				this.modelObj.qrcodeBuyAllNum = userPool.qrcodeBuyAllNum;
+				this.modelObj.qrcodeRefundAllNum = userPool.qrcodeRefundAllNum;
+				this.modelObj.rpAllCurrentAccount = userPool.rpAllCurrentAccount;
 			},
 			initDate(){
 				this.date.startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
@@ -295,13 +333,14 @@
 					'pageSize': g.param.pageSizeList[0],
 					'sortField': 'create_time',
 					'sortOrder': 'desc',
-					'inOutType': 0,
-					'inOutContent': '',
+					'endTime': this.date.startTime,
+					'startTime': this.date.endTime,
 					'freezeStatus': 0,
 					'authStatus': 0
-
 				}
+
 			},
+
 			onClick_searchBtn(){
 				this.searchObj.page = 1;
 				this.onUpdate_userList()
@@ -321,7 +360,9 @@
 				g.ui.showLoading();
 				this.searchObj.startTime = this.date.startTimeStr;
 				this.searchObj.endTime = this.date.endTimeStr;
-				getUserList(this.searchObj, this.initList)
+				this.searchObj[this.currentType] = this.inputContent;
+				getUserList(this.searchObj, this.initList);
+				this.searchObj[this.currentType] = "";
 			},
 			onClick_dropListBtn(){
 				if (this.isShow_dropList)
@@ -350,8 +391,9 @@
 				this.onUpdate_userList();
 			},
 			onClick_dropItem($type){
-				this.searchObj.inOutType = $type;
+				this.currentType = $type;
 				this.isShow_dropList = false;
+
 			},
 			onClick_sortBtn($field){
 				if (this.searchObj.sortOrder == "desc")
@@ -396,22 +438,27 @@
 					this.isShowStartTime = false;
 				}
 			},
-			onClick_chooseDateStart(dateArr){
-				this.date.startTime = new Date(dateArr[0], dateArr[1], dateArr[2]).getTime() / 1000;
-				this.date.startTimeStr = g.timeTool.getDate(this.date.startTime, true);
+
+//			onChange_date($timeStamp)
+//			{
+//				trace('$timeStamp========', $timeStamp);
+//			},
+			onClick_chooseDateStart($timeStamp){
+				this.date.startTime = $timeStamp;
+				this.date.startTimeStr = g.timeTool.getDate($timeStamp, true);
 				if (this.date.startTime > this.date.endTime)
 				{
-					this.onClick_chooseDateEnd(dateArr);
+					this.onClick_chooseDateEnd($timeStamp);
 				}
 				this.isShowStartTime = false;
 			},
 
-			onClick_chooseDateEnd(dateArr){
-				this.date.endTime = new Date(dateArr[0], dateArr[1], dateArr[2]).getTime() / 1000;
-				this.date.endTimeStr = g.timeTool.getDate(this.date.endTime, true);
+			onClick_chooseDateEnd($timeStamp){
+				this.date.endTime = $timeStamp;
+				this.date.endTimeStr = g.timeTool.getDate($timeStamp, true);
 				if (this.date.endTime < this.date.startTime)
 				{
-					this.onClick_chooseDateStart(dateArr);
+					this.onClick_chooseDateStart($timeStamp);
 				}
 				this.isShowEndTime = false;
 			},
@@ -439,12 +486,16 @@
 				}
 			},
 			onClick_userItem($type, $id){
-
+				g.url = ("/userdetail?id=" + $id)
 			},
 			onClick_lookItem($id){
-
+				g.url = ("/userdetail?id=" + $id)
 			},
 			onClick_exportBtn(){
+			},
+			onClick_userItem($id){
+				g.url = ("/userdetail?id=" + $id)
+
 			}
 		}
 	}
@@ -453,6 +504,7 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common.scss";
 	@import "../css/myBill.scss";
+
 	.date-input {
 		/*background: url("../../assets/images/date.png") no-repeat 160px center;*/
 	}
@@ -463,4 +515,10 @@
 
 	}
 </style>
+
+
+
+
+
+
 

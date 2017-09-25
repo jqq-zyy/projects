@@ -22,7 +22,7 @@
 </template>
 <script type="text/ecmascript-6">
 	const prefixCls = "hw-list";
-	import * as func from './../../../js/func';
+	import * as util from './../../../js/util';
 
 	import ListItem from './../../list/src/listItem.vue';
 	import Group from './../../group/index';
@@ -88,39 +88,39 @@
 		methods: {
 			onClick_item($item, $event)
 			{
-				func.insertOneOrZero(this.currIdList, $item.id);
+				util.insertOneOrZero(this.currIdList, $item.id);
 				this.tmpItem = $item;
 			},
 			onClick_icon($item)
 			{
 				this.tmpItem = $item;
-				func.insertOneOrZero(this.checkedChildren, $item.id)
+				util.insertOneOrZero(this.checkedChildren, $item.id)
 				this.checkedAllChildren($item);
 				this.$emit('change', this.checkedChildren);
 			},
 			onChange_list($idList)
 			{
 				this.checkedChildren = $idList;
-				func.splice(this.checkedChildren, this.tmpItem.id);
+				util.splice(this.checkedChildren, this.tmpItem.id);
 				if ($idList.length > 0)
 				{
-					func.pushIn(this.checkedChildren, this.tmpItem.id);
+					util.pushIn(this.checkedChildren, this.tmpItem.id);
 				}
 				this.$emit('change', this.checkedChildren);
 			},
 			checkedAllChildren($data)
 			{
-				if (func.typeOf($data['children']) === 'array' && $data['children'].length > 0)
+				if (util.typeOf($data['children']) === 'array' && $data['children'].length > 0)
 				{
 					for (var item of $data['children'])
 					{
 						if (this.checkedChildren.indexOf($data.id) >= 0)
 						{
-							func.pushIn(this.checkedChildren, item.id);
+							util.pushIn(this.checkedChildren, item.id);
 						}
 						else
 						{
-							func.splice(this.checkedChildren, item.id)
+							util.splice(this.checkedChildren, item.id)
 						}
 						this.checkedAllChildren(item);
 					}

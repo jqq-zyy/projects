@@ -9,8 +9,8 @@
 			</div>
 			<div class="page-select-dropdown" :class="isShowAdjustSize?'is-absoluted':''" v-if="isShowAdjustSize">
 				<ul class="page-select-list">
-					<li v-for="item in pageSizeList" @click="onClick_pageSize(item.id)"
-						:class="item.name==pageSize? 'selected':''">
+					<li v-for="item in pageSizeList" @click="onClick_pageSize(item)"
+						:class="item==pageSize? 'selected':''">
 						{{item.name}}条/页
 					</li>
 				</ul>
@@ -44,7 +44,7 @@
 	</div>
 </template>
 <script>
-	import * as func from './../../../js/func'
+	import * as util from './../../../js/util'
 	const prefixCls = "hw-page";
 	export default{
 		name: "hw-page",
@@ -63,14 +63,14 @@
 				type: String,
 				validator($val)
 				{
-					return func.oneOf($val, ["primary", "mini"]);
+					return util.oneOf($val, ["primary", "mini"]);
 				}
 			},
 			textType: {
 				type: String,
 				validator($val)
 				{
-					return func.oneOf($val, ["en", "cn", "char"]);
+					return util.oneOf($val, ["en", "cn", "char"]);
 				},
 				default: "char"
 			},
@@ -87,6 +87,13 @@
 			pageSize: {
 				type: Number,
 				default: 10
+			},
+			pageSizeList: {
+				type: Array,
+				default: function ()
+				{
+					return [10, 20, 50];
+				}
 			},
 			showPageSize: {
 				type: Boolean,
@@ -136,49 +143,7 @@
 				}
 				return leftArr.concat(rightArr);
 			},
-			pageSizeList()
-			{
-				if (this.total >= 320)
-				{
-					return [
-						{
-							id: 10,
-							name: "10"
-						},
-						{
-							id: 20,
-							name: "20"
-						},
-						{
-							id: 50,
-							name: "50"
-						}, {
-							id: 100,
-							name: "100"
-						}
-					]
-				}
-				else
-				{
-					return [
-						{
-							id: 10,
-							name: "10"
-						},
-						{
-							id: 20,
-							name: "20"
-						},
-						{
-							id: 30,
-							name: "30"
-						}, {
-							id: 40,
-							name: "100"
-						}
-					]
-				}
-			},
+
 			defaultTextList()
 			{
 				if (this.textType == "char")

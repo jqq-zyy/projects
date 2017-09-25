@@ -1,5 +1,6 @@
 <template>
 	<div :class="classes" :style="styles">
+		<div>{{title}}</div>
 		<slot></slot>
 	</div>
 </template>
@@ -17,6 +18,9 @@
 			vertical: {
 				type: Boolean,
 				default: false
+			},
+			title: {
+				type: String
 			}
 		},
 		computed: {

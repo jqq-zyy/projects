@@ -5,8 +5,16 @@ var _list = [];
 var _hash = Object.create(null);
 var _total = 0;
 var _totalPage = 0;
-var _model = Object.create(null);
-
+var _shopAllAmount = 0;
+var _platformAllAmount = 0;
+var _rpSendAllNum = 0;
+var _qrcodeScanAllNum = 0;
+var _qrcodeBindAllNum = 0;
+var _qrcodeExportAllNum = 0;
+var _qrcodeUnExportAllNum = 0;
+var _qrcodeBuyAllNum = 0;
+var _qrcodeRefundAllNum = 0;
+var _rpAllCurrentAccount = 0;
 
 export default class UserPool {
 	constructor()
@@ -16,18 +24,23 @@ export default class UserPool {
 	update($obj)
 	{
 		var model = $obj.model;
-		$obj.hasOwnProperty('total') && (_total= $obj.total);
+		$obj.hasOwnProperty('total') && (_total = $obj.total);
 		$obj.hasOwnProperty('totalPage') && (_totalPage = $obj.totalPage);
-		$obj.hasOwnProperty('shopAllAmount') && (_model.shopAllAmount = $obj.shopAllAmount);
-		model.hasOwnProperty('platformAllAmount') && (_model.platformAllAmount = model.platformAllAmount);
-		model.hasOwnProperty('rpSendAllNum') && (_model.rpSendAllNum = model.rpSendAllNum);
-		model.hasOwnProperty('qrcodeScanAllNum') && (_model.qrcodeScanAllNum = model.qrcodeScanAllNum);
-		model.hasOwnProperty('qrcodeBindAllNum') && (_model.qrcodeBindAllNum = model.qrcodeBindAllNum);
-		model.hasOwnProperty('qrcodeExportAllNum') && (_model.qrcodeExportAllNum = model.qrcodeExportAllNum);
-		model.hasOwnProperty('qrcodeUnExportAllNum') && (_model.qrcodeUnExportAllNum = model.qrcodeUnExportAllNum);
-		model.hasOwnProperty('qrcodeBuyAllNum') && (_model.qrcodeBuyAllNum = model.qrcodeBuyAllNum);
-		model.hasOwnProperty('qrcodeRefundAllNum') && (_model.qrcodeRefundAllNum = model.qrcodeRefundAllNum);
-		model.hasOwnProperty('rpAllCurrentAccount') && (_model.rpAllCurrentAccount = model.rpAllCurrentAccount);
+
+		if (model)
+		{
+			model.hasOwnProperty('shopAllAmount') && (_shopAllAmount = $obj.shopAllAmount);
+			model.hasOwnProperty('platformAllAmount') && (_platformAllAmount = model.platformAllAmount);
+			model.hasOwnProperty('rpSendAllNum') && (_rpSendAllNum = model.rpSendAllNum);
+			model.hasOwnProperty('qrcodeScanAllNum') && (_qrcodeScanAllNum = model.qrcodeScanAllNum);
+			model.hasOwnProperty('qrcodeBindAllNum') && (_qrcodeBindAllNum = model.qrcodeBindAllNum);
+			model.hasOwnProperty('qrcodeExportAllNum') && (_qrcodeExportAllNum = model.qrcodeExportAllNum);
+			model.hasOwnProperty('qrcodeUnExportAllNum') && (_qrcodeUnExportAllNum = model.qrcodeUnExportAllNum);
+			model.hasOwnProperty('qrcodeBuyAllNum') && (_qrcodeBuyAllNum = model.qrcodeBuyAllNum);
+			model.hasOwnProperty('qrcodeRefundAllNum') && (_qrcodeRefundAllNum = model.qrcodeRefundAllNum);
+			model.hasOwnProperty('rpAllCurrentAccount') && (_rpAllCurrentAccount = model.rpAllCurrentAccount);
+		}
+
 		for (var item of $obj.data)
 		{
 			this.add(item);
@@ -57,9 +70,55 @@ export default class UserPool {
 	{
 		return _list;
 	}
-	get model()
+
+	get shopAllAmount()
 	{
-		return _model;
+		return _shopAllAmount;
+	}
+
+	get platformAllAmount()
+	{
+		return _platformAllAmount;
+	}
+
+	get rpSendAllNum()
+	{
+		return _rpSendAllNum;
+	}
+
+	get qrcodeScanAllNum()
+	{
+		return _qrcodeScanAllNum;
+	}
+
+	get qrcodeBindAllNum()
+	{
+		return _qrcodeBindAllNum;
+	}
+
+	get qrcodeExportAllNum()
+	{
+		return _qrcodeExportAllNum;
+	}
+
+	get qrcodeUnExportAllNum()
+	{
+		return _qrcodeUnExportAllNum;
+	}
+
+	get qrcodeBuyAllNum()
+	{
+		return _qrcodeBuyAllNum;
+	}
+
+	get qrcodeRefundAllNum()
+	{
+		return _qrcodeRefundAllNum;
+	}
+
+	get rpAllCurrentAccount()
+	{
+		return _rpAllCurrentAccount;
 	}
 
 	getDataById($id)

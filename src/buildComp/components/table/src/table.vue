@@ -1,7 +1,7 @@
 <template>
 	<div class="out-box relative" :class="inlineBorder?'out-box-border':''" ref="scrollCon"
 		 :style="{height:boxHeight+'px',width:boxWidth+'px'}">
-		<div class="table-header header-vertical body-row"
+		<div class="header header-vertical body-row"
 			 :style="{height:headerHeight+'px',top:offsetTop+'px',width:getTypeWidth('total')+'px'}">
 			<div class="left-header"
 				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
@@ -10,6 +10,10 @@
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkLeftHeader(item,index)">
 						<span>{{item.name}}</span>
+						<hw-icon :iconType="item.sortBy ? item.sortBy == 'desc' ? 'bottom-arrow' : 'top-arrow' : ''"
+								 v-if="item.sortBy"
+						></hw-icon>
+
 					</div>
 				</div>
 			</div>
@@ -17,11 +21,14 @@
 			<div class="middle-header"
 				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:headerHeight+'px'}">
 				<div class="header-row">
-
 					<div class="header-col" v-for="(item,index) in tableData.header" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkMiddleHeader(item,index)">
 						<span>{{item.name}}</span>
+						<hw-icon :iconType="item.sortBy ? item.sortBy == 'desc' ? 'bottom-arrow' : 'top-arrow' : ''"
+								 v-if="item.sortBy"
+						></hw-icon>
+
 					</div>
 				</div>
 			</div>
@@ -33,6 +40,10 @@
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkRightHeader(item,index)">
 						<span>{{item.name}}</span>
+						<hw-icon :iconType="item.sortBy ? item.sortBy == 'desc' ? 'bottom-arrow' : 'top-arrow' : ''"
+								 v-if="item.sortBy"
+						></hw-icon>
+
 					</div>
 				</div>
 			</div>
@@ -40,48 +51,47 @@
 
 
 		<div class="body" :style="{width:getTypeWidth('total')+'px',height:bodyHeight+'px'}">
-			<div class="left-table-body"
+			<div class="left-body"
 				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
-				<div class="body-row" v-for="item in tableData.body"
+				<div class="body-row" v-for="item in tableData.body" @click="onClick_body(item.id)"
 
 					 :style="{height: eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item" v-if="checkLeftBody(key,index)"
 						 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
 							<span v-if="key==='btn'">
-								<hw-btn :text="value.name" @click="onClick_itemBtn(value.id,item.id)">
+								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)">
 								</hw-btn>
 							</span>
 					</div>
 				</div>
 			</div>
 
-
-			<div class="middle-table-body" :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px'}">
-				<div class="body-row" v-for="item in tableData.body"
+			<div class="middle-body" :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px'}">
+				<div class="body-row" v-for="item in tableData.body" @click="onClick_body(item.id)"
 					 :style="{height: eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item"
 						 v-if="checkMiddleBody(key,index)"
 						 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
 						<span v-if="key==='btn'">
-							<hw-btn :text="value.name" @click="onClick_itemBtn(value.id,item.id)">
+							<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)">
 							</hw-btn>
 						</span>
 					</div>
 				</div>
 			</div>
 
-			<div class="right-table-body"
+			<div class="right-body"
 				 :style="{right:Math.max(getScrollLimit()-offsetLeft+6,0)+'px',width:getTypeWidth('right')+'px'}">
-				<div class="body-row" v-for="item in tableData.body"
+				<div class="body-row" v-for="item in tableData.body" @click="onClick_body(item.id)"
 					 :style="{height:eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item"
 						 v-if="checkRightBody(key,index)"
 						 :style="{width: getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
 							<span v-if="key==='btn'">
-								<hw-btn :text="value.name" @click="onClick_itemBtn(value.id,item.id)">
+								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)">
 								</hw-btn>
 							</span>
 					</div>
@@ -170,7 +180,8 @@
 			}
 
 		},
-		computed: {},
+		computed: {
+		},
 		methods: {
 			checkMiddleHeader($item, index)
 			{
@@ -201,27 +212,31 @@
 			onClick_headItem($item)
 			{
 
-				if ($item.supportSort)
-				{
-					if (flag)
-					{
-						this.tableData.body = this.tableData.body.sort(function (a, b)
-						{
-							return a[$item.id] - b[$item.id]
-						})
-						flag = false;
-					}
-					else
-					{
-						this.tableData.body = this.tableData.body.sort(function (a, b)
-						{
-							return b[$item.id] - a[$item.id];
-						});
-						flag = true;
-					}
-
-				}
-				this.$emit('sort', this.tableData.body);
+//				if ($item.supportSort)
+//				{
+//					if (flag)
+//					{
+//						this.tableData.body = this.tableData.body.sort(function (a, b)
+//						{
+//							return a[$item.id] - b[$item.id]
+//						})
+//						flag = false;
+//					}
+//					else
+//					{
+//						this.tableData.body = this.tableData.body.sort(function (a, b)
+//						{
+//							return b[$item.id] - a[$item.id];
+//						});
+//						flag = true;
+//					}
+//
+//				}
+				this.$emit('clickHead', $item);
+			},
+			onClick_body($id)
+			{
+				this.$emit('clickBody', $id)
 			},
 			onClick_itemBtn($btnId, $itemId)
 			{
@@ -324,7 +339,8 @@
 		return "horizontal";
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
+
+<style type="text/scss" lang="sass" rel="stylesheet/scss" scoped>
 	* {
 		margin: 0;
 		padding: 0;
@@ -336,12 +352,12 @@
 		border: 1px solid #444444;
 	}
 
-	.table-header, .body {
+	.header, .body {
 		white-space: nowrap;
 		position: relative;
 	}
 
-	.table-header {
+	.header {
 		z-index: 1000;
 		box-shadow: 0px 3px 3px #999999;
 	}
@@ -350,14 +366,14 @@
 		z-index: 995;
 	}
 
-	.left-table-body,
+	.left-body,
 	.left-header {
 		z-index: 999;
 		box-shadow: -2px 1px 4px #999999;
 		/*background-color: #ffff00 !important;*/
 	}
 
-	.right-table-body,
+	.right-body,
 	.right-header {
 		z-index: 999;
 		box-shadow: -2px 1px 4px #999999;
@@ -374,7 +390,7 @@
 		z-index: 998;
 	}
 
-	.middle-table-body {
+	.middle-body {
 		z-index: 990;
 	}
 
@@ -405,13 +421,13 @@
 		left: 0;
 	}
 
-	.left-table-body, .middle-table-body, .left-header, .middle-header, .right-header, .right-table-body {
+	.left-body, .middle-body, .left-header, .middle-header, .right-header, .right-body {
 		position: absolute;
 		top: 0;
 		background-color: #ffffff;
 	}
 
-	.left-table-body, .left-header {
+	.left-body, .left-header {
 		left: 0;
 	}
 

@@ -28,6 +28,25 @@
 									</ul>
 								</div>
 								<div class="bar-bottom">
+									<div class="date-box">
+										<span class="creat-time">创建时间：从</span>
+										<div class="date-from">
+											<input type="text" class="startTime date-input pointer"
+												   v-model="date.startTimeStr"
+												   readonly="true"
+												   @click.stop="onClick_showCalendar('start')">
+											<hw-date type="date" skin="simple" @change="onClick_chooseDateStart" v-model="isShowStartTime"></hw-date>
+										</div>
+									</div>
+									<span class="goto">至</span>
+									<div class="date-box">
+										<div class="date-from">
+											<input type="text" class="endTime date-input pointer"
+												   v-model="date.endTimeStr"
+												   readonly="true" @click.stop="onClick_showCalendar('end')">
+											<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd" v-model="isShowEndTime"></hw-date>
+										</div>
+									</div>
 									<div class="drop-box pointer">
 										<div @click.stop="onClick_dropListBtn">
 											{{typeList[dataObj.inOutType]}}
@@ -169,10 +188,18 @@
 			return {
 				isLoad: false,
 				isShow_dropList: false,
+				isShowStartTime: false,
+				isShowEndTime: false,
 				g: g,
 				totalPage: 1,
 				statusList: ["付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
 				qrcodeList: [],
+				date: {
+					startTime: 0,
+					startTimeStr: "",
+					endTimeStr: "",
+					endTime: 0
+				},
 				dataObj: {
 					ruleType: "",
 					activityName: "",
@@ -204,8 +231,14 @@
 				this.totalPage = info.totalPage;
 				this.bagList = info.list;
 				this.rpAmount = info.rpAmount;
+				this.initDate();
 			},
-
+			initDate(){
+				this.date.startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
+				this.date.endTime = this.date.startTime;
+				this.date.startTimeStr = g.timeTool.getDate(this.date.startTime, true);
+				this.date.endTimeStr = g.timeTool.getDate(this.date.endTime, true);
+			},
 			onChange_currentPage($page, $pageSize){
 				this.dataObj.page = $page;
 				this.dataObj.pageSize = $pageSize;
@@ -300,6 +333,54 @@
 					return true
 				}
 				return false
+			},
+			onClick_showCalendar(str){
+				if (str == 'start')
+				{
+					//this.startTime = 0;
+					if (this.isShowStartTime)
+					{
+						this.isShowStartTime = false;
+					}
+					else
+					{
+						this.isShowStartTime = true;
+					}
+					this.isShowEndTime = false;
+				}
+				else
+				{
+
+					if (this.isShowEndTime)
+					{
+						this.isShowEndTime = false;
+					}
+					else
+					{
+						this.isShowEndTime = true;
+					}
+					this.isShowStartTime = false;
+				}
+			},
+
+			onClick_chooseDateStart($timeStamp){
+				this.date.startTime = $timeStamp;
+				this.date.startTimeStr = g.timeTool.getDate($timeStamp, true);
+				if (this.date.startTime > this.date.endTime)
+				{
+					this.onClick_chooseDateEnd($timeStamp);
+				}
+				this.isShowStartTime = false;
+			},
+
+			onClick_chooseDateEnd($timeStamp){
+				this.date.endTime = $timeStamp;
+				this.date.endTimeStr = g.timeTool.getDate($timeStamp, true);
+				if (this.date.endTime < this.date.startTime)
+				{
+					this.onClick_chooseDateStart($timeStamp);
+				}
+				this.isShowEndTime = false;
 			},
 			onClick_qrcodeItem($type){
 
