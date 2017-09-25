@@ -18,7 +18,22 @@
                                         <span>最近7天</span>
                                         <span>最近30天</span>
                                     </div>
-                                    <div class="chart-nav-right"></div>
+                                    <div class="chart-nav-right">
+                                        <div class="chart-nav-time">
+                                            <span>从</span>
+                                            <input type="text" placeholder="开始时间">
+                                            <span>从</span>
+                                            <input type="text" placeholder="结束时间">
+
+                                        </div>
+
+                                        <div class="chart-nav-search">
+                                            查询
+                                        </div>
+
+                                        <div class="chart-nav-select hb-fill-middle2-bg">选择活动</div>
+
+                                    </div>
                                 </div>
                                 <div class="chart-detail">
                                     <p>新扫码消费者</p>
