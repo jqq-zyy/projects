@@ -13,7 +13,6 @@
 								红包账户详情
 							</p>
 							<div class="bar-box">
-
 								<div class="bar-top">
 									<ul>
 										<li>状态：</li>
@@ -29,6 +28,25 @@
 									</ul>
 								</div>
 								<div class="bar-bottom">
+									<div class="date-margin">
+										<div class="date-box">
+											<span class="creat-time">创建时间：从</span>
+											<div class="date-from">
+												<input type="text" class="startTime date-input pointer"
+													   readonly="true">
+												<calendar class="drop-time"></calendar>
+											</div>
+										</div>
+										<span class="goto">至</span>
+										<div class="date-box">
+											<div class="date-from">
+												<input type="text" class="endTime date-input pointer">
+												<calendar class="drop-time"
+												></calendar>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
 									<div class="drop-box pointer">
 										<div @click.stop="onClick_dropListBtn">
 											{{typeList[dataObj.inOutType]}}
@@ -42,7 +60,7 @@
 										</ul>
 									</div>
 									<input type="text" v-model="dataObj.inOutContent" class="search-input">
-									<span class="btn pointer search-btn border-btn hb-fill-middle2-bg"
+									<span class="pointer search-btn border-btn hb-fill-middle2-bg"
 										  @click="onClick_searchBtn">查找</span>
 								</div>
 							</div>

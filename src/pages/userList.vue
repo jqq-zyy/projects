@@ -31,35 +31,36 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="bar-bottom">
-									<div class="date-box">
-										<span class="creat-time">创建时间：从</span>
-										<div class="date-from">
-											<input type="text" class="startTime date-input pointer"
-												   v-model="date.startTimeStr"
-												   readonly="true"
-												   @click.stop="onClick_showCalendar('start')">
-											<calendar @click="onClick_chooseDateStart" v-show="isShowStartTime"
-													  class="drop-time"
-													  ref="timeBox" :isCanBefore="true"></calendar>
+									<div class="date-margin">
+										<div class="date-box">
+											<span class="creat-time">创建时间：从</span>
+											<div class="date-from">
+												<input type="text" class="startTime date-input pointer"
+													   v-model="date.startTimeStr"
+													   readonly="true"
+													   @click.stop="onClick_showCalendar('start')">
+												<calendar @click="onClick_chooseDateStart" v-show="isShowStartTime"
+														  class="drop-time"
+														  ref="timeBox" :isCanBefore="true"></calendar>
+											</div>
 										</div>
-									</div>
-									<span class="goto">至</span>
-									<div class="date-box">
-										<div class="date-from">
-											<input type="text" class="endTime date-input pointer"
-												   v-model="date.endTimeStr"
-												   readonly="true" @click.stop="onClick_showCalendar('end')">
-											<calendar @click="onClick_chooseDateEnd" v-show="isShowEndTime"
-													  class="drop-time" :startTime="date.startTime"
-													  :isCanBefore="true"></calendar>
+										<span class="goto">至</span>
+										<div class="date-box">
+											<div class="date-from">
+												<input type="text" class="endTime date-input pointer"
+													   v-model="date.endTimeStr"
+													   readonly="true" @click.stop="onClick_showCalendar('end')">
+												<calendar @click="onClick_chooseDateEnd" v-show="isShowEndTime"
+														  class="drop-time" :startTime="date.startTime"
+														  :isCanBefore="true"></calendar>
+											</div>
 										</div>
+										<div class="clearfix"></div>
 									</div>
-									<div class="drop-box pointer">
-										<div @click.stop="onClick_dropListBtn">
-											{{typeList[searchObj.inOutType]}}
+									<div class="drop-box pointer" @click.stop="onClick_dropListBtn">
+										{{typeList[searchObj.inOutType]}}
 											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"
 												  @click.stop="onClick_dropListBtn"></span>
-										</div>
 										<ul class="droplist" v-show="isShow_dropList">
 											<li v-for="(item,index) in typeList" class="pointer"
 												@click="onClick_dropItem(index)">{{item}}
@@ -67,14 +68,18 @@
 										</ul>
 									</div>
 									<input type="text" v-model="searchObj.inOutContent" class="search-input">
-									<div class="btn pointer search-btn border-btn hb-fill-middle2-bg" @click="onClick_searchBtn">查找</div>
+									<div class="btn pointer search-btn border-btn hb-fill-middle2-bg"
+										 @click="onClick_searchBtn">查找
+									</div>
 									<div class="clearfix"></div>
 								</div>
 							</div>
 							<div class="all-out">
 								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right
-									" @click="onClick_exportBtn">导出全部</div>
+									" @click="onClick_exportBtn">导出全部
+								</div>
 							</div>
+
 							<div class="recharge-table admin-calendar-table ">
 								<table>
 									<thead>
@@ -213,7 +218,6 @@
 										 @change="onChange_searchItem" v-show="totalPage>1"></common-page>
 							<common-prompt v-show="userList.length==0"></common-prompt>
 						</div>
-
 						<common-footer></common-footer>
 
 					</div>
@@ -453,6 +457,7 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common.scss";
 	@import "../css/myBill.scss";
+
 	.date-input {
 		/*background: url("../../assets/images/date.png") no-repeat 160px center;*/
 	}

@@ -27,7 +27,45 @@
 										</li>
 									</ul>
 								</div>
-								<div class="bar-bottom">
+								<div class="bar-bottom bar-bottonm-spcial">
+									<div class="date-margin">
+										<div class="date-box">
+											<span class="creat-time">创建时间：从</span>
+											<div class="date-from">
+												<input type="text" class="startTime date-input pointer"
+													   readonly="true">
+												<calendar class="drop-time"></calendar>
+											</div>
+										</div>
+										<span class="goto">至</span>
+										<div class="date-box">
+											<div class="date-from">
+												<input type="text" class="endTime date-input pointer">
+												<calendar class="drop-time"
+												></calendar>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="date-margin">
+										<div class="date-box">
+											<span class="creat-time">结束时间：从</span>
+											<div class="date-from">
+												<input type="text" class="startTime date-input pointer"
+													   readonly="true">
+												<calendar class="drop-time"></calendar>
+											</div>
+										</div>
+										<span class="goto">至</span>
+										<div class="date-box">
+											<div class="date-from">
+												<input type="text" class="endTime date-input pointer">
+												<calendar class="drop-time"
+												></calendar>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
 									<div class="drop-box pointer">
 										<div @click.stop="onClick_dropListBtn">
 											{{typeList[dataObj.inOutType]}}

@@ -3,17 +3,29 @@
 		<div slot="content" class="content-box">
 			<div class="logon-box">
 				<div class="wrap-top">
-					<div class="nav-box">
-						<div class="nav">
-							<p>
-								商家营销管理
-							</p>
-						</div>
-					</div>
 					<div class="login-button-box">
-						<img :src="g.config.path.images+'/text.png'" alt="">
-						<div @click.stop="onClick_showLoginPop" class="login-button bg-btn pointer">登录</div>
-						<div @click.stop="onClick_signBtn" class="register-button border-btn pointer">立即注册</div>
+						<!--<img :src="g.config.path.images+'/text.png'" alt="">-->
+						<!--<div @click.stop="onClick_showLoginPop" class="login-button bg-btn pointer">登录</div>-->
+						<!--<div @click.stop="onClick_signBtn" class="register-button border-btn pointer">立即注册</div>-->
+						<div class="login-body">
+							<div class="m-title">
+								<p class="header">运营管理后台</p></div>
+							<div class="m-title">
+								<input class="user" type="text" v-model="logonObj.logon"
+									   @keyup.enter="onClick_logonBtn"
+									   @focus="onFocus_input" placeholder="请输入用户名或手机号"></div>
+							<div class="m-title">
+								<input class="pwd" type="password" v-model="pwd" @keyup.enter="onClick_logonBtn"
+									   @focus="onFocus_input" placeholder="请输入密码">
+							</div>
+							<div v-text="loginErrMsg" class="err-msg"></div>
+							<a class="login-btn bg-btn pointer hb-fill-middle2-rev" @click="onClick_logonBtn"
+							   :class="{disabled:!logonObj.logon||!pwd}">登录</a>
+
+							<!--<div class="m-title">-->
+							<!--<a class="forget-btn pointer" @click.stop="onClick_modPwdBtn">忘记登录密码？</a>-->
+							<!--</div>-->
+						</div>
 					</div>
 				</div>
 			</div>
@@ -47,13 +59,16 @@
 							<div class="m-title">
 								<a class="login-btn bg-btn pointer" @click="onClick_logonBtn"
 								   :class="{disabled:!logonObj.logon||!pwd}">登录</a>
+
+							</div>
+							<div class="m-title">
 								<a class="forget-btn pointer" @click.stop="onClick_modPwdBtn">忘记登录密码？</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</transition>
- 			<!--重置密码-->
+			<!--重置密码-->
 			<transition name="bounce">
 				<div class="affix-box default-pos-type" v-show="isShow_modPwdPop">
 					<div class="pop-edit-password reset-pop pop-edit" ref="modPwdBox">
@@ -81,7 +96,7 @@
 								<span class="pwd-box">
 									<input type="password" v-model="newPwd" @focus="onFocus_input" placeholder="请输入密码"
 										   class="">
-									<img :src="g.config.path.images+'/hide.png'" alt=""  class="pointer">
+									<img :src="g.config.path.images+'/hide.png'" alt="" class="pointer">
 									<img :src="g.config.path.images+'/display.png'" class="pointer" alt="" v-show="">
 								</span>
 							</div>
@@ -439,6 +454,48 @@
 			position: absolute;
 			right: 10px;
 			top: 16px;
+		}
+	}
+
+	.login-body {
+		div {
+			margin-top: 25px;
+			overflow: hidden;
+			input {
+				height: 40px;
+				line-height: 40px;
+				width: 220px;
+				float: left;
+				border: 1px solid #dbdee7;
+				border-radius: 2px;
+				padding-left: 50px;
+				font-size: 14px;
+
+			}
+		}
+		.header {
+			width: 272px;
+			font-size: 18px;
+			color: #ffffff;
+			text-align: center;
+		}
+		.login-btn {
+			width: 272px;
+			height: 40px;
+			line-height: 40px;
+			letter-spacing: 5px;
+		}
+		.forget-btn {
+			width: 272px;
+			margin-top: 15px;
+			color: #ffffff;
+			display: block;
+			font-size: 14px;
+			text-align: center;
+			text-decoration: underline;
+		}
+		.me-radio-core {
+			margin-right: 0;
 		}
 	}
 

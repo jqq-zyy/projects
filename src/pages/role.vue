@@ -18,7 +18,7 @@
 									<tr>
 										<th>权限名称</th>
 										<th><span>|</span>权限范围</th>
-										<th><span>|</span>创建时间见</th>
+										<th><span>|</span>创建时间</th>
 										<th><span>|</span>操作</th>
 									</tr>
 									</thead>
@@ -60,14 +60,13 @@
 								<span class="name">权限范围：</span>
 							</div>
 							<div class="m-title button-box">
-								<div class="save-button border-btn pointer hb-fill-middle2-rev">取消</div>
-								<div class="save-button bg-btn pointer hb-fill-middle2-rev">保存</div>
+								<div class="button border-btn pointer hb-fill-middle2-bg">取消</div>
+								<div class="button bg-btn pointer hb-fill-middle2-rev">保存</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</transition>
-
 			<transition name="bounce">
 				<div class="affix-box default-pos-type" v-show="isShow_deletePop">
 					<div class="pop-edit-password pop-edit function-pop">

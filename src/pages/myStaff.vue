@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<transition name="bounce">
-				<div class="affix-box default-pos-type">
+				<div class="affix-box default-pos-type" v-show="isShow_addStaffPop">
 					<div class="pop-edit-password pop-edit" ref="modPwdBox">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
@@ -66,23 +66,41 @@
 						<div class="pop-tit">
 							添加员工
 						</div>
+						<div class="pop-tit" v-show="">
+							编辑员工
+						</div>
 						<div class="pop-body">
 							<div class="m-title">
-								<span class="m-name ">用户名：</span>
+								<span class="name ">用户名：</span>
 								<input type="text"
 									   placeholder="">
 							</div>
 							<div class="m-title">
-								<span class="m-name ">手机号：</span>
+								<span class="name">手机号：</span>
 								<input class="input-code" type="text"
 									   placeholder="">
 							</div>
 							<div class="m-title">
-								<span class="m-name">权限：</span>
+								<span class="name">权限：</span>
+								<div class="m-drop" @click="onClick_roleList">
+									<span :class="['drop-icon',isShow_roleList?'rotate':'']"></span>
+									<ul class="droplist" v-show="isShow_roleList">
+										<li>123</li>
+									</ul>
+								</div>
+							</div>
+							<div class="m-title">
+								<span class="name">初始密码：</span>
+								<span>888888</span>
+							</div>
+							<div class="m-title" v-show="">
+								<span class="name">密码：</span>
+								<input class="input-code" type="text"
+									   placeholder="">
 							</div>
 							<div class="m-title button-box">
-								<span class=" border-btn hb-fill-middle2-bg  pointer">取消</span>
-								<span class=" pointer bg-btn hb-fill-middle2-rev">保存</span>
+								<span class="pointer button border-btn hb-fill-middle2-bg">取消</span>
+								<span class="button pointer cancel-btn bg-btn hb-fill-middle2-rev">保存</span>
 							</div>
 						</div>
 
@@ -118,6 +136,7 @@
 				isShow_dropList: false,
 				isShow_addStaffPop: false,
 				isShow_FunctionList: false,
+				isShow_roleList: false,
 				searchObj: {},
 				totalPage: 1,
 				statusList: [],
@@ -253,14 +272,14 @@
 				});
 			},
 			onClick_addBtn(){
-				if (g.data.powerPool.list.length > 0)
-				{
-					this.initRole();
-				}
-				this.initAddData();
-				getRoleList(this.initRole);
-				this.confirmPwd = "";
-				this.roleName = "请选择";
+//				if (g.data.powerPool.list.length > 0)
+//				{
+//					this.initRole();
+//				}
+//				this.initAddData();
+//				getRoleList(this.initRole);
+//				this.confirmPwd = "";
+//				this.roleName = "请选择";
 
 				this.isShow_addStaffPop = true;
 			},
@@ -302,8 +321,10 @@
 				{
 					g.func.dealErr(err);
 				});
+			},
+			onClick_roleList(){
+				this.isShow_roleList = !this.isShow_roleList;
 			}
-
 		}
 	}
 
