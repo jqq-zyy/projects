@@ -43,7 +43,8 @@
 											<p>50000 <= 数量时，单价 ¥ 0.02／个</p>
 
 										</div>
-										<span class="button hb-fill-middle2-bg" @click="onClick_setBtn('ewm-price')">设置</span>
+										<span class="button hb-fill-middle2-bg"
+											  @click="onClick_setBtn('ewm-price')">设置</span>
 									</div>
 								</div>
 
@@ -63,9 +64,9 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
-						<div class="pop-body tree-box">
+						<div class="pop-body">
 							<div>确认{{currentTypeDesc}}该活动么</div>
 							<div class="m-title">
 								<div class="button pointer" @click="onClick_closeBtn">暂不{{currentTypeDesc}}</div>
@@ -82,13 +83,13 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
-						<div class="step-about-tit show-recharge-tips">
-							<div class="g-title">设置账户余额报警门槛</div>
+						<div class="pop-tit pop-tit-center">
+							设置账户余额报警门槛
 						</div>
 						<div class="pop-body tree-box">
-							<div class="input-money">
+							<div class="input-money m-title">
 								<span>请输入金额：</span>
 								<input type="text">
 								<span>元</span>
@@ -110,13 +111,13 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
-						<div class="step-about-tit show-recharge-tips">
-							<div class="g-title">设置平台红包金额范围</div>
+						<div class="pop-tit">
+							设置平台红包金额范围
 						</div>
 						<div class="pop-body tree-box">
-							<div class="input-money">
+							<div class="input-money m-title">
 								<span>请输入倍数：</span>
 								<input type="text" class="multiple"> ~
 								<input type="text" class="multiple">
@@ -138,15 +139,13 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
-						<div class="step-about-tit show-recharge-tips">
-							<div class="g-title">
-								设置扫码限制数
-							</div>
+						<div class="pop-tit">
+							设置扫码限制数
 						</div>
 						<div class="pop-body tree-box">
-							<div class="input-money">
+							<div class="input-money m-title">
 								<span>请输入数量：</span>
 								<input type="text">
 								<span>元</span>
@@ -168,15 +167,13 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
-						<div class="step-about-tit show-recharge-tips">
-							<div class="g-title">
-								设置二维码单价
-							</div>
+						<div class="pop-tit">
+							设置二维码单价
 						</div>
 						<div class="pop-body tree-box">
-							<div class="input-money">
+							<div class="input-money" style="margin-top: 25px">
 								<span class="count">数量：</span>
 
 								<div class="count-set">
@@ -223,18 +220,26 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
-						<div class="step-about-tit show-recharge-tips">
-							<div class="g-title">设置账户余额报警门槛</div>
+						<div class="pop-tit">
+							设置账户余额报警门槛
 						</div>
 						<div class="pop-body tree-box">
-							<div class="input-money">
-								<label for="box1">
-									<input type="radio" id="box1" name="box1"> 是
+							<div class="input-money set-warn">
+								<label>
+									<span class="me-radio">
+										<input class=" me-radio-input" type="checkbox" name="batch">
+										<span class="me-radio-core code-id checkbox"></span>
+									</span>
+									是
 								</label>
-								<label for="box2">
-									<input type="radio" id="box2" name="box1"> 否
+								<label>
+									<span class="me-radio">
+										<input class=" me-radio-input" type="checkbox" name="batch">
+										<span class="me-radio-core code-id checkbox"></span>
+									</span>
+									否
 								</label>
 							</div>
 
@@ -369,10 +374,11 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/personlInfo.scss";
 	@import "../css/rule.scss";
-
-	img {
-		width: 50px;
-		height: 50px;
+	.set-warn{
+		margin-top: 25px;
+		display: flex;
+		/*align-items: center;*/
+		justify-content: space-around;
 	}
 </style>
 

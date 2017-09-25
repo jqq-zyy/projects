@@ -60,7 +60,7 @@
 										</ul>
 									</div>
 									<input type="text" v-model="dataObj.inOutContent" class="search-input">
-									<span class="pointer search-btn border-btn hb-fill-middle2-bg"
+									<span class="btn pointer search-btn border-btn hb-fill-middle2-bg"
 										  @click="onClick_searchBtn">查找</span>
 								</div>
 							</div>

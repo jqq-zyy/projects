@@ -169,7 +169,7 @@
 									</thead>
 									<tbody>
 									<tr v-for="item in activityList">
-										<td @click="onClick_detailBtn(item.id)">
+										<td @click="onClick_detailBtn(item.id)" class="first-td-child">
 											{{item.activityName}}
 										</td>
 										<td>{{item.companyName}}</td>
@@ -430,5 +430,9 @@
 	.my-activity .me-checkbox-core {
 		margin-left: 10px;
 		margin-right: 10px;
+	}
+	.first-td-child:hover{
+		text-decoration: underline;
+		cursor: pointer;
 	}
 </style>

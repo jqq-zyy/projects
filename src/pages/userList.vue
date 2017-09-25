@@ -171,7 +171,7 @@
 									</thead>
 									<tbody>
 									<tr v-for="item in userList">
-										<td>{{item.id}}</td>
+										<td class="first-td-child">{{item.id}}</td>
 										<td>{{item.createTime}}</td>
 										<td>{{item.name}}</td>
 										<td v-text="freezeContent(item.freezeStatus)"></td>

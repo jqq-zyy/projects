@@ -3,6 +3,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
   padding: 0;
   color: #252332;
   letter-spacing: 1px;
+  font-size: 14px;
 }
 
 a, img, button, input, textarea, div {
@@ -702,6 +703,7 @@ li, ul {
 	  .creat-time {
 		float: left;
 		margin-right: 10px;
+		color: #252332;
 	  }
 	  .date-from {
 		position: relative;
@@ -737,8 +739,8 @@ li, ul {
 		width: 8px;
 		top: 12px;
 		display: block;
-		border-left: 2px solid #dbdee7;
-		border-bottom: 2px solid #dbdee7;
+		border-left: 2px solid #333;
+		border-bottom: 2px solid #333;
 		transform: rotate(-45deg);
 	  }
 	  .rotate {
