@@ -234,7 +234,7 @@
 									<input type="radio" id="box1" name="box1"> 是
 								</label>
 								<label for="box2">
-									<input type="radio" id="box2" name="box2"> 否
+									<input type="radio" id="box2" name="box1"> 否
 								</label>
 							</div>
 
