@@ -10,8 +10,17 @@
                     <div class="admin-data-items">
                         <div class="right-body">
                             <p class="g-title">
-                                平台财务流水
+                                图标分析
                             </p>
+
+                            <div class="g-chart">
+                                <div class="chart-nav">
+
+
+                                </div>
+                                <div class="chart-detail"></div>
+
+                            </div>
 
                         </div>
                         <common-footer></common-footer>
