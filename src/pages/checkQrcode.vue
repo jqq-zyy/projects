@@ -8,6 +8,28 @@
                     <div class="admin-data-items">
                         <div class="right-body">
                             <div class="g-title">查询二维码</div>
+                            <div class=" bar-box">
+                                <div class="search-code-box">
+                                    <span class="search-name">二维码ID:</span>
+                                    <input type="text" class="search-input">
+                                    <span class="btn pointer search border-btn hb-fill-middle2-bg">查找</span>
+                                </div>
+                            </div>
+                            <div class="admin-calendar-table">
+                                <div class="check-detail">
+                                    <div class="msg-title">查找结果</div>
+                                    <div class="msg-title">二维码ID：</div>
+                                    <span class="msg-info">所属活动名称:<i class="text-color">123</i></span>
+                                    <span class="msg-info">活动创建时间:</span>
+                                    <span class="msg-info">活动状态:</span>
+                                    <span class="msg-info">所属商户ID:<i class="text-color">123</i></span>
+                                    <span class="msg-info">企业全称:
+                                        <img :src="g.config.path.images+'/cert.png'" class="cert-img">
+                                        <img :src="g.config.path.images+'/cert1.png'" class="cert-img"></span>
+                                    </span>
+                                    <span class="msg-info">商户状态:</span>
+                                </div>
+                            </div>
                         </div>
                         <common-footer></common-footer>
                     </div>
@@ -137,16 +159,10 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-
     @import "../css/common.scss";
 </style>
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
-    @import "../css/personlInfo.scss";
-
-    img {
-        width: 50px;
-        height: 50px;
-    }
+    @import "../css/checkQrcode.scss";
 </style>
 
 

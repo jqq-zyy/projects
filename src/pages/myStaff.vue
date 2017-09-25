@@ -9,26 +9,86 @@
 						<div class="right-body">
 							<div class="g-title">
 								我的员工
-								<span class="add-button pointer" @click="onClick_addBtn">添加员工</span>
 							</div>
-							<div class="staff-bar">
-								<p>当前在职员工人数：<i class="staff-number">{{totalStaffNum}}</i> 人</p>
-
-								<!--<div class="search-box">
-									<input type="text" class="search" placeholder="搜索姓名" v-model="searchObj.logon">
-									<div class="button search-btn pointer" @click="onClick_searchBtn">搜索</div>
-								</div>-->
+							<div class="bar-box role-bar">
+								员工总人数：4<span class="add-button border-btn hb-fill-middle2-bg  pointer"
+											 @click="onClick_addBtn">添加员工
+							</span>
 							</div>
+							<div class="admin-data-items">
+								<div class="admin-calendar-table">
+									<table>
+										<thead>
+										<tr>
+											<th>用户名</th>
+											<th><span>|</span>手机号</th>
+											<th><span>|</span>权限</th>
+											<th><span>|</span>创建时间</th>
+											<th><span>|</span>状态</th>
+											<th><span>|</span>操作</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td>
+												<span class="pointer border-btn hb-fill-middle2-bg role-del-btn">编辑</span>
+												<span class="pointer bg-btn hb-fill-middle2-rev role-del-btn">冻结</span>
+											</td>
+										</tr>
+										</tbody>
+									</table>
 
+								</div>
+							</div>
 							<common-page :index="searchObj.page" :total="totalPage"
 										 @change="onChange_searchItem" v-show="totalPage>1"></common-page>
 							<common-prompt v-show="staffList.length==0"></common-prompt>
 
 						</div>
 						<common-footer></common-footer>
+
+
 					</div>
 				</div>
 			</div>
+			<transition name="bounce">
+				<div class="affix-box default-pos-type">
+					<div class="pop-edit-password pop-edit" ref="modPwdBox">
+						<div class="show-close-btn">
+							<img :src="g.config.path.images+'/close.png'"
+								 @click="onClick_closeBtn('modPwd')" />
+						</div>
+						<div class="pop-tit">
+							添加员工
+						</div>
+						<div class="pop-body">
+							<div class="m-title">
+								<span class="m-name ">用户名：</span>
+								<input type="text"
+									   placeholder="">
+							</div>
+							<div class="m-title">
+								<span class="m-name ">手机号：</span>
+								<input class="input-code" type="text"
+									   placeholder="">
+							</div>
+							<div class="m-title">
+								<span class="m-name">权限：</span>
+							</div>
+							<div class="m-title button-box">
+								<span class=" border-btn hb-fill-middle2-bg  pointer">取消</span>
+								<span class=" pointer bg-btn hb-fill-middle2-rev">保存</span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</transition>
 		</div>
 	</main-layout>
 </template>

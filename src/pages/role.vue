@@ -6,16 +6,88 @@
 				<div class="right-content-wrap">
 					<common-top-nav></common-top-nav>
 					<div class="admin-data-items">
-
 						<div class="right-body">
-							<div class="g-title">管理</div>
+							<div class="g-title">权限管理</div>
+							<div class="bar-box role-bar">
+								权限总数：4<span class="pointer border-btn pointer hb-fill-middle2-bg add-role-btn"
+											@click="onClick_addRoleBtn">添加</span>
+							</div>
+							<div class="admin-calendar-table">
+								<table>
+									<thead>
+									<tr>
+										<th>权限名称</th>
+										<th><span>|</span>权限范围</th>
+										<th><span>|</span>创建时间见</th>
+										<th><span>|</span>操作</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><span class="pointer border-btn hb-fill-middle2-bg role-del-btn"
+												  @click="onClick_delBtn">删除</span>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+
+							</div>
 
 						</div>
 						<common-footer></common-footer>
 					</div>
 				</div>
 			</div>
+			<transition name="bounce">
+				<div class="affix-box default-pos-type" v-show="isShow_rolePop">
+					<div class="pop-edit-password pop-edit function-pop">
+						<div class="show-close-btn">
+							<img :src="g.config.path.images+'/close.png'"
+								 @click="onClick_closeBtn" />
+						</div>
+						<div class="pop-tit">
+							添加权限
+						</div>
+						<div class="pop-body ">
+							<div class="m-title">
+								<span class="name">权限名称：</span>
+								<input type="text" placeholder="请输入职务名称">
+							</div>
+							<div class="m-title">
+								<span class="name">权限范围：</span>
+							</div>
+							<div class="m-title button-box">
+								<div class="save-button border-btn pointer hb-fill-middle2-rev">取消</div>
+								<div class="save-button bg-btn pointer hb-fill-middle2-rev">保存</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</transition>
 
+			<transition name="bounce">
+				<div class="affix-box default-pos-type" v-show="isShow_deletePop">
+					<div class="pop-edit-password pop-edit function-pop">
+						<div class="show-close-btn">
+							<img :src="g.config.path.images+'/close.png'"
+								 @click="onClick_closeBtn" />
+						</div>
+						<div class="pop-tit">
+						</div>
+						<div class="pop-body ">
+							<div class="m-title">
+								该权限下仍有绑定用户，请先解绑用户后再进行删除。
+							</div>
+							<div class="m-title button-box">
+								<div class="save-button bg-btn pointer hb-fill-middle2-rev">保存</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</transition>
 
 		</div>
 	</main-layout>
@@ -26,7 +98,7 @@
 	import MainLayout from './common/mainLayout.vue';
 	import CommonNav from './common/CommonNav.vue';
 	import CommonTopNav from './common/CommonTopNav.vue';
-//	import treeMenu from './common/CommonTree.vue';
+	//	import treeMenu from './common/CommonTree.vue';
 	import CommonFooter from './common/CommonFooter.vue';
 
 	export default {
@@ -40,8 +112,10 @@
 				g: g,
 				isShow_setRolePop: false,
 				isShow_editNamePop: false,
-				isAdd:false,
+				isAdd: false,
 //				isShow_addPop: false,
+				isShow_rolePop: false,
+				isShow_deletePop: false,
 				roleList: [],
 				roleName: "",
 				roleId: "",
@@ -63,116 +137,31 @@
 				this.powerList = g.data.powerPool.list;
 
 			},
-			onClick_deleteBtn($id){
-				g.net.call("permission/delShopRole", {
-					'roleId': $id
-				}).then(($data) =>
-				{
-					g.data.rolePool.remove($id);
-				}, (err) =>
-				{
-					g.func.dealErr(err);
-				});
-			},
+
 			onClick_closeBtn(){
-				this.isShow_setRolePop = false;
-				this.isShow_editNamePop = false;
-				this.isShow_addPop = false;
+				this.isShow_rolePop = false;
+				this.isShow_deletePop = false;			},
+			onClick_addRoleBtn(){
+				this.isShow_rolePop = true;
 			},
-			onClick_saveTreeBtn(){
-				this.onGet_treeList();
-				var permissionIds = this.currentRoleList.join(",");
-				g.net.call("permission/updateShopRolePermission", {
-					'roleId': this.roleId,
-					'permissionIds':permissionIds
-				}).then(($data) =>
-				{
-					var obj = {};
-					obj.permissionIds = permissionIds;
-					g.data.rolePool.getDataById(this.roleId).update(obj);
-					this.isShow_setRolePop = false;
-				}, (err) =>
-				{
-					g.func.dealErr(err);
-				});
-			},
-			onGet_treeList(){
-				this.currentRoleList = [];
-				var trees = this.$refs.tree;
-				for (var i = 0; i < trees.length; i++)
-				{
-					var roles = trees[i].getAllKeys();
-					if (roles.length == 0)
-					{
-						continue
-					}
-					this.currentRoleList.push(roles.join(","))
-				}
-			},
-
-			onClick_setRoleBtn($id){
-				this.roleId = $id;
-				var roleStr = g.data.rolePool.getDataById($id).roleStr;
-				this.selectKeys = roleStr.split(",");
-				this.isAdd = false;
-				this.isShow_setRolePop = true;
-			},
-			onClick_editBtn($id){
-				this.roleId = $id;
-				this.roleName = g.data.rolePool.getDataById($id).roleName;
-				this.isShow_editNamePop = true;
-			},
-			onClick_saveNameBtn(){
-				g.net.call("permission/updateShopRoleName", {
-					'roleId': this.roleId,
-					'roleName': this.roleName
-				}).then(($data) =>
-				{
-					g.data.rolePool.getDataById(this.roleId).update({'roleName': this.roleName});
-					this.isShow_editNamePop = false
-				}, (err) =>
-				{
-					g.func.dealErr(err);
-				});
-			},
-			onClick_addBtn(){
-				this.roleName = "";
-				this.selectKeys = [];
-				this.isShow_setRolePop = true;
-				this.isAdd = true;
-			},
-			onClick_saveAddBtn(){
-				this.onGet_treeList();
-				var permissionIds = this.currentRoleList.join(",");
-				g.net.call("permission/addShopRole", {
-					'roleName': this.roleName,
-					"permissionIds":permissionIds
-				}).then(($data) =>
-				{
-					g.data.rolePool.add($data.content);
-					this.roleList = g.data.rolePool.list;
-					this.isShow_setRolePop = false;
-
-				}, (err) =>
-				{
-					g.func.dealErr(err);
-				});
+			onClick_delBtn(){
+				this.isShow_deletePop = true;
 			}
 		}
 	}
 </script>
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common.scss";
-	@import "../css/membeManage.scss";
 	@import "../css/role.scss";
 	@import "../css/pop.scss";
 
 	.function-pop .tree-box {
 		height: 300px;
 		overflow: auto;
-		margin-top:10px;
+		margin-top: 10px;
 	}
-	.save-button{
+
+	.save-button {
 		border-radius: 4px;
 		width: 130px;
 		height: 36px;
@@ -181,12 +170,13 @@
 		color: #ffffff;
 		background: #01aaef;
 	}
-	.name-box{
-		height:40px;
+
+	.name-box {
+		height: 40px;
 		line-height: 40px;
-		margin-top:20px;
-		padding-left:40px;
-		input{
+		margin-top: 20px;
+		padding-left: 40px;
+		input {
 			width: 240px;
 			height: 40px;
 			box-sizing: border-box;

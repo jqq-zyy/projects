@@ -269,11 +269,6 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/personlInfo.scss";
 	@import "../css/userDetail.scss";
-
-	img {
-		width: 50px;
-		height: 50px;
-	}
 </style>
 
 
