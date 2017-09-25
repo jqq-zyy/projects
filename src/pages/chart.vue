@@ -10,8 +10,36 @@
                     <div class="admin-data-items">
                         <div class="right-body">
                             <p class="g-title">
-                                平台财务流水
+                                图表分析
                             </p>
+                            <div class="g-chart">
+                                <div class="chart-nav">
+                                    <div class="chart-nav-left">
+                                        <span>最近7天</span>
+                                        <span>最近30天</span>
+                                    </div>
+                                    <div class="chart-nav-right">
+                                        <div class="chart-nav-time">
+                                            <span>从</span>
+                                            <input type="text" placeholder="开始时间">
+                                            <span>从</span>
+                                            <input type="text" placeholder="结束时间">
+
+                                        </div>
+
+                                        <div class="chart-nav-search">
+                                            查询
+                                        </div>
+
+                                        <div class="chart-nav-select hb-fill-middle2-bg">选择活动</div>
+
+                                    </div>
+                                </div>
+                                <div class="chart-detail">
+                                    <p>新扫码消费者</p>
+                                </div>
+
+                            </div>
 
                         </div>
                         <common-footer></common-footer>
@@ -36,6 +64,7 @@
                             <div>发起时间：</div>
                             <div>流水金额：</div>
                             <div>备注：</div>
+                            <div>支付方式：</div>
                             <div>支付方式：</div>
                             <div>目标账户：</div>
                         </div>
@@ -229,4 +258,8 @@
     @import "../css/common";
     @import "../css/myActivity";
 
+</style>
+
+<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
+    @import "../css/chart";
 </style>
