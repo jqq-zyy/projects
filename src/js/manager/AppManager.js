@@ -19,7 +19,6 @@ _initList.push(initGlobal);
 _initList.push(initStaticData);
 _initList.push(initBuildComp);
 _initList.push(initSocket);
-_initList.push(initSocket);
 
 export function init($callback)
 {
