@@ -122,7 +122,7 @@ html, body {
   color: #252332;
   font-family: "PingFang SC", "Microsoft YaHei", tahoma, arial, Hiragino Sans GB, \5b8b\4f53;
   //position: relative;
-  font-size: 16px;
+  font-size: 14px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -821,7 +821,9 @@ li, ul {
   margin-right: 40px;
   float: left;
 }
-
+.data-margin-end{
+  margin-right: 0;
+}
 @media screen and (max-width: 1650px) {
   div.bar-box {
 	.bar-bottom {
@@ -849,18 +851,18 @@ li, ul {
 }
 
 @media screen and (max-width: 1400px) {
-  div.bar-box {
+  .bar-box {
 	.bar-bottom {
-	  .data-box {
-		.data-input {
-		  width: 120px;
+	  .date-box {
+		.date-input {
+		  width: 130px;
 		}
 	  }
 	  .drop-box {
-		width: 150px;
+		width: 220px;
 	  }
 	  .search-input {
-		width: 150px;
+		width: 220px;
 	  }
 	}
   }

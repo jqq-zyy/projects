@@ -37,6 +37,7 @@
 												<calendar class="drop-time"></calendar>
 											</div>
 										</div>
+
 										<span class="goto">至</span>
 										<div class="date-box">
 											<div class="date-from">
@@ -47,7 +48,7 @@
 										</div>
 										<div class="clearfix"></div>
 									</div>
-									<div class="date-margin">
+									<div class="date-margin data-margin-end">
 										<div class="date-box">
 											<span class="creat-time">结束时间：从</span>
 											<div class="date-from">
