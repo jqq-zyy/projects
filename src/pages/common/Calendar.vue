@@ -128,7 +128,7 @@
 <style lang="sass" rel="stylesheet/scss" type="text/css" scoped>
 	.choose-date {
 		position: absolute;
-		width: 264px;
+		width: 238px;
 		height: auto;
 		border: 1px solid #efefef;
 		box-shadow: 0 0 3px #f4f4f4;

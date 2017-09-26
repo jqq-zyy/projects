@@ -15,12 +15,11 @@ var WEB_CONFIG = {
 
 	url: {
 		domain: "",
-		server: "http://192.168.12.4:8085/rp-mms-web-admin/mms-web-admin",
-		socket: "http://192.168.12.4:8085/rp-mms-web-admin/mms-web-admin",
+		server: "http://192.168.12.5:8082/rp-mms-web-admin/mms-web-admin",
+		socket: "http://192.168.12.5:8082/rp-mms-web-admin/mms-web-admin",
 		//server: "http://192.168.12.4:8084/mms-web",
 		//server: "",
 		adminPage: ""
-
 	},
 
 	http: {

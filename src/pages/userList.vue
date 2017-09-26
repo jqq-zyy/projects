@@ -50,7 +50,9 @@
 												   readonly="true" @click.stop="onClick_showCalendar('end')">
 											<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd"
 													 v-model="isShowEndTime"></hw-date>
+
 										</div>
+										<div class="clearfix"></div>
 									</div>
 									<div class="drop-box pointer" @click.stop="onClick_dropListBtn">
 										<div @click.stop="onClick_dropListBtn">
@@ -75,6 +77,7 @@
 									" @click="onClick_exportBtn">导出全部
 								</div>
 							</div>
+
 							<div class="recharge-table admin-calendar-table ">
 								<table>
 									<thead>
@@ -213,7 +216,6 @@
 										 @change="onChange_searchItem" v-show="totalPage>1"></common-page>
 							<common-prompt v-show="userList.length==0"></common-prompt>
 						</div>
-
 						<common-footer></common-footer>
 
 					</div>
@@ -301,7 +303,6 @@
 				this.initDate();
 				this.initSearchData();
 				this.initList();
-
 			},
 			initList(){
 				this.userList = g.data.userPool.list;

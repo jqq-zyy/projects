@@ -16,10 +16,6 @@
 								<div class="bar-top">
 									<ul>
 										<li>状态：</li>
-										<li class="type-item pointer " @click="onClick_changeType(0)"
-											 :class="{'acticity-process':isCurrentType(-1)}">
-											全部
-										</li>
 										<li class="type-item pointer" v-for="(item,index) in statusList"
 											 @click="onClick_changeType(index)"
 											 :class="{'acticity-process':isCurrentType(index)}">
@@ -46,20 +42,20 @@
 												   readonly="true" @click.stop="onClick_showCalendar('end')">
 											<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd" v-model="isShowEndTime"></hw-date>
 										</div>
+
 									</div>
-									<div class="drop-box pointer">
+									<div class="drop-box pointer" @click.stop="onClick_dropListBtn">
 										<div @click.stop="onClick_dropListBtn">
-											{{typeList[dataObj.inOutType]}}
-											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"
-												  @click.stop="onClick_dropListBtn"></span>
+											{{currentSearchType}}
+											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"></span>
 										</div>
 										<ul class="droplist" v-show="isShow_dropList">
-											<li v-for="(item,index) in typeList" class="pointer"
-												@click="onClick_dropItem(index)">{{item}}
+											<li v-for="item in typeList" class="pointer"
+												@click.stop="onClick_dropItem(item.id)">{{item.name}}
 											</li>
 										</ul>
 									</div>
-									<input type="text" v-model="dataObj.inOutContent" class="search-input">
+									<input type="text" v-model="inputContent" class="search-input">
 									<span class="btn pointer search-btn border-btn hb-fill-middle2-bg" @click="onClick_searchBtn">查找</span>
 								</div>
 							</div>
@@ -160,7 +156,7 @@
 							</div>
 							<common-page :index="dataObj.page" :total="totalPage"
 										 @change="onChange_currentPage" v-show="totalPage>1"></common-page>
-							<common-prompt v-show="qrcodeList.length==0"></common-prompt>
+							<common-prompt v-show="bagList.length==0"></common-prompt>
 						</div>
 						<common-footer></common-footer>
 					</div>
@@ -192,27 +188,34 @@
 				isShowEndTime: false,
 				g: g,
 				totalPage: 1,
-				statusList: ["付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
-				qrcodeList: [],
+				statusList: ["全部", "未付款","付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
+				bagList: [],
+				currentType: "",
+				inputContent: "",
 				date: {
 					startTime: 0,
 					startTimeStr: "",
 					endTimeStr: "",
 					endTime: 0
 				},
-				dataObj: {
-					ruleType: "",
-					activityName: "",
-					page: 1,
-					pageSize: g.param.pageSizeList[0],
-					activityStatusList: [-1],
-					sortField: "create_time",
-					sortOrder: "desc",
-					inOutType: 0,
-					inOutContent: ""
-				},
-				typeList: ['流水ID', '企业全称', '发起人'],
-				rpAmount: 0
+				activityStatusList: [0],
+				dataObj: {},
+				typeList: [
+					{
+						id: 'orderId',
+						name: '流水ID'
+					}, {
+						id: "companyFullName",
+						name: '企业全称'
+					}, {
+						id: "applyUserLogon",
+						name: '发起人'
+					}
+				],
+				resultTotalObj: {
+					qrcodeNum: 0,
+					qrcodeAmount: 0
+				}
 
 			}
 		},
@@ -225,13 +228,41 @@
 			CommonPrompt,
 			CommonSort
 		},
+		computed: {
+			currentSearchType(){
+				for (var i = 0; i < this.typeList.length; i++)
+				{
+					if (this.typeList[i].id == this.currentType)
+					{
+						return this.typeList[i].name
+					}
+				}
+			}
+		},
 		methods: {
 			init(){
+				this.initDate();
+				this.initData();
+				this.initSearchData();
+
+			},
+			initData(){
 				var info = g.data.bagPool;
 				this.totalPage = info.totalPage;
-				this.bagList = info.list;
-				this.rpAmount = info.rpAmount;
-				this.initDate();
+				this.qrcodeList = info.list;
+				this.resultTotalObj.qrcodeNum = info.qrcodeNum;
+				this.resultTotalObj.qrcodeAmount = info.qrcodeAmount;
+			},
+			initSearchData(){
+				this.dataObj = {
+					queryStatus: "",
+					startTime: "",
+					endTime: "",
+					page: 1,
+					pageSize: g.param.pageSizeList[0],
+					sortField: "create_time",
+					sortOrder: "desc"
+				}
 			},
 			initDate(){
 				this.date.startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
@@ -246,22 +277,32 @@
 			},
 			onUpdate_qrcodeList(){
 				g.ui.showLoading();
-				g.net.call("/activity/queryActivityStatisticByPage", this.dataObj).then(($data) =>
+				this.dataObj.queryStatus = this.activityStatusList.join(",");
+				this.dataObj.startTime = this.date.startTimeStr;
+				this.dataObj.endTime = this.date.endTimeStr;
+				if (this.currentType)
 				{
-					g.data.activityPool.removeAll();
-					var obj = {};
-					obj.resultPageList = $data;
-					g.data.activityPool.update(obj);
-					this.activityList = g.data.activityPool.list;
-					g.ui.hideLoading();
+					this.dataObj[this.currentType] = this.inputContent;
+				}
+				g.net.call("order/queryRpAccountList", this.dataObj).then(($data) =>
+				{
+					g.data.qrcodePool.removeAll();
+					g.data.qrcodePool.update($data);
+					if (this.currentType)
+					{
+						this.dataObj[this.currentType] = "";
+					}
 					this.initData();
+					g.ui.hideLoading();
+
 				}, (err) =>
 				{
 					g.func.dealErr(err);
 				});
 			},
+
 			onClick_dropItem($type){
-				this.dataObj.inOutType = $type;
+				this.currentType = $type;
 				this.isShow_dropList = false;
 			},
 			onClick_dropListBtn(){
@@ -276,26 +317,26 @@
 			},
 			onClick_changeType($typeId){
 				this.dataObj.page = 1;
-				var activityStatusList = this.dataObj.activityStatusList;
-				if ($typeId == -1)
+				var activityStatusList = this.activityStatusList;
+				if ($typeId == 0)
 				{
-					this.dataObj.activityStatusList = [-1]
+					this.activityStatusList = [0]
 				}
 				else
 				{
-					if (activityStatusList.indexOf(-1) > -1)
+					if (activityStatusList.indexOf(0) > -1)
 					{
-						this.dataObj.activityStatusList = []
+						this.activityStatusList = []
 
 					}
 					var index = activityStatusList.indexOf($typeId);
 					if (index > -1)
 					{
-						this.dataObj.activityStatusList.splice(index, 1)
+						this.activityStatusList.splice(index, 1)
 					}
 					else
 					{
-						this.dataObj.activityStatusList.push($typeId)
+						this.activityStatusList.push($typeId)
 					}
 				}
 
@@ -328,7 +369,7 @@
 				}
 			},
 			isCurrentType($type){
-				if (this.dataObj.activityStatusList.indexOf($type) > -1)
+				if (this.activityStatusList.indexOf($type) > -1)
 				{
 					return true
 				}
@@ -382,6 +423,7 @@
 				}
 				this.isShowEndTime = false;
 			},
+
 			onClick_qrcodeItem($type){
 
 			},
@@ -404,3 +446,5 @@
 		margin-right: 10px;
 	}
 </style>
+
+

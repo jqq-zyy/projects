@@ -77,6 +77,7 @@
 										<div >
 											{{currentSearchType}}
 											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"></span>
+
 										</div>
 										<ul class="droplist" v-show="isShow_dropList">
 											<li v-for="item in typeList" class="pointer"

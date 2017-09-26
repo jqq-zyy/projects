@@ -15,8 +15,11 @@ export default class QRcodePool {
 
 	update($dObj)
 	{
-		$dObj.model.hasOwnProperty('qrcodeNum') && (_qrcodeNum = $dObj.model.qrcodeNum);
-		$dObj.model.hasOwnProperty('qrcodeAmount') && (_qrcodeAmount = $dObj.model.qrcodeAmount);
+		if($dObj.model){
+			$dObj.model.hasOwnProperty('qrcodeNum') && (_qrcodeNum = $dObj.model.qrcodeNum);
+			$dObj.model.hasOwnProperty('qrcodeAmount') && (_qrcodeAmount = $dObj.model.qrcodeAmount);
+		}
+
 		$dObj.hasOwnProperty('total') && (_total = $dObj.total);
 		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
 		for (var item of $dObj.data)
@@ -96,10 +99,12 @@ function createData($dObj)
 	d.refundUnitPrice = 0;
 	d.payWay = 0;
 	d.payWayDesc = "";
+	d.orderAmount = 0;
 	d.orderStatus = 0;
 	d.orderStatusDesc = "";
 	d.createTime = "";
 	d.companyFullName = "";
+	d.applyUserLogon = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -111,13 +116,14 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('shopId') && (this.shopId = $dObj.shopId);
 	$dObj.hasOwnProperty('orderType') && (this.orderType = $dObj.orderType);
 	$dObj.hasOwnProperty('orderTypeDesc') && (this.orderTypeDesc = $dObj.orderTypeDesc);
-	$dObj.hasOwnProperty('qrcodeRefundNum') && (this.qrcodeRefundNum = $dObj.qrcodeRefundNum);
-	$dObj.hasOwnProperty('refundUnitPrice') && (this.refundUnitPrice = $dObj.refundUnitPrice);
-	$dObj.hasOwnProperty('orderAmount') && (this.orderAmount = $dObj.orderAmount);
+	$dObj.hasOwnProperty('qrcodeBuyNum') && (this.qrcodeRefundNum = $dObj.qrcodeBuyNum);
+	$dObj.hasOwnProperty('buyUnitPrice') && (this.refundUnitPrice = $dObj.buyUnitPrice);
+	$dObj.hasOwnProperty('orderTotalAmount') && (this.orderAmount = $dObj.orderTotalAmount);
 	$dObj.hasOwnProperty('payWay') && (this.payWay = $dObj.payWay);
 	$dObj.hasOwnProperty('payWayDesc') && (this.payWayDesc = $dObj.payWayDesc);
 	$dObj.hasOwnProperty('orderStatus') && (this.orderStatus = $dObj.orderStatus);
 	$dObj.hasOwnProperty('orderStatusDesc') && (this.orderStatusDesc = $dObj.orderStatusDesc);
 	$dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
 	$dObj.hasOwnProperty('companyFullName') && (this.companyFullName = $dObj.companyFullName);
+	$dObj.hasOwnProperty('applyUserLogon') && (this.applyUserLogon = $dObj.applyUserLogon);
 }

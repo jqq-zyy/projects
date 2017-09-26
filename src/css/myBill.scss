@@ -43,7 +43,6 @@
   line-height: 130px;
 }
 
-
 .admin-calendar-table {
   .money-from {
 	text-decoration: underline;
@@ -127,13 +126,19 @@
 
 }
 
-@media screen and (max-width: 1400px) {
-  .recharge-record .recharge-record-bottom .date-box .date-input {
-	width: 110px;
-	padding-left: 0;
-  }
-  .recharge-record .recharge-record-bottom .search-input {
-	width: 150px;
-
+@media screen and (max-width: 1500px) {
+  div.bar-box {
+	.bar-bottonm-spcial {
+	  height: 100px;
+	  div.data-box {
+		.data-input {
+		  width: 125px;
+		}
+		.goto {
+		  float: left;
+		  margin: 0 8px;
+		}
+	  }
+	}
   }
 }

@@ -6,32 +6,50 @@
 				<div class="right-content-wrap">
 					<common-top-nav></common-top-nav>
 					<div class="admin-data-items">
-						<div class="right-body personal-box">
+						<div class="right-body">
 							<div class="g-title"><span>商户列表</span>/活动详情</div>
-							<div class="admin-calendar-table">
-								<div>基本信息</div>
-								<span>活动名称:{{activityInfo.activityName}}</span>
-								<span>创建时间:{{activityInfo.createTime}}</span>
-								<span>基础红包设定：</span>
-								<span>状态：{{activityInfo.activityStartTimeStr}}
-									<span class="button pointer" v-text="onConfirm_freezeStatus(activityInfo.freezeStatus)"
+							<div class="admin-calendar-table user-detail-box">
+								<div class="detail-msg">
+									<div class="msg-title">基本信息</div>
+									<span class="msg-info msf-info-width">活动名称:{{activityInfo.activityName}}</span>
+									<span class="msg-info msf-info-width">创建时间:{{activityInfo.createTime}}</span>
+									<span class="msg-info msf-info-width">基础红包设定：</span>
+									<span class="msg-info msf-info-width">状态：{{activityInfo.activityStartTimeStr}}
+									<span class="pointer border-btn status-btn hb-fill-middle2-bg"
+										  v-text="onConfirm_freezeStatus(activityInfo.freezeStatus)"
 										  @click="onClick_changeStatus(activityInfo.freezeStatus)"></span></span>
-								<span>开始时间：{{activityInfo.activityStartTimeStr}}</span>
-								<span>结束时间：{{activityInfo.activityEndTimeStr}}</span>
-								<span>剩余数量/二维码数量：{{remainQrCodeNum}}/{{totalQrCodeNum}}</span>
-								<span>已发放金额：{{totalMakedAmount}}</span>
-								<span>是否接受平台红包：</span>
-								<span>活动地区：</span>
-								<span>会员奖励：</span>
-							</div>
-							<div class="admin-calendar-table">
-								<div>红包信息</div>
-								<div>
-									<span>标题：{{activityRpInfo.rpTitle}}</span>
-									<span>祝福文字：{{activityRpInfo.rpWish}}</span>
-									<span>显示图片：<img :src="activityRpInfo.rpLogoUrl" alt=""></span>
+									<span class="msg-info msf-info-width">开始时间：{{activityInfo.activityStartTimeStr}}</span>
+									<span class="msg-info msf-info-width">结束时间：{{activityInfo.activityEndTimeStr}}</span>
+									<span class="msg-info msf-info-width">剩余数量/二维码数量：{{remainQrCodeNum}}/{{totalQrCodeNum}}</span>
+									<span class="msg-info msf-info-width">已发放金额：{{totalMakedAmount}}</span>
+									<span class="msg-info msf-info-width" style="width: 100%;">是否接受平台红包：</span>
+									<div class="msg-info msf-info-width">
+										<span>活动地区：</span>
+										<ul>
+											<li>1. 浙江省杭州市（1 倍）</li>
+											<li>2. 上海市（2 倍）</li>
+											<li> 3. 广东省广州市（3 倍）</li>
+										</ul>
+									</div>
+									<div class="msg-info msf-info-width">
+										<span>会员奖励：</span>
+										<ul>
+											<li>1. 初级会员（1.2 倍）</li>
+											<li>2. 中级会员（2.4 倍）</li>
+											<li>3. 高级会员（3.1 倍）</li>
+										</ul>
+									</div>
+								</div>
+								<div class="detail-msg">
+									<div class="msg-title">红包信息</div>
+									<span class="msg-info msf-info-width">标题：{{activityRpInfo.rpTitle}}</span>
+									<span class="msg-info msf-info-width">祝福文字：{{activityRpInfo.rpWish}}</span>
+									<span class="msg-info msf-info-width">显示图片：<img class="show-img"
+																					:src="activityRpInfo.rpLogoUrl"
+																					alt=""></span>
 								</div>
 							</div>
+
 						</div>
 						<common-footer></common-footer>
 					</div>
@@ -42,13 +60,18 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn"/>
+								 @click="onClick_closeBtn" />
 						</div>
-						<div class="pop-body tree-box">
-							<div>确认{{currentTypeDesc}}该活动么</div>
-							<div class="m-title">
-								<div class="button pointer" @click="onClick_closeBtn">暂不{{currentTypeDesc}}</div>
-								<div class="button pointer" @click="onClick_confirmChange">确认{{currentTypeDesc}}</div>
+						<div class="pop-tit"></div>
+						<div class="pop-body">
+							<div class="m-title text-center">确认{{currentTypeDesc}}该活动么</div>
+							<div class="m-title button-box">
+								<div class="button pointer border-btn  hb-fill-middle2-bg" @click="onClick_closeBtn">
+									暂不{{currentTypeDesc}}
+								</div>
+								<div class="button pointer bg-btn hb-fill-middle2-rev" @click="onClick_confirmChange">
+									确认{{currentTypeDesc}}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -166,10 +189,13 @@
 </style>
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/personlInfo.scss";
+	@import "../css/userDetail.scss";
 
-	img {
+	.show-img {
 		width: 50px;
 		height: 50px;
+		vertical-align: middle;
+
 	}
 </style>
 

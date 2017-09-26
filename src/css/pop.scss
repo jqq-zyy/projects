@@ -41,7 +41,9 @@ div.mint-popup {
   -ms-transform: translate(150%, -100%);
   -o-transform: translate(150%, -100%);
   cursor: pointer;
+  z-index: 2;
   img {
+	float: left;
 	width: 32px;
 	height: 32px;
   }
@@ -50,9 +52,9 @@ div.mint-popup {
 .pop-tit {
   line-height: 46px;
   height: 46px;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  padding-left: 20px;
   background: #f2f4f9;
   border-bottom: 1px solid #d0d3dc;
 }
@@ -61,6 +63,9 @@ div.mint-popup {
   min-width: 600px;
   overflow: hidden;
   //height: 690px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   .pop-body {
 	padding: 2px 50px 30px;
 	overflow: hidden;
@@ -68,7 +73,7 @@ div.mint-popup {
 	.m-title {
 	  margin-top: 20px;
 	  line-height: 40px;
-	  overflow: hidden;
+	  //overflow: hidden;
 	  input {
 		width: 370px;
 		height: 40px;
@@ -76,8 +81,8 @@ div.mint-popup {
 		line-height: 40px;
 		padding: 0 20px;
 		text-align: justify;
-		border: 1px solid #d0d3dc;
-		border-radius: 4px;
+		border: 1px solid #dbdee7;
+		border-radius: 2px;
 		color: #979797;
 	  }
 	  .out-form {
@@ -115,9 +120,10 @@ div.mint-popup {
 		font-weight: bold;
 	  }
 	  .name {
-		font-size: 18px;
+		width: 85px;
+		float: left;
 		color: #4a4a4a;
-		font-weight: bold;
+		text-align: right;
 	  }
 	  .buy-number {
 		width: 370px;
@@ -144,46 +150,37 @@ div.mint-popup {
 		color: #5cbb69;
 		line-height: 14px;
 	  }
-	  .m-drop-box {
-		width: 512px;
-		height: 42px;
-		display: inline-block;
-		position: relative;
-
-	  }
 	  .m-drop {
 		position: relative;
-		width: 510px;
+		width: 370px;
 		height: 40px;
+		float: left;
 		line-height: 40px;
-		border: 1px solid #d0d3dc;
-		border-right: none;
-		padding-left: 20px;
-		display: inline-block;
-	  }
-	  .drop-list {
-		width: 510px;
-		background: #ffffff;
-		border: 1px solid #d0d3dc;
-		position: absolute;
-		top: 100%;
-		left: -1px;
-		height: 300px;
-		overflow-y: auto;
-		z-index: 9999;
-		ul {
+		border: 1px solid #dbdee7;
+		padding: 0 20px;
+		border-radius: 2px;
+		.drop-list {
 		  width: 100%;
-		  overflow: hidden;
-		  li {
-			padding-left: 20px;
-		  }
-		  li:hover {
-			background: #d0d3dc;
+		  background: #ffffff;
+		  border: 1px solid #d0d3dc;
+		  position: absolute;
+		  top: 100%;
+		  left: -1px;
+		  z-index: 9999;
+		  ul {
+			width: 100%;
+			li {
+			  padding-left: 20px;
+			}
+			li:hover {
+			  background: #d0d3dc;
 
+			}
 		  }
+
 		}
-
 	  }
+
 	  .m-icon {
 		width: 42px;
 		height: 40px;
@@ -208,6 +205,13 @@ div.mint-popup {
 		text-align: center;
 	  }
 	}
+	.m-title::before {
+	  content: ".";
+	  height: 0;
+	  font-size: 0;
+	  clear: both;
+	}
+
 	.text-center {
 	  text-align: center;
 	}
@@ -215,72 +219,6 @@ div.mint-popup {
 	  display: flex;
 	  align-items: center;
 	  justify-content: center;
-	}
-  }
-
-}
-
-div.login-pop {
-  width: 290px;
-  height: 298px;
-  background: #101212;
-  position: relative;
-  padding: 0 35px 15px;
-  //padding: 0 10px;
-  .close-btn {
-	width: 20px;
-	height: 20px;
-	position: absolute;
-	right: 31px;
-	top: 21px;
-  }
-  .pop-head {
-	text-align: center;
-	color: #ffffff;
-	margin-top: 25px;
-	font-size: 18px;
-  }
-  .login-body {
-	div {
-	  margin-top: 10px;
-	  overflow: hidden;
-	  .login-title {
-		width: 42px;
-		height: 42px;
-		float: left;
-	  }
-	  input {
-		height: 40px;
-		line-height: 40px;
-		width: 220px;
-		float: left;
-		border: 1px solid #dbdee7;
-		border-radius: 4px;
-		padding-left: 50px;
-		font-size: 14px;
-	  }
-	}
-	label {
-	  color: #979797;
-	  font-size: 12px;
-	  line-height: 20px;
-	}
-	.login-btn {
-	  width: 220px;
-	  height: 40px;
-	  line-height: 40px;
-	  letter-spacing: 5px;
-	}
-	.forget-btn {
-	  margin-top: 15px;
-	  color: #ffffff;
-	  display: block;
-	  font-size: 14px;
-	  text-align: center;
-	  text-decoration: underline;
-	}
-	.me-radio-core {
-	  margin-right: 0;
 	}
   }
 
@@ -294,6 +232,7 @@ div.reset-pop {
 	padding: 0;
 	.m-title {
 	  position: relative;
+	  font-size: 14px;
 	  input {
 		width: 280px;
 		height: 40px;
@@ -371,10 +310,11 @@ div.reset-pop {
   height: 36px;
   line-height: 36px;
 }
-.button:last-child{
+
+.button:last-child {
   margin-left: 30px;
 }
 
-.pop-edit{
-  
+.pop-edit {
+
 }
