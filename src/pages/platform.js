@@ -8,7 +8,7 @@ export default function (to, next)
 	var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
 	var startTimeStr = g.timeTool.getDate(startTime, true);
 	var endTimeStr = startTimeStr;
-	g.net.call("/account/queryPlatformAccountOverview", {
+	g.net.call("order/queryPlatformAccountOverview", {
 		'recordTypes': "",
 		'beginTimeStart': startTimeStr,
 		'beginTimeEnd': endTimeStr,

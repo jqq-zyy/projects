@@ -169,7 +169,7 @@
 									</thead>
 									<tbody>
 									<tr v-for="item in userList">
-										<td @click="onClick_userItem(item.id)">{{item.id}}</td>
+										<td @click="onClick_userItem(item.id)"  class="first-td-child">{{item.id}}</td>
 										<td>{{item.createTime}}</td>
 										<td>{{item.name}}</td>
 										<td v-text="freezeContent(item.freezeStatus)"></td>
