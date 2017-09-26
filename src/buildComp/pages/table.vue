@@ -36,7 +36,8 @@
 						}, {
 							name: '年龄',
 							id: 'age',
-							supportSort: true
+							sortBy: "desc",
+							params:"create_time"
 						},
 						{
 							name: '省份',

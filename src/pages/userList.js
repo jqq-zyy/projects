@@ -8,27 +8,22 @@ export default function (to, next)
 	var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
 	obj.page = 1;
 	obj.pageSize=10;
-	obj.sortOrder = 'desc';
-	obj.startTimeStr = g.timeTool.getDate(startTime, true);
-	obj.endTimeStr = obj.startTimeStr;
-	obj.status = 0;
+	obj.startTime = g.timeTool.getDate(startTime, true);
+	obj.endTime = obj.startTime ;
 	getUserList(obj,next)
 }
 export function getUserList($param,$callback)
 {
 	g.ui.showLoading();
-	g.net.call("/userList", $param).then(($data) =>
+	g.net.call("user/queryShopList", $param).then(($data) =>
 	{
 		g.ui.hideLoading();
+		g.data.userPool.removeAll();
 		g.data.userPool.update($data);
+
 		$callback();
 	}, (err) =>
 	{
 		g.func.dealErr(err);
 	});
 }
-
-
-
-
-

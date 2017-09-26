@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<hw-btn @click="onClick_btn"></hw-btn>
-		<hw-date type="date" skin="simple" @change="onChange_date" v-model="isShowDate"></hw-date>
+		<hw-date type="date" @change="onChange_date" v-model="isShowDate"></hw-date>
 	</div>
 
 </template>

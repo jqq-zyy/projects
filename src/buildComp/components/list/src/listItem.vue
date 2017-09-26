@@ -22,7 +22,7 @@
 </template>
 <script type="text/ecmascript-6">
 	const prefixCls = "list-item";
-	import * as func from './../../../js/func';
+	import * as util from './../../../js/util';
 	import Group from './../../group/index';
 	export default{
 		name: "list-item",
@@ -81,13 +81,11 @@
 		methods: {
 			onClick_item($item, $event)
 			{
-				func.insertOneOrZero(this.currIdList, $item.id);
+				util.insertOneOrZero(this.currIdList, $item.id);
 			},
 			onClick_icon($item)
 			{
-				debugger;
-
-				func.insertOneOrZero(this.checkedChildren, $item.id)
+				util.insertOneOrZero(this.checkedChildren, $item.id)
 				this.checkedAllChildren($item);
 				this.$emit('change', this.checkedChildren);
 				this.$forceUpdate();
@@ -95,26 +93,26 @@
 			onChange_list($idList)
 			{
 				this.checkedChildren = $idList;
-				func.splice(this.checkedChildren, this.itemData.id);
+				util.splice(this.checkedChildren, this.itemData.id);
 				if ($idList.length > 0)
 				{
-					func.pushIn(this.checkedChildren, this.itemData.id);
+					util.pushIn(this.checkedChildren, this.itemData.id);
 				}
 				this.$emit('change', this.checkedChildren);
 			},
 			checkedAllChildren($data)
 			{
-				if (func.typeOf($data['children']) === 'array' && $data['children'].length > 0)
+				if (util.typeOf($data['children']) === 'array' && $data['children'].length > 0)
 				{
 					for (var item of $data['children'])
 					{
 						if (this.checkedChildren.indexOf($data.id) >= 0)
 						{
-							func.pushIn(this.checkedChildren, item.id);
+							util.pushIn(this.checkedChildren, item.id);
 						}
 						else
 						{
-							func.splice(this.checkedChildren, item.id)
+							util.splice(this.checkedChildren, item.id)
 						}
 						this.checkedAllChildren(item);
 					}

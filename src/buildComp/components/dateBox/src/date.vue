@@ -28,7 +28,8 @@
 		</div>
 		<div class="laydate-setm" v-show="pops.isShowMonth">
 			<ul class="ymdropul ">
-				<li v-for="n in 12" :class="date.month==n? mainColor:''" @click="onClick_detailDate('month',n)"
+				<li v-for="n in 12" :class="[date.month==n? mainColor:'',checkMonthDisable(n)?'date-disabled':'']"
+					@click="onClick_detailDate('month',n)"
 					class="month-num">{{n|addZero}}月
 				</li>
 			</ul>
@@ -48,7 +49,7 @@
 			<tbody>
 			<tr v-for="n in weekNum">
 				<td v-for="item in dateList.list.slice((n-1)*7,n*7)"
-					:class="[date.day==item[2]&&date.month==(item[1]+1)&&date.year==item[0]? mainColor :'', checkDisable(item)?'date-disabled':'cursor','']"
+					:class="[date.day==item[2] && (item[1] + 1) == date.month? mainColor :'', checkDisable(item)?'date-disabled':'cursor','']"
 					@click.stop="onClick_dayDate(item)">{{item[2]}}
 				</td>
 			</tr>
@@ -104,8 +105,8 @@
 	</div>
 </template>
 <script type="text/ecmascript-6">
-	import g from './../../../../global';
-	import * as func from './../../../js/func'
+	import * as util from './../../../js/util'
+	import * as timeTool from './../../../js/TimeTool';
 	var _showList = ["Year", "Month", 'Hour', 'Minute', 'Second'];
 	var _startYear, _endYear, _endMonth;
 	const prefixCls = 'hw-date';
@@ -136,7 +137,7 @@
 				type: String,
 				validator($val)
 				{
-					return func.oneOf($val, ['date', 'hour'])
+					return util.oneOf($val, ['date', 'hour'])
 				}
 			},
 			hasBorder: {
@@ -145,11 +146,11 @@
 			},
 			startTime: {
 				type: Number,
-				default: 1279555200000
+				default: 1330000000000
 			},
 			endTime: {
 				type: Number,
-				default: Date.now()
+				default: 9999999999999
 			},
 			value: {
 				type: Boolean,
@@ -162,7 +163,7 @@
 
 		},
 		computed: {
-			weekNum: function ()
+			weekNum()
 			{
 				if (this.dateList.list)
 				{
@@ -171,7 +172,7 @@
 			},
 			dateList()
 			{
-				return g.timeTool.getMonthByOffset(this.currMonth);
+				return timeTool.getMonthByOffset(this.currMonth);
 			},
 			wrapClass()
 			{
@@ -192,9 +193,9 @@
 		},
 		methods: {
 			init(){
-				_startYear = parseInt(g.timeTool.getDateArray(this.startTime)[0]);
-				_endYear = parseInt(g.timeTool.getDateArray(this.endTime)[0]);
-				_endMonth = parseInt(g.timeTool.getDateArray(this.endTime)[1]);
+				_startYear = parseInt(timeTool.getDateArray(this.startTime)[0]);
+				_endYear = parseInt(timeTool.getDateArray(this.endTime)[0]);
+				_endMonth = parseInt(timeTool.getDateArray(this.endTime)[1]);
 				for (var i = _startYear; i <= _endYear; i++)
 				{
 					this.yearList.push(i);
@@ -262,10 +263,7 @@
 			},
 			onClick_dayDate($item)
 			{
-				trace($item);
 				this.date.day = this.addZero($item[2]);
-				this.date.month = this.addZero($item[1] + 1);
-				this.date.year = $item[0];
 				if (this.type === 'date')
 				{
 					this.onClick_okBtn();
@@ -291,7 +289,7 @@
 			onClick_todayBtn()
 			{
 				var now = Date.now();
-				var dateArr = g.timeTool.getFullDateArray(now, true);
+				var dateArr = timeTool.getFullDateArray(now, true);
 				this.date = {
 					year: dateArr[0],
 					month: dateArr[1],
@@ -360,7 +358,11 @@
 				return this.dateToTime(item) > this.endTime || this.dateToTime(item) < this.startTime || ( (item[1] + 1) !=
 						this.date.month);
 			},
-
+			checkMonthDisable(n)
+			{
+				return false;
+//				return timeTool.getDateArray(this.endTime)[2] >= n;
+			},
 			checkToday(item)
 			{
 				return this.dateList.nowYear == item[0] && this.dateList.nowDate == item[2] && this.dateList.nowMonth == item[1];

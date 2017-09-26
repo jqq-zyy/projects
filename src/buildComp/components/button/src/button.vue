@@ -6,7 +6,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-	import * as func from './../../../js/func'
+	import * as util from './../../../js/util'
 	const prefixCls = "hw-btn";
 	export default{
 		name: "hw-btn",
@@ -17,7 +17,7 @@
 			type: {
 				type: String,
 				validator (value) {
-					return func.oneOf(value, ['default', 'primary', 'success', 'error', 'info', 'warning']);
+					return util.oneOf(value, ['default', 'primary', 'success', 'error', 'info', 'warning']);
 				},
 				default: "default"
 			},
@@ -28,7 +28,7 @@
 			size: {
 				type: String,
 				validator (value) {
-					return func.oneOf(value, ['small', 'middle', 'large']);
+					return util.oneOf(value, ['small', 'middle', 'large']);
 				},
 				default: "middle"
 			},
@@ -55,7 +55,7 @@
 			htmlType: {
 				default: 'button',
 				validator (value) {
-					return func.oneOf(value, ['button', 'submit', 'reset']);
+					return util.oneOf(value, ['button', 'submit', 'reset']);
 				}
 			}
 		},

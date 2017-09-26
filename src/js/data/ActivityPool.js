@@ -17,6 +17,7 @@ export default class ActivityPool {
 
 	update($dObj)
 	{
+
 		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
 		if ($dObj.model)
 		{
@@ -35,9 +36,9 @@ export default class ActivityPool {
 	add($dObj)
 	{
 		var itemData = createData($dObj);
-		if (!_hash[itemData.activityNo])
+		if (!_hash[itemData.id])
 		{
-			_hash[itemData.activityNo] = itemData;
+			_hash[itemData.id] = itemData;
 			_list.push(itemData);
 		}
 	}
@@ -100,6 +101,12 @@ export default class ActivityPool {
 	{
 		_list = [];
 		_hash = Object.create(null);
+		_totalPage = 0;
+		_total = 0;
+		_totalQrCodeNum = 0;
+		_totalScanCount = 0;
+		_totalUseRpAmount = 0;
+		_totalUseRpAmountDesc = 0;
 	}
 }
 
