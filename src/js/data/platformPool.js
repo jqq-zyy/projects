@@ -17,10 +17,11 @@ export default class PlatformPool {
 
 	update($dObj)
 	{
-		$dObj.hasOwnProperty('totalIncome') && (_totalIncome = $dObj.totalIncome);
-		$dObj.hasOwnProperty('totalDisburse') && (_totalDisburse = $dObj.totalDisburse);
-		$dObj.hasOwnProperty('balance') && (_balance = $dObj.balance);
-		$dObj.hasOwnProperty('typeData') && (_typeData = $dObj.typeData);
+		if($dObj.hasOwnProperty('statisticData')){
+			$dObj.statisticData.hasOwnProperty('totalIncome') && (_totalIncome = $dObj.statisticData.totalIncome);
+			$dObj.statisticData.hasOwnProperty('totalDisburse') && (_totalDisburse = $dObj.statisticData.totalDisburse);
+			$dObj.statisticData.hasOwnProperty('balance') && (_balance = $dObj.statisticData.balance);
+		}
 
 		if($dObj.hasOwnProperty('resultPageList')){
 			$dObj.resultPageList.hasOwnProperty('totalPage') && (_totalPage = $dObj.resultPageList.totalPage);
@@ -29,16 +30,14 @@ export default class PlatformPool {
 				this.add(item);
 			}
 		}
-
-
 	}
 
 	add($dObj)
 	{
 		var itemData = createData($dObj);
-		if (!_hash[itemData.activityNo])
+		if (!_hash[itemData.id])
 		{
-			_hash[itemData.activityNo] = itemData;
+			_hash[itemData.id] = itemData;
 			_list.push(itemData);
 		}
 	}
@@ -101,8 +100,9 @@ function createData($dObj)
 	d.beginTime = "";
 	d.amount = 0;
 	d.remarks = "";
-	d.recordTypeDesc = "";
-	d.amountDesc = "";
+	d.orderStatusDesc = "";
+	d.payWayDesc = "";
+	d.targetAccount = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -110,13 +110,13 @@ function createData($dObj)
 
 function updateData($dObj)
 {
-	$dObj.hasOwnProperty('recordId') && (this.id = $dObj.recordId);
-	$dObj.hasOwnProperty('recordType') && (this.recordType = $dObj.recordType);
-	$dObj.hasOwnProperty('author') && (this.author = $dObj.author);
-	$dObj.hasOwnProperty('beginTime') && (this.beginTime = $dObj.beginTime);
-	$dObj.hasOwnProperty('amount') && (this.amount = $dObj.amount);
-	$dObj.hasOwnProperty('remarks') && (this.remarks = $dObj.remarks);
-	$dObj.hasOwnProperty('recordTypeDesc') && (this.recordTypeDesc = $dObj.recordTypeDesc);
-	$dObj.hasOwnProperty('amountDesc') && (this.amountDesc = $dObj.amountDesc);
-	
+	$dObj.hasOwnProperty('orderId') && (this.id = $dObj.orderId);
+	$dObj.hasOwnProperty('orderTypeDesc') && (this.recordType = $dObj.orderTypeDesc);
+	$dObj.hasOwnProperty('applyUserLogon') && (this.author = $dObj.applyUserLogon);
+	$dObj.hasOwnProperty('createTime') && (this.beginTime = $dObj.createTime);
+	$dObj.hasOwnProperty('orderAmount') && (this.amount = $dObj.orderAmount);
+	$dObj.hasOwnProperty('remark') && (this.remarks = $dObj.remark);
+	$dObj.hasOwnProperty('orderStatusDesc') && (this.orderStatusDesc = $dObj.orderStatusDesc);
+	$dObj.hasOwnProperty('payWayDesc') && (this.payWayDesc = $dObj.payWayDesc);
+	$dObj.hasOwnProperty('targetAccount') && (this.targetAccount = $dObj.targetAccount);
 }

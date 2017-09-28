@@ -11,8 +11,6 @@ import MemberManage from "./pages/memberManage.vue";
 import MemberManageMain from "./pages/memberManage";
 import ModPwd from "./pages/modPwd.vue";
 import ModPwdMain from "./pages/modPwd";
-import MyBill from "./pages/myBill.vue";
-import MyBillMain from "./pages/myBill";
 import myStaff from "./pages/myStaff.vue";
 import myStaffMain from "./pages/myStaff";
 import Role from "./pages/role.vue";
@@ -39,6 +37,7 @@ import Platform from "./pages/platform.vue";
 import PlatformMain from "./pages/platform";
 import Chart from "./pages/chart.vue";
 import Rule from "./pages/rule.vue";
+import RuleMain from "./pages/rule";
 import CheckQrcode from "./pages/checkQrcode.vue";
 export default [
 	{
@@ -90,7 +89,8 @@ export default [
 	{
 		path: '/rule',
 		name: "规则设置",
-		component: Rule
+		component: Rule,
+		preload: RuleMain
 	},
 	{
 		path: '/data',
@@ -117,12 +117,7 @@ export default [
 		name: "修改密码",
 		component: ModPwd,
 		preload: ModPwdMain
-	}, {
-		path: '/bill',
-		name: "我的账单充值消费记录",
-		component: MyBill,
-		preload: MyBillMain
-	}, {
+	},  {
 		path: '/user',
 		name: "商户列表",
 		component: UserList,

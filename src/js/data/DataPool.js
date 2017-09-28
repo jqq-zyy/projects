@@ -28,6 +28,7 @@ import UserDetailPool from "./UserDetailPool";
 import BagPool from "./BagPool";
 import BagDetailPool from "./BagDetailPool";
 import PlatformPool from "./PlatformPool";
+import RulePool from "./RulePool";
 
 export var userInfo = new UserInfo(); //用户信息
 export var rightPool = new RightPool(); //权限数据池
@@ -58,6 +59,7 @@ export var userDetailPool = new UserDetailPool(); //商户详情信息
 export var bagPool = new BagPool(); //红包账户
 export var bagDetailPool = new BagDetailPool(); //红包详情
 export var platformPool = new PlatformPool(); //平台财务信息
+export var rulePool = new RulePool(); //平台活动规则
 
 
 
