@@ -7,8 +7,8 @@
 		<div class="pop-tit">
 			设置是否支持使用平台红包
 		</div>
-		<div class="pop-body tree-box">
-			<div class="input-money set-warn">
+		<div class="pop-body">
+			<div class="input-money set-warn m-title">
 				<label>
 									<span class="me-radio">
 										<input class=" me-radio-input" type="radio" name="batch" value="true" v-model="platformRpSupport">
@@ -25,9 +25,9 @@
 				</label>
 			</div>
 
-			<div>
-				<div class="button hb-fill-middle2-bg" @click="onClick_closeBtn">取消</div>
-				<div class="button hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
+			<div class="m-title button-box">
+				<div class="button pointer border-btn hb-fill-middle2-bg" @click="onClick_closeBtn">取消</div>
+				<div class="button pointer bg-btn hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
 			</div>
 
 		</div>

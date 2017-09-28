@@ -12,7 +12,7 @@
 							</div>
 							<div class="bar-box role-bar">
 								员工总人数：{{totalStaffNum}}<span class="add-button border-btn hb-fill-middle2-bg  pointer"
-											 @click="onClick_addBtn">添加员工
+															 @click="onClick_addBtn">添加员工
 							</span>
 							</div>
 							<div class="admin-data-items">
@@ -36,8 +36,11 @@
 											<td>{{item.createTime}}</td>
 											<td>{{item.userStatusDesc}}</td>
 											<td>
-												<span class="pointer border-btn hb-fill-middle2-bg role-del-btn" @click="onClick_editBtn(item.id)">编辑</span>
-												<span class="pointer bg-btn hb-fill-middle2-rev role-del-btn" v-text=staffCurrentStatus(item.userStatus)  @click="onClick_changeType(item.id,item.userStatus)">冻结</span>
+												<span class="pointer border-btn hb-fill-middle2-bg role-del-btn"
+													  @click="onClick_editBtn(item.id)">编辑</span>
+												<span class="pointer bg-btn hb-fill-middle2-rev role-del-btn"
+													  v-text=staffCurrentStatus(item.userStatus)
+													  @click="onClick_changeType(item.id,item.userStatus)">冻结</span>
 											</td>
 
 										</tr>
@@ -85,7 +88,12 @@
 								<span class="name">权限：</span>
 								<div class="m-drop" @click="onClick_roleList">
 									<span :class="['drop-icon',isShow_roleList?'rotate':'']"></span>
-									<ul class="droplist" v-show="isShow_roleList">
+									<ul class="drop-list" v-show="isShow_roleList">
+										<li>123</li>
+										<li>123</li>
+										<li>123</li>
+										<li>123</li>
+										<li>123</li>
 										<li>123</li>
 									</ul>
 								</div>
@@ -226,7 +234,6 @@
 					g.func.dealErr(err);
 				});
 
-
 			},
 			onClick_addBtn(){
 //				if (g.data.powerPool.list.length > 0)
@@ -268,9 +275,12 @@
 				this.isShow_roleList = !this.isShow_roleList;
 			},
 			staffCurrentStatus($status){
-				if(status ==1){
+				if (status == 1)
+				{
 					return "冻结"
-				}else{
+				}
+				else
+				{
 					return "解冻"
 				}
 			}

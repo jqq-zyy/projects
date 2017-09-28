@@ -7,13 +7,13 @@
 		<div class="pop-tit">
 			设置扫码限制数
 		</div>
-		<div class="pop-body tree-box">
+		<div class="pop-body">
 			<div class="input-money m-title">
-				<span>请输入数量：</span>
+				<span class="">请输入数量：</span>
 				<input type="text" v-model="maxQrcodeScanNum">
 			</div>
-			<div>
-				<div class="button hb-fill-middle2-bg" @click="onClick_closeBtn">取消</div>
+			<div class="m-title button-box">
+				<div class="button pointer border-btn hb-fill-middle2-bg" @click="onClick_closeBtn">取消</div>
 				<div class="button hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
 			</div>
 		</div>

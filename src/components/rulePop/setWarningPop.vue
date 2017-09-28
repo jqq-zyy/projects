@@ -7,16 +7,16 @@
 		<div class="pop-tit pop-tit-center">
 			设置账户余额报警门槛
 		</div>
-		<div class="pop-body tree-box">
+		<div class="pop-body">
 			<div class="input-money m-title">
 				<span>请输入金额：</span>
 				<input type="text" v-model="warningAmount">
 				<span>元</span>
 			</div>
 			<p v-show="isShow_moneyTips" class="tips">请输入有效金额</p>
-			<div>
-				<div class="button hb-fill-middle2-bg" @click=" onClick_closeBtn">取消</div>
-				<div class="button hb-fill-middle2-rev" @click="onClick_saveWarningBtn">保存</div>
+			<div class="m-title button-box">
+				<div class="button pointer border-btn hb-fill-middle2-bg" @click=" onClick_closeBtn">取消</div>
+				<div class="button pointer bg-btn hb-fill-middle2-rev" @click="onClick_saveWarningBtn">保存</div>
 			</div>
 
 		</div>

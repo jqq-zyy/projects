@@ -73,17 +73,20 @@ div.mint-popup {
 	.m-title {
 	  margin-top: 20px;
 	  line-height: 40px;
+	  color: #4a4a4a;
 	  //overflow: hidden;
 	  input {
 		width: 370px;
 		height: 40px;
 		font-size: 14px;
 		line-height: 40px;
-		padding: 0 20px;
 		text-align: justify;
 		border: 1px solid #dbdee7;
 		border-radius: 2px;
 		color: #979797;
+	  }
+	  .multiple {
+		width: 100px;
 	  }
 	  .out-form {
 		width: 578px;
@@ -152,7 +155,7 @@ div.mint-popup {
 	  }
 	  .m-drop {
 		position: relative;
-		width: 370px;
+		width: 330px;
 		height: 40px;
 		float: left;
 		line-height: 40px;
@@ -167,17 +170,14 @@ div.mint-popup {
 		  top: 100%;
 		  left: -1px;
 		  z-index: 9999;
-		  ul {
-			width: 100%;
-			li {
-			  padding-left: 20px;
-			}
-			li:hover {
-			  background: #d0d3dc;
-
-			}
+		  max-height: 120px;
+		  overflow-y: auto;
+		  li {
+			padding-left: 20px;
 		  }
-
+		  li:hover {
+			background: #d0d3dc;
+		  }
 		}
 	  }
 
@@ -315,6 +315,44 @@ div.reset-pop {
   margin-left: 30px;
 }
 
-.pop-edit {
+.count-tipes {
+  color: #cccccc;
+  text-indent: 7em;
+}
 
+.pop-edit .set-code-price {
+  .count {
+	float: left;
+  }
+  .count-set {
+	float: left;
+	width: 90%;
+	margin-left: 9%;
+	margin-bottom: 25px;
+	&:nth-of-type(1) {
+	  margin-left: 0;
+	}
+	.count-left, .count-right {
+	  width: 50%;
+	  float: left;
+	  input {
+		width: 80px;
+		height: 36px;
+
+	  }
+	}
+  }
+  .count-tips {
+	color: #f2687a;
+	text-align: center;
+  }
+}
+
+.set-warn{
+  display:flex;
+  //justify-content:space-around;
+  label{
+	width: 50%;
+	text-align: center;
+  }
 }
