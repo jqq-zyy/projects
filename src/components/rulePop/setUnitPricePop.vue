@@ -18,17 +18,6 @@
 					</div>
 				</div>
 
-				<!--<div class="count-set">-->
-					<!--<div class="count-left">-->
-						<!--<input type="text">-->
-						<!--~-->
-						<!--<input type="text">-->
-					<!--</div>-->
-					<!--<div class="count-right">-->
-						<!--单价：¥ <input type="text"> / 个-->
-						<!--<span class="count-add"></span>-->
-					<!--</div>-->
-				<!--</div>-->
 				<div class="count-set">
 					<div class="count-left">
 						<input type="text">
