@@ -11,23 +11,24 @@
 							<div class=" bar-box">
 								<div class="search-code-box">
 									<span class="search-name">二维码ID:</span>
-									<input type="text" class="search-input">
-									<span class="btn pointer search border-btn hb-fill-middle2-bg">查找</span>
+									<input type="text" class="search-input" v-model="qrcodeId">
+									<span class="btn pointer search border-btn hb-fill-middle2-bg"   @click="onClick_searchBtn">查找</span>
 								</div>
 							</div>
-							<div class="admin-calendar-table" style="background: #ffffff">
+							<div class="admin-calendar-table" style="background: #ffffff" v-if="qrcodeInfo.qrcodeId">
 								<div class="check-detail">
 									<div class="msg-title">查找结果</div>
-									<div class="msg-title">二维码ID：</div>
-									<span class="msg-info">所属活动名称:<i class="text-color">123</i></span>
-									<span class="msg-info">活动创建时间:</span>
-									<span class="msg-info">活动状态:</span>
-									<span class="msg-info">所属商户ID:<i class="text-color">123</i></span>
-                                    <span class="msg-info">企业全称:
-                                        <img :src="g.config.path.images+'/cert.png'" class="cert-img">
-                                        <img :src="g.config.path.images+'/cert1.png'" class="cert-img"></span>
+									<div class="msg-title">二维码ID：{{qrcodeInfo.qrcodeId}}</div>
+									<span class="msg-info">所属活动名称:<i class="text-color"  @click="onClick_activityItem(qrcodeInfo.activityId,qrcodeInfo.activityName)">{{qrcodeInfo
+										.activityName}}</i></span>
+									<span class="msg-info">活动创建时间:{{qrcodeInfo.createTime}}</span>
+									<span class="msg-info">活动状态:{{qrcodeInfo.activityStatusDesc}}</span>
+									<span class="msg-info">所属商户ID:<i class="text-color">{{qrcodeInfo.shopId}}</i></span>
+                                    <span class="msg-info">企业全称:{{qrcodeInfo.companyFullName}}
+                                        <img :src="g.config.path.images+'/cert'+authStatus+'.png'" class="cert-img">
+										<span :class="{'cert':authStatus==1}">{{qrcodeInfo.authStatusDesc}}</span>
 									</span>
-									<span class="msg-info">商户状态:</span>
+									<span class="msg-info">商户状态:{{qrcodeInfo.freezeStatusDesc}}</span>
 								</div>
 							</div>
 						</div>
@@ -35,23 +36,6 @@
 					</div>
 				</div>
 			</div>
-			<transition name="bounce">
-				<div class="affix-box default-pos-type" v-show="isShow_changeTypePop">
-					<div class="pop-edit-password pop-edit">
-						<div class="show-close-btn">
-							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn" />
-						</div>
-						<div class="pop-body tree-box">
-							<div>确认{{currentTypeDesc}}该活动么</div>
-							<div class="m-title">
-								<div class="button pointer" @click="onClick_closeBtn">暂不{{currentTypeDesc}}</div>
-								<div class="button pointer" @click="onClick_confirmChange">确认{{currentTypeDesc}}</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</transition>
 		</div>
 	</main-layout>
 </template>
@@ -65,22 +49,14 @@
 	export default {
 		created(){
 			this.isLoad = true;
-			this.init();
 		},
 		data(){
 			return {
 				isLoad: false,
-				isShow_changeTypePop: false,
-				currentType: "冻结",
-				currentTypeDesc: "",
 				g: g,
-				activityInfo: {},
-				activityRpInfo: {},
-				activityRules: [],
-				totalQrCodeNum: 0,
-				remainQrCodeNum: 0,
-				totalMakedAmount: 0,
-				totalMakedRpCount: 0
+				qrcodeId:"",
+				qrcodeInfo:{},
+				authStatus:1
 			}
 		},
 		components: {
@@ -89,73 +65,40 @@
 			CommonTopNav,
 			CommonFooter
 		},
+		watch:{
+			qrcodeId($val,$oldVal){
+				if (isNaN($val))
+				{
+					this.qrcodeId = $oldVal;
+				}
+			}
+		},
 		methods: {
-			init(){
-				var activityDetail = g.data.activityDetailPool;
-				this.activityInfo = activityDetail.activityInfo;
-				this.activityRpInfo = activityDetail.activityRpInfo;
-				this.activityRules = activityDetail.activityRules;
-				this.totalQrCodeNum = activityDetail.totalQrCodeNum;
-				this.remainQrCodeNum = activityDetail.remainQrCodeNum;
-				this.totalMakedAmount = activityDetail.totalMakedAmount;
-				this.totalMakedRpCount = activityDetail.totalMakedRpCount;
+			onClick_searchBtn(){
+				g.net.call("qrcode/queryQrcodeInfo", {
+					"qrcodeId":this.qrcodeId
+				}).then(($data) =>
+				{
+					this.qrcodeInfo = $data;
+					this.authStatus = $data.authStatus
+				}, (err) =>
+				{
+					this.qrcodeInfo = {};
+					g.func.dealErr(err);
+				});
 			},
-			onConfirm_freezeStatus($type){
-				if ($type == 1)
-				{
-					return "冻结该活动"
-				}
-				else
-				{
-					return "解冻该活动"
-				}
-			},
-			onClick_changeStatus($type){
-				this.currentType = $type;
-				if ($type == 1)
-				{
-					this.currentTypeDesc = "冻结"
-				}
-				else
-				{
-					this.currentTypeDesc = "解冻"
-				}
-				this.isShow_changeTypePop = true
-
-			},
-			onClick_closeBtn(){
-				this.isShow_changeTypePop = false;
-			},
-			onClick_confirmChange(){
-				var obj = {};
-				if (this.currentType == 1)
-				{
-					obj = {
-						"freezeStatus": 0,
-						"freezeStatusDesc": "冻结"
+			onClick_activityItem($id,$name){
+				g.url = ({
+					"path": "/activitydetail",
+					"query": {
+						"id": $id,
+						"name": $name
 					}
-				}
-				else
-				{
-					obj = {
-						"freezeStatus": 1,
-						"freezeStatusDesc": "正常"
-					}
-				}
-				/*g.net.call("/getActivityDetail",{
-				 "id":this.shopId
-				 }).then(($data) =>
-				 {*/
-				g.data.userDetailPool.update(obj);
-				this.init();
-				this.isShow_changeTypePop = false;
-//				}, (err) =>
-//				{
-//					g.func.dealErr(err);
-//				});
-			},
+				})
+			}
 		}
 	}
+
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">

@@ -11,7 +11,7 @@
 								我的员工
 							</div>
 							<div class="bar-box role-bar">
-								员工总人数：4<span class="add-button border-btn hb-fill-middle2-bg  pointer"
+								员工总人数：{{totalStaffNum}}<span class="add-button border-btn hb-fill-middle2-bg  pointer"
 											 @click="onClick_addBtn">添加员工
 							</span>
 							</div>
@@ -29,16 +29,17 @@
 										</tr>
 										</thead>
 										<tbody>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
+										<tr v-for="item in staffList">
+											<td>{{item.userName}}</td>
+											<td>{{item.telphone}}</td>
+											<td>{{item.roleName}}</td>
+											<td>{{item.createTime}}</td>
+											<td>{{item.userStatusDesc}}</td>
 											<td>
-												<span class="pointer border-btn hb-fill-middle2-bg role-del-btn">编辑</span>
-												<span class="pointer bg-btn hb-fill-middle2-rev role-del-btn">冻结</span>
+												<span class="pointer border-btn hb-fill-middle2-bg role-del-btn" @click="onClick_editBtn(item.id)">编辑</span>
+												<span class="pointer bg-btn hb-fill-middle2-rev role-del-btn" v-text=staffCurrentStatus(item.userStatus)  @click="onClick_changeType(item.id,item.userStatus)">冻结</span>
 											</td>
+
 										</tr>
 										</tbody>
 									</table>
@@ -121,7 +122,6 @@
 	import {getEmployeeList} from './myStaff';
 	import CommonFooter from './common/CommonFooter.vue';
 	import CommonPrompt from './common/CommonPrompt.vue';
-	import CommonSort from './common/CommonSort.vue';
 	import sha256 from 'sha256';
 
 	export default {
@@ -133,17 +133,13 @@
 			return {
 				isLoad: false,
 				g: g,
-				isShow_dropList: false,
 				isShow_addStaffPop: false,
-				isShow_FunctionList: false,
 				isShow_roleList: false,
 				searchObj: {},
 				totalPage: 1,
-				statusList: [],
 				staffList: [],
 				totalStaffNum: 0,
 				roleList: [],
-				confirmPwd: "",
 				roleName: "请选择",
 				staffObj: {}
 
@@ -156,7 +152,6 @@
 			CommonPage,
 			CommonFooter,
 			CommonPrompt,
-			CommonSort
 		},
 		methods: {
 			init(){
@@ -166,7 +161,6 @@
 
 			},
 			initData(){
-				this.statusList = g.param.staffStatusList;
 				this.staffList = g.data.staffPool.list;
 				this.totalPage = g.data.staffPool.totalPage;
 				this.totalStaffNum = g.data.staffPool.total;
@@ -182,41 +176,12 @@
 				this.searchObj = {
 					'page': 1,
 					'pageSize': g.param.pageSizeList[0],
-					'logon': "",
-					'userStatus': 0,
 					'sortOrder': "desc",
 					'sortField': "create_time"
 				}
 			},
 			initRole(){
 				this.roleList = g.data.rolePool.list;
-			},
-			onClick_searchBtn(){
-				this.searchObj.page = 1;
-				this.onUpdate_orderList()
-			},
-			onClick_typeItem($type){
-				if (this.searchObj.userStatus == $type)
-				{
-					return
-				}
-				this.searchObj.userStatus = $type;
-				this.searchObj.page = 1;
-				this.onUpdate_orderList()
-			},
-			onClick_sortBtn($field){
-				if (this.searchObj.sortOrder == "desc")
-				{
-					this.searchObj.sortOrder = "asc"
-				}
-				else
-				{
-					this.searchObj.sortOrder = "desc"
-				}
-				this.searchObj.sortField = $field;
-				this.searchObj.page = 1;
-				this.onUpdate_orderList()
-
 			},
 			onChange_searchItem($page, $pageSize){
 				if ($page)
@@ -232,16 +197,6 @@
 			onUpdate_orderList(){
 
 				getEmployeeList(this.searchObj, this.initData);
-			},
-			onClick_showTypeBtn(){
-				if (this.isShow_dropList)
-				{
-					this.isShow_dropList = false;
-				}
-				else
-				{
-					this.isShow_dropList = true;
-				}
 			},
 			onClick_changeType($id, $type){
 				var type;
@@ -270,6 +225,8 @@
 				{
 					g.func.dealErr(err);
 				});
+
+
 			},
 			onClick_addBtn(){
 //				if (g.data.powerPool.list.length > 0)
@@ -277,7 +234,7 @@
 //					this.initRole();
 //				}
 //				this.initAddData();
-//				getRoleList(this.initRole);
+				getRoleList(this.initRole);
 //				this.confirmPwd = "";
 //				this.roleName = "请选择";
 
@@ -285,21 +242,6 @@
 			},
 			onClick_closeBtn(){
 				this.isShow_addStaffPop = false;
-				this.isShow_FunctionList = false;
-			},
-			onClick_dropListBtn(){
-				if (this.isShow_FunctionList)
-				{
-					this.isShow_FunctionList = false;
-				}
-				else
-				{
-					this.isShow_FunctionList = true;
-				}
-			},
-			onClick_roleItem($id, $name){
-				this.staffObj.roleId = $id;
-				this.roleName = $name;
 				this.isShow_FunctionList = false;
 			},
 			onClick_confirmBtn(){
@@ -312,7 +254,7 @@
 						return
 					}
 				}
-				g.net.call("user/saveEmployeeInfo", this.staffObj).then(($data) =>
+				g.net.call("user/addAdminUser", this.staffObj).then(($data) =>
 				{
 					this.isShow_addStaffPop = false;
 					this.initSearchData();
@@ -324,6 +266,13 @@
 			},
 			onClick_roleList(){
 				this.isShow_roleList = !this.isShow_roleList;
+			},
+			staffCurrentStatus($status){
+				if(status ==1){
+					return "冻结"
+				}else{
+					return "解冻"
+				}
 			}
 		}
 	}
