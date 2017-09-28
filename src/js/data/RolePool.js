@@ -71,6 +71,8 @@ function createData($dObj)
 	d.shopId = "";
 	d.roleName = "";
 	d.roleStr = "";
+	d.permissionDesc = "";
+	d.createTime = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -82,6 +84,8 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('shopId') && (this.shopId = $dObj.shopId);
 	$dObj.hasOwnProperty('roleName') && (this.roleName = $dObj.roleName);
 	$dObj.hasOwnProperty('permissionIds') && (this.roleStr = $dObj.permissionIds);
+	$dObj.hasOwnProperty('permissionDesc') && (this.permissionDesc = $dObj.permissionDesc);
+	$dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
 }
 
 

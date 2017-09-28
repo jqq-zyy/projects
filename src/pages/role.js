@@ -3,7 +3,7 @@
  */
 export default function (to, next)
 {
-	g.net.calls("permission/getRoleListByShop","permission/getPermissionList").then(($list) =>
+	g.net.calls("permission/getRoleListByAdmin","permission/getPermissionList").then(($list) =>
 	{
 		g.data.rolePool.update($list[0]);
 		g.data.powerPool.update($list[1]);

@@ -259,9 +259,8 @@
 				obj.shopId = $data.shopId;
 				obj.logon = $data.logon;
 				g.data.save("userInfo", obj);
-//				g.func.getUnreadMsg('login');
+			//g.func.getUnreadMsg('login');
 				g.event.dispatchEvent("APP_IS_LOGIN");
-
 
 			},
 

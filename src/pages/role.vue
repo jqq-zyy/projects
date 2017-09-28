@@ -9,7 +9,7 @@
 						<div class="right-body">
 							<div class="g-title">权限管理</div>
 							<div class="bar-box role-bar">
-								权限总数：4<span class="pointer border-btn pointer hb-fill-middle2-bg add-role-btn"
+								权限总数：{{roleList.length}}<span class="pointer border-btn pointer hb-fill-middle2-bg add-role-btn"
 											@click="onClick_addRoleBtn">添加</span>
 							</div>
 							<div class="admin-calendar-table">
@@ -23,12 +23,12 @@
 									</tr>
 									</thead>
 									<tbody>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
+									<tr v-for="item in roleList">
+										<td>{{item.roleName}}</td>
+										<td>{{item.permissionDesc}}</td>
+										<td>{{item.createTime}}</td>
 										<td><span class="pointer border-btn hb-fill-middle2-bg role-del-btn"
-												  @click="onClick_delBtn">删除</span>
+												  @click="onClick_delBtn(item.id)">删除</span>
 										</td>
 									</tr>
 									</tbody>
@@ -143,7 +143,7 @@
 			onClick_addRoleBtn(){
 				this.isShow_rolePop = true;
 			},
-			onClick_delBtn(){
+			onClick_delBtn($id){
 				this.isShow_deletePop = true;
 			}
 		}
