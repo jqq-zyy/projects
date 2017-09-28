@@ -5,14 +5,15 @@ import g from '../global';
 export default function (to, next)
 {
 	g.ui.showLoading();
-	g.net.call("/bagdetail", {
-		'ruleType': "",
-		'activityStatus': 0,
-		'activityName': "",
+	var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
+	startTime = g.timeTool.getDate(startTime, true);
+	var endTime = startTime;
+	g.net.call("order/queryRpReceiveList", {
+		'status': 0,
+		'startTime':startTime,
+		'endTime':endTime,
 		'page': 1,
-		'pageSize': g.param.pageSizeList[0],
-		'sortField': "",
-		'sortOrder': ""
+		'pageSize': g.param.pageSizeList[0]
 	}).then(($data) =>
 	{
 		g.ui.hideLoading();

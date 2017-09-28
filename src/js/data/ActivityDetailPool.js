@@ -66,5 +66,12 @@ export default class ActivityDetailPool {
 	{
 		_list = [];
 		_hash = Object.create(null);
+		_totalQrCodeNum = 0;
+		_remainQrCodeNum = 0;
+		_totalMakedAmount = 0;
+		_totalMakedRpCount = 0;
+		_activityInfo = {};
+		_activityRpInfo = {};
+		_activityRules = [];
 	}
 }

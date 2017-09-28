@@ -5,14 +5,10 @@ import g from '../global';
 export default function (to, next)
 {
 	g.ui.showLoading();
+	var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
 	g.net.call("/activity/queryActivityStatisticOverview", {
-		'ruleType': "",
-		'activityStatus': 0,
-		'activityName': "",
 		'page': 1,
 		'pageSize': g.param.pageSizeList[0],
-		'sortField': "",
-		'sortOrder': ""
 	}).then(($data) =>
 	{
 		g.ui.hideLoading();

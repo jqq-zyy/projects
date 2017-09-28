@@ -4,8 +4,8 @@
 export default function (to, next)
 {
 	var id = to.query.id;
-	g.net.call("/getActivityDetail",{
-		"id":id
+	g.net.call("user/queryShopDetail",{
+		"shopId":id
 	}).then(($data) =>
 	{
 		g.data.userDetailPool.update($data);
@@ -15,5 +15,3 @@ export default function (to, next)
 		g.func.dealErr(err);
 	});
 }
-
-

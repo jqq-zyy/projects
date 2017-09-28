@@ -3,17 +3,12 @@
  */
 export default function (to, next)
 {
-	var id = to.query.id;
-	g.net.call("/activity/queryActivityDetail",{
-		"id":id
-	}).then(($data) =>
+	g.net.call("config/loadRuleConfig").then(($data) =>
 	{
-		g.data.activityDetailPool.update($data);
+		g.data.rulePool.update($data)
 		next();
 	}, (err) =>
 	{
 		g.func.dealErr(err);
 	});
 }
-
-

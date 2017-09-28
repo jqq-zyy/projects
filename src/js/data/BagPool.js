@@ -14,7 +14,10 @@ export default class BagPool {
 
 	update($dObj)
 	{
-		$dObj.model.hasOwnProperty('rpAmount') && (_rpAmount = $dObj.model.rpAmount);
+		if($dObj.model){
+			$dObj.model.hasOwnProperty('rpAmount') && (_rpAmount = $dObj.model.rpAmount);
+		}
+
 		$dObj.hasOwnProperty('total') && (_total = $dObj.total);
 		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
 		for (var item of $dObj.data)

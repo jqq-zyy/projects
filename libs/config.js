@@ -10,15 +10,17 @@ var WEB_CONFIG = {
 		data: "{$assets}/data",
 		images: "{$assets}/images",
 		template: "{$assets}/template",
-		libs:"{$domain}/libs"
+		libs: "{$domain}/libs"
 	},
 
 	url: {
 		domain: "",
-//		server: "http://192.168.12.5:8080/rp-mms-web/mms-web",
-		socket: "http://192.168.12.5:8081/rp-mms-web/message",
+		server: "http://192.168.12.4:8085/rp-mms-web-admin/mms-web-admin",
+		socket: "http://192.168.12.4:8085/rp-mms-web-admin/mms-web-admin",
+//		server: "http://192.168.12.5:8082/rp-mms-web-admin/mms-web-admin",
+//		socket: "http://192.168.12.5:8082/rp-mms-web-admin/mms-web-admin",
 		//server: "http://192.168.12.4:8084/mms-web",
-		server: "",
+		//server: "",
 		adminPage: ""
 	},
 
@@ -60,7 +62,7 @@ var WEB_CONFIG = {
 		defaultLang: "cn",
 		loginExpires: 30 * 60,
 		auditRoleId: 5,
-		pageSize:8,
+		pageSize: 8,
 		reg: {
 			'telphone': /^1[34578]\d{9}$/,
 			'emailReg': /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
@@ -70,21 +72,52 @@ var WEB_CONFIG = {
 		upLoadUrl: "",
 		pageSizeList: [10, 25],
 		resetTime: 60,
-		moduleUrl:"https://www.baidu.com/",
-		staffStatusList:["全部", "正常", "冻结"],
-		unLogin:["/sign"],
-		rpPageCount:3
+		moduleUrl: "https://www.baidu.com/",
+		staffStatusList: ["全部", "正常", "冻结"],
+		unLogin: ["/sign"],
+		rpPageCount: 3
 	}
 
 }
 
 var production = Object.create(null);
 
+function calFactor(n)
+{
+	var results = [];
+	factor(n);
+	function factor(n)
+	{
+		if (isPrime(n))
+		{
+			results.push(n);
+			return;
+		}
+		for (var i = 2; i <= Math.ceil(n / 2); i++)
+		{
+			if (n % i == 0)
+			{
+				results.push(i);
+				n = n / i;
+				factor(n);
+				break;
+			}
+		}
+	}
 
-
-
-
-
+	function isPrime(n)
+	{
+		for (var i = 2; i <= Math.ceil(Math.sqrt(n)); i++)
+		{
+			if (n % i == 0)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	return results;
+}
 
 
 

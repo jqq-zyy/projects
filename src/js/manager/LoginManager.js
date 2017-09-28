@@ -24,20 +24,21 @@ function initLocalStorage($callback)
 		//本地缓存未过期
 		isLogin = true;
 
-		g.net.call('user/queryUserIsLogin').then((d) =>
+		g.net.call('user/queryAdminIsLogin').then((d) =>
 		{
 			goLogin(false);
-			g.func.getUnreadMsg($callback);
+			$callback();
+
+
+
+			//g.func.getUnreadMsg($callback);
 		}, (error)=>
 		{
 			//后端未登录
 			logout(true, true);
 			$callback();
 		});
-
-
-
-
+		
 	}
 }
 
@@ -54,7 +55,7 @@ function initLocalStorage($callback)
 export function logout($toLogin = true, $goLogin = false)
 {
 	isLogin = false;
-	g.net.call("user/userLoginOut").then((d)=>
+	g.net.call("user/adminLoginOut").then((d)=>
 	{
 		clearLoginInfo();
 		if ($toLogin)
@@ -122,5 +123,11 @@ function clearLoginInfo()
 	g.data.clear("userInfo");
 	g.data.clearAll();
 }
+
+
+
+
+
+
 
 
