@@ -183,13 +183,7 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
     @import "../css/personlInfo.scss";
     @import "../css/rule.scss";
-    .set-warn{
-        margin-top: 25px;
-        display:flex;
-        /*align-items: center;*/
-        justify-content:space-around;
-
-    }
+    @import "../css/pop.scss";
 </style>
 
 

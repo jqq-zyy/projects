@@ -7,8 +7,8 @@
 		<div class="pop-tit">
 			设置二维码单价
 		</div>
-		<div class="pop-body tree-box">
-			<div class="input-money" style="margin-top: 25px">
+		<div class="pop-body set-code-price">
+			<div class="input-money m-title">
 				<span class="count">数量：</span>
 
 				<div class="count-set" v-for="item in dataList">
@@ -30,9 +30,9 @@
 
 			</div>
 			<p class="count-tips">请输入有效数量</p>
-			<div>
-				<div class="button hb-fill-middle2-bg">取消</div>
-				<div class="button hb-fill-middle2-rev">保存</div>
+			<div class="m-title button-box">
+				<div class="button pointer border-btn hb-fill-middle2-bg">取消</div>
+				<div class="button pointer bg-btn hb-fill-middle2-rev">保存</div>
 			</div>
 		</div>
 	</div>
