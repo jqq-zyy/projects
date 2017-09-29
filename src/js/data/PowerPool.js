@@ -35,7 +35,7 @@ export default class PowerPool {
 			if(itemData.menuLevel ==1){
 				_list.push(itemData);
 			}else{
-				_hash[itemData.supMenuID].childNode.push(itemData);
+				_hash[itemData.supMenuID].children.push(itemData);
 			}
 
 //
@@ -63,10 +63,10 @@ function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
-	d.menuName = "";
+	d.name = "";
 	d.supMenuID = "";
 	d.menuLevel = 0;
-	d.childNode = [];
+	d.children = [];
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -75,7 +75,7 @@ function createData($dObj)
 function updateData($dObj)
 {
 	$dObj.hasOwnProperty('permissionId') && (this.id = $dObj.permissionId);
-	$dObj.hasOwnProperty('permissionName') && (this.menuName = $dObj.permissionName);
+	$dObj.hasOwnProperty('permissionName') && (this.name = $dObj.permissionName);
 	$dObj.hasOwnProperty('parentId') && (this.supMenuID = $dObj.parentId);
 	$dObj.hasOwnProperty('catalogLevel') && (this.menuLevel = $dObj.catalogLevel);
 }

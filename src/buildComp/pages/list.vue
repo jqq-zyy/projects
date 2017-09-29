@@ -1,8 +1,6 @@
 <template>
 	<div>
-		<!--<hw-list :listData="dataList" :checkedList="checkedList" :showArrow="true" @change="onChange_list"></hw-list>-->
-		<hw-tree-menu :data="data" @change="onChange_treeMenu" :showArrow="true">
-		</hw-tree-menu>
+		<hw-list :listData="listData" :checkedList="checkedList" :showArrow="true" @change="onChange_list"></hw-list>
 	</div>
 </template>
 <script type="text/ecmascript-6">
@@ -14,8 +12,7 @@
 		data(){
 			return {
 				g: g,
-
-				dataList: [
+				listData: [
 					{
 						id: "No1-1",
 						name: "test",
@@ -400,10 +397,6 @@
 			onChange_list($data)
 			{
 				trace(JSON.stringify($data, null, 4));
-			},
-			onChange_treeMenu($data)
-			{
-				trace('onChange_treeMenu', JSON.stringify($data, null, 4))
 			}
 		}
 	}

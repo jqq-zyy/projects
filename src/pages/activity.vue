@@ -197,7 +197,7 @@
 									</tr>
 									</tbody>
 									<tfoot>
-									<tr>
+									<tr v-show="activityList.length>0">
 										<td colspan="7"></td>
 										<td>{{resultTotalObj.totalQrCodeNum}}</td>
 										<td>{{resultTotalObj.totalScanCount}}</td>

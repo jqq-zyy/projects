@@ -195,7 +195,7 @@
 									</tr>
 									</tbody>
 									<tfoot>
-									<tr>
+									<tr v-show="userList.length>0">
 										<td colspan="7"></td>
 										<td>{{modelObj.shopAllAmount}}</td>
 										<td>{{modelObj.platformAllAmount}}</td>
@@ -208,6 +208,12 @@
 										<td>{{modelObj.qrcodeRefundAllNum}}</td>
 										<td>{{modelObj.rpAllCurrentAccount}}</td>
 										<td></td>
+
+
+
+
+
+
 									</tr>
 									</tfoot>
 								</table>

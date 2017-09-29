@@ -44,6 +44,9 @@ export default class UserDetailPool {
 	{
 		return _hash;
 	}
+	removeAll(){
+		 _hash = Object.create(null);
+	}
 
 }
 

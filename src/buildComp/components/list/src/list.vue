@@ -11,7 +11,8 @@
 						:iconClass="checkedChildren.indexOf(itemData.id) >= 0?'icon-fangxingxuanzhong':'icon-fangxingweixuanzhong'"
 						@click="onClick_icon(itemData)"
 				></hw-icon>
-				<span>{{itemData.name}}</span>
+				<span v-if="itemData.name" @click="onClick_icon(itemData)">{{itemData.name}}</span>
+				<img :src="itemData.url" :alt="itemData.alt" v-if="itemData.url">
 			</div>
 			<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft">
 				<list-item :data="child" v-for="child in itemData.children" :showArrow="showArrow"
@@ -29,7 +30,7 @@
 	export default{
 		name: "hw-list",
 		created(){
-			this.list = this.dataList;
+			this.list = this.listData;
 			this.checkedChildren = this.checkedList;
 			for (var item of this.list)
 			{
@@ -39,13 +40,13 @@
 		data(){
 			return {
 				currIdList: [],
-				list: this.dataList,
+				list: this.listData,
 				tmpItem: {},
 				checkedChildren: this.checkedList
 			}
 		},
 		props: {
-			dataList: {
+			listData: {
 				type: Array,
 				default: function ()
 				{

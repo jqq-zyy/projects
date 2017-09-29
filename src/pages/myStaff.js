@@ -11,15 +11,7 @@ export default function (to, next)
 		'sortOrder': 'desc'
 	};
 	getEmployeeList(obj, next)
-
-
-
-
-
-
-
-
-
+	
 }
 export function getEmployeeList($obj, $callBack)
 {

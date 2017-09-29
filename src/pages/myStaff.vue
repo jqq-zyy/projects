@@ -39,8 +39,8 @@
 												<span class="pointer border-btn hb-fill-middle2-bg role-del-btn"
 													  @click="onClick_editBtn(item.id)">编辑</span>
 												<span class="pointer bg-btn hb-fill-middle2-rev role-del-btn"
-													  v-text=staffCurrentStatus(item.userStatus)
-													  @click="onClick_changeType(item.id,item.userStatus)">冻结</span>
+													  v-text="staffCurrentStatus(item.userStatus)"
+													  @click="onClick_changeType(item.id,item.userStatus)"></span>
 											</td>
 
 										</tr>
@@ -65,51 +65,47 @@
 					<div class="pop-edit-password pop-edit" ref="modPwdBox">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn('modPwd')" />
+								 @click="onClick_closeBtn()" />
 						</div>
-						<div class="pop-tit">
+						<div class="pop-tit" v-show="isAdd">
 							添加员工
 						</div>
-						<div class="pop-tit" v-show="">
+						<div class="pop-tit" v-show="!isAdd">
 							编辑员工
 						</div>
 						<div class="pop-body">
 							<div class="m-title">
 								<span class="name ">用户名：</span>
-								<input type="text"
-									   placeholder="">
+								<input type="text" v-model="staffObj.logon">
 							</div>
 							<div class="m-title">
 								<span class="name">手机号：</span>
-								<input class="input-code" type="text"
-									   placeholder="">
+								<input class="input-code" type="text" v-model = "staffObj.telphone">
 							</div>
 							<div class="m-title">
 								<span class="name">权限：</span>
 								<div class="m-drop" @click="onClick_roleList">
+									{{roleName}}
 									<span :class="['drop-icon',isShow_roleList?'rotate':'']"></span>
 									<ul class="drop-list" v-show="isShow_roleList">
-										<li>123</li>
-										<li>123</li>
-										<li>123</li>
-										<li>123</li>
-										<li>123</li>
-										<li>123</li>
+										<li v-for="item in roleList"
+											@click="onClick_roleItem(item.id,item.roleName)">
+											{{item.roleName}}
+										</li>
 									</ul>
 								</div>
 							</div>
-							<div class="m-title">
+							<div class="m-title" v-show="isAdd">
 								<span class="name">初始密码：</span>
 								<span>888888</span>
 							</div>
-							<div class="m-title" v-show="">
+							<div class="m-title" v-show="!isAdd">
 								<span class="name">密码：</span>
-								<input class="input-code" type="text"
-									   placeholder="">
+								<input class="input-code" type="text" v-model="confirmPwd">
 							</div>
 							<div class="m-title button-box">
-								<span class="pointer button border-btn hb-fill-middle2-bg">取消</span>
-								<span class="button pointer cancel-btn bg-btn hb-fill-middle2-rev">保存</span>
+								<span class="pointer button border-btn hb-fill-middle2-bg"  @click="onClick_closeBtn">取消</span>
+								<span class="button pointer cancel-btn bg-btn hb-fill-middle2-rev" @click="onClick_confirmBtn" >保存</span>
 							</div>
 						</div>
 
@@ -149,8 +145,9 @@
 				totalStaffNum: 0,
 				roleList: [],
 				roleName: "请选择",
-				staffObj: {}
-
+				staffObj: {},
+				isAdd:false,
+				confirmPwd:""
 			}
 		},
 		components: {
@@ -177,6 +174,7 @@
 				this.staffObj = {
 					"logon": "",
 					"roleId": "",
+					"telphone":"",
 					"password": sha256(888888)
 				}
 			},
@@ -220,7 +218,7 @@
 					typeDesc = "正常"
 				}
 
-				g.net.call("user/updateEmployeeFreeze", {
+				g.net.call("user/updateAdminFreeze", {
 					'userId': $id,
 					'userStatus': type
 				}).then(($data) =>
@@ -236,15 +234,33 @@
 
 			},
 			onClick_addBtn(){
-//				if (g.data.powerPool.list.length > 0)
-//				{
-//					this.initRole();
-//				}
-//				this.initAddData();
-				getRoleList(this.initRole);
-//				this.confirmPwd = "";
-//				this.roleName = "请选择";
+				this.isAdd = true
+				if (g.data.powerPool.list.length > 0)
+				{
+					this.initRole();
+				}else{
+					getRoleList(this.initRole);
+				}
+				this.initAddData();
+				this.roleName = "请选择";
+				this.isShow_addStaffPop = true;
 
+			},
+			onClick_editBtn($id){
+				this.isAdd = false;
+				if (g.data.powerPool.list.length > 0)
+				{
+					this.initRole();
+				}else{
+					getRoleList(this.initRole);
+				}
+				var staffObj = g.data.staffPool.getDataById($id)
+				this.staffObj.logon = staffObj.userName;
+				this.staffObj.roleId = staffObj.roleId;
+				this.staffObj.telphone = staffObj.telphone;
+				this.staffObj.userId = $id;
+				this.staffObj.password = "";
+				this.roleName = staffObj.roleName;
 				this.isShow_addStaffPop = true;
 			},
 			onClick_closeBtn(){
@@ -254,13 +270,30 @@
 			onClick_confirmBtn(){
 				for (var key in this.staffObj)
 				{
+					if(key=="password"&&!this.isAdd){
+						continue
+					}
 					if (this.staffObj[key] == "")
 					{
 						g.ui.toast("请填写全部信息");
-
 						return
 					}
 				}
+				if (!g.param.reg.telphone.test(this.staffObj.telphone))
+				{
+					g.ui.toast('请填写正确格式的手机');
+					return;
+				}
+				if(this.isAdd){
+					this.onConfirm_addUser()
+				}else{
+					if(this.confirmPwd){
+						this.staffObj.password = sha256(this.confirmPwd);
+					}
+					this.onConfirm_editUser()
+				}
+			},
+			onConfirm_addUser(){
 				g.net.call("user/addAdminUser", this.staffObj).then(($data) =>
 				{
 					this.isShow_addStaffPop = false;
@@ -270,6 +303,22 @@
 				{
 					g.func.dealErr(err);
 				});
+			},
+			onConfirm_editUser(){
+				g.net.call("user/updateAdminUser", this.staffObj).then(($data) =>
+				{
+					this.isShow_addStaffPop = false;
+					this.initSearchData();
+					this.onUpdate_orderList();
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				});
+			},
+			onClick_roleItem($id, $name){
+				this.staffObj.roleId = $id;
+				this.roleName = $name;
+				this.isShow_FunctionList = false;
 			},
 			onClick_roleList(){
 				this.isShow_roleList = !this.isShow_roleList;
@@ -283,6 +332,10 @@
 				{
 					return "解冻"
 				}
+
+
+
+
 			}
 		}
 	}

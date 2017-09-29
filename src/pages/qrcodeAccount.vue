@@ -174,8 +174,9 @@
 									</tr>
 									</tbody>
 									<tfoot>
-									<tr>
+									<tr v-show="qrcodeList.length>0">
 										<td colspan="2"></td>
+
 										<td>{{resultTotalObj.qrcodeNum}}</td>
 										<td></td>
 										<td>{{resultTotalObj.qrcodeAmount}}</td>

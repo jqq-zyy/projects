@@ -11,7 +11,7 @@
 					@click="onClick_icon(itemData)"
 			></hw-icon>
 
-			<span>{{itemData.name}}</span>
+			<span @click="onClick_icon(itemData)">{{itemData.name}}</span>
 		</div>
 		<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft">
 			<list-item :data="child" v-for="child in itemData.children" :showArrow="showArrow" :checkedList="checkedChildren"

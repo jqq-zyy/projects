@@ -6,7 +6,6 @@
 				<span class="top-list pointer">统一食品{{shopName}}</span>
 				<img class="m-right" :src="g.config.path.images+'/icon-drop.png'" alt="">
 				<div class="admin pointer" v-show="isShow_signOut">
-					<div @click="onClick_modPwdBtn" >{{g.lang("修改密码")}}</div>
 					<div @click="onClick_modInfoBtn" >{{g.lang("账户信息")}}</div>
 				</div>
 			</div>
@@ -68,13 +67,14 @@
 
 			onClick_loginOutBtn: function ()
 			{
-				g.net.call("user/userLoginOut").then((d)=>
+				g.net.call("user/adminLoginOut").then((d)=>
 				{
 					LoginManager.logout(true, true);
 				}, (err)=>
 				{
 					g.func.dealErr(err);
 				});
+
 
 			},
 			onClick_modPwdBtn(){
@@ -123,7 +123,6 @@
 	.admin div:hover {
 		background: #cccccc;
 	}
-
 	.new-message-box {
 		min-width: 250px;
 		font-size: 12px;

@@ -21,6 +21,7 @@ export default class UserPool {
 	{
 	}
 
+
 	update($obj)
 	{
 		var model = $obj.model;
@@ -130,6 +131,18 @@ export default class UserPool {
 	{
 		_list = [];
 		_hash = Object.create(null);
+		_total = 0;
+		_totalPage = 0;
+		_shopAllAmount = 0;
+		_platformAllAmount = 0;
+		_rpSendAllNum = 0;
+		_qrcodeScanAllNum = 0;
+		_qrcodeBindAllNum = 0;
+		_qrcodeExportAllNum = 0;
+		_qrcodeUnExportAllNum = 0;
+		_qrcodeBuyAllNum = 0;
+		_qrcodeRefundAllNum = 0;
+		_rpAllCurrentAccount = 0;
 	}
 }
 

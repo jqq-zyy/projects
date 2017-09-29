@@ -79,8 +79,11 @@ export default class MessagePool {
 	removeAll()
 	{
 		_list = [];
+		_unReadlist = [];
 		_hash = Object.create(null);
 		_totalPage = 0;
+		_unreadCount = 0;
+		_readCount = 0;
 	}
 }
 

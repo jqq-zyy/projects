@@ -14,7 +14,7 @@ export default function (to, next)
 	});
 }
 export function getRoleList($callback){
-	g.net.call("permission/getRoleListByShop").then(($obj) =>
+	g.net.call("permission/getRoleListByAdmin").then(($obj) =>
 	{
 		g.data.rolePool.update($obj);
 		$callback();
@@ -22,4 +22,5 @@ export function getRoleList($callback){
 	{
 		g.func.dealErr(err);
 	});
+	
 }
