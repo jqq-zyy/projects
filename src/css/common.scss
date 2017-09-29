@@ -416,7 +416,9 @@ li, ul {
   color: #ffffff;
   border-radius: 2px;
 }
-
+.bg-btn:hover{
+  color:#0582b5;
+}
 .position {
   position: relative;
 }
@@ -708,6 +710,13 @@ li, ul {
 	  .date-from {
 		position: relative;
 		float: left;
+		.date-del {
+		  position: absolute;
+		  right: 10px;
+		  top: 2px;
+		  cursor: pointer;
+		  color: #333333;
+		}
 	  }
 	  .date-input {
 		width: 145px;
@@ -723,7 +732,7 @@ li, ul {
 	  float: left;
 	  position: relative;
 	  border-radius: 2px;
-	  width: 220px;
+	  width: 270px;
 	  height: 38px;
 	  padding-left: 18px;
 	  line-height: 38px;
@@ -739,8 +748,8 @@ li, ul {
 		width: 8px;
 		top: 12px;
 		display: block;
-		border-left: 2px solid #333;
-		border-bottom: 2px solid #333;
+		border-left: 2px solid #333333;
+		border-bottom: 2px solid #333333;
 		transform: rotate(-45deg);
 	  }
 	  .rotate {
@@ -774,7 +783,7 @@ li, ul {
 	  margin: 0 10px;
 	}
 	.search-input {
-	  width: 220px;
+	  width: 270px;
 	  height: 38px;
 	  line-height: 38px;
 	  border: 1px solid #dbdee7;
@@ -821,9 +830,11 @@ li, ul {
   margin-right: 40px;
   float: left;
 }
-.data-margin-end{
+
+.data-margin-end {
   margin-right: 0;
 }
+
 @media screen and (max-width: 1650px) {
   div.bar-box {
 	.bar-bottom {

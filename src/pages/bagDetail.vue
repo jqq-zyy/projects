@@ -31,29 +31,31 @@
 									</ul>
 								</div>
 								<div class="bar-bottom">
+									<div class="date-margin">
+										<div class="date-box">
+											<span class="creat-time">创建时间：从</span>
+											<div class="date-from">
+												<input type="text" class="startTime date-input pointer"
+													   v-model="date.startTimeStr"
+													   readonly="true"
+													   @click.stop="onClick_showCalendar('start')">
+												<hw-date type="date" skin="simple" @change="onClick_chooseDateStart"
+														 v-model="isShowStartTime"></hw-date>
+											</div>
+										</div>
+										<span class="goto">至</span>
+										<div class="date-box">
+											<div class="date-from">
+												<input type="text" class="endTime date-input pointer"
+													   v-model="date.endTimeStr"
+													   readonly="true" @click.stop="onClick_showCalendar('end')">
+												<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd"
+														 v-model="isShowEndTime"></hw-date>
+											</div>
 
-									<div class="date-box">
-										<span class="creat-time">创建时间：从</span>
-										<div class="date-from">
-											<input type="text" class="startTime date-input pointer"
-												   v-model="date.startTimeStr"
-												   readonly="true"
-												   @click.stop="onClick_showCalendar('start')">
-											<hw-date type="date" skin="simple" @change="onClick_chooseDateStart"
-													 v-model="isShowStartTime"></hw-date>
 										</div>
 									</div>
-									<span class="goto">至</span>
-									<div class="date-box">
-										<div class="date-from">
-											<input type="text" class="endTime date-input pointer"
-												   v-model="date.endTimeStr"
-												   readonly="true" @click.stop="onClick_showCalendar('end')">
-											<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd"
-													 v-model="isShowEndTime"></hw-date>
-										</div>
 
-									</div>
 									<div class="drop-box pointer" @click.stop="onClick_dropListBtn">
 										<div @click.stop="onClick_dropListBtn">
 											{{currentSearchType}}
@@ -65,7 +67,7 @@
 											</li>
 										</ul>
 									</div>
-									<input type="text" v-model="inputContent" class="search-input" >
+									<input type="text" v-model="inputContent" class="search-input">
 									<span class="btn pointer search-btn border-btn hb-fill-middle2-bg"
 										  @click="onClick_searchBtn">查找</span>
 								</div>
@@ -245,7 +247,7 @@
 						id: "activityName",
 						name: '活动名称'
 					}, {
-						id:"companyFullName",
+						id: "companyFullName",
 						name: '企业全称'
 					}
 				],

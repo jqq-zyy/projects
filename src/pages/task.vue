@@ -8,27 +8,28 @@
 					<div class="admin-data-items">
 
 						<div class="right-body ">
-							<p class="g-title">
-
-								{{g.lang("修改密码")}}
-							</p>
-							<div class="mod-right-body">
-								<div class="mod-info">
-									<span class="title">{{g.lang("当前密码")}}:</span>
-									<input type="password" v-model="oldPwd">
-								</div>
-								<div class="mod-info">
-									<span class="title">{{g.lang("新密码")}}:</span>
-									<input type="password" v-model="newPwd">
-								</div>
-								<div class="mod-info">
-									<span class="title">{{g.lang("确认新密码")}}:</span>
-									<input type="password" v-model="confirmPwd">
-								</div>
-								<div class="mod-info pointer">
-									<span class="button save-mod bg-btn" @click="onClick_saveBtn">{{g.lang("保存修改")
-										}}</span>
-								</div>
+							<p class="g-title">待办任务</p>
+							<div class="admin-calendar-table">
+								<table>
+									<thead>
+									<tr>
+										<th>任务类型</th>
+										<th><span>|</span>申请用户</th>
+										<th><span>|</span>申请时间</th>
+										<th><span>|</span>企业全称</th>
+										<th><span>|</span>操作</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><span class="button pointer border-btn">处理</span></td>
+									</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 						<common-footer></common-footer>
@@ -102,42 +103,4 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common.scss";
 </style>
-<style lang="sass" type="text/scss" rel="stylesheet/scss">
 
-	div.mod-right-body {
-		background: #ffffff;
-		border: 1px solid #dbdee7;
-		border-radius: 4px;
-		.mod-info {
-			margin: 30px auto 0;
-			width: 500px;
-
-			/*overflow: hidden;*/
-			.title {
-				width: 90px;
-				display: inline-block;
-				text-align: right;
-				line-height: 40px;
-				/*float: left;*/
-				margin-right: 15px;
-			}
-			input {
-				width: 370px;
-				height: 40px;
-				line-height: 40px;
-				outline: none;
-				border: 1px solid #dbdee7;
-				border-radius: 4px;
-				padding-left: 20px;
-				/*float: left;*/
-			}
-		}
-		.save-mod {
-			width: 112px;
-			height: 40px;
-			line-height: 40px;
-			margin: 0 auto 30px;
-			display: block;
-		}
-	}
-</style>
