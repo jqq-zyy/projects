@@ -43,9 +43,9 @@ div.mint-popup {
   cursor: pointer;
   z-index: 2;
   img {
-	float: left;
-	width: 32px;
-	height: 32px;
+    float: left;
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -67,159 +67,169 @@ div.mint-popup {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   .pop-body {
-	padding: 2px 50px 30px;
-	overflow: hidden;
-	box-sizing: border-box;
-	.m-title {
-	  margin-top: 20px;
-	  line-height: 40px;
-	  color: #4a4a4a;
-	  //overflow: hidden;
-	  input {
-		width: 370px;
-		height: 40px;
-		font-size: 14px;
-		line-height: 40px;
-		text-align: justify;
-		border: 1px solid #dbdee7;
-		border-radius: 2px;
-		color: #979797;
-	  }
-	  .multiple {
-		width: 100px;
-	  }
-	  .out-form {
-		width: 578px;
-		margin: 0 auto 22px;
-		.out-name {
-		  width: 152px;
-		  display: inline-block;
-		  text-align: right;
-		  font-weight: bold;
-		  color: #4a4a4a;
-		  font-size: 18px;
-		}
-		input {
-		  width: 370px;
-		  height: 40px;
-		  font-size: 14px;
-		  line-height: 40px;
-		  padding: 0 20px;
-		  text-align: justify;
-		  border: 1px solid #d0d3dc;
-		  border-radius: 4px;
-		  color: #979797;
-		}
-		.out-tip {
-		  margin-left: 152px;
-		  height: 24px;
-		  line-height: 24px;
-		}
-	  }
-	  .m-name {
-		display: inline-block;
-		font-size: 18px;
-		text-align: right;
-		font-weight: bold;
-	  }
-	  .name {
-		width: 85px;
-		float: left;
-		color: #4a4a4a;
-		text-align: right;
-	  }
-	  .buy-number {
-		width: 370px;
-		height: 40px;
-		font-size: 20px;
-		line-height: 40px;
-		padding-left: 20px;
-		border: 1px solid #d0d3dc;
-		border-radius: 4px;
-		color: #a4a4a4;
-	  }
-	  .code-price {
-		font-size: 14px;
-		color: #979797;
-		margin-left: 25px;
-		font-weight: 600;
-	  }
-	  .m-money {
-		font-size: 28px;
-	  }
-	  .m-note {
-		padding-left: 100px;
-		font-size: 12px;
-		color: #5cbb69;
-		line-height: 14px;
-	  }
-	  .m-drop {
-		position: relative;
-		width: 330px;
-		height: 40px;
-		float: left;
-		line-height: 40px;
-		border: 1px solid #dbdee7;
-		padding: 0 20px;
-		border-radius: 2px;
-		.drop-list {
-		  width: 100%;
-		  background: #ffffff;
-		  border: 1px solid #d0d3dc;
-		  position: absolute;
-		  top: 100%;
-		  left: -1px;
-		  z-index: 9999;
-		  max-height: 120px;
-		  overflow-y: auto;
-		  li {
-			padding-left: 20px;
-		  }
-		  li:hover {
-			background: #d0d3dc;
-		  }
-		}
-	  }
+    padding: 2px 50px 30px;
+    overflow: hidden;
+    box-sizing: border-box;
+    .m-title {
+      margin-top: 20px;
+      line-height: 40px;
+      color: #4a4a4a;
+      overflow: auto;
+      .push-line {
+        display: inline-block;
+        width:15px;
+        height:15px;
+        text-align: center;
+        line-height: 15px;
+        border:1px solid #eee;
+        margin-left:2px;
+        margin-right:2px;
+      }
+      input {
+        width: 370px;
+        height: 40px;
+        font-size: 14px;
+        line-height: 40px;
+        text-align: justify;
+        border: 1px solid #dbdee7;
+        border-radius: 2px;
+        color: #979797;
+      }
+      .multiple {
+        width: 100px;
+      }
+      .out-form {
+        width: 578px;
+        margin: 0 auto 22px;
+        .out-name {
+          width: 152px;
+          display: inline-block;
+          text-align: right;
+          font-weight: bold;
+          color: #4a4a4a;
+          font-size: 18px;
+        }
+        input {
+          width: 370px;
+          height: 40px;
+          font-size: 14px;
+          line-height: 40px;
+          padding: 0 20px;
+          text-align: justify;
+          border: 1px solid #d0d3dc;
+          border-radius: 4px;
+          color: #979797;
+        }
+        .out-tip {
+          margin-left: 152px;
+          height: 24px;
+          line-height: 24px;
+        }
+      }
+      .m-name {
+        display: inline-block;
+        font-size: 18px;
+        text-align: right;
+        font-weight: bold;
+      }
+      .name {
+        width: 85px;
+        float: left;
+        color: #4a4a4a;
+        text-align: right;
+      }
+      .buy-number {
+        width: 370px;
+        height: 40px;
+        font-size: 20px;
+        line-height: 40px;
+        padding-left: 20px;
+        border: 1px solid #d0d3dc;
+        border-radius: 4px;
+        color: #a4a4a4;
+      }
+      .code-price {
+        font-size: 14px;
+        color: #979797;
+        margin-left: 25px;
+        font-weight: 600;
+      }
+      .m-money {
+        font-size: 28px;
+      }
+      .m-note {
+        padding-left: 100px;
+        font-size: 12px;
+        color: #5cbb69;
+        line-height: 14px;
+      }
+      .m-drop {
+        position: relative;
+        width: 330px;
+        height: 40px;
+        float: left;
+        line-height: 40px;
+        border: 1px solid #dbdee7;
+        padding: 0 20px;
+        border-radius: 2px;
+        .drop-list {
+          width: 100%;
+          background: #ffffff;
+          border: 1px solid #d0d3dc;
+          position: absolute;
+          top: 100%;
+          left: -1px;
+          z-index: 9999;
+          max-height: 120px;
+          overflow-y: auto;
+          li {
+            padding-left: 20px;
+          }
+          li:hover {
+            background: #d0d3dc;
+          }
+        }
+      }
 
-	  .m-icon {
-		width: 42px;
-		height: 40px;
-		display: inline-block;
-		border: 1px solid #d0d3dc;
-		border-top: none;
-		border-bottom: none;
-		line-height: 40px;
-		margin-left: -6px;
-		text-align: center;
-		float: right;
-		.m-rotete {
-		  transition: transform .2s;
-		  transform: rotate(0deg);
-		}
-		.rotate {
-		  transition: transform .2s;
-		  transform: rotate(180deg);
-		}
-	  }
-	  .out-total {
-		text-align: center;
-	  }
-	}
-	.m-title::before {
-	  content: ".";
-	  height: 0;
-	  font-size: 0;
-	  clear: both;
-	}
+      .m-icon {
+        width: 42px;
+        height: 40px;
+        display: inline-block;
+        border: 1px solid #d0d3dc;
+        border-top: none;
+        border-bottom: none;
+        line-height: 40px;
+        margin-left: -6px;
+        text-align: center;
+        float: right;
+        .m-rotete {
+          transition: transform .2s;
+          transform: rotate(0deg);
+        }
+        .rotate {
+          transition: transform .2s;
+          transform: rotate(180deg);
+        }
+      }
+      .out-total {
+        text-align: center;
+      }
+    }
+    .m-title::before {
+      content: ".";
+      height: 0;
+      font-size: 0;
+      clear: both;
+    }
 
-	.text-center {
-	  text-align: center;
-	}
-	.button-box {
-	  display: flex;
-	  align-items: center;
-	  justify-content: center;
-	}
+    .text-center {
+      text-align: center;
+    }
+    .button-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
 }
@@ -227,65 +237,65 @@ div.mint-popup {
 div.reset-pop {
   width: 878px;
   .reset-body {
-	width: 381px;
-	margin: 30px auto 25px;
-	padding: 0;
-	.m-title {
-	  position: relative;
-	  font-size: 14px;
-	  input {
-		width: 280px;
-		height: 40px;
-		line-height: 40px;
-		border: 1px solid #dbdee7;
-		border-radius: 4px;
-	  }
-	  .input-code {
-		width: 242px;
-	  }
-	  .confirm-btn {
-		width: 112px;
-		height: 40px;
-		line-height: 40px;
-		text-align: center;
-		display: block;
-		margin: auto;
-	  }
-	  .get-code {
-		position: absolute;
-		right: 0;
-		top: 0;
-		height: 42px;
-		border-radius: 4px;
-		line-height: 42px;
-		text-align: center;
-		width: 112px;
-		background: #01aaef;
-		color: #ffffff;
-	  }
-	  .get-code:hover {
-		background: #0886ba;
-	  }
-	  .login, .agree {
-		float: left;
-		font-size: 12px;
-		color: #979797;
-	  }
-	  .agree {
-		float: right;
-	  }
-	  .success-text {
-		margin: 75px 0;
-		text-align: center;
-		font-size: 36px;
-		color: #01aaef;
-		font-weight: 500;
-	  }
-	}
-	.err-msg {
-	  padding-left: 113px;
-	  line-height: 20px;
-	}
+    width: 381px;
+    margin: 30px auto 25px;
+    padding: 0;
+    .m-title {
+      position: relative;
+      font-size: 14px;
+      input {
+        width: 280px;
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid #dbdee7;
+        border-radius: 4px;
+      }
+      .input-code {
+        width: 242px;
+      }
+      .confirm-btn {
+        width: 112px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        display: block;
+        margin: auto;
+      }
+      .get-code {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 42px;
+        border-radius: 4px;
+        line-height: 42px;
+        text-align: center;
+        width: 112px;
+        background: #01aaef;
+        color: #ffffff;
+      }
+      .get-code:hover {
+        background: #0886ba;
+      }
+      .login, .agree {
+        float: left;
+        font-size: 12px;
+        color: #979797;
+      }
+      .agree {
+        float: right;
+      }
+      .success-text {
+        margin: 75px 0;
+        text-align: center;
+        font-size: 36px;
+        color: #01aaef;
+        font-weight: 500;
+      }
+    }
+    .err-msg {
+      padding-left: 113px;
+      line-height: 20px;
+    }
 
   }
 }
@@ -294,13 +304,13 @@ div.reset-pop {
   width: 640px;
   height: 260px;
   .reset-success-body {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: center;
-	img {
-	  margin-bottom: 30px;
-	}
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    img {
+      margin-bottom: 30px;
+    }
 
   }
 }
@@ -322,37 +332,49 @@ div.reset-pop {
 
 .pop-edit .set-code-price {
   .count {
-	float: left;
+    float: left;
   }
   .count-set {
-	float: left;
-	width: 90%;
-	margin-left: 9%;
-	margin-bottom: 25px;
-	&:nth-of-type(1) {
-	  margin-left: 0;
-	}
-	.count-left, .count-right {
-	  width: 50%;
-	  float: left;
-	  input {
-		width: 80px;
-		height: 36px;
+    float: left;
+    width: 90%;
+    margin-left: 9%;
+    margin-bottom: 25px;
+    &:nth-of-type(1) {
+      margin-left: 0;
+    }
+    .count-left, .count-right {
+      width: 48%;
+      float: left;
+      input {
+        width: 80px;
+        height: 36px;
 
-	  }
-	}
+      }
+    }
+    .count-left {
+      width: 42%;
+    }
   }
   .count-tips {
-	color: #f2687a;
-	text-align: center;
+    color: #f2687a;
+    text-align: center;
   }
 }
 
-.set-warn{
-  display:flex;
+.set-warn {
+  display: flex;
   //justify-content:space-around;
-  label{
-	width: 50%;
-	text-align: center;
+  label {
+    width: 50%;
+    text-align: center;
   }
+}
+
+.save-mod {
+  padding: 0 20px;
+  margin: auto;
+  display: block;
+  height: 42px;
+  line-height: 42px;
+  width: 80px;
 }

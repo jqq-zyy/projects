@@ -324,7 +324,7 @@
 				this.isShow_roleList = !this.isShow_roleList;
 			},
 			staffCurrentStatus($status){
-				if (status == 1)
+				if ($status == 1)
 				{
 					return "冻结"
 				}
@@ -332,9 +332,6 @@
 				{
 					return "解冻"
 				}
-
-
-
 
 			}
 		}

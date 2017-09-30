@@ -1,33 +1,36 @@
 <template>
 	<div class="model-header">
 		<div class="show-right-content">
-			<div class="user-choose-type" @click="onClick_adminBtn">
-				<img class="pointer  head-img" :src="g.config.path.images+'/head.png'" alt="">
-				<span class="top-list pointer">统一食品{{shopName}}</span>
-				<img class="m-right" :src="g.config.path.images+'/icon-drop.png'" alt="">
-				<div class="admin pointer" v-show="isShow_signOut">
-					<div @click="onClick_modInfoBtn" >{{g.lang("账户信息")}}</div>
-				</div>
-			</div>
 			<div class="user-choose-type pointer" @click="onClick_promptBtn">
-				<span>消息通知</span>
+				<span>待办任务</span>
 				<span class="msg" v-show="num>0"></span>
 				<img :src="g.config.path.images+'/message.png'" alt="">
 				<!--<div class="new-message-box">-->
-					<!--<div class="horn"></div>-->
-					<!--<span class="message-title">系统公告({{num}})</span>-->
-					<!--<ul class="message-title-box">-->
-						<!--<li v-for="item in unReadList" @click="onClick_itemMsg(item.id)">-->
-							<!--<span class="float-left">{{item.title}}</span>-->
-							<!--<span class="float-right">{{item.time}}</span>-->
-						<!--</li>-->
+				<!--<div class="horn"></div>-->
+				<!--<span class="message-title">系统公告({{num}})</span>-->
+				<!--<ul class="message-title-box">-->
+				<!--<li v-for="item in unReadList" @click="onClick_itemMsg(item.id)">-->
+				<!--<span class="float-left">{{item.title}}</span>-->
+				<!--<span class="float-right">{{item.time}}</span>-->
+				<!--</li>-->
 
-					<!--</ul>-->
-					<!--<div class="check-btn">查看全部信息</div>-->
+				<!--</ul>-->
+				<!--<div class="check-btn">查看全部信息</div>-->
 				<!--</div>-->
 			</div>
-			<div class="user-choose-type">
-				<span @click="onClick_loginOutBtn">{{g.lang("安全退出")}}</span>
+			<div class="user-choose-type" @click="onClick_adminBtn">
+				<!--<img class="pointer  head-img" :src="g.config.path.images+'/head.png'" alt="">-->
+				<span class="top-list pointer">个人</span>
+				<!--<span class="right drop-icon"></span>-->
+				<!--<img class="m-right" :class="[isShow_signOut?'rotate1':'']" :src="g.config.path.images+'/icon-drop.png'" alt="">-->
+				<!--<div class="admin pointer" v-show="isShow_signOut">-->
+					<!--<div @click="onClick_modPwdBtn" >{{g.lang("修改密码")}}</div>-->
+					<!--<div @click="onClick_modInfoBtn" >{{g.lang("账户信息")}}</div>-->
+				<!--</div>-->
+			</div>
+
+			<div class="user-choose-type pointer" @click="onClick_loginOutBtn">
+				<span >{{g.lang("安全退出")}}</span>
 				<img class="pointer m-right" :src="g.config.path.images+'/back.png'" alt="">
 			</div>
 		</div>
@@ -84,19 +87,20 @@
 				g.url = ("/personal");
 			},
 			onClick_adminBtn(){
-				if (this.isShow_signOut)
-				{
-					this.isShow_signOut = false;
-				}
-				else
-				{
-					this.isShow_signOut = true;
-				}
+//				if (this.isShow_signOut)
+//				{
+//					this.isShow_signOut = false;
+//				}
+//				else
+//				{
+//					this.isShow_signOut = true;
+//				}
+				g.url = ("/personal" )
 
 			},
 
 			onClick_promptBtn(){
-				g.url = ("/")
+				g.url = ("/task")
 			},
 			onUpdate_messageNum($data){
 

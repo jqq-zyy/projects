@@ -12,7 +12,7 @@
 							<p class="g-title">
 								活动列表
 							</p>
-							<div class="bar-box">
+							<div class="bar-box activity-bar-box">
 								<div class="bar-top">
 									<ul>
 										<li>活动状态:</li>
@@ -28,53 +28,60 @@
 									</ul>
 								</div>
 								<div class="bar-bottom">
-									<div class="date-box">
-										<span class="creat-time">开始时间：从</span>
-										<div class="date-from">
-											<input type="text" class="startTime date-input pointer"
-												   v-model="activitySQueryBeginTime"
-												   readonly="true"
-												   @click.stop="onClick_showCalendar('isShow_SQueryBeginTime')">
-											<hw-date type="date" skin="simple" @change="onClick_chooseSQueryBeginTime"
-													 v-model="isShow_dataObj.isShow_SQueryBeginTime"></hw-date>
+									<div class="date-margin">
+										<div class="date-box">
+											<span class="creat-time">开始时间：从</span>
+											<div class="date-from">
+												<input type="text" class="startTime date-input pointer"
+													   v-model="activitySQueryBeginTime"
+													   readonly="true"
+													   @click.stop="onClick_showCalendar('isShow_SQueryBeginTime')">
+												<span class="date-del" @click.stop="onClick_resetTime('activitySQueryBeginTime')">X</span>
+												<hw-date type="date" skin="simple" @change="onClick_chooseSQueryBeginTime"
+														 v-model="isShow_dataObj.isShow_SQueryBeginTime"></hw-date>
+											</div>
+										</div>
+										<span class="goto">至</span>
+										<div class="date-box">
+											<div class="date-from">
+												<input type="text" class="endTime date-input pointer"
+													   v-model="activitySQueryEndTime"
+													   readonly="true"
+													   @click.stop="onClick_showCalendar('isShow_SQueryEndTime')">
+												<span class="date-del" @click.stop="onClick_resetTime('activitySQueryEndTime')">X</span>
+												<hw-date type="date" skin="simple" @change="onClick_chooseSQueryEndTime"
+														 v-model="isShow_dataObj.isShow_SQueryEndTime"></hw-date>
+											</div>
 										</div>
 									</div>
-									<span class="goto">至</span>
-									<div class="date-box">
-										<div class="date-from">
-											<input type="text" class="endTime date-input pointer"
-												   v-model="activitySQueryEndTime"
-												   readonly="true" @click.stop="onClick_showCalendar('isShow_SQueryEndTime')">
-											<span @click="onClick_resetTime('activitySQueryEndTime')">X</span>
-											<hw-date type="date" skin="simple" @change="onClick_chooseSQueryEndTime"
-													 v-model="isShow_dataObj.isShow_SQueryEndTime"></hw-date>
+									<div class="date-margin">
+										<div class="date-box">
+											<span class="creat-time">结束时间：从</span>
+											<div class="date-from">
+												<input type="text" class="startTime date-input pointer"
+													   v-model="activityEQueryStartTime"
+													   readonly="true"
+													   @click.stop="onClick_showCalendar('isShow_EQueryStartTime')">
+												<span class="date-del" @click.stop="onClick_resetTime('activityEQueryStartTime')">X</span>
+												<hw-date type="date" skin="simple" @change="onClick_chooseEQueryStartTime"
+														 v-model="isShow_dataObj.isShow_EQueryStartTime"></hw-date>
+											</div>
 										</div>
-									</div>
-									<div class="date-box">
-										<span class="creat-time">结束时间：从</span>
-										<div class="date-from">
-											<input type="text" class="startTime date-input pointer"
-												   v-model="activityEQueryStartTime"
-												   readonly="true"
-												   @click.stop="onClick_showCalendar('isShow_EQueryStartTime')">
-											<span @click="onClick_resetTime('activityEQueryStartTime')">X</span>
-											<hw-date type="date" skin="simple" @change="onClick_chooseEQueryStartTime"
-													 v-model="isShow_dataObj.isShow_EQueryStartTime"></hw-date>
-										</div>
-									</div>
-									<span class="goto">至</span>
-									<div class="date-box">
-										<div class="date-from">
-											<input type="text" class="endTime date-input pointer"
-												   v-model="activityEQueryEndTime"
-												   readonly="true" @click.stop="onClick_showCalendar('isShow_EQueryEndTime')">
-											<span @click="onClick_resetTime('activityEQueryEndTime')">X</span>
-											<hw-date type="date" skin="simple" @change="onClick_chooseEQueryEndTime"
-													 v-model="isShow_dataObj.isShow_EQueryEndTime"></hw-date>
+										<span class="goto">至</span>
+										<div class="date-box">
+											<div class="date-from">
+												<input type="text" class="endTime date-input pointer"
+													   v-model="activityEQueryEndTime"
+													   readonly="true"
+													   @click.stop="onClick_showCalendar('isShow_EQueryEndTime')">
+												<span class="date-del" @click.stop="onClick_resetTime('activityEQueryEndTime')">X</span>
+												<hw-date type="date" skin="simple" @change="onClick_chooseEQueryEndTime"
+														 v-model="isShow_dataObj.isShow_EQueryEndTime"></hw-date>
+											</div>
 										</div>
 									</div>
 									<div class="drop-box pointer" @click.stop="onClick_dropListBtn">
-										<div >
+										<div>
 											{{currentSearchType}}
 											<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"></span>
 
@@ -192,7 +199,7 @@
 										<td>{{item.useRpAmount}}</td>
 										<td>
 												<span v-text="onConfirm_operation(item.freezeStatus)"
-													  @click="onClick_activityItem(item.id)"></span>
+													  @click="onClick_activityItem(item.id)" class="blue-content pointer"></span>
 										</td>
 									</tr>
 									</tbody>
@@ -239,23 +246,23 @@
 				g: g,
 				isLoad: false,
 				isShow_dropList: false,
-				isShow_dataObj:{
-					isShow_SQueryBeginTime:false,
-					isShow_SQueryEndTime:false,
-					isShow_EQueryStartTime:false,
-					isShow_EQueryEndTime:false
+				isShow_dataObj: {
+					isShow_SQueryBeginTime: false,
+					isShow_SQueryEndTime: false,
+					isShow_EQueryStartTime: false,
+					isShow_EQueryEndTime: false
 				},
 				totalPage: 10,
 				statusList: [],
 				activityId: 0,
 				activityList: [],
-				activitySQueryBeginTime:'',
-				activitySQueryEndTime:'',
-				activityEQueryStartTime:'',
-				activityEQueryEndTime:'',
+				activitySQueryBeginTime: '',
+				activitySQueryEndTime: '',
+				activityEQueryStartTime: '',
+				activityEQueryEndTime: '',
 				dataObj: {},
 				currentType: "",
-				inputContent:"",
+				inputContent: "",
 				typeList: [
 					{
 						id: 'activityName',
@@ -269,7 +276,7 @@
 					}
 
 				],
-				activityStatus:[0],
+				activityStatus: [0],
 				resultTotalObj: {
 					totalQrCodeNum: 0,
 					totalScanCount: 0,
@@ -327,16 +334,16 @@
 				this.activityEQueryEndTime = this.activitySQueryBeginTime;
 			},
 			initSearchData(){
-				this.dataObj= {
+				this.dataObj = {
 					page: 1,
 					pageSize: g.param.pageSizeList[0],
 					activityStatus: "",
 					sortField: "create_time",
 					sortOrder: "desc",
-					activitySQueryBeginTime:'',
-					activitySQueryEndTime:'',
-					activityEQueryStartTime:'',
-					activityEQueryEndTime:''
+					activitySQueryBeginTime: '',
+					activitySQueryEndTime: '',
+					activityEQueryStartTime: '',
+					activityEQueryEndTime: ''
 				}
 
 			},
@@ -347,7 +354,7 @@
 			},
 			onUpdate_activityList(){
 				g.ui.showLoading();
-				this.dataObj.activityStatus  = this.activityStatus.join(",");
+				this.dataObj.activityStatus = this.activityStatus.join(",");
 				this.dataObj[this.currentType] = this.inputContent;
 				g.net.call("/activity/queryActivityStatisticByPage", this.dataObj).then(($data) =>
 				{
@@ -471,7 +478,7 @@
 					return "解冻"
 				}
 			},
-			onClick_activityItem( $id){
+			onClick_activityItem($id){
 				g.url = ("/activitydetail?id=" + $id)
 
 			},
@@ -480,8 +487,10 @@
 			},
 			onClick_showCalendar($str){
 				trace(this.isShow_dataObj)
-				for(var key in this.isShow_dataObj){
-					if(key ==$str){
+				for (var key in this.isShow_dataObj)
+				{
+					if (key == $str)
+					{
 						if (this.isShow_dataObj[key])
 						{
 							this.isShow_dataObj[key] = false;
@@ -490,7 +499,9 @@
 						{
 							this.isShow_dataObj[key] = true;
 						}
-					}else{
+					}
+					else
+					{
 						this.isShow_dataObj[key] = false;
 					}
 				}
@@ -535,9 +546,8 @@
 				this.isShow_dataObj.isShow_EQueryEndTime = false;
 			},
 			onClick_resetTime($resetType){
-				this.dataObj[$resetType] ="";
-				this[$resetType] ="";
-
+				this.dataObj[$resetType] = "";
+				this[$resetType] = "";
 
 			}
 		}
@@ -553,8 +563,12 @@
 		margin-left: 10px;
 		margin-right: 10px;
 	}
-	.first-td-child:hover{
+
+	.first-td-child:hover {
 		text-decoration: underline;
 		cursor: pointer;
+	}
+	.blue-content{
+		color:#01aaef;
 	}
 </style>

@@ -3,6 +3,8 @@
  */
 import Index from "./pages/index.vue";
 import IndexMain from "./pages/index";
+import UpcoimgTask from "./pages/task.vue";
+import UpcoimgTaskMain from "./pages/task";
 import myStaff from "./pages/myStaff.vue";
 import myStaffMain from "./pages/myStaff";
 import Role from "./pages/role.vue";
@@ -31,6 +33,8 @@ import Chart from "./pages/chart.vue";
 import Rule from "./pages/rule.vue";
 import RuleMain from "./pages/rule";
 import CheckQrcode from "./pages/checkQrcode.vue";
+import Personal from "./pages/personal.vue";
+import PersonalMain from "./pages/personal";
 export default [
 	{
 		path: '/',
@@ -90,6 +94,18 @@ export default [
 		component: Login,
 		preload: LoginMain
 	}, {
+
+		path: '/task',
+		name: "待办任务",
+		component: UpcoimgTask,
+		preload: UpcoimgTaskMain
+	}, {
+		path: '/personal',
+		name: "个人",
+		component: Personal,
+		preload: PersonalMain
+	},
+	{
 		path: '/user',
 		name: "商户列表",
 		component: UserList,
@@ -109,17 +125,13 @@ export default [
 		name: "权限设置",
 		component: Role,
 		preload: RoleMain
-	},{
+	}, {
 		path: '/checkqrcode',
 		name: "查找二维码",
 		component: CheckQrcode,
 //		preload: checkQrcodeMain
 	}
 ];
-
-
-
-
 
 
 

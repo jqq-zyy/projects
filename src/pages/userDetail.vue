@@ -2,7 +2,7 @@
 	<main-layout :isLoad="isLoad">
 		<div slot="content" class="content-box">
 			<div class="admin-main-wrap">
-				<common-nav></common-nav>
+				<common-nav :nav="'user'"></common-nav>
 				<div class="right-content-wrap">
 					<common-top-nav></common-top-nav>
 					<div class="admin-data-items">
@@ -165,6 +165,7 @@
 	import CommonNav from './common/CommonNav.vue';
 	import CommonTopNav from './common/CommonTopNav.vue';
 	import CommonFooter from './common/CommonFooter.vue';
+	import {queryShopDetail} from './userDetail';
 	export default {
 		created(){
 			this.isLoad = true;
@@ -179,6 +180,7 @@
 				currentType: "冻结",
 				currentTypeDesc: "",
 				refuseContent: "",
+				currentStatus:"",
 				shopId: "",
 				g: g,
 				infoObj: {}
@@ -224,12 +226,14 @@
 			},
 			onClick_confirmChange(){
 				var obj = {};
+				var freezeStatus;
 				if (this.currentType == 1)
 				{
 					obj = {
 						"freezeStatus": 0,
 						"freezeStatusDesc": "冻结"
 					}
+					freezeStatus = 2
 				}
 				else
 				{
@@ -237,18 +241,20 @@
 						"freezeStatus": 1,
 						"freezeStatusDesc": "正常"
 					}
+					freezeStatus = 1
 				}
-				/*g.net.call("/getActivityDetail",{
-				 "id":this.shopId
+				g.net.call("user/updateShopFreeze",{
+				 	"shopId":this.shopId,
+					"freezeStatus":freezeStatus
 				 }).then(($data) =>
-				 {*/
-				g.data.userDetailPool.update(obj);
-				this.init();
-				this.isShow_changeTypePop = false;
-//				}, (err) =>
-//				{
-//					g.func.dealErr(err);
-//				});
+				 {
+					g.data.userDetailPool.update(obj);
+					this.init();
+					this.isShow_changeTypePop = false;
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				});
 			},
 			onClick_refuseBtn(){
 				this.isShow_refusePop = true;
@@ -259,25 +265,22 @@
 					this.isShow_hasError = true;
 					return
 				}
-				g.net.call("user/updateShopAuth", {
-					"shopId": this.shopId,
-					"auditStatus":3,
-					"remark":this.refuseContent
-				}).then(($data) =>
-				{
-
-				}, (err) =>
-				{
-					g.func.dealErr(err);
-				});
+				this.currentStatus = 3
+				this.updateShopAuth();
 			},
 			onClick_passBtn(){
+				this.currentStatus = 2
+				this.updateShopAuth();
+			},
+			updateShopAuth(){
 				g.net.call("user/updateShopAuth", {
 					"shopId": this.shopId,
-					"auditStatus":2
+					"auditStatus":this.currentStatus,
+					"remark":this.refuseContent,
+					"auditRecordId":this.infoObj.auditRecordId
 				}).then(($data) =>
 				{
-
+					queryShopDetail(this.shopId,this.init)
 				}, (err) =>
 				{
 					g.func.dealErr(err);

@@ -17,6 +17,7 @@ rm('-rf', assetsPath)
 mkdir('-p', assetsPath);
 cp('-R', 'assets/', assetsPath + '/assets/')
 cp('-R', 'template/libs/', assetsPath + '/libs/');
+cp('-R', 'template/', assetsPath + '/');
 
 webpack(webpackConfig, function (err, stats)
 {

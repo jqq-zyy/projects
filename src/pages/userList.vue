@@ -31,28 +31,30 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="bar-bottom">
-									<div class="date-box">
-										<span class="creat-time">创建时间：从</span>
-										<div class="date-from">
-											<input type="text" class="startTime date-input pointer"
-												   v-model="date.startTimeStr"
-												   readonly="true"
-												   @click.stop="onClick_showCalendar('start')">
-											<hw-date type="date" skin="simple" @change="onClick_chooseDateStart"
-													 v-model="isShowStartTime"></hw-date>
+									<div class="date-margin">
+										<div class="date-box">
+											<span class="creat-time">创建时间：从</span>
+											<div class="date-from">
+												<input type="text" class="startTime date-input pointer"
+													   v-model="date.startTimeStr"
+													   readonly="true"
+													   @click.stop="onClick_showCalendar('start')">
+												<hw-date type="date" skin="simple" @change="onClick_chooseDateStart"
+														 v-model="isShowStartTime"></hw-date>
+											</div>
 										</div>
-									</div>
-									<span class="goto">至</span>
-									<div class="date-box">
-										<div class="date-from">
-											<input type="text" class="endTime date-input pointer"
-												   v-model="date.endTimeStr"
-												   readonly="true" @click.stop="onClick_showCalendar('end')">
-											<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd"
-													 v-model="isShowEndTime"></hw-date>
+										<span class="goto">至</span>
+										<div class="date-box">
+											<div class="date-from">
+												<input type="text" class="endTime date-input pointer"
+													   v-model="date.endTimeStr"
+													   readonly="true" @click.stop="onClick_showCalendar('end')">
+												<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd"
+														 v-model="isShowEndTime"></hw-date>
 
+											</div>
+											<div class="clearfix"></div>
 										</div>
-										<div class="clearfix"></div>
 									</div>
 									<div class="drop-box pointer" @click.stop="onClick_dropListBtn">
 										<div @click.stop="onClick_dropListBtn">
@@ -188,9 +190,9 @@
 										<td>{{item.rpCurrentAccount}}</td>
 										<td>
 											<span v-text="onConfirm_operation(item.freezeStatus)"
-												  @click="onClick_userItem(item.id)"></span>
+												  @click="onClick_userItem(item.id)" class="pointer blue-content"></span>
 											<span v-show="item.authStatus=1"
-												  @click="onClick_lookItem(item.id)">审核</span>
+												  @click="onClick_lookItem(item.id)" class="pointer blue-content">审核</span>
 										</td>
 									</tr>
 									</tbody>
@@ -208,12 +210,6 @@
 										<td>{{modelObj.qrcodeRefundAllNum}}</td>
 										<td>{{modelObj.rpAllCurrentAccount}}</td>
 										<td></td>
-
-
-
-
-
-
 									</tr>
 									</tfoot>
 								</table>
@@ -504,6 +500,7 @@
 				g.url = ("/userdetail?id=" + $id)
 
 			}
+
 		}
 	}
 </script>
@@ -521,6 +518,15 @@
 		border: 1px solid #01aaef;
 
 	}
+	.first-td-child{
+		color:#01aaef;
+		text-decoration: underline
+
+	}
+	.blue-content{
+		color:#01aaef;
+	}
+
 </style>
 
 

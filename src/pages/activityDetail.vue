@@ -2,7 +2,7 @@
 	<main-layout :isLoad="isLoad">
 		<div slot="content" class="content-box">
 			<div class="admin-main-wrap">
-				<common-nav></common-nav>
+				<common-nav  :nav="'activity'"></common-nav>
 				<div class="right-content-wrap">
 					<common-top-nav></common-top-nav>
 					<div class="admin-data-items">
@@ -11,32 +11,37 @@
 							<div class="admin-calendar-table user-detail-box">
 								<div class="detail-msg">
 									<div class="msg-title">基本信息</div>
-									<span class="msg-info msf-info-width">活动名称:{{activityInfo.activityName}}</span>
+									<span class="msg-info msf-info-width">活动名称: {{activityInfo.activityName}}</span>
 									<span class="msg-info msf-info-width">创建时间:{{activityInfo.createTime}}</span>
-									<span class="msg-info msf-info-width">基础红包设定：</span>
+									<span class="msg-info msf-info-width">基础红包设定：
+										<span v-if="activityRpInfo.fixedAmount">
+											固定金额：{{activityRpInfo.fixedAmount}}元/个
+
+										</span>
+										<span  v-if="activityRpInfo.randomMin">
+											随机金额：{{activityRpInfo.randomMin}}~{{activityRpInfo.randomMax}}元/个（平均金额{{activityRpInfo.randomAvg}}元/个）
+
+										</span>
+									</span>
 									<span class="msg-info msf-info-width">状态：{{activityInfo.activityStartTimeStr}}
 									<span class="pointer border-btn status-btn hb-fill-middle2-bg"
 										  v-text="onConfirm_freezeStatus(activityInfo.freezeStatus)"
 										  @click="onClick_changeStatus(activityInfo.freezeStatus)"></span></span>
-									<span class="msg-info msf-info-width">开始时间：{{activityInfo.activityStartTimeStr}}</span>
-									<span class="msg-info msf-info-width">结束时间：{{activityInfo.activityEndTimeStr}}</span>
+									<span class="msg-info msf-info-width">开始时间：<span v-text="currentActivity(activityInfo.activityStartTimeStr)"></span></span>
+									<span class="msg-info msf-info-width">结束时间：<span v-text="currentActivity(activityInfo.activityEndTimeStr)"></span></span>
 									<span class="msg-info msf-info-width">剩余数量/二维码数量：{{remainQrCodeNum}}/{{totalQrCodeNum}}</span>
 									<span class="msg-info msf-info-width">已发放金额：{{totalMakedAmount}}</span>
-									<span class="msg-info msf-info-width" style="width: 100%;">是否接受平台红包：</span>
+									<span class="msg-info msf-info-width" style="width: 100%;">是否接受平台红包：<span v-text="isPlatformReward"></span></span>
 									<div class="msg-info msf-info-width">
 										<span>活动地区：</span>
-										<ul>
-											<li>1. 浙江省杭州市（1 倍）</li>
-											<li>2. 上海市（2 倍）</li>
-											<li> 3. 广东省广州市（3 倍）</li>
+										<ul v-for="(item,index) in activityRules" >
+											<li v-if="item.ruleType==1">{{index+1}}. {{item.provinceName}}（{{item.reward}}  倍）</li>
 										</ul>
 									</div>
 									<div class="msg-info msf-info-width">
 										<span>会员奖励：</span>
-										<ul>
-											<li>1. 初级会员（1.2 倍）</li>
-											<li>2. 中级会员（2.4 倍）</li>
-											<li>3. 高级会员（3.1 倍）</li>
+										<ul v-for="(item,index) in activityRules">
+											<li v-if="item.ruleType==2">{{index+1}}. {{item.memberName}}会员（{{item.reward}} 倍）</li>
 										</ul>
 									</div>
 								</div>
@@ -52,6 +57,7 @@
 
 						</div>
 						<common-footer></common-footer>
+
 					</div>
 				</div>
 			</div>
@@ -114,6 +120,15 @@
 			CommonTopNav,
 			CommonFooter
 		},
+		computed:{
+			isPlatformReward(){
+				if(this.activityInfo.isPlatformReward){
+					return "是"
+				}else{
+					return "否"
+				}
+			}
+		},
 		methods: {
 			init(){
 				var activityDetail = g.data.activityDetailPool;
@@ -124,6 +139,14 @@
 				this.remainQrCodeNum = activityDetail.remainQrCodeNum;
 				this.totalMakedAmount = activityDetail.totalMakedAmount;
 				this.totalMakedRpCount = activityDetail.totalMakedRpCount;
+			},
+			currentActivity($detail){
+
+				if($detail){
+					return $detail
+				}else{
+					return "暂无"
+				}
 			},
 			onConfirm_freezeStatus($type){
 				if ($type == 1)

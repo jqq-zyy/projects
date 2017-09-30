@@ -11,7 +11,7 @@
 	height: 100%;
 	.user-choose-type {
 	  float: left;
-	  margin-left: 16px;
+	  margin-left: 30px;
 	  position: relative;
 	  display: flex;
 	  align-items: center;
@@ -42,6 +42,7 @@
 		text-align: center;
 		border: 1px solid #dbdee7;
 		box-shadow: 0 0 3px #dbdee7;
+		z-index: 999;
 		div {
 		  height: 48px;
 		  line-height: 48px;
@@ -66,7 +67,7 @@
 		overflow: hidden;
 		pointer-events: none;
 		transform: rotate(-135deg);
-		//z-index: -1;
+		z-index: -1;
 	  }
 	  .admin::before {
 		background: #dbdee7;
@@ -83,6 +84,10 @@
 
 .m-right {
   margin-left: 18px;
+  transition: transform .2s;
+}
+.rotate1{
+  transform: rotate(180deg);
 }
 
 .head-img {
