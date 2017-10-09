@@ -12,6 +12,7 @@ export function queryShopDetail($id,$callBack){
 		"shopId":$id
 	}).then(($data) =>
 	{
+		g.data.userDetailPool.removeAll();
 		g.data.userDetailPool.update($data);
 		$callBack();
 	}, (err) =>
@@ -19,3 +20,6 @@ export function queryShopDetail($id,$callBack){
 		g.func.dealErr(err);
 	});
 }
+
+
+

@@ -9,7 +9,7 @@
 
 						<div class="right-body ">
 							<p class="g-title">查看信息</p>
-							<div class="mod-box">注册手机号：{{tel}} <span class="button pointer border-btn" @click="onClick_modPwdBtn">修改密码</span>
+							<div class="mod-box">注册手机号：{{tel}} <span v-if="!tel">暂无</span><span class="button pointer border-btn" @click="onClick_modPwdBtn">修改密码</span>
 							</div>
 						</div>
 						<common-footer></common-footer>

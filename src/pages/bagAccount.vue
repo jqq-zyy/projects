@@ -157,7 +157,7 @@
 								</table>
 							</div>
 							<common-page :index="dataObj.page" :total="totalPage"
-										 @change="onChange_currentPage" v-show="totalPage>1"></common-page>
+										 @change="onChange_currentPage" v-show="bagList.length>=1"></common-page>
 							<common-prompt v-show="bagList.length==0"></common-prompt>
 						</div>
 						<common-footer></common-footer>

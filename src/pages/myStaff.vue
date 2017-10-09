@@ -50,7 +50,7 @@
 								</div>
 							</div>
 							<common-page :index="searchObj.page" :total="totalPage"
-										 @change="onChange_searchItem" v-show="totalPage>1"></common-page>
+										 @change="onChange_searchItem" v-show="staffList.length>=0"></common-page>
 							<common-prompt v-show="staffList.length==0"></common-prompt>
 
 						</div>

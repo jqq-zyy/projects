@@ -49,14 +49,14 @@
 									<div class="msg-title">红包信息</div>
 									<span class="msg-info msf-info-width">标题：{{activityRpInfo.rpTitle}}</span>
 									<span class="msg-info msf-info-width">祝福文字：{{activityRpInfo.rpWish}}</span>
-									<span class="msg-info msf-info-width">显示图片：<img class="show-img"
-																					:src="activityRpInfo.rpLogoUrl"
-																					alt=""></span>
+									<span class="msg-info msf-info-width">显示图片：<img class="show-img pointer" :src="activityRpInfo.rpLogoUrl"  @click="onClick_seeImage(infoObj.shopLogo)"></span>
 								</div>
 							</div>
 
 						</div>
 						<common-footer></common-footer>
+
+
 
 					</div>
 				</div>
@@ -83,6 +83,7 @@
 					</div>
 				</div>
 			</transition>
+			<see-image v-show ="isShow_seeImage" :imageUrl="currentUrl" @close="onClick_closeBtn"></see-image>
 		</div>
 	</main-layout>
 </template>
@@ -93,6 +94,7 @@
 	import CommonNav from './common/CommonNav.vue';
 	import CommonTopNav from './common/CommonTopNav.vue';
 	import CommonFooter from './common/CommonFooter.vue';
+	import SeeImage from './common/SeeImage.vue';
 	export default {
 		created(){
 			this.isLoad = true;
@@ -102,6 +104,7 @@
 			return {
 				isLoad: false,
 				isShow_changeTypePop: false,
+				isShow_seeImage:false,
 				currentType: "冻结",
 				currentTypeDesc: "",
 				g: g,
@@ -118,7 +121,8 @@
 			MainLayout,
 			CommonNav,
 			CommonTopNav,
-			CommonFooter
+			CommonFooter,
+			SeeImage
 		},
 		computed:{
 			isPlatformReward(){
@@ -139,6 +143,11 @@
 				this.remainQrCodeNum = activityDetail.remainQrCodeNum;
 				this.totalMakedAmount = activityDetail.totalMakedAmount;
 				this.totalMakedRpCount = activityDetail.totalMakedRpCount;
+			},
+			onClick_seeImage($url){
+				this.currentUrl = $url;
+				this.isShow_seeImage = true;
+
 			},
 			currentActivity($detail){
 
@@ -173,6 +182,7 @@
 			},
 			onClick_closeBtn(){
 				this.isShow_changeTypePop = false;
+				this.isShow_seeImage = false;
 			},
 			onClick_confirmChange(){
 				var obj = {};

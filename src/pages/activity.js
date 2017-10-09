@@ -6,9 +6,11 @@ export default function (to, next)
 {
 	g.ui.showLoading();
 	var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
-	g.net.call("/activity/queryActivityStatisticOverview", {
+	g.net.call("activity/queryActivityStatisticOverview", {
 		'page': 1,
 		'pageSize': g.param.pageSizeList[0],
+
+
 	}).then(($data) =>
 	{
 		g.ui.hideLoading();
@@ -21,13 +23,6 @@ export default function (to, next)
 		g.func.dealErr(err);
 	});
 }
-
-
-
-
-
-
-
 
 
 

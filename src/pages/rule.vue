@@ -63,7 +63,6 @@
                     </div>
                 </div>
             </div>
-
             <!--账户余额报警门槛-->
             <transition name="bounce">
                 <div class="affix-box default-pos-type" v-show="isShow_refusePop === 'plat-money'">

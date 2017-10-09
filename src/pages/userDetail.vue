@@ -28,19 +28,18 @@
 									<div class="upload-box">
 										<span class="company">企业证照：</span>
 										<div class="enterprise-msg">
-											<img :src="infoObj.businessLicense" alt="" v-show="infoObj.businessLicense">
-											<span v-show="infoObj.businessLicense==''">暂无</span>
+											<img :src="infoObj.businessLicense" alt="" v-show="infoObj.businessLicense" class="pointer" @click="onClick_seeImage(infoObj.businessLicense)">
+											<span v-show="!infoObj.businessLicense">暂无</span>
 											<span>营业执照</span>
 										</div>
 										<div class="enterprise-msg">
-											<img :src="infoObj.taxRegister" alt="" v-show="infoObj.taxRegister">
-											<span v-show="infoObj.taxRegister==''">暂无</span>
+											<img :src="infoObj.taxRegister" alt="" v-show="infoObj.taxRegister" class="pointer" @click="onClick_seeImage(infoObj.taxRegister)">
+											<span v-show="!infoObj.taxRegister">暂无</span>
 											<span>税务登记证</span>
 										</div>
 										<div class="enterprise-msg">
-											<img :src="infoObj.organizeCertificate" alt=""
-												 v-show="infoObj.organizeCertificate">
-											<span v-show="infoObj.organizeCertificate==''">暂无</span>
+											<img :src="infoObj.organizeCertificate" alt="" v-show="infoObj.organizeCertificate" class="pointer" @click="onClick_seeImage(infoObj.organizeCertificate)">
+											<span v-show="!infoObj.organizeCertificate">暂无</span>
 											<span>组织结构代码证</span>
 										</div>
 
@@ -48,43 +47,44 @@
 									<div class="upload-box">
 										<span class="company">法人身份证照：</span>
 										<div class="enterprise-msg">
-											<img :src="infoObj.idcardImagA" alt="" w-show="infoObj.idcardImagA">
-											<span v-show="infoObj.idcardImagA==''">暂无</span>
+											<img :src="infoObj.idcardImagA" alt="" v-show="infoObj.idcardImagA" class="pointer" @click="onClick_seeImage(infoObj.idcardImagA)">
+											<span v-show="!infoObj.idcardImagA">暂无</span>
 											<span>正面</span>
 										</div>
 										<div class="enterprise-msg">
-											<img :src="infoObj.idcardImagB" alt="" w-show="infoObj.idcardImagB">
-											<span v-show="infoObj.idcardImagB==''">暂无</span>
+											<img :src="infoObj.idcardImagB" alt="" v-show="infoObj.idcardImagB" class="pointer" @click="onClick_seeImage(infoObj.idcardImagB)">
+											<span v-show="!infoObj.idcardImagB">暂无</span>
 											<span>反面</span>
 										</div>
 									</div>
 									<div class="enterprise-name upload-box">
 
-										<span class="company">企业全称：</span>{{infoObj.companyFullName}}
+										<span class="company">企业全称：</span>
+										<span v-if="infoObj.companyFullName" >{{infoObj.companyFullName}}</span>
+										<span v-if="!infoObj.companyFullName">暂无</span>
 									</div>
 									<div class="upload-box">
 										<span class="company">企业logo：</span>
 										<div class="enterprise-msg">
-											<img :src="infoObj.shopLogo" alt="">
+											<img :src="infoObj.shopLogo" alt="" v-show="infoObj.shopLogo" class="pointer" @click="onClick_seeImage(infoObj.shopLogo)">
+											<span v-show="!infoObj.shopLogo">暂无</span>
 										</div>
-										<div class="enterprise-msg">
-											<img :src="infoObj.shopLogo" alt="" w-show="infoObj.shopLogo">
-											<span v-show="infoObj.shopLogo==''">暂无</span>
-										</div>
+
 									</div>
 									<div class="upload-box">
 										<span class="company">品牌授权书：</span>
-										<div v-for="item in infoObj.brandList" class="enterprise-msg">
-											<img :src="item.brandAuthorize" alt="">
+										<div v-for="item in infoObj.brandList" class="enterprise-msg" v-if="infoObj.brandList.length>0">
+											<img :src="item.brandAuthorize" alt="" @click="onClick_seeImage(item.brandAuthorize)">
 											<span>{{item.brandName}}</span>
 										</div>
+										<div v-if="infoObj.brandList.length==0">暂无</div>
+
 									</div>
 									<div v-show="infoObj.authStatus==3" class="status-button-box">
 										<div class="applicate-btn pointer border-btn " @click="onClick_passBtn">通过申请
 										</div>
 										<div class=" applicate-btn pointer bg-btn" @click="onClick_refuseBtn">拒绝申请</div>
 									</div>
-
 								</div>
 								<div class="detail-msg">
 									<div class="msg-title">活动信息</div>
@@ -106,6 +106,7 @@
 								</div>
 							</div>
 						</div>
+
 						<common-footer></common-footer>
 					</div>
 				</div>
@@ -155,6 +156,7 @@
 					</div>
 				</div>
 			</transition>
+			<see-image v-show ="isShow_seeImage" :imageUrl="currentUrl" @close="onClick_closeBtn"></see-image>
 		</div>
 	</main-layout>
 </template>
@@ -165,6 +167,7 @@
 	import CommonNav from './common/CommonNav.vue';
 	import CommonTopNav from './common/CommonTopNav.vue';
 	import CommonFooter from './common/CommonFooter.vue';
+	import SeeImage from './common/SeeImage.vue';
 	import {queryShopDetail} from './userDetail';
 	export default {
 		created(){
@@ -177,25 +180,33 @@
 				isShow_changeTypePop: false,
 				isShow_refusePop: false,
 				isShow_hasError: false,
+				isShow_seeImage:false,
 				currentType: "冻结",
 				currentTypeDesc: "",
 				refuseContent: "",
 				currentStatus:"",
 				shopId: "",
 				g: g,
-				infoObj: {}
+				infoObj: {},
+				currentUrl:""
 			}
 		},
 		components: {
 			MainLayout,
 			CommonNav,
 			CommonTopNav,
-			CommonFooter
+			CommonFooter,
+			SeeImage
 		},
 		methods: {
 			init(){
 				this.infoObj = g.data.userDetailPool.hash;
 				this.shopId = this.infoObj.shopId;
+			},
+			onClick_seeImage($url){
+				this.currentUrl = $url;
+				this.isShow_seeImage = true;
+
 			},
 			onConfirm_freezeStatus($type){
 				if ($type == 1)
@@ -223,6 +234,8 @@
 			onClick_closeBtn(){
 				this.isShow_changeTypePop = false;
 				this.isShow_refusePop = false;
+				this.isShow_seeImage = false;
+
 			},
 			onClick_confirmChange(){
 				var obj = {};

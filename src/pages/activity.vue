@@ -33,7 +33,7 @@
 											<span class="creat-time">开始时间：从</span>
 											<div class="date-from">
 												<input type="text" class="startTime date-input pointer"
-													   v-model="activitySQueryBeginTime"
+													   v-model="dataObj.activitySQueryBeginTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_SQueryBeginTime')">
 												<span class="date-del" @click.stop="onClick_resetTime('activitySQueryBeginTime')">X</span>
@@ -45,7 +45,7 @@
 										<div class="date-box">
 											<div class="date-from">
 												<input type="text" class="endTime date-input pointer"
-													   v-model="activitySQueryEndTime"
+													   v-model="dataObj.activitySQueryEndTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_SQueryEndTime')">
 												<span class="date-del" @click.stop="onClick_resetTime('activitySQueryEndTime')">X</span>
@@ -59,7 +59,7 @@
 											<span class="creat-time">结束时间：从</span>
 											<div class="date-from">
 												<input type="text" class="startTime date-input pointer"
-													   v-model="activityEQueryStartTime"
+													   v-model="dataObj.activityEQueryStartTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_EQueryStartTime')">
 												<span class="date-del" @click.stop="onClick_resetTime('activityEQueryStartTime')">X</span>
@@ -71,7 +71,7 @@
 										<div class="date-box">
 											<div class="date-from">
 												<input type="text" class="endTime date-input pointer"
-													   v-model="activityEQueryEndTime"
+													   v-model="dataObj.activityEQueryEndTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_EQueryEndTime')">
 												<span class="date-del" @click.stop="onClick_resetTime('activityEQueryEndTime')">X</span>
@@ -216,7 +216,7 @@
 								</table>
 							</div>
 							<common-page :index="dataObj.page" :total="totalPage"
-										 @change="onChange_currentPage" v-show="totalPage>1"></common-page>
+										 @change="onChange_currentPage" v-show="activityList.length>0"></common-page>
 							<common-prompt v-show="activityList.length==0"></common-prompt>
 						</div>
 						<common-footer></common-footer>
@@ -252,14 +252,14 @@
 					isShow_EQueryStartTime: false,
 					isShow_EQueryEndTime: false
 				},
-				totalPage: 10,
+				totalPage: 0,
 				statusList: [],
 				activityId: 0,
 				activityList: [],
-				activitySQueryBeginTime: '',
-				activitySQueryEndTime: '',
-				activityEQueryStartTime: '',
-				activityEQueryEndTime: '',
+				// activitySQueryBeginTime: '',
+				// activitySQueryEndTime: '',
+				// activityEQueryStartTime: '',
+				// activityEQueryEndTime: '',
 				dataObj: {},
 				currentType: "",
 				inputContent: "",
@@ -324,14 +324,14 @@
 				this.resultTotalObj.platformAmount = info.totalUseRpAmountDesc;
 			},
 			initDate(){
-				this.dataObj.activitySQueryBeginTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
+				this.dataObj.activitySQueryBeginTime = g.timeTool.getDate(this.dataObj.activitySQueryBeginTime, true);
 				this.dataObj.activitySQueryEndTime = this.dataObj.activitySQueryBeginTime;
 				this.dataObj.activityEQueryStartTime = this.dataObj.activitySQueryBeginTime;
 				this.dataObj.activityEQueryEndTime = this.dataObj.activitySQueryBeginTime;
-				this.activitySQueryBeginTime = g.timeTool.getDate(this.dataObj.activitySQueryBeginTime, true);
-				this.activitySQueryEndTime = this.activitySQueryBeginTime;
-				this.activityEQueryStartTime = this.activitySQueryBeginTime;
-				this.activityEQueryEndTime = this.activitySQueryBeginTime;
+				// this.activitySQueryBeginTime = g.timeTool.getDate(this.dataObj.activitySQueryBeginTime, true);
+				// this.activitySQueryEndTime = this.activitySQueryBeginTime;
+				// this.activityEQueryStartTime = this.activitySQueryBeginTime;
+				// this.activityEQueryEndTime = this.activitySQueryBeginTime;
 			},
 			initSearchData(){
 				this.dataObj = {
@@ -356,7 +356,7 @@
 				g.ui.showLoading();
 				this.dataObj.activityStatus = this.activityStatus.join(",");
 				this.dataObj[this.currentType] = this.inputContent;
-				g.net.call("/activity/queryActivityStatisticByPage", this.dataObj).then(($data) =>
+				g.net.call("activity/queryActivityStatisticByPage", this.dataObj).then(($data) =>
 				{
 					g.data.activityPool.removeAll();
 					g.data.activityPool.update($data);
@@ -508,8 +508,8 @@
 				trace(this.isShow_dataObj);
 			},
 			onClick_chooseSQueryBeginTime($timeStamp){
-				this.dataObj.activitySQueryBeginTime = $timeStamp;
-				this.activitySQueryBeginTime = g.timeTool.getDate($timeStamp, true);
+				this.dataObj.activitySQueryBeginTime = g.timeTool.getDate($timeStamp, true);;
+				//this.activitySQueryBeginTime = g.timeTool.getDate($timeStamp, true);
 				if (this.dataObj.activitySQueryBeginTime > this.dataObj.activitySQueryEndTime)
 				{
 					this.onClick_chooseSQueryEndTime($timeStamp);
@@ -519,8 +519,8 @@
 			},
 
 			onClick_chooseSQueryEndTime($timeStamp){
-				this.dataObj.activitySQueryEndTime = $timeStamp;
-				this.activitySQueryEndTime = g.timeTool.getDate($timeStamp, true);
+				this.dataObj.activitySQueryEndTime = g.timeTool.getDate($timeStamp, true);;
+				// this.activitySQueryEndTime = g.timeTool.getDate($timeStamp, true);
 				if (this.dataObj.activitySQueryEndTime < this.dataObj.activitySQueryBeginTime)
 				{
 					this.onClick_chooseSQueryBeginTime($timeStamp);
@@ -528,8 +528,8 @@
 				this.isShow_dataObj.isShow_SQueryEndTime = false;
 			},
 			onClick_chooseEQueryStartTime($timeStamp){
-				this.dataObj.activityEQueryStartTime = $timeStamp;
-				this.activityEQueryStartTime = g.timeTool.getDate($timeStamp, true);
+				this.dataObj.activityEQueryStartTime = g.timeTool.getDate($timeStamp, true);
+				//this.activityEQueryStartTime = g.timeTool.getDate($timeStamp, true);
 				if (this.dataObj.activityEQueryStartTime > this.dataObj.activityEQueryEndTime)
 				{
 					this.onClick_chooseEQueryEndTime($timeStamp);
@@ -537,8 +537,8 @@
 				this.isShow_dataObj.isShow_EQueryStartTime = false;
 			},
 			onClick_chooseEQueryEndTime($timeStamp){
-				this.dataObj.activityEQueryEndTime = $timeStamp;
-				this.activityEQueryEndTime = g.timeTool.getDate($timeStamp, true);
+				this.dataObj.activityEQueryEndTime = g.timeTool.getDate($timeStamp, true);
+				//this.activityEQueryEndTime = g.timeTool.getDate($timeStamp, true);
 				if (this.dataObj.activityEQueryEndTime < this.dataObj.activityEQueryStartTime)
 				{
 					this.onClick_chooseEQueryStartTime($timeStamp);

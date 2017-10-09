@@ -38,9 +38,8 @@
 								</div>
 								<div class="chart-detail">
 									<p>新扫码消费者</p>
-									<img src="./../../assets/images/bag-bg.png" alt="">
+									<!--<img src="./../../assets/images/bag-bg.png" alt="">-->
 								</div>
-
 							</div>
 
 							<!--消费时间分布-->
@@ -68,7 +67,7 @@
 								</div>
 								<div class="chart-detail">
 									<p>消费时间分布</p>
-									<img src="./../../assets/images/bag-bg.png" alt="">
+									<!--<img src="./../../assets/images/bag-bg.png" alt="">-->
 								</div>
 
 							</div>
@@ -97,7 +96,7 @@
 								</div>
 								<div class="chart-detail">
 									<p>扫码次数走势图</p>
-									<img src="./../../assets/images/bag-bg.png" alt="">
+									<!--<img src="./../../assets/images/bag-bg.png" alt="">-->
 								</div>
 
 							</div>
@@ -128,11 +127,11 @@
 								<div class="chart-detail chart-last">
 									<div class="chart-last-left">
 										<p>累计消费次数分布</p>
-										<img src="./../../assets/images/bag-bg.png" alt="">
+										<!--<img src="./../../assets/images/bag-bg.png" alt="">-->
 									</div>
 									<div class="chart-last-right">
 										<p>消费地区分布</p>
-										<img src="./../../assets/images/bag-bg.png" alt="">
+										<!--<img src="./../../assets/images/bag-bg.png" alt="">-->
 									</div>
 								</div>
 

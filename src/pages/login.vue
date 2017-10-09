@@ -247,6 +247,7 @@
 				{
 					this.onSave_userInfo($data);
 					socketManager.connectSocket();
+
 					g.data.save("loginTime", g.timeTool.getNowStamp());
 				}, (err) =>
 				{
@@ -260,7 +261,7 @@
 				obj.logon = $data.logon;
 				obj.telphone = $data.telphone;
 				g.data.save("userInfo", obj);
-			//g.func.getUnreadMsg('login');
+				//g.func.getUnreadMsg('login');
 				g.event.dispatchEvent("APP_IS_LOGIN");
 
 			},
