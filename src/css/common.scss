@@ -748,7 +748,7 @@ li, ul {
 	  box-sizing: border-box;
 	  .drop-icon {
 		position: absolute;
-		right: 20px;
+		right: 12px;
 		height: 8px;
 		width: 8px;
 		top: 12px;
@@ -770,6 +770,8 @@ li, ul {
 		z-index: 3;
 		left: -1px;
 		top: 100%;
+		max-height: 240px;
+		overflow-y: auto;
 		li {
 		  width: 100%;
 		  line-height: 40px;
