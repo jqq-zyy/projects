@@ -137,10 +137,10 @@ function createData($dObj) {
     d.id = 0;
     d.createTime = '';
     d.name = '';
-    d.freezeStatus = 0;
+    d.freezeStatusDesc = "";
     d.logon = "";
     d.telphone = "";
-    d.authStatus = 0;
+    d.authStatusDesc = "";
     d.shopAmount = 0;
     d.platformAmount = 0;
     d.rpSendNum = 0;
@@ -151,9 +151,9 @@ function createData($dObj) {
     d.qrcodeBuyNum = 0;
     d.qrcodeRefundNum = 0;
     d.rpCurrentAccount = 0;
-    d.authStatusDesc = "";
-    d.freezeStatusDesc = "";
+    d.freezeStatus = 0;
     d.btn = [];
+    d.authStatus = 0;
     d.update = updateData.bind(d);
     d.update($dObj);
     return d;
@@ -163,11 +163,9 @@ function updateData($dObj) {
     $dObj.hasOwnProperty('shopId') && (this.id = $dObj.shopId);
     $dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
     $dObj.hasOwnProperty('companyFullName') && (this.name = $dObj.companyFullName);
-    $dObj.hasOwnProperty('freezeStatus') && (this.freezeStatus = $dObj.freezeStatus);
     $dObj.hasOwnProperty('freezeStatusDesc') && (this.freezeStatusDesc = $dObj.freezeStatusDesc);
     $dObj.hasOwnProperty('logon') && (this.logon = $dObj.logon);
     $dObj.hasOwnProperty('telphone') && (this.telphone = $dObj.telphone);
-    $dObj.hasOwnProperty('authStatus') && (this.authStatus = $dObj.authStatus);
     $dObj.hasOwnProperty('authStatusDesc') && (this.authStatusDesc = $dObj.authStatusDesc);
     $dObj.hasOwnProperty('shopAmount') && (this.shopAmount = $dObj.shopAmount);
     $dObj.hasOwnProperty('platformAmount') && (this.platformAmount = $dObj.platformAmount);
@@ -179,6 +177,8 @@ function updateData($dObj) {
     $dObj.hasOwnProperty('qrcodeBuyNum') && (this.qrcodeBuyNum = $dObj.qrcodeBuyNum);
     $dObj.hasOwnProperty('qrcodeRefundNum') && (this.qrcodeRefundNum = $dObj.qrcodeRefundNum);
     $dObj.hasOwnProperty('rpCurrentAccount') && (this.rpCurrentAccount = $dObj.rpCurrentAccount);
+    $dObj.hasOwnProperty('authStatus') && (this.authStatus = $dObj.authStatus);
+    $dObj.hasOwnProperty('freezeStatus') && (this.freezeStatus = $dObj.freezeStatus);
     // var obj = {
     //     id: 0,
     //     name: ""

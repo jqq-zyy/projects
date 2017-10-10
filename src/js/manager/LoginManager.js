@@ -35,7 +35,7 @@ function initLocalStorage($callback)
 			logout(true, true);
 			$callback();
 		});
-		
+
 	}
 }
 

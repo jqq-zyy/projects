@@ -1,11 +1,13 @@
 <template>
-	<div class="out-box relative" :class="inlineBorder?'out-box-border':''" ref="scrollCon"
-		 :style="{height:boxHeight+'px',width:boxWidth+'px'}">
+	<div class="out-box relative auto" :class="[inlineBorder?'out-box-border':'']"
+		 ref="scrollCon"
+		 :style="{height:boxHeight +'px',width:boxWidth+'px'}">
+		<!--<div class="content-box1" style="height: 700px;"></div>-->
 		<div class="header header-vertical body-row"
 			 :style="{height:headerHeight+'px',top:offsetTop+'px',width:getTypeWidth('total')+'px'}">
 			<div class="left-header"
 				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
-				<div class="header-row">
+				<div class="header-row" :style="{height:headerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.header" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkLeftHeader(item,index)">
@@ -20,7 +22,7 @@
 
 			<div class="middle-header"
 				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:headerHeight+'px'}">
-				<div class="header-row">
+				<div class="header-row" :style="{height:headerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.header" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkMiddleHeader(item,index)">
@@ -35,7 +37,7 @@
 
 			<div class="right-header"
 				 :style="{right:Math.max(getScrollLimit()-offsetLeft+6,0)+'px',width:getTypeWidth('right')+'px',height:headerHeight+'px'}">
-				<div class="header-row">
+				<div class="header-row" :style="{height:headerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.header" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkRightHeader(item,index)">
@@ -49,12 +51,11 @@
 			</div>
 		</div>
 
-
-		<div class="body" :style="{width:getTypeWidth('total')+'px',height:bodyHeight+'px'}">
+		<div class="body" :style="{width:getTypeWidth('total')+'px',height:bodyHeight+'px'}"
+			 v-if="tableData.body.length > 1">
 			<div class="left-body"
 				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
 				<div class="body-row" v-for="item in tableData.body" @click="onClick_body(item.id)"
-
 					 :style="{height: eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item" v-if="checkLeftBody(key,index)"
 						 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}">
@@ -67,7 +68,8 @@
 				</div>
 			</div>
 
-			<div class="middle-body" :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px'}">
+			<div class="middle-body"
+				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px'}">
 				<div class="body-row" v-for="item in tableData.body" @click="onClick_body(item.id)"
 					 :style="{height: eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item"
@@ -81,7 +83,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="right-body"
 				 :style="{right:Math.max(getScrollLimit()-offsetLeft+6,0)+'px',width:getTypeWidth('right')+'px'}">
 				<div class="body-row" v-for="item in tableData.body" @click="onClick_body(item.id)"
@@ -99,37 +100,37 @@
 			</div>
 		</div>
 
-		<div class="footer header-vertical body-row"
-			 :style="{height:footerHeight+'px',top:headerHeight+bodyHeight+offsetTop+'px',width:getTypeWidth('total')+'px'}">
+		<div class="footer header-vertical body-row" v-if="tableData.body.length > 1"
+			 :style="{height:footerHeight+'px',top:offsetTop+'px',width:getTypeWidth('total')+'px'}">
 			<div class="left-header"
-				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
-				<div class="header-row">
+				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px',height:footerHeight+'px'}">
+				<div class="header-row" :style="{height:footerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkLeftFooter(item,index)">
-						<span>{{item.name}}</span>
+						<span :class="item.name===undefined?'transparent':''">{{item.name===undefined?"空":item.name}}</span>
 					</div>
 				</div>
 			</div>
 
 			<div class="middle-header"
-				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:headerHeight+'px'}">
-				<div class="header-row">
+				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:footerHeight+'px'}">
+				<div class="header-row" :style="{height:footerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkMiddleFooter(item,index)">
-						<span>{{item.name}}</span>
+						<span :class="item.name===undefined?'transparent':''">{{item.name===undefined?"空":item.name}}</span>
 					</div>
 				</div>
 			</div>
 
 			<div class="right-header"
-				 :style="{right:Math.max(getScrollLimit()-offsetLeft+6,0)+'px',width:getTypeWidth('right')+'px',height:headerHeight+'px'}">
-				<div class="header-row">
+				 :style="{right:Math.max(getScrollLimit()-offsetLeft+6,0)+'px',width:getTypeWidth('right')+'px',height:footerHeight+'px'}">
+				<div class="header-row" :style="{height:footerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkRightFooter(item,index)">
-						<span>{{item.name}}</span>
+						<span :class="item.name===undefined?'transparent':''">{{item.name===undefined?"空":item.name}}</span>
 					</div>
 				</div>
 			</div>
@@ -143,20 +144,22 @@
 	export default{
 		name: "hw-table",
 		created(){
-			this.tableData = __merge(this.tableData, this.data);
-			trace('this.tableData', this.data);
 			this.$nextTick(() =>
 			{
 				this.$refs.scrollCon.addEventListener('scroll', (e) =>
 				{
 					this.offsetLeft = this.$refs.scrollCon.scrollLeft;
+					if (this.topIsLimit)
+					{
+						return;
+					}
 					this.offsetTop = this.$refs.scrollCon.scrollTop;
+
 				});
 			})
 		},
 		data(){
 			return {
-				tableData: {},
 				count: 1,
 //				direction: "vertical",
 				offsetLeft: 0,
@@ -164,7 +167,7 @@
 			}
 		},
 		props: {
-			data: {
+			tableData: {
 				type: Object,
 				default: function ()
 				{
@@ -234,6 +237,11 @@
 			rightCols()
 			{
 				return Math.min(this.rightFixedCols, this.rightFooterFixedCols)
+			},
+			topIsLimit()
+			{
+				var totalHeight = this.getContentHeight();
+				return totalHeight - this.offsetTop - this.bodyHeight <= 0;
 			}
 		},
 		methods: {
@@ -327,8 +335,6 @@
 			},
 			getTypeWidth($type)
 			{
-
-				debugger;
 				let width = 0;
 				const tmpArr = this.tableData.header.concat();
 				for (var item of tmpArr)
@@ -389,9 +395,9 @@
 				const width = this.getTypeWidth('total');
 				return width - this.boxWidth;
 			},
-			getRightLimit()
+			getContentHeight()
 			{
-
+				return this.tableData.body.length * this.eachRowHeight;
 			},
 			isEven($index)
 			{
@@ -425,8 +431,15 @@
 
 	.out-box {
 		font-size: 14px;
-		overflow: auto;
 		border: 1px solid #444444;
+	}
+
+	.auto {
+		overflow: auto;
+	}
+
+	.hidden {
+		overflow: hidden;
 	}
 
 	.header, .body {
@@ -531,7 +544,7 @@
 	}
 
 	.footer {
-		position: absolute;
+		position: relative;
 		border-top: 1px solid #444444;
 	}
 
@@ -545,6 +558,17 @@
 
 	.header-col, .body-col {
 		padding-left: 6px;
+	}
+
+	.transparent {
+		color: transparent;
+	}
+
+	.body-col span, .header-col span {
+		display: inline-block;
+		width: 50px;
+		text-align: center;
+		word-wrap: break-word;
 	}
 </style>
 

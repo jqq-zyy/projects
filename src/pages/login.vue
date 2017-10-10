@@ -251,9 +251,9 @@
 				g.net.call("user/adminLogin", this.logonObj).then(($data) =>
 				{
 					this.onSave_userInfo($data);
-					socketManager.connectSocket();
-
+//					socketManager.connectSocket();
 					g.data.save("loginTime", g.timeTool.getNowStamp());
+					g.event.dispatchEvent("APP_IS_LOGIN");
 				}, (err) =>
 				{
 					g.func.dealErr(err);

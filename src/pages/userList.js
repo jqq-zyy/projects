@@ -10,7 +10,10 @@ export default function (to, next)
 	obj.pageSize = 10;
 	obj.startTime = g.timeTool.getDate(startTime, true);
 	obj.endTime = obj.startTime;
-	getUserList(obj, next)
+	getUserList(obj).then(function ()
+	{
+		next();
+	})
 }
 export function getUserList($param)
 {
@@ -22,9 +25,11 @@ export function getUserList($param)
 			g.ui.hideLoading();
 			g.data.userPool.removeAll();
 			g.data.userPool.update($data);
+			resolved();
 		}, (err) =>
 		{
 			g.func.dealErr(err);
+			rejected();
 		});
 	})
 	return promise;
@@ -35,15 +40,23 @@ export function convertList($list)
 	var list = $list.concat();
 	for (var item  of list)
 	{
+		item.btn = [];
+		if (item.authStatus == 1)
+		{
+			item.btn.push({
+				id: "audit",
+				name: "审核"
+			})
+		}
+		else
+		{
+			item.btn.push({})
+		}
+		delete item.update;
+		delete item.authStatus;
 		delete item.freezeStatus;
-		delete item.auditStatus;
-		item.btn.push({
-			id: "forbid",
-			name: "禁用"
-		})
 	}
 	return list
-
 }
 
 export function getFooterList()
@@ -62,7 +75,7 @@ export function getFooterList()
 		qrcodeRefundAllNum: userPool.qrcodeRefundAllNum,
 		rpAllCurrentAccount: userPool.rpAllCurrentAccount,
 	};
-	trace(target)
+
 	var tmpList = getTmpList();
 	for (var tmpItem of tmpList)
 	{
@@ -79,8 +92,12 @@ export function getFooterList()
 			}
 		}
 	}
+	for (var i = 0; i < 6; i++)
+	{
+		tmpList.splice(1, 0, {})
+	}
+	tmpList.push({});
 	return tmpList;
-
 	function getTmpList()
 	{
 		var results = [];
