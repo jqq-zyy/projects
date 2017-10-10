@@ -20,7 +20,9 @@
 			<!--<span v-for="item in pageSizeList" @click="onClick_changePageSizeBtn(item)"-->
 			<!--:class="[item == currentPageSize?'selected-style':'']">{{item}}</span>-->
 			<div class="page-size">
-				<span class="size-choosed pointer">10</span><span class="pointer">25</span>
+				<span v-for="item in pageSizeList" @click="onClick_changeSize(item)" class="pointer" :class="{'size-choosed':currentPageSize==item}"> {{item}}</span>
+				<!--<span class="size-choosed pointer" @click="onClick_changeSize(10)">10</span><span class="pointer">25</span>-->
+
 			</div>
 		</div>
 	</div>
@@ -138,6 +140,10 @@
 			upDateOrder: function ()
 			{
 				this.$emit('change', this.indexPage, this.currentPageSize);
+			},
+			onClick_changeSize:function($size){
+				this.currentPageSize = $size;
+				this.upDateOrder();
 			}
 		}
 	}

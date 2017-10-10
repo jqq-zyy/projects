@@ -89,6 +89,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('userId') && (this.id = $dObj.userId);
 	$dObj.hasOwnProperty('logon') && (this.userName = $dObj.logon);
 	$dObj.hasOwnProperty('roleName') && (this.roleName = $dObj.roleName);
+	$dObj.hasOwnProperty('roleId') && (this.roleId = $dObj.roleId);
 	$dObj.hasOwnProperty('telphone') && (this.telphone = $dObj.telphone);
 	$dObj.hasOwnProperty('userStatus') && (this.userStatus = $dObj.userStatus);
 	$dObj.hasOwnProperty('userStatusDesc') && (this.userStatusDesc = $dObj.userStatusDesc);

@@ -5,9 +5,6 @@ import g from '../global';
 export default function (to, next)
 {
 	g.ui.showLoading();
-	var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
-	var startTimeStr = g.timeTool.getDate(startTime, true);
-	var endTimeStr = startTimeStr;
 	g.net.call("order/queryPlatformAccountOverview" ).then(($data) =>
 	{
 		g.ui.hideLoading();

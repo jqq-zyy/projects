@@ -4,14 +4,22 @@
 export default function (to, next)
 {
 	var id = to.query.id;
+	queryShopDetail(id,next)
+}
+
+export function queryShopDetail($id,$callBack){
 	g.net.call("user/queryShopDetail",{
-		"shopId":id
+		"shopId":$id
 	}).then(($data) =>
 	{
+		g.data.userDetailPool.removeAll();
 		g.data.userDetailPool.update($data);
-		next();
+		$callBack();
 	}, (err) =>
 	{
 		g.func.dealErr(err);
 	});
 }
+
+
+

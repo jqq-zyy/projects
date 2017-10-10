@@ -417,8 +417,9 @@ li, ul {
   border-radius: 2px;
 }
 .bg-btn:hover{
-  color:#0582b5;
+  background: #0582b5;
 }
+
 .position {
   position: relative;
 }
@@ -531,7 +532,7 @@ li, ul {
   font-size: 14px;
 }
 
-.hb-fill-middle2-bg::before {
+/*.hb-fill-middle2-bg::before {
   position: absolute;
   content: "";
   transition-duration: 0.3s;
@@ -639,7 +640,7 @@ li, ul {
 
 .hb-fill-middle2-rev:hover::after {
   width: 0;
-}
+}*/
 
 .clearfix {
   clear: both;
@@ -712,10 +713,14 @@ li, ul {
 		float: left;
 		.date-del {
 		  position: absolute;
-		  right: 10px;
-		  top: 2px;
+		  right: 0;
+		  top: 8px;
 		  cursor: pointer;
 		  color: #333333;
+		  z-index: 9999;
+		  width: 20px;
+		  height: 38px;
+		  line-height: 38px;
 		}
 	  }
 	  .date-input {
@@ -877,4 +882,10 @@ li, ul {
 	  }
 	}
   }
+}
+
+.blue_underline {
+  color: #01aaef;
+  text-decoration: underline;
+
 }

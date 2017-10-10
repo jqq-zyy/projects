@@ -173,10 +173,10 @@
 										<td @click="onClick_userItem(item.id)"  class="first-td-child">{{item.id}}</td>
 										<td>{{item.createTime}}</td>
 										<td>{{item.name}}</td>
-										<td v-text="freezeContent(item.freezeStatus)"></td>
+										<td>{{item.freezeStatusDesc}}</td>
 										<td>{{item.logon}}</td>
 										<td>{{item.telphone}}</td>
-										<td v-text="authContent(item.authStatus)"></td>
+										<td >{{item.authStatusDesc}}</td>
 										<td>{{item.shopAmount}}</td>
 										<td>{{item.platformAmount}}</td>
 										<td>{{item.rpSendNum}}</td>
@@ -189,14 +189,14 @@
 										<td>{{item.rpCurrentAccount}}</td>
 										<td>
 											<span v-text="onConfirm_operation(item.freezeStatus)"
-												  @click="onClick_userItem(item.id)"></span>
-											<span v-show="item.authStatus=1"
-												  @click="onClick_lookItem(item.id)">审核</span>
+												  @click="onClick_userItem(item.id)" class="pointer blue-content"></span>
+											<span v-show="item.authStatus==1"
+												  @click="onClick_lookItem(item.id)" class="pointer blue-content">审核</span>
 										</td>
 									</tr>
 									</tbody>
 									<tfoot>
-									<tr>
+									<tr v-show="userList.length>0">
 										<td colspan="7"></td>
 										<td>{{modelObj.shopAllAmount}}</td>
 										<td>{{modelObj.platformAllAmount}}</td>
@@ -214,8 +214,9 @@
 								</table>
 							</div>
 							<common-page :index="searchObj.page" :total="totalPage"
-										 @change="onChange_searchItem" v-show="totalPage>1"></common-page>
+										 @change="onChange_searchItem" v-show="userList.length>0"></common-page>
 							<common-prompt v-show="userList.length==0"></common-prompt>
+
 						</div>
 						<common-footer></common-footer>
 
@@ -258,7 +259,7 @@
 				searchObj: {},
 				userList: [],
 				modelObj: {},
-				totalPage: 10,
+				totalPage: 0,
 				currentType: "",
 				inputContent: "",
 				typeList: [
@@ -471,12 +472,6 @@
 				this.freezeCount = Number(this.freezeCount) + Number($refundCount);
 				this.onChange_searchItem(1)
 			},
-			freezeContent($type){
-				return this.freezeStatusList[$type]
-			},
-			authContent($type){
-				return this.authStatusList[$type - 0 + 1]
-			},
 			onConfirm_operation($type){
 				if ($type == 1)
 				{
@@ -499,6 +494,7 @@
 				g.url = ("/userdetail?id=" + $id)
 
 			}
+
 		}
 	}
 </script>
@@ -516,6 +512,15 @@
 		border: 1px solid #01aaef;
 
 	}
+	.first-td-child{
+		color:#01aaef;
+		text-decoration: underline
+
+	}
+	.blue-content{
+		color:#01aaef;
+	}
+
 </style>
 
 

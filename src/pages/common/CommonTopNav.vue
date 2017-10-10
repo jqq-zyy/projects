@@ -70,13 +70,14 @@
 
 			onClick_loginOutBtn: function ()
 			{
-				g.net.call("user/userLoginOut").then((d)=>
+				g.net.call("user/adminLoginOut").then((d)=>
 				{
 					LoginManager.logout(true, true);
 				}, (err)=>
 				{
 					g.func.dealErr(err);
 				});
+
 
 			},
 			onClick_modPwdBtn(){
@@ -126,7 +127,6 @@
 	.admin div:hover {
 		background: #cccccc;
 	}
-
 	.new-message-box {
 		min-width: 250px;
 		font-size: 12px;

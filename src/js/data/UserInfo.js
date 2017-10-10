@@ -134,6 +134,25 @@ export default class UserInfo {
 	{
 		return _roleId;
 	}
+	removeAll(){
+		_id = "";
+		_name = "";
+		_email = "";
+		_tel = "";
+		_contacts = "";
+		_fullName = "";
+		_logo = "";
+		_license = "";
+		_imagA = "";
+		_imagB = "";
+		_auditStatus = 0;
+		_taxImg = "";
+		_organizeImg = "";
+		_brandName = "";
+		_warrantImg = "";
+		_roleName = "";
+		_roleId = "";
+	}
 }
 
 

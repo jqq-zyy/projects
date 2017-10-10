@@ -190,8 +190,13 @@
 								</table>
 							</div>
 							<common-page :index="dataObj.page" :total="totalPage"
-										 @change="onChange_currentPage" v-show="totalPage>1"></common-page>
+										 @change="onChange_currentPage" v-show="bagDetailList.length>0"></common-page>
 							<common-prompt v-show="bagDetailList.length==0"></common-prompt>
+
+
+
+
+
 						</div>
 						<common-footer></common-footer>
 					</div>

@@ -3,7 +3,7 @@
  */
 export default function (to, next)
 {
-	g.net.calls("permission/getRoleListByShop","permission/getPermissionList").then(($list) =>
+	g.net.calls("permission/getRoleListByAdmin","permission/getPermissionList").then(($list) =>
 	{
 		g.data.rolePool.update($list[0]);
 		g.data.powerPool.update($list[1]);
@@ -14,7 +14,7 @@ export default function (to, next)
 	});
 }
 export function getRoleList($callback){
-	g.net.call("permission/getRoleListByShop").then(($obj) =>
+	g.net.call("permission/getRoleListByAdmin").then(($obj) =>
 	{
 		g.data.rolePool.update($obj);
 		$callback();
@@ -22,4 +22,5 @@ export function getRoleList($callback){
 	{
 		g.func.dealErr(err);
 	});
+	
 }

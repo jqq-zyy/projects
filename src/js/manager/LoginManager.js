@@ -28,9 +28,6 @@ function initLocalStorage($callback)
 		{
 			goLogin(false);
 			$callback();
-
-
-
 			//g.func.getUnreadMsg($callback);
 		}, (error)=>
 		{

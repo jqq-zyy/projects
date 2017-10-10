@@ -63,7 +63,6 @@
                     </div>
                 </div>
             </div>
-
             <!--账户余额报警门槛-->
             <transition name="bounce">
                 <div class="affix-box default-pos-type" v-show="isShow_refusePop === 'plat-money'">
@@ -90,7 +89,7 @@
             <!--设置二维码单价-->
             <transition name="bounce">
                 <div class="affix-box default-pos-type" v-show="isShow_refusePop === 'ewm-price'">
-                    <set-unit-price-pop></set-unit-price-pop>
+                    <set-unit-price-pop @init="init" @close="onClick_closeBtn" ></set-unit-price-pop>
                 </div>
             </transition>
 

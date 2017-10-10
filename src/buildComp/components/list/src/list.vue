@@ -11,7 +11,7 @@
 						:iconClass="checkedChildren.indexOf(itemData.id) >= 0?'icon-fangxingxuanzhong':'icon-fangxingweixuanzhong'"
 						@click="onClick_icon(itemData)"
 				></hw-icon>
-				<span v-if="itemData.name">{{itemData.name}}</span>
+				<span v-if="itemData.name" @click="onClick_icon(itemData)">{{itemData.name}}</span>
 				<img :src="itemData.url" :alt="itemData.alt" v-if="itemData.url">
 			</div>
 			<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft">

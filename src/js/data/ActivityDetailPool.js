@@ -10,6 +10,8 @@ var _totalMakedRpCount = 0;
 var _activityInfo = {};
 var _activityRpInfo = {};
 var _activityRules = [];
+var _memberRules = [];
+var _regionRules = [];
 
 export default class ActivityDetailPool {
 	constructor()
@@ -25,6 +27,8 @@ export default class ActivityDetailPool {
 		$dObj.hasOwnProperty('activityInfo') && (_activityInfo = $dObj.activityInfo);
 		$dObj.hasOwnProperty('activityRpInfo') && (_activityRpInfo = $dObj.activityRpInfo);
 		$dObj.hasOwnProperty('activityRules') && (_activityRules = $dObj.activityRules);
+		$dObj.hasOwnProperty('memberRules') && (_memberRules = $dObj.memberRules);
+		$dObj.hasOwnProperty('regionRules') && (_regionRules = $dObj.regionRules);
 	}
 
 	get totalQrCodeNum()
@@ -61,6 +65,15 @@ export default class ActivityDetailPool {
 	{
 		return _activityRules
 	}
+	get memberRules()
+	{
+		return _memberRules
+	}
+
+	get regionRules()
+	{
+		return _regionRules
+	}
 
 	removeAll()
 	{
@@ -73,5 +86,9 @@ export default class ActivityDetailPool {
 		_activityInfo = {};
 		_activityRpInfo = {};
 		_activityRules = [];
+		_memberRules = [];
+		_regionRules = [];
 	}
 }
+
+

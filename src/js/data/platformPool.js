@@ -88,6 +88,12 @@ export default class PlatformPool {
 	{
 		_list = [];
 		_hash = Object.create(null);
+		_totalPage = 0;
+		_total = 0;
+		_totalIncome = 0;
+		_totalDisburse = 0;
+		_balance = 0;
+		_typeData = {};
 	}
 }
 

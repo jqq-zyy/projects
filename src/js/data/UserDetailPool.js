@@ -39,10 +39,14 @@ export default class UserDetailPool {
 		$obj.hasOwnProperty('rpAccountRechargeAmount') && (_hash.rpRechargeAmount = $obj.rpAccountRechargeAmount);
 		$obj.hasOwnProperty('rpAccountRefundTime') && (_hash.rpRefundTime = $obj.rpAccountRefundTime);
 		$obj.hasOwnProperty('rpAccountRefundAmount') && (_hash.rpRefundAmount = $obj.rpAccountRefundAmount);
+		$obj.hasOwnProperty('auditRecordId') && (_hash.auditRecordId = $obj.auditRecordId);
 	}
 	get hash()
 	{
 		return _hash;
+	}
+	removeAll(){
+		 _hash = Object.create(null);
 	}
 
 }

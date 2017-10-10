@@ -2,13 +2,8 @@
  * Created by Hjai on 17/1/11.
  */
 var _list = [];
-var _unReadlist = [];
 var _hash = Object.create(null);
 var _totalPage = 0;
-var _unreadCount = 0;
-var _readCount = 0;
-
-//var _count = 0;
 
 export default class MessagePool {
 	constructor()
@@ -17,10 +12,8 @@ export default class MessagePool {
 
 	update($dObj)
 	{
-		$dObj.resultPageList.hasOwnProperty('totalPage') && (_totalPage = $dObj.resultPageList.totalPage);
-		$dObj.hasOwnProperty('unreadCount') && (_unreadCount = $dObj.unreadCount);
-		$dObj.hasOwnProperty('alreadyReadCount') && (_readCount = $dObj.alreadyReadCount);
-		for (var item of $dObj.resultPageList.data)
+		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
+		for (var item of $dObj.data)
 		{
 			this.add(item,$dObj.count);
 		}
@@ -31,9 +24,6 @@ export default class MessagePool {
 		var itemData = createData($dObj);
 		if (!_hash[itemData.id])
 		{
-//			if(itemData.status == 0){
-//				_unReadlist.push(itemData)
-//			}
 			_list.push(itemData);
 			_hash[itemData.id] = itemData;
 		}
@@ -52,23 +42,10 @@ export default class MessagePool {
 	{
 		return _list;
 	}
-
-//	get unReadList()
-//	{
-//		return _unReadlist;
-//	}
-
+	
 	get totalPage()
 	{
 		return _totalPage;
-	}
-	get unreadCount()
-	{
-		return _unreadCount;
-	}
-	get readCount()
-	{
-		return _readCount;
 	}
 
 	getDataById($id)
@@ -88,11 +65,12 @@ function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
-	d.title = "";
-	d.content = "";
-	d.type = "";
-	d.time = "";
-	d.status = 0;
+	d.createTime = "";
+	d.applyUserLogon = "";
+	d.pendTypeDesc = "";
+	d.companyFullName = "";
+	d.pendType = 0;
+	d.shopId = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -100,12 +78,13 @@ function createData($dObj)
 
 function updateData($dObj)
 {
-	$dObj.hasOwnProperty('msgId') && (this.id = $dObj.msgId);
-	$dObj.hasOwnProperty('msgTitle') && (this.title = $dObj.msgTitle);
-	$dObj.hasOwnProperty('msgContent') && (this.content = $dObj.msgContent);
-	$dObj.hasOwnProperty('msgType') && (this.type = $dObj.msgType);
-	$dObj.hasOwnProperty('sendTime') && (this.time = $dObj.sendTime);
-	$dObj.hasOwnProperty('status') && (this.status = $dObj.status);
+	$dObj.hasOwnProperty('pendId') && (this.id = $dObj.pendId);
+	$dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
+	$dObj.hasOwnProperty('applyUserLogon') && (this.applyUserLogon = $dObj.applyUserLogon);
+	$dObj.hasOwnProperty('pendTypeDesc') && (this.pendTypeDesc = $dObj.pendTypeDesc);
+	$dObj.hasOwnProperty('companyFullName') && (this.companyFullName = $dObj.companyFullName);
+	$dObj.hasOwnProperty('pendType') && (this.pendType = $dObj.pendType);
+	$dObj.hasOwnProperty('shopId') && (this.shopId = $dObj.shopId);
 }
 
 

@@ -17,165 +17,186 @@ var _qrcodeRefundAllNum = 0;
 var _rpAllCurrentAccount = 0;
 
 export default class UserPool {
-	constructor()
-	{
-	}
+    constructor() {
+    }
 
-	update($obj)
-	{
-		var model = $obj.model;
-		$obj.hasOwnProperty('total') && (_total = $obj.total);
-		$obj.hasOwnProperty('totalPage') && (_totalPage = $obj.totalPage);
 
-		if (model)
-		{
-			model.hasOwnProperty('shopAllAmount') && (_shopAllAmount = $obj.shopAllAmount);
-			model.hasOwnProperty('platformAllAmount') && (_platformAllAmount = model.platformAllAmount);
-			model.hasOwnProperty('rpSendAllNum') && (_rpSendAllNum = model.rpSendAllNum);
-			model.hasOwnProperty('qrcodeScanAllNum') && (_qrcodeScanAllNum = model.qrcodeScanAllNum);
-			model.hasOwnProperty('qrcodeBindAllNum') && (_qrcodeBindAllNum = model.qrcodeBindAllNum);
-			model.hasOwnProperty('qrcodeExportAllNum') && (_qrcodeExportAllNum = model.qrcodeExportAllNum);
-			model.hasOwnProperty('qrcodeUnExportAllNum') && (_qrcodeUnExportAllNum = model.qrcodeUnExportAllNum);
-			model.hasOwnProperty('qrcodeBuyAllNum') && (_qrcodeBuyAllNum = model.qrcodeBuyAllNum);
-			model.hasOwnProperty('qrcodeRefundAllNum') && (_qrcodeRefundAllNum = model.qrcodeRefundAllNum);
-			model.hasOwnProperty('rpAllCurrentAccount') && (_rpAllCurrentAccount = model.rpAllCurrentAccount);
-		}
+    update($obj) {
+        var model = $obj.model;
+        $obj.hasOwnProperty('total') && (_total = $obj.total);
+        $obj.hasOwnProperty('totalPage') && (_totalPage = $obj.totalPage);
+        if (model) {
+            model.hasOwnProperty('shopAllAmount') && (_shopAllAmount = $obj.shopAllAmount);
+            model.hasOwnProperty('platformAllAmount') && (_platformAllAmount = model.platformAllAmount);
+            model.hasOwnProperty('rpSendAllNum') && (_rpSendAllNum = model.rpSendAllNum);
+            model.hasOwnProperty('qrcodeScanAllNum') && (_qrcodeScanAllNum = model.qrcodeScanAllNum);
+            model.hasOwnProperty('qrcodeBindAllNum') && (_qrcodeBindAllNum = model.qrcodeBindAllNum);
+            model.hasOwnProperty('qrcodeExportAllNum') && (_qrcodeExportAllNum = model.qrcodeExportAllNum);
+            model.hasOwnProperty('qrcodeUnExportAllNum') && (_qrcodeUnExportAllNum = model.qrcodeUnExportAllNum);
+            model.hasOwnProperty('qrcodeBuyAllNum') && (_qrcodeBuyAllNum = model.qrcodeBuyAllNum);
+            model.hasOwnProperty('qrcodeRefundAllNum') && (_qrcodeRefundAllNum = model.qrcodeRefundAllNum);
+            model.hasOwnProperty('rpAllCurrentAccount') && (_rpAllCurrentAccount = model.rpAllCurrentAccount);
+        }
 
-		for (var item of $obj.data)
-		{
-			this.add(item);
-		}
-	}
+        for (var item of $obj.data) {
+            this.add(item);
+        }
+    }
 
-	add($dObj)
-	{
-		var itemData = createData($dObj);
-		if (!_hash[itemData.id])
-		{
-			_hash[itemData.id] = itemData;
-			_list.push(itemData);
-		}
-	}
+    add($dObj) {
+        var itemData = createData($dObj);
+        if (!_hash[itemData.id]) {
+            _hash[itemData.id] = itemData;
+            _list.push(itemData);
+        }
+    }
 
-	remove($id)
-	{
-		var index = _list.indexOf(_hash[$id]);
-		if (index != -1)
-		{
-			_list.splice(index, 1);
-		}
-	}
+    remove($id) {
+        var index = _list.indexOf(_hash[$id]);
+        if (index != -1) {
+            _list.splice(index, 1);
+        }
+    }
 
-	get list()
-	{
-		return _list;
-	}
+    get list() {
+        return _list;
+    }
 
-	get shopAllAmount()
-	{
-		return _shopAllAmount;
-	}
+    get shopAllAmount() {
+        return _shopAllAmount;
+    }
 
-	get platformAllAmount()
-	{
-		return _platformAllAmount;
-	}
+    get platformAllAmount() {
+        return _platformAllAmount;
+    }
 
-	get rpSendAllNum()
-	{
-		return _rpSendAllNum;
-	}
+    get rpSendAllNum() {
+        return _rpSendAllNum;
+    }
 
-	get qrcodeScanAllNum()
-	{
-		return _qrcodeScanAllNum;
-	}
+    get qrcodeScanAllNum() {
+        return _qrcodeScanAllNum;
+    }
 
-	get qrcodeBindAllNum()
-	{
-		return _qrcodeBindAllNum;
-	}
+    get qrcodeBindAllNum() {
+        return _qrcodeBindAllNum;
+    }
 
-	get qrcodeExportAllNum()
-	{
-		return _qrcodeExportAllNum;
-	}
+    get qrcodeExportAllNum() {
+        return _qrcodeExportAllNum;
+    }
 
-	get qrcodeUnExportAllNum()
-	{
-		return _qrcodeUnExportAllNum;
-	}
+    get qrcodeUnExportAllNum() {
+        return _qrcodeUnExportAllNum;
+    }
 
-	get qrcodeBuyAllNum()
-	{
-		return _qrcodeBuyAllNum;
-	}
+    get qrcodeBuyAllNum() {
+        return _qrcodeBuyAllNum;
+    }
 
-	get qrcodeRefundAllNum()
-	{
-		return _qrcodeRefundAllNum;
-	}
+    get qrcodeRefundAllNum() {
+        return _qrcodeRefundAllNum;
+    }
 
-	get rpAllCurrentAccount()
-	{
-		return _rpAllCurrentAccount;
-	}
+    get rpAllCurrentAccount() {
+        return _rpAllCurrentAccount;
+    }
 
-	getDataById($id)
-	{
-		return _hash[$id];
-	}
+    get totalPage() {
+        return _totalPage;
+    }
 
-	removeAll()
-	{
-		_list = [];
-		_hash = Object.create(null);
-	}
+    get total() {
+        return _total;
+    }
+
+    getDataById($id) {
+        return _hash[$id];
+    }
+
+    removeAll() {
+        _list = [];
+        _hash = Object.create(null);
+        _total = 0;
+        _totalPage = 0;
+        _shopAllAmount = 0;
+        _platformAllAmount = 0;
+        _rpSendAllNum = 0;
+        _qrcodeScanAllNum = 0;
+        _qrcodeBindAllNum = 0;
+        _qrcodeExportAllNum = 0;
+        _qrcodeUnExportAllNum = 0;
+        _qrcodeBuyAllNum = 0;
+        _qrcodeRefundAllNum = 0;
+        _rpAllCurrentAccount = 0;
+    }
 }
 
-function createData($dObj)
-{
-	var d = {};
-	d.id = 0;
-	d.createTime = '';
-	d.name = '';
-	d.freezeStatus = 0;
-	d.logon = "";
-	d.telphone = "";
-	d.authStatus = 0;
-	d.shopAmount = 0;
-	d.platformAmount = 0;
-	d.rpSendNum = 0;
-	d.qrcodeScanNum = 0;
-	d.qrcodeBindNum = 0;
-	d.qrcodeExportNum = 0;
-	d.qrcodeUnExportNum = 0;
-	d.qrcodeBuyNum = 0;
-	d.qrcodeRefundNum = 0;
-	d.rpCurrentAccount = 0;
-	d.update = updateData.bind(d);
-	d.update($dObj);
-	return d;
+function createData($dObj) {
+    var d = {};
+    d.id = 0;
+    d.createTime = '';
+    d.name = '';
+    d.freezeStatus = 0;
+    d.logon = "";
+    d.telphone = "";
+    d.authStatus = 0;
+    d.shopAmount = 0;
+    d.platformAmount = 0;
+    d.rpSendNum = 0;
+    d.qrcodeScanNum = 0;
+    d.qrcodeBindNum = 0;
+    d.qrcodeExportNum = 0;
+    d.qrcodeUnExportNum = 0;
+    d.qrcodeBuyNum = 0;
+    d.qrcodeRefundNum = 0;
+    d.rpCurrentAccount = 0;
+    d.authStatusDesc = "";
+    d.freezeStatusDesc = "";
+    d.btn = [];
+    d.update = updateData.bind(d);
+    d.update($dObj);
+    return d;
 }
 
-function updateData($dObj)
-{
-	$dObj.hasOwnProperty('shopId') && (this.id = $dObj.shopId);
-	$dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
-	$dObj.hasOwnProperty('companyFullName') && (this.name = $dObj.companyFullName);
-	$dObj.hasOwnProperty('freezeStatus') && (this.freezeStatus = $dObj.freezeStatus);
-	$dObj.hasOwnProperty('logon') && (this.logon = $dObj.logon);
-	$dObj.hasOwnProperty('telphone') && (this.telphone = $dObj.telphone);
-	$dObj.hasOwnProperty('authStatus') && (this.authStatus = $dObj.authStatus);
-	$dObj.hasOwnProperty('shopAmount') && (this.shopAmount = $dObj.shopAmount);
-	$dObj.hasOwnProperty('platformAmount') && (this.platformAmount = $dObj.platformAmount);
-	$dObj.hasOwnProperty('rpSendNum') && (this.rpSendNum = $dObj.rpSendNum);
-	$dObj.hasOwnProperty('qrcodeScanNum') && (this.qrcodeScanNum = $dObj.qrcodeScanNum);
-	$dObj.hasOwnProperty('qrcodeBindNum') && (this.qrcodeBindNum = $dObj.qrcodeBindNum);
-	$dObj.hasOwnProperty('qrcodeExportNum') && (this.qrcodeExportNum = $dObj.qrcodeExportNum);
-	$dObj.hasOwnProperty('qrcodeUnExportNum') && (this.qrcodeUnExportNum = $dObj.qrcodeUnExportNum);
-	$dObj.hasOwnProperty('qrcodeBuyNum') && (this.qrcodeBuyNum = $dObj.qrcodeBuyNum);
-	$dObj.hasOwnProperty('qrcodeRefundNum') && (this.qrcodeRefundNum = $dObj.qrcodeRefundNum);
-	$dObj.hasOwnProperty('rpCurrentAccount') && (this.rpCurrentAccount = $dObj.rpCurrentAccount);
+function updateData($dObj) {
+    $dObj.hasOwnProperty('shopId') && (this.id = $dObj.shopId);
+    $dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
+    $dObj.hasOwnProperty('companyFullName') && (this.name = $dObj.companyFullName);
+    $dObj.hasOwnProperty('freezeStatus') && (this.freezeStatus = $dObj.freezeStatus);
+    $dObj.hasOwnProperty('freezeStatusDesc') && (this.freezeStatusDesc = $dObj.freezeStatusDesc);
+    $dObj.hasOwnProperty('logon') && (this.logon = $dObj.logon);
+    $dObj.hasOwnProperty('telphone') && (this.telphone = $dObj.telphone);
+    $dObj.hasOwnProperty('authStatus') && (this.authStatus = $dObj.authStatus);
+    $dObj.hasOwnProperty('authStatusDesc') && (this.authStatusDesc = $dObj.authStatusDesc);
+    $dObj.hasOwnProperty('shopAmount') && (this.shopAmount = $dObj.shopAmount);
+    $dObj.hasOwnProperty('platformAmount') && (this.platformAmount = $dObj.platformAmount);
+    $dObj.hasOwnProperty('rpSendNum') && (this.rpSendNum = $dObj.rpSendNum);
+    $dObj.hasOwnProperty('qrcodeScanNum') && (this.qrcodeScanNum = $dObj.qrcodeScanNum);
+    $dObj.hasOwnProperty('qrcodeBindNum') && (this.qrcodeBindNum = $dObj.qrcodeBindNum);
+    $dObj.hasOwnProperty('qrcodeExportNum') && (this.qrcodeExportNum = $dObj.qrcodeExportNum);
+    $dObj.hasOwnProperty('qrcodeUnExportNum') && (this.qrcodeUnExportNum = $dObj.qrcodeUnExportNum);
+    $dObj.hasOwnProperty('qrcodeBuyNum') && (this.qrcodeBuyNum = $dObj.qrcodeBuyNum);
+    $dObj.hasOwnProperty('qrcodeRefundNum') && (this.qrcodeRefundNum = $dObj.qrcodeRefundNum);
+    $dObj.hasOwnProperty('rpCurrentAccount') && (this.rpCurrentAccount = $dObj.rpCurrentAccount);
+    // var obj = {
+    //     id: 0,
+    //     name: ""
+    // };
+    // if ($dObj.hasOwnProperty('freezeStatus') == 1) {
+    //     obj.id = 0;
+    //     obj.name = "冻结"
+    //     this.btn.push(obj);
+    // } else {
+    //     obj.id = 1;
+    //     obj.name = "解冻"
+    //     this.btn.push(obj);
+    // }
+    //
+    // if($dObj.hasOwnProperty('authStatus') == 1){
+    //     obj.id = 'auth';
+    //     obj.name = "审核"
+    //     this.btn.push(obj);
+    // }
 
 }

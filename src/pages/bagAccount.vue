@@ -137,18 +137,19 @@
 										<td>{{item.orderAmount}}</td>
 										<td>{{item.payWayDesc}}</td>
 										<td>{{item.orderStatusDesc}}</td>
-										<td>{{item.qrCodeNum}}</td>
+										<td>{{item.applyUserLogon}}</td>
 										<td>{{item.createTime}}</td>
 										<td>{{item.companyFullName}}</td>
 										<td>
-												<span @click="onClick_qrcodeItem(item.id)"
+												<span class ="blue_underline pointer"@click="onClick_qrcodeItem(item.id)"
 													  v-show="item.orderStatus==1">审核
 												</span>
 										</td>
+
 									</tr>
 									</tbody>
 									<tfoot>
-									<tr>
+									<tr v-show="bagList.length>0">
 										<td colspan="2"></td>
 										<td>{{rpAmount}}</td>
 										<td colspan="6"></td>
@@ -157,13 +158,45 @@
 								</table>
 							</div>
 							<common-page :index="dataObj.page" :total="totalPage"
-										 @change="onChange_currentPage" v-show="totalPage>1"></common-page>
+										 @change="onChange_currentPage" v-show="bagList.length>=1"></common-page>
 							<common-prompt v-show="bagList.length==0"></common-prompt>
 						</div>
 						<common-footer></common-footer>
 					</div>
 				</div>
 			</div>
+			<transition name="bounce">
+				<div class="affix-box default-pos-type" v-show="isShow_refusePop">
+					<div class="pop-edit-password pop-edit">
+						<div class="show-close-btn">
+							<img :src="g.config.path.images+'/close.png'"
+								 @click="onClick_closeBtn"/>
+						</div>
+						<div class="pop-tit"></div>
+						<div class="pop-body">
+							<div>审核退款申请：
+								<label><input type="radio" v-model="auditStatus" value="2">通过申请</label>
+								<label><input type="radio" v-model="auditStatus" value="-1">拒绝申请</label>
+							</div>
+							<div class="m-title" v-show="auditStatus==-1"><span class="name">请输入拒绝原因：</span>
+								<textarea name="" id="" cols="30" rows="10" class="describle-reasons"
+										  v-model="refuseContent" @focus="onFocus_refuseInput"></textarea>
+								<div v-show="isShow_hasError">拒绝原因不能为空</div>
+							</div>
+
+							<div class="m-title button-box" v-show="auditStatus==-1">
+								<div class="save-button pointer bg-btn" @click="onClick_closeBtn">暂不拒绝</div>
+								<div class="save-button pointer bg-btn" @click="onClick_sumbitBtn">确认拒绝并告知商户</div>
+							</div>
+							<div class="m-title button-box" v-show="auditStatus==2">
+								<div class="save-button pointer bg-btn" @click="onClick_closeBtn">暂不通过</div>
+								<div class="save-button pointer bg-btn" @click="onClick_sumbitBtn">确认通过并告知商户</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</transition>
 		</div>
 	</main-layout>
 </template>
@@ -188,6 +221,8 @@
 				isShow_dropList: false,
 				isShowStartTime: false,
 				isShowEndTime: false,
+				isShow_hasError: false,
+				isShow_refusePop:false,
 				g: g,
 				totalPage: 1,
 				statusList: ["全部", "未付款","付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
@@ -214,10 +249,10 @@
 						name: '发起人'
 					}
 				],
-				resultTotalObj: {
-					qrcodeNum: 0,
-					qrcodeAmount: 0
-				}
+				rpAmount: 0,
+				currentId:0,
+				auditStatus: 2,
+				refuseContent: ""
 
 			}
 		},
@@ -251,9 +286,9 @@
 			initData(){
 				var info = g.data.bagPool;
 				this.totalPage = info.totalPage;
-				this.qrcodeList = info.list;
-				this.resultTotalObj.qrcodeNum = info.qrcodeNum;
-				this.resultTotalObj.qrcodeAmount = info.qrcodeAmount;
+				this.bagList = info.list;
+				this.rpAmount = info.rpAmount;
+
 			},
 			initSearchData(){
 				this.dataObj = {
@@ -288,8 +323,8 @@
 				}
 				g.net.call("order/queryRpAccountList", this.dataObj).then(($data) =>
 				{
-					g.data.qrcodePool.removeAll();
-					g.data.qrcodePool.update($data);
+					g.data.bagPool.removeAll();
+					g.data.bagPool.update($data);
 					if (this.currentType)
 					{
 						this.dataObj[this.currentType] = "";
@@ -370,6 +405,9 @@
 					this.isShow_dropList = true;
 				}
 			},
+			onClick_closeBtn(){
+				this.isShow_refusePop = false;
+			},
 			isCurrentType($type){
 				if (this.activityStatusList.indexOf($type) > -1)
 				{
@@ -426,8 +464,36 @@
 				this.isShowEndTime = false;
 			},
 
-			onClick_qrcodeItem($type){
 
+			onClick_qrcodeItem($id){
+				this.isShow_refusePop = true;
+				this.currentId = $id;
+
+			},
+			onClick_sumbitBtn(){
+				if (this.refuseContent.trim() == "")
+				{
+					this.isShow_hasError = true;
+					return
+				}
+				this.updateOrderAuth();
+			},
+			updateOrderAuth(){
+				g.net.call("order/updateOrderRefundAudit", {
+					"orderId": this.currentId,
+					"auditStatus":this.auditStatus,
+					"remark":this.refuseContent
+				}).then(($data) =>
+				{
+					this.isShow_refusePop = false;
+					this.onUpdate_qrcodeList();
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+				});
+			},
+			onFocus_refuseInput(){
+				this.isShow_hasError = false;
 			},
 			onClick_exportBtn(){
 

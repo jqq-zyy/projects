@@ -1,0 +1,98 @@
+[
+  {
+    "name": "商户ID",
+    "id": "id",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "创建时间",
+    "id": "createTime"
+  },
+  {
+    "name": "企业全称",
+    "id": "name"
+  },
+  {
+    "name": "运营状态",
+    "id": "freezeStatusDesc"
+  },
+  {
+    "name": "用户名",
+    "id": "logon"
+  },
+  {
+    "name": "手机号",
+    "id": "telphone"
+  },
+  {
+    "name": "认证状态",
+    "id": "authStatusDesc",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "商家红包金额",
+    "id": "shopAmount",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "平台红包金额",
+    "id": "platformAmount",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "平台红包发放数",
+    "id": "rpSendNum",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "扫码量",
+    "id": "qrcodeScanNum",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "绑定二维码数",
+    "id": "qrcodeBindNum",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "导出二维码数",
+    "id": "qrcodeExportNum",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "未导出二维码数",
+    "id": "qrcodeUnExportNum",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "已购二维码数",
+    "id": "qrcodeBuyNum",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "退款二维码数",
+    "id": "qrcodeRefundNum",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "红包账户余额",
+    "id": "rpCurrentAccount",
+    "sortBy": "desc",
+    "params": "create_time"
+  },
+  {
+    "name": "操作",
+    "id": "action"
+  }
+]

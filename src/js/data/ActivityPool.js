@@ -120,10 +120,10 @@ function createData($dObj)
 	d.brandName = '';
 	d.activityStatus = 0;
 	d.activityStatusDesc = 0;
-	d.createTime = 0;
-	d.startTime = 0;
-	d.endTime = 0;
-	d.createTime = 0;
+	d.createTime = "";
+	d.startTime = "";
+	d.endTime = "";
+	d.createTime = "";
 	d.createTimeDesc = 0;
 	d.qrCodeNum = 0;
 	d.totalScanCount = 0;
@@ -149,5 +149,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('totalScanCount') && (this.totalScanCount = $dObj.totalScanCount);
 	$dObj.hasOwnProperty('useRpAmount') && (this.useRpAmount = $dObj.useRpAmount);
 	$dObj.hasOwnProperty('useRpAmountDesc') && (this.useRpAmountDesc = $dObj.useRpAmountDesc);
+	$dObj.hasOwnProperty('activityStartTimeDesc') && (this.startTime = $dObj.activityStartTimeDesc);
+	$dObj.hasOwnProperty('activityEndTimeDesc') && (this.endTime = $dObj.activityEndTimeDesc);
 
 }

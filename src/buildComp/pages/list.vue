@@ -397,10 +397,6 @@
 			onChange_list($data)
 			{
 				trace(JSON.stringify($data, null, 4));
-			},
-			onChange_treeMenu($data)
-			{
-				trace('onChange_treeMenu', JSON.stringify($data, null, 4))
 			}
 		}
 	}

@@ -9,7 +9,7 @@
 
 						<div class="right-body ">
 							<p class="g-title">查看信息</p>
-							<div class="mod-box">注册手机号：13811111111 <span class="button pointer border-btn" @click="onClick_modPwdBtn">修改密码</span>
+							<div class="mod-box">注册手机号：{{tel}} <span v-if="!tel">暂无</span><span class="button pointer border-btn" @click="onClick_modPwdBtn">修改密码</span>
 							</div>
 						</div>
 						<common-footer></common-footer>
@@ -31,21 +31,21 @@
 						<div class="pop-body">
 							<div class="m-title">
 								<span class="name ">旧密码：</span>
-								<input type="text"
-									   placeholder="">
+								<input type="password"
+									   placeholder="" v-model="oldPwd">
 							</div>
 							<div class="m-title">
 								<span class="name">新密码：</span>
-								<input class="input-code" type="text"
-									   placeholder="">
+								<input class="input-code" type="password"
+									   placeholder="" v-model="newPwd">
 							</div>
 							<div class="m-title">
 								<span class="name">确认密码：</span>
-								<input class="input-code" type="text"
-									   placeholder="">
+								<input class="input-code" type="password"
+									   placeholder="" v-model="confirmPwd">
 							</div>
 							<div class="m-title">
-								<span class="pointer save-mod bg-btn hb-fill-middle2-rev">保存修改</span>
+								<span class="pointer save-mod bg-btn hb-fill-middle2-rev" @click="onClick_saveBtn">保存修改</span>
 							</div>
 						</div>
 					</div>
@@ -66,12 +66,14 @@
 	export default {
 		created(){
 			this.isLoad = true;
+			this.init();
 		},
 		data(){
 			return {
 				isLoad: false,
 				g: g,
 				isShow_modPwdfPop: false,
+				tel:"",
 				oldPwd: "",
 				newPwd: "",
 				confirmPwd: ""
@@ -84,15 +86,45 @@
 			CommonFooter
 		},
 		methods: {
+			init(){
+				this.tel = g.data.get("userInfo").telphone;
+			},
 			onClick_modPwdBtn:function(){
 				this.isShow_modPwdfPop = true;
 			},
 			onClick_closeBtn:function(){
 				this.isShow_modPwdfPop = false;
+			},
+			onClick_saveBtn(){
+				if (this.oldPwd == "" || this.newPwd == "" || this.confirmPwd == "")
+				{
+					g.ui.toast('填写全部信息');
+					return;
+				}
+				if (this.newPwd != this.confirmPwd)
+				{
+					g.ui.toast('新密码与确认密码不同');
+					return
+				}
+				g.net.call("user/updateAdminPassword", {
+					"userId": g.data.get("userInfo").userId,
+					"oldPassword": this.oldPwd,
+					"newPassword": sha256(this.newPwd)
+				}).then(($data)=>
+				{
+					this.oldPwd = "";
+					this.newPwd = "";
+					this.confirmPwd = "";
+					g.ui.toast('密码修改成功');
+					this.isShow_modPwdfPop = false;
+				}, (err) =>
+				{
+					g.func.dealErr(err);
+
+				});
 			}
 		}
 	}
-
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">

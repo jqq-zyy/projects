@@ -46,7 +46,14 @@ export default class RulePool {
     get dataList() {
         return _dataList;
     }
-	
+	removeAll(){
+        _warningAmount = 0;
+        _max = 0;
+        _min = 0;
+        _maxQrcodeScanNum = 0;
+        _platformRpSupport = false;
+        _dataList = [];
+    }
 }
 
 

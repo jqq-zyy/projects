@@ -3,12 +3,6 @@
  */
 import Index from "./pages/index.vue";
 import IndexMain from "./pages/index";
-import AllData from "./pages/allData.vue";
-import AllDataMain from "./pages/allData";
-import MemberList from "./pages/memberList.vue";
-import MemberListMain from "./pages/memberList";
-import MemberManage from "./pages/memberManage.vue";
-import MemberManageMain from "./pages/memberManage";
 import UpcoimgTask from "./pages/task.vue";
 import UpcoimgTaskMain from "./pages/task";
 import myStaff from "./pages/myStaff.vue";
@@ -95,26 +89,12 @@ export default [
 		preload: RuleMain
 	},
 	{
-		path: '/data',
-		name: "数据概览",
-		component: AllData,
-		preload: AllDataMain
-	}, {
 		path: '/login',
 		name: "登录",
 		component: Login,
 		preload: LoginMain
 	}, {
-		path: '/member',
-		name: "顾客分析",
-		component: MemberList,
-		preload: MemberListMain
-	}, {
-		path: '/membermanage',
-		name: "会员设置",
-		component: MemberManage,
-		preload: MemberManageMain
-	}, {
+
 		path: '/task',
 		name: "待办任务",
 		component: UpcoimgTask,
@@ -150,38 +130,6 @@ export default [
 		name: "查找二维码",
 		component: CheckQrcode,
 //		preload: checkQrcodeMain
-	},
-	{
-		path: '/date',
-		name: "日期",
-		component: (resolve) =>
-		{
-			require(['./pages/dateBox.vue'], resolve)
-		},
-	},
-	{
-		path: '/page',
-		name: "分页",
-		component: (resolve) =>
-		{
-			require(['./pages/page.vue'], resolve)
-		},
-	},
-	{
-		path: '/table',
-		name: "表格",
-		component: (resolve) =>
-		{
-			require(['./pages/table.vue'], resolve)
-		},
-	},
-	{
-		path: '/tree',
-		name: "树形结构",
-		component: (resolve) =>
-		{
-			require(['./pages/list.vue'], resolve)
-		},
 	}
 ];
 

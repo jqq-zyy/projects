@@ -21,18 +21,22 @@
 									</tr>
 									</thead>
 									<tbody>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td><span class="button pointer border-btn">处理</span></td>
+									<tr v-for="item in messageList">
+										<td>{{item.pendTypeDesc}}</td>
+										<td>{{item.applyUserLogon}}</td>
+										<td>{{item.createTime}}</td>
+										<td>{{item.companyFullName}}</td>
+										<td><span class="button pointer border-btn" @click="onClick_handleBtn(item.pendType,item.shopId)">处理</span></td>
 									</tr>
 									</tbody>
 								</table>
 							</div>
+							<common-page :index="dataObj.page" :total="totalPage"
+										 @change="onChange_currentPage" v-show="messageList.length>=1"></common-page>
+							<common-prompt v-show="messageList.length==0"></common-prompt>
 						</div>
 						<common-footer></common-footer>
+
 					</div>
 				</div>
 			</div>
@@ -46,54 +50,62 @@
 	import CommonNav from './common/CommonNav.vue';
 	import CommonTopNav from './common/CommonTopNav.vue';
 	import CommonFooter from './common/CommonFooter.vue';
+	import CommonPrompt from './common/CommonPrompt.vue';
+	import CommonPage from './common/CommonPage.vue';
+	import {getMessage} from './task';
 	import sha256 from 'sha256';
 
 	export default {
 		created(){
+			this.init();
 			this.isLoad = true;
 		},
 		data(){
 			return {
 				isLoad: false,
 				g: g,
-				oldPwd: "",
-				newPwd: "",
-				confirmPwd: ""
+				totalPage: 1,
+				messageList: [],
+				dataObj: {}
 			}
 		},
 		components: {
 			MainLayout,
 			CommonNav,
 			CommonTopNav,
-			CommonFooter
+			CommonFooter,
+			CommonPrompt,
+			CommonPage
 		},
 		methods: {
-			onClick_saveBtn(){
-				if (this.oldPwd == "" || this.newPwd == "" || this.confirmPwd == "")
-				{
-					g.ui.toast('填写全部信息');
-					return;
+			init(){
+				this.initList();
+				this.initData();
+			},
+			initData(){
+				this.dataObj = {
+					'page': 1,
+					'pageSize': g.param.pageSizeList[0],
 				}
-				if (this.newPwd != this.confirmPwd)
-				{
-					g.ui.toast('新密码与确认密码不同');
-					return
+			},
+			initList(){
+				this.messageList = g.data.messagePool.list;
+				this.totalPage = g.data.messagePool.totalPage;
+			},
+			onChange_currentPage($page, $pageSize){
+				this.dataObj.page = $page;
+				this.dataObj.pageSize = $pageSize;
+				this.onUpdate_messageList()
+			},
+			onUpdate_messageList(){
+				getMessage(this.dataObj, this.initList);
+			},
+			onClick_handleBtn($type,$id){
+				if($type == 1){
+					g.url = ("userdetail?id="+$id)
+				}else{
+					g.url = ("/platform");
 				}
-				g.net.call("user/updateUserPassword", {
-					"userId": g.data.get("userInfo").userId,
-					"oldPassword": sha256(this.oldPwd),
-					"newPassword": sha256(this.newPwd)
-				}).then(($data)=>
-				{
-					this.oldPwd = "";
-					this.newPwd = "";
-					this.confirmPwd = "";
-					g.ui.toast('密码修改成功');
-				}, (err) =>
-				{
-					g.func.dealErr(err);
-
-				});
 			}
 		}
 	}
@@ -103,4 +115,9 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common.scss";
 </style>
+
+
+
+
+
 

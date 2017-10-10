@@ -241,12 +241,13 @@
 				this.onConfirm_login()
 			},
 			onConfirm_login(){
-				//this.logonObj.password = sha256(this.pwd);
-				this.logonObj.password = this.pwd;
+				this.logonObj.password = sha256(this.pwd);
+				//this.logonObj.password = this.pwd;
 				g.net.call("user/adminLogin", this.logonObj).then(($data) =>
 				{
 					this.onSave_userInfo($data);
 					socketManager.connectSocket();
+
 					g.data.save("loginTime", g.timeTool.getNowStamp());
 				}, (err) =>
 				{
@@ -258,10 +259,10 @@
 				obj.userId = $data.userId;
 				obj.shopId = $data.shopId;
 				obj.logon = $data.logon;
+				obj.telphone = $data.telphone;
 				g.data.save("userInfo", obj);
-//				g.func.getUnreadMsg('login');
+				//g.func.getUnreadMsg('login');
 				g.event.dispatchEvent("APP_IS_LOGIN");
-
 
 			},
 
