@@ -98,6 +98,42 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="footer header-vertical body-row"
+			 :style="{height:footerHeight+'px',top:headerHeight+bodyHeight+offsetTop+'px',width:getTypeWidth('total')+'px'}">
+			<div class="left-header"
+				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
+				<div class="header-row">
+					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
+						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
+						 v-if="checkLeftFooter(item,index)">
+						<span>{{item.name}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="middle-header"
+				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:headerHeight+'px'}">
+				<div class="header-row">
+					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
+						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
+						 v-if="checkMiddleFooter(item,index)">
+						<span>{{item.name}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="right-header"
+				 :style="{right:Math.max(getScrollLimit()-offsetLeft+6,0)+'px',width:getTypeWidth('right')+'px',height:headerHeight+'px'}">
+				<div class="header-row">
+					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
+						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
+						 v-if="checkRightFooter(item,index)">
+						<span>{{item.name}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -107,13 +143,12 @@
 	export default{
 		name: "hw-table",
 		created(){
-			this.tableData = this.data;
+			this.tableData = __merge(this.tableData, this.data);
 			trace('this.tableData', this.data);
 			this.$nextTick(() =>
 			{
 				this.$refs.scrollCon.addEventListener('scroll', (e) =>
 				{
-//					this.direction = getDirection(e);
 					this.offsetLeft = this.$refs.scrollCon.scrollLeft;
 					this.offsetTop = this.$refs.scrollCon.scrollTop;
 				});
@@ -125,7 +160,7 @@
 				count: 1,
 //				direction: "vertical",
 				offsetLeft: 0,
-				offsetTop: 0,
+				offsetTop: 0
 			}
 		},
 		props: {
@@ -142,7 +177,7 @@
 			},
 			boxHeight: {
 				type: Number,
-				default: 350
+				default: 400
 			},
 			headerHeight: {
 				type: Number,
@@ -160,6 +195,14 @@
 				type: Number,
 				default: 0
 			},
+			leftFooterFixedCols: {
+				type: Number,
+				default: 1
+			},
+			rightFooterFixedCols: {
+				type: Number,
+				default: 1
+			},
 			rightFixedCols: {
 				type: Number,
 				default: 0
@@ -174,40 +217,72 @@
 				type: Boolean,
 				default: true
 			},
+			footerHeight: {
+				type: Number,
+				default: 50
+			},
 			stripe: {
 				type: Boolean,
 				default: false
+			},
+			isShowIdCol: {
+				type: Boolean,
+				default: false
 			}
-
 		},
 		computed: {
+			rightCols()
+			{
+				return Math.min(this.rightFixedCols, this.rightFooterFixedCols)
+			}
 		},
 		methods: {
-			checkMiddleHeader($item, index)
-			{
-				return $item.id != 'id' && index > this.leftFixedCols && index <= (this.getValidLength() -
-						this.rightFixedCols)
-			},
+
 			checkLeftHeader($item, index)
 			{
-				return $item.id != 'id' && index <= this.leftFixedCols;
+				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				return isTrue && index < this.leftFixedCols;
+			},
+			checkMiddleHeader($item, index)
+			{
+				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				return isTrue && index >= this.leftFixedCols && index < (this.getValidLength("header") -
+						this.rightFixedCols)
 			},
 			checkRightHeader($item, index)
 			{
-				return $item.id != 'id' && index > (this.getValidLength() - this.rightFixedCols)
+				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				return isTrue && index >= (this.getValidLength("header") - this.rightFixedCols)
 			},
+
 			checkMiddleBody(key, index)
 			{
-				return key != 'id' && index > this.leftFixedCols && index <= (this.getValidLength() -
+				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
+				return isTrue && index >= this.leftFixedCols && index < (this.getValidLength("header") -
 						this.rightFixedCols)
 			},
 			checkLeftBody(key, index)
 			{
-				return key != 'id' && index <= this.leftFixedCols
+				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
+				return isTrue && index < this.leftFixedCols
 			},
 			checkRightBody(key, index)
 			{
-				return key != 'id' && index > (this.getValidLength() - this.rightFixedCols)
+				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
+				return isTrue && index >= (this.getValidLength("header") - this.rightFixedCols)
+			},
+			checkMiddleFooter($item, index)
+			{
+				return index >= this.leftFooterFixedCols && index < (this.getValidLength("footer") -
+						this.rightCols)
+			},
+			checkLeftFooter($item, index)
+			{
+				return index < this.leftFooterFixedCols;
+			},
+			checkRightFooter($item, index)
+			{
+				return index >= (this.getValidLength("footer") - this.rightCols)
 			},
 			onClick_headItem($item)
 			{
@@ -252,11 +327,13 @@
 			},
 			getTypeWidth($type)
 			{
+
+				debugger;
 				let width = 0;
 				const tmpArr = this.tableData.header.concat();
 				for (var item of tmpArr)
 				{
-					if (item.id == 'id')
+					if (!this.isShowIdCol && item.id == 'id')
 					{
 						tmpArr.length--
 					}
@@ -295,12 +372,12 @@
 				}
 				return width;
 			},
-			getValidLength()
+			getValidLength($type)
 			{
-				const tmpArr = this.tableData.header.concat();
+				const tmpArr = this.tableData[$type].concat();
 				for (var item of tmpArr)
 				{
-					if (item.id == 'id')
+					if (!this.isShowIdCol && item.id == 'id')
 					{
 						tmpArr.length--
 					}
@@ -451,6 +528,23 @@
 		border: 1px solid #444444;
 		border-right-color: transparent;
 		border-bottom-color: transparent;
+	}
+
+	.footer {
+		position: absolute;
+		border-top: 1px solid #444444;
+	}
+
+	.out-box-border .footer .header-col {
+		border-top-color: transparent;
+	}
+
+	.left-header, .left-body {
+		box-shadow: 3px 0 4px #eeeeee;
+	}
+
+	.header-col, .body-col {
+		padding-left: 6px;
 	}
 </style>
 

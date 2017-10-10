@@ -32,146 +32,146 @@
 			</div>
 			<!--&lt;!&ndash;登录&ndash;&gt;-->
 			<!--<transition name="bounce">-->
-				<!--<div class="affix-box default-pos-type" v-show="isShow_loginPop">-->
-					<!--<div class="pop-edit-passwor pop-edit login-pop" ref="loginBox">-->
-						<!--<div class="show-close-btn close-btn" @click="onClick_closeBtn('login')">-->
-							<!--<img :src="g.config.path.images+'/close1.png'"/>-->
-						<!--</div>-->
-						<!--<div class="pop-head">{{g.lang("登录")}}</div>-->
-						<!--<div class="login-body">-->
-							<!--<div class="m-title">-->
-								<!--<input class="user" type="text" v-model="logonObj.logon"-->
-									   <!--@keyup.enter="onClick_logonBtn"-->
-									   <!--@focus="onFocus_input" placeholder="请输入用户名或手机号"></div>-->
-							<!--<div class="m-title">-->
-								<!--<input class="pwd" type="password" v-model="pwd" @keyup.enter="onClick_logonBtn"-->
-									   <!--@focus="onFocus_input" placeholder="请输入密码">-->
-							<!--</div>-->
-							<!--<div v-text="loginErrMsg" class="err-msg"></div>-->
-							<!--<div class="m-title">-->
-								<!--<a class="login-btn bg-btn pointer" @click="onClick_logonBtn"-->
-								   <!--:class="{disabled:!logonObj.logon||!pwd}">登录</a>-->
-<!--<<<<<<< HEAD-->
-<!--=======-->
+			<!--<div class="affix-box default-pos-type" v-show="isShow_loginPop">-->
+			<!--<div class="pop-edit-passwor pop-edit login-pop" ref="loginBox">-->
+			<!--<div class="show-close-btn close-btn" @click="onClick_closeBtn('login')">-->
+			<!--<img :src="g.config.path.images+'/close1.png'"/>-->
+			<!--</div>-->
+			<!--<div class="pop-head">{{g.lang("登录")}}</div>-->
+			<!--<div class="login-body">-->
+			<!--<div class="m-title">-->
+			<!--<input class="user" type="text" v-model="logonObj.logon"-->
+			<!--@keyup.enter="onClick_logonBtn"-->
+			<!--@focus="onFocus_input" placeholder="请输入用户名或手机号"></div>-->
+			<!--<div class="m-title">-->
+			<!--<input class="pwd" type="password" v-model="pwd" @keyup.enter="onClick_logonBtn"-->
+			<!--@focus="onFocus_input" placeholder="请输入密码">-->
+			<!--</div>-->
+			<!--<div v-text="loginErrMsg" class="err-msg"></div>-->
+			<!--<div class="m-title">-->
+			<!--<a class="login-btn bg-btn pointer" @click="onClick_logonBtn"-->
+			<!--:class="{disabled:!logonObj.logon||!pwd}">登录</a>-->
+			<!--<<<<<<< HEAD-->
+			<!--=======-->
 
-							<!--</div>-->
-							<!--<div class="m-title">-->
-								<!--<a class="forget-btn pointer" @click.stop="onClick_modPwdBtn">忘记登录密码？</a>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="m-title">-->
+			<!--<a class="forget-btn pointer" @click.stop="onClick_modPwdBtn">忘记登录密码？</a>-->
+			<!--</div>-->
+			<!--</div>-->
+			<!--</div>-->
+			<!--</div>-->
 			<!--</transition>-->
 			<!--&lt;!&ndash;重置密码&ndash;&gt;-->
 			<!--<transition name="bounce">-->
-				<!--<div class="affix-box default-pos-type" v-show="isShow_modPwdPop">-->
-					<!--<div class="pop-edit-password reset-pop pop-edit" ref="modPwdBox">-->
-						<!--<div class="show-close-btn">-->
-							<!--<img :src="g.config.path.images+'/close.png'"-->
-								 <!--@click="onClick_closeBtn('modPwd')" />-->
-						<!--</div>-->
-						<!--<div class="pop-tit">-->
-							<!--{{g.lang("重置密码")}}-->
-						<!--</div>-->
-						<!--<div class="pop-body reset-body">-->
-							<!--<div class="m-title">-->
-								<!--<span class="m-name ">身份验证：</span>-->
-								<!--<input type="text" v-model="pwdObj.logon" @focus="onFocus_input"-->
-									   <!--placeholder="请输入您的手机号或用户名">-->
-							<!--</div>-->
-							<!--<div class="m-title">-->
-								<!--&lt;!&ndash;<span class="title check">{{g.lang("验证码")}}：</span>&ndash;&gt;-->
-								<!--<input class="input-code" type="text" v-model="pwdObj.msgCode" @focus="onFocus_input"-->
-									   <!--placeholder="请输入验证码">-->
-								<!--<span class="get-code pointer" @click="onClick_getCodeBtn">{{code}}</span>-->
-							<!--</div>-->
-							<!--<div class="m-title">-->
-								<!--<span class="m-name">重置密码：</span>-->
-								<!--<span class="pwd-box">-->
-									<!--<input type="password" v-model="newPwd" @focus="onFocus_input" placeholder="请输入密码"-->
-										   <!--class="">-->
-									<!--<img :src="g.config.path.images+'/hide.png'" alt="" class="pointer">-->
-									<!--<img :src="g.config.path.images+'/display.png'" class="pointer" alt="" v-show="">-->
-								<!--</span>-->
-							<!--</div>-->
-							<!--&lt;!&ndash;<div class="form-box last-form-box">-->
-								<!--<span class="title check">确认新密码：</span>-->
-								<!--<input type="password" v-model="confirmPwd" @focus="onFocus_input"-->
-									   <!--placeholder="请再次输入密码">-->
-							<!--</div>&ndash;&gt;-->
-							<!--<div v-text="pwdErrMsg" class="err-msg"></div>-->
-							<!--<div class="m-title">-->
-								<!--<span class="confirm-btn bg-btn pointer"-->
-									  <!--@click="onClick_confirmBtn" :class="{disabled:isCanMod}">{{g.lang("确认修改")}}</span>-->
-							<!--</div>-->
-						<!--</div>-->
+			<!--<div class="affix-box default-pos-type" v-show="isShow_modPwdPop">-->
+			<!--<div class="pop-edit-password reset-pop pop-edit" ref="modPwdBox">-->
+			<!--<div class="show-close-btn">-->
+			<!--<img :src="g.config.path.images+'/close.png'"-->
+			<!--@click="onClick_closeBtn('modPwd')" />-->
+			<!--</div>-->
+			<!--<div class="pop-tit">-->
+			<!--{{g.lang("重置密码")}}-->
+			<!--</div>-->
+			<!--<div class="pop-body reset-body">-->
+			<!--<div class="m-title">-->
+			<!--<span class="m-name ">身份验证：</span>-->
+			<!--<input type="text" v-model="pwdObj.logon" @focus="onFocus_input"-->
+			<!--placeholder="请输入您的手机号或用户名">-->
+			<!--</div>-->
+			<!--<div class="m-title">-->
+			<!--&lt;!&ndash;<span class="title check">{{g.lang("验证码")}}：</span>&ndash;&gt;-->
+			<!--<input class="input-code" type="text" v-model="pwdObj.msgCode" @focus="onFocus_input"-->
+			<!--placeholder="请输入验证码">-->
+			<!--<span class="get-code pointer" @click="onClick_getCodeBtn">{{code}}</span>-->
+			<!--</div>-->
+			<!--<div class="m-title">-->
+			<!--<span class="m-name">重置密码：</span>-->
+			<!--<span class="pwd-box">-->
+			<!--<input type="password" v-model="newPwd" @focus="onFocus_input" placeholder="请输入密码"-->
+			<!--class="">-->
+			<!--<img :src="g.config.path.images+'/hide.png'" alt="" class="pointer">-->
+			<!--<img :src="g.config.path.images+'/display.png'" class="pointer" alt="" v-show="">-->
+			<!--</span>-->
+			<!--</div>-->
+			<!--&lt;!&ndash;<div class="form-box last-form-box">-->
+			<!--<span class="title check">确认新密码：</span>-->
+			<!--<input type="password" v-model="confirmPwd" @focus="onFocus_input"-->
+			<!--placeholder="请再次输入密码">-->
+			<!--</div>&ndash;&gt;-->
+			<!--<div v-text="pwdErrMsg" class="err-msg"></div>-->
+			<!--<div class="m-title">-->
+			<!--<span class="confirm-btn bg-btn pointer"-->
+			<!--@click="onClick_confirmBtn" :class="{disabled:isCanMod}">{{g.lang("确认修改")}}</span>-->
+			<!--</div>-->
+			<!--</div>-->
 
-					<!--</div>-->
-				<!--</div>-->
+			<!--</div>-->
+			<!--</div>-->
 			<!--</transition>-->
 			<!--&lt;!&ndash;重置密码成功&ndash;&gt;-->
 			<!--<transition name="bounce">-->
-				<!--<div class="affix-box default-pos-type" v-show="">-->
-					<!--<div class="pop-edit-password reset-pop pop-edit">-->
-						<!--<div class="show-close-btn">-->
-							<!--<img :src="g.config.path.images+'/close.png'"-->
-								 <!--@click="onClick_closeBtn" />-->
-						<!--</div>-->
-						<!--<div class="pop-tit">-->
-							<!--重置密码成功-->
-						<!--</div>-->
-						<!--<div class="pop-body reset-body">-->
-							<!--<div class="m-title">-->
-								<!--<p class="success-text">密码修改成功!</p>-->
-							<!--</div>-->
-							<!--<div class="m-title">-->
-								<!--<span class="bg-btn pointer confirm-btn">返回登录</span>-->
-							<!--</div>-->
-						<!--</div>-->
+			<!--<div class="affix-box default-pos-type" v-show="">-->
+			<!--<div class="pop-edit-password reset-pop pop-edit">-->
+			<!--<div class="show-close-btn">-->
+			<!--<img :src="g.config.path.images+'/close.png'"-->
+			<!--@click="onClick_closeBtn" />-->
+			<!--</div>-->
+			<!--<div class="pop-tit">-->
+			<!--重置密码成功-->
+			<!--</div>-->
+			<!--<div class="pop-body reset-body">-->
+			<!--<div class="m-title">-->
+			<!--<p class="success-text">密码修改成功!</p>-->
+			<!--</div>-->
+			<!--<div class="m-title">-->
+			<!--<span class="bg-btn pointer confirm-btn">返回登录</span>-->
+			<!--</div>-->
+			<!--</div>-->
 
-					<!--</div>-->
-				<!--</div>-->
+			<!--</div>-->
+			<!--</div>-->
 			<!--</transition>-->
 
 			<!--&lt;!&ndash;注册&ndash;&gt;-->
 			<!--<transition name="bounce">-->
-				<!--<div class="affix-box default-pos-type" v-show="isShow_signPop">-->
+			<!--<div class="affix-box default-pos-type" v-show="isShow_signPop">-->
 
-					<!--<sign-pop @close="onClick_closeBtn" ref="signBox" @reset="onClick_resetSign"></sign-pop>-->
-				<!--</div>-->
+			<!--<sign-pop @close="onClick_closeBtn" ref="signBox" @reset="onClick_resetSign"></sign-pop>-->
+			<!--</div>-->
 			<!--</transition>-->
 
 			<!--&lt;!&ndash;绑定手机&ndash;&gt;-->
 			<!--<transition name="bounce">-->
-				<!--<div class="affix-box default-pos-type" v-show="isShow_bindTel">-->
-					<!--<div class="pop-edit-password pop-edit reset-pop">-->
-						<!--<div class="show-close-btn">-->
-							<!--<img :src="g.config.path.images+'/close.png'"-->
-								 <!--@click="onClick_closeBtn" />-->
-						<!--</div>-->
-						<!--<div class="pop-tit">-->
-							<!--绑定手机号-->
-						<!--</div>-->
-						<!--<div class="pop-body reset-body">-->
-							<!--<div class="m-title">-->
-								<!--<span class="title check">手机号：</span>-->
-								<!--<input type="text" v-model="onBindTel" @focus="onFocus_input"-->
-									   <!--placeholder="请输入您的手机号或用户名">-->
-							<!--</div>-->
-							<!--<div class="m-title">-->
-								<!--<span class="title check">{{g.lang("验证码")}}：</span>-->
-								<!--<input type="text" v-model="bindTelCode" @focus="onFocus_input" placeholder="请输入验证码">-->
-								<!--<span class="get-code pointer" @click="onClick_getBindBtn">{{code}}</span>-->
-							<!--</div>-->
+			<!--<div class="affix-box default-pos-type" v-show="isShow_bindTel">-->
+			<!--<div class="pop-edit-password pop-edit reset-pop">-->
+			<!--<div class="show-close-btn">-->
+			<!--<img :src="g.config.path.images+'/close.png'"-->
+			<!--@click="onClick_closeBtn" />-->
+			<!--</div>-->
+			<!--<div class="pop-tit">-->
+			<!--绑定手机号-->
+			<!--</div>-->
+			<!--<div class="pop-body reset-body">-->
+			<!--<div class="m-title">-->
+			<!--<span class="title check">手机号：</span>-->
+			<!--<input type="text" v-model="onBindTel" @focus="onFocus_input"-->
+			<!--placeholder="请输入您的手机号或用户名">-->
+			<!--</div>-->
+			<!--<div class="m-title">-->
+			<!--<span class="title check">{{g.lang("验证码")}}：</span>-->
+			<!--<input type="text" v-model="bindTelCode" @focus="onFocus_input" placeholder="请输入验证码">-->
+			<!--<span class="get-code pointer" @click="onClick_getBindBtn">{{code}}</span>-->
+			<!--</div>-->
 
-							<!--<div v-text="bindErrMsg" class="err-msg"></div>-->
-							<!--<div class="m-title">-->
-								<!--<span class="login-btn pointer" @click="onClick_bindBtn">绑定</span>-->
-<!--&gt;>>>>>> 583995fb4f091ee6d50dca742bdd568c7c38993b-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</div>-->
+			<!--<div v-text="bindErrMsg" class="err-msg"></div>-->
+			<!--<div class="m-title">-->
+			<!--<span class="login-btn pointer" @click="onClick_bindBtn">绑定</span>-->
+			<!--&gt;>>>>>> 583995fb4f091ee6d50dca742bdd568c7c38993b-->
+			<!--</div>-->
+			<!--</div>-->
+			<!--</div>-->
+			<!--</div>-->
 			<!--</transition>-->
 		</div>
 	</main-layout>
@@ -233,6 +233,11 @@
 				this.loginErrMsg = '';
 			},
 			onClick_logonBtn(){
+				if (g.core.onMode("testData"))
+				{
+					this.logonObj.logon = "admin";
+					this.pwd = "1qaz2wsx";
+				}
 				if (this.logonObj.logon == "" || this.pwd == "")
 				{
 					return
@@ -262,7 +267,7 @@
 				obj.telphone = $data.telphone;
 				g.data.save("userInfo", obj);
 				//g.func.getUnreadMsg('login');
-				g.event.dispatchEvent("APP_IS_LOGIN");
+				g.event.dispatchEvent("+");
 
 			},
 

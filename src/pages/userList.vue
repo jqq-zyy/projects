@@ -79,140 +79,160 @@
 									" @click="onClick_exportBtn">导出全部
 								</div>
 							</div>
-							<div class="recharge-table admin-calendar-table ">
-								<table>
-									<thead>
-									<tr>
-										<th @click="onClick_sortBtn('order_amount')" class="pointer">商户ID
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'order_amount'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th><span>|</span>创建时间</th>
-										<th><span>|</span>企业全称</th>
-										<th><span>|</span>运营状态</th>
-										<th><span>|</span>用户名</th>
-										<th><span>|</span>手机号</th>
-										<th><span>|</span>认证状态</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											商家红包金额
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											<span>|</span>平台红包金额
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											<span>|</span>平台红包发放数
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											<span>|</span>扫码量
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											<span>|</span>绑定二维码数
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											<span>|</span>导出二维码数
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											<span>|</span>未导出二维码数
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											<span>|</span>已购二维码数
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											<span>|</span>退款二维码数
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer">
-											<span>|</span>红包账户余额
-											<common-sort :type="searchObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="searchObj.sortField"
-											></common-sort>
-										</th>
-										<th><span>|</span>操作</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr v-for="item in userList">
-										<td @click="onClick_userItem(item.id)"  class="first-td-child">{{item.id}}</td>
-										<td>{{item.createTime}}</td>
-										<td>{{item.name}}</td>
-										<td>{{item.freezeStatusDesc}}</td>
-										<td>{{item.logon}}</td>
-										<td>{{item.telphone}}</td>
-										<td >{{item.authStatusDesc}}</td>
-										<td>{{item.shopAmount}}</td>
-										<td>{{item.platformAmount}}</td>
-										<td>{{item.rpSendNum}}</td>
-										<td>{{item.qrcodeScanNum}}</td>
-										<td>{{item.qrcodeBindNum}}</td>
-										<td>{{item.qrcodeExportNum}}</td>
-										<td>{{item.qrcodeUnExportNum}}</td>
-										<td>{{item.qrcodeBuyNum}}</td>
-										<td>{{item.qrcodeRefundNum}}</td>
-										<td>{{item.rpCurrentAccount}}</td>
-										<td>
-											<span v-text="onConfirm_operation(item.freezeStatus)"
-												  @click="onClick_userItem(item.id)" class="pointer blue-content"></span>
-											<span v-show="item.authStatus==1"
-												  @click="onClick_lookItem(item.id)" class="pointer blue-content">审核</span>
-										</td>
-									</tr>
-									</tbody>
-									<tfoot>
-									<tr v-show="userList.length>0">
-										<td colspan="7"></td>
-										<td>{{modelObj.shopAllAmount}}</td>
-										<td>{{modelObj.platformAllAmount}}</td>
-										<td>{{modelObj.rpSendAllNum}}</td>
-										<td>{{modelObj.qrcodeScanAllNum}}</td>
-										<td>{{modelObj.qrcodeBindAllNum}}</td>
-										<td>{{modelObj.qrcodeExportAllNum}}</td>
-										<td>{{modelObj.qrcodeUnExportAllNum}}</td>
-										<td>{{modelObj.qrcodeBuyAllNum}}</td>
-										<td>{{modelObj.qrcodeRefundAllNum}}</td>
-										<td>{{modelObj.rpAllCurrentAccount}}</td>
-										<td></td>
-									</tr>
-									</tfoot>
-								</table>
-							</div>
+							<hw-table :data="data"
+							:boxWidth="1250"
+							:boxHeight="500"
+							:headerHeight="80"
+							:bodyHeight="380"
+							:footerHeight="60"
+							:fixHeader="true"
+							:leftFixedCols="4"
+							:rightFixedCols="4"
+							:rightFooterFixedCols="1"
+							:eachRowHeight="20"
+							:eachColWidth="250"
+							:isShowIdCol="true"
+							@clickBtn="onClick_btn"
+							@clickHead="onClick_btn"
+							@clickbody="onClick_btn">
+							</hw-table>
+
+							<!--<div class="recharge-table admin-calendar-table ">-->
+								<!--<table>-->
+									<!--<thead>-->
+									<!--<tr>-->
+										<!--<th @click="onClick_sortBtn('order_amount')" class="pointer">商户ID-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'order_amount'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th><span>|</span>创建时间</th>-->
+										<!--<th><span>|</span>企业全称</th>-->
+										<!--<th><span>|</span>运营状态</th>-->
+										<!--<th><span>|</span>用户名</th>-->
+										<!--<th><span>|</span>手机号</th>-->
+										<!--<th><span>|</span>认证状态</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--商家红包金额-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--<span>|</span>平台红包金额-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--<span>|</span>平台红包发放数-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--<span>|</span>扫码量-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--<span>|</span>绑定二维码数-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--<span>|</span>导出二维码数-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--<span>|</span>未导出二维码数-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--<span>|</span>已购二维码数-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--<span>|</span>退款二维码数-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
+											<!--<span>|</span>红包账户余额-->
+											<!--<common-sort :type="searchObj.sortOrder"-->
+														 <!--:target="'create_time'"-->
+														 <!--:currentField="searchObj.sortField"-->
+											<!--&gt;</common-sort>-->
+										<!--</th>-->
+										<!--<th><span>|</span>操作</th>-->
+									<!--</tr>-->
+									<!--</thead>-->
+									<!--<tbody>-->
+									<!--<tr v-for="item in userList">-->
+										<!--<td @click="onClick_userItem(item.id)" class="first-td-child">{{item.id}}</td>-->
+										<!--<td>{{item.createTime}}</td>-->
+										<!--<td>{{item.name}}</td>-->
+										<!--<td>{{item.freezeStatusDesc}}</td>-->
+										<!--<td>{{item.logon}}</td>-->
+										<!--<td>{{item.telphone}}</td>-->
+										<!--<td>{{item.authStatusDesc}}</td>-->
+										<!--<td>{{item.shopAmount}}</td>-->
+										<!--<td>{{item.platformAmount}}</td>-->
+										<!--<td>{{item.rpSendNum}}</td>-->
+										<!--<td>{{item.qrcodeScanNum}}</td>-->
+										<!--<td>{{item.qrcodeBindNum}}</td>-->
+										<!--<td>{{item.qrcodeExportNum}}</td>-->
+										<!--<td>{{item.qrcodeUnExportNum}}</td>-->
+										<!--<td>{{item.qrcodeBuyNum}}</td>-->
+										<!--<td>{{item.qrcodeRefundNum}}</td>-->
+										<!--<td>{{item.rpCurrentAccount}}</td>-->
+										<!--<td>-->
+							<!--<span v-text="onConfirm_operation(item.freezeStatus)"-->
+								  <!--@click="onClick_userItem(item.id)" class="pointer blue-content"></span>-->
+							<!--<span v-show="item.authStatus==1"-->
+								  <!--@click="onClick_lookItem(item.id)" class="pointer blue-content">审核</span>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--</tbody>-->
+									<!--<tfoot>-->
+									<!--<tr v-show="userList.length>0">-->
+										<!--<td colspan="7"></td>-->
+										<!--<td>{{modelObj.shopAllAmount}}</td>-->
+										<!--<td>{{modelObj.platformAllAmount}}</td>-->
+										<!--<td>{{modelObj.rpSendAllNum}}</td>-->
+										<!--<td>{{modelObj.qrcodeScanAllNum}}</td>-->
+										<!--<td>{{modelObj.qrcodeBindAllNum}}</td>-->
+										<!--<td>{{modelObj.qrcodeExportAllNum}}</td>-->
+										<!--<td>{{modelObj.qrcodeUnExportAllNum}}</td>-->
+										<!--<td>{{modelObj.qrcodeBuyAllNum}}</td>-->
+										<!--<td>{{modelObj.qrcodeRefundAllNum}}</td>-->
+										<!--<td>{{modelObj.rpAllCurrentAccount}}</td>-->
+										<!--<td></td>-->
+									<!--</tr>-->
+									<!--</tfoot>-->
+								<!--</table>-->
+							<!--</div>-->
+
+
 							<common-page :index="searchObj.page" :total="totalPage"
 										 @change="onChange_searchItem" v-show="userList.length>0"></common-page>
 							<common-prompt v-show="userList.length==0"></common-prompt>
@@ -233,7 +253,7 @@
 	import CommonNav from './common/CommonNav.vue';
 	import CommonTopNav from './common/CommonTopNav.vue';
 	import CommonPage from './common/CommonPage.vue';
-	import {getUserList} from './userList';
+	import {getUserList, convertList,getFooterList} from './userList';
 	import Calendar from './common/Calendar.vue';
 	import CommonFooter from './common/CommonFooter.vue';
 	import CommonPrompt from './common/CommonPrompt.vue';
@@ -258,7 +278,6 @@
 				},
 				searchObj: {},
 				userList: [],
-				modelObj: {},
 				totalPage: 0,
 				currentType: "",
 				inputContent: "",
@@ -274,8 +293,14 @@
 						name: "企业全称"
 					}
 				],
+
 				freezeStatusList: ['全部', '正常', '冻结'],
-				authStatusList: ['全部', '未认证', '已认证']
+				authStatusList: ['全部', '未认证', '已认证'],
+				data: {
+					header: [],
+					body: [],
+					footer: []
+				}
 			}
 		},
 		watch: {},
@@ -306,24 +331,27 @@
 				this.initSearchData();
 				this.initList();
 			},
+
+
 			initList(){
-				this.userList = g.data.userPool.list;
+				this.data.header = g.data.staticTableHeaderPool.list.concat();
+				this.data.body = g.data.userPool.list;
+				this.data.footer = getFooterList();
 				this.totalPage = g.data.userPool.totalPage;
-				this.initTotal();
 			},
-			initTotal(){
-				var userPool = g.data.userPool;
-				this.modelObj.shopAllAmount = userPool.shopAllAmount;
-				this.modelObj.platformAllAmount = userPool.platformAllAmount;
-				this.modelObj.rpSendAllNum = userPool.rpSendAllNum;
-				this.modelObj.qrcodeScanAllNum = userPool.qrcodeScanAllNum;
-				this.modelObj.qrcodeBindAllNum = userPool.qrcodeBindAllNum;
-				this.modelObj.qrcodeExportAllNum = userPool.qrcodeExportAllNum;
-				this.modelObj.qrcodeUnExportAllNum = userPool.qrcodeUnExportAllNum;
-				this.modelObj.qrcodeBuyAllNum = userPool.qrcodeBuyAllNum;
-				this.modelObj.qrcodeRefundAllNum = userPool.qrcodeRefundAllNum;
-				this.modelObj.rpAllCurrentAccount = userPool.rpAllCurrentAccount;
-			},
+//			initTotal(){
+//				var userPool = g.data.userPool;
+//				this.modelObj.shopAllAmount = userPool.shopAllAmount;
+//				this.modelObj.platformAllAmount = userPool.platformAllAmount;
+//				this.modelObj.rpSendAllNum = userPool.rpSendAllNum;
+//				this.modelObj.qrcodeScanAllNum = userPool.qrcodeScanAllNum;
+//				this.modelObj.qrcodeBindAllNum = userPool.qrcodeBindAllNum;
+//				this.modelObj.qrcodeExportAllNum = userPool.qrcodeExportAllNum;
+//				this.modelObj.qrcodeUnExportAllNum = userPool.qrcodeUnExportAllNum;
+//				this.modelObj.qrcodeBuyAllNum = userPool.qrcodeBuyAllNum;
+//				this.modelObj.qrcodeRefundAllNum = userPool.qrcodeRefundAllNum;
+//				this.modelObj.rpAllCurrentAccount = userPool.rpAllCurrentAccount;
+//			},
 			initDate(){
 				this.date.startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
 				this.date.endTime = this.date.startTime;
@@ -364,7 +392,7 @@
 				this.searchObj.startTime = this.date.startTimeStr;
 				this.searchObj.endTime = this.date.endTimeStr;
 				this.searchObj[this.currentType] = this.inputContent;
-				getUserList(this.searchObj, this.initList);
+				getUserList(this.searchObj).then(this.initList);
 				this.searchObj[this.currentType] = "";
 			},
 			onClick_dropListBtn(){
@@ -512,13 +540,15 @@
 		border: 1px solid #01aaef;
 
 	}
-	.first-td-child{
-		color:#01aaef;
+
+	.first-td-child {
+		color: #01aaef;
 		text-decoration: underline
 
 	}
-	.blue-content{
-		color:#01aaef;
+
+	.blue-content {
+		color: #01aaef;
 	}
 
 </style>
