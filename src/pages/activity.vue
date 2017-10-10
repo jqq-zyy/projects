@@ -179,7 +179,7 @@
 														 :currentField="dataObj.sortField"
 											></common-sort>
 										</th>
-										<th class="activity-last-col"><span>|</span>{{g.lang("操作")}}</th>
+										<!--<th class="activity-last-col"><span>|</span>{{g.lang("操作")}}</th>-->
 									</tr>
 									</thead>
 									<tbody>
@@ -197,10 +197,10 @@
 										<td>{{item.totalScanCount}}</td>
 										<td>{{item.useRpAmount}}</td>
 										<td>{{item.useRpAmount}}</td>
-										<td>
-												<span v-text="onConfirm_operation(item.freezeStatus)"
-													  @click="onClick_activityItem(item.id)" class="blue-content pointer"></span>
-										</td>
+										<!--<td>-->
+												<!--<span v-text="onConfirm_operation(item.freezeStatus)"-->
+													  <!--@click="onClick_activityItem(item.id)" class="blue-content pointer"></span>-->
+										<!--</td>-->
 									</tr>
 									</tbody>
 									<tfoot>
@@ -210,7 +210,6 @@
 										<td>{{resultTotalObj.totalScanCount}}</td>
 										<td>{{resultTotalObj.RpAmount}}</td>
 										<td>{{resultTotalObj.platformAmount}}</td>
-										<td></td>
 									</tr>
 									</tfoot>
 								</table>
@@ -271,7 +270,7 @@
 						id: "brandName",
 						name: "品牌名称"
 					}, {
-						id: "companyName",
+						id: "companyFullName",
 						name: "企业名称"
 					}
 
@@ -283,6 +282,10 @@
 					RpAmount: 0,
 					platformAmount: 0
 				}
+
+
+
+
 
 			}
 		},
@@ -308,7 +311,6 @@
 		},
 		methods: {
 			init(){
-
 				this.initSearchData();
 				this.initData();
 
@@ -338,8 +340,8 @@
 					page: 1,
 					pageSize: g.param.pageSizeList[0],
 					activityStatus: "",
-					sortField: "create_time",
-					sortOrder: "desc",
+					// sortField: "create_time",
+					// sortOrder: "desc",
 					activitySQueryBeginTime: '',
 					activitySQueryEndTime: '',
 					activityEQueryStartTime: '',
@@ -355,6 +357,9 @@
 			onUpdate_activityList(){
 				g.ui.showLoading();
 				this.dataObj.activityStatus = this.activityStatus.join(",");
+				this.dataObj.companyFullName="";
+				this.dataObj.activityName="";
+				this.dataObj.applyUserLogon="";
 				this.dataObj[this.currentType] = this.inputContent;
 				g.net.call("activity/queryActivityStatisticByPage", this.dataObj).then(($data) =>
 				{

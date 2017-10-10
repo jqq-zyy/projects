@@ -15,7 +15,7 @@ export default class BagPool {
 	update($dObj)
 	{
 		if($dObj.model){
-			$dObj.model.hasOwnProperty('rpAmount') && (_rpAmount = $dObj.model.rpAmount);
+			$dObj.model.hasOwnProperty('totalAmount') && (_rpAmount = $dObj.model.totalAmount);
 		}
 
 		$dObj.hasOwnProperty('total') && (_total = $dObj.total);
@@ -94,6 +94,7 @@ function createData($dObj)
 	d.orderStatusDesc = "";
 	d.createTime = "";
 	d.companyFullName = "";
+	d.applyUserLogon = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -105,11 +106,12 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('shopId') && (this.shopId = $dObj.shopId);
 	$dObj.hasOwnProperty('orderType') && (this.orderType = $dObj.orderType);
 	$dObj.hasOwnProperty('orderTypeDesc') && (this.orderTypeDesc = $dObj.orderTypeDesc);
-	$dObj.hasOwnProperty('orderAmount') && (this.orderAmount = $dObj.orderAmount);
+	$dObj.hasOwnProperty('orderTotalAmount') && (this.orderAmount = $dObj.orderTotalAmount);
 	$dObj.hasOwnProperty('payWay') && (this.payWay = $dObj.payWay);
 	$dObj.hasOwnProperty('payWayDesc') && (this.payWayDesc = $dObj.payWayDesc);
 	$dObj.hasOwnProperty('orderStatus') && (this.orderStatus = $dObj.orderStatus);
 	$dObj.hasOwnProperty('orderStatusDesc') && (this.orderStatusDesc = $dObj.orderStatusDesc);
 	$dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
 	$dObj.hasOwnProperty('companyFullName') && (this.companyFullName = $dObj.companyFullName);
+	$dObj.hasOwnProperty('applyUserLogon') && (this.applyUserLogon = $dObj.applyUserLogon);
 }

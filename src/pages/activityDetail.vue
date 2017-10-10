@@ -23,10 +23,10 @@
 
 										</span>
 									</span>
-									<span class="msg-info msf-info-width">状态：{{activityInfo.activityStartTimeStr}}
-									<span class="pointer border-btn status-btn hb-fill-middle2-bg"
-										  v-text="onConfirm_freezeStatus(activityInfo.freezeStatus)"
-										  @click="onClick_changeStatus(activityInfo.freezeStatus)"></span></span>
+									<span class="msg-info msf-info-width">状态：{{activityInfo.activityStatusStr}}</span>
+									<!--<span class="pointer border-btn status-btn hb-fill-middle2-bg"-->
+										  <!--v-text="onConfirm_freezeStatus(activityInfo.freezeStatus)"-->
+										  <!--@click="onClick_changeStatus(activityInfo.freezeStatus)"></span>-->
 									<span class="msg-info msf-info-width">开始时间：<span v-text="currentActivity(activityInfo.activityStartTimeStr)"></span></span>
 									<span class="msg-info msf-info-width">结束时间：<span v-text="currentActivity(activityInfo.activityEndTimeStr)"></span></span>
 									<span class="msg-info msf-info-width">剩余数量/二维码数量：{{remainQrCodeNum}}/{{totalQrCodeNum}}</span>
@@ -34,29 +34,29 @@
 									<span class="msg-info msf-info-width" style="width: 100%;">是否接受平台红包：<span v-text="isPlatformReward"></span></span>
 									<div class="msg-info msf-info-width">
 										<span>活动地区：</span>
-										<ul v-for="(item,index) in activityRules" >
-											<li v-if="item.ruleType==1">{{index+1}}. {{item.provinceName}}（{{item.reward}}  倍）</li>
+										<ul v-for="(item,index) in regionRules" v-if="regionRules.length>0">
+											<li v-if="item.ruleType==2">{{index+1}}. {{item.provinceName}}（{{item.reward}}  倍）</li>
 										</ul>
+										<span v-if="regionRules.length==0">暂无</span>
 									</div>
 									<div class="msg-info msf-info-width">
 										<span>会员奖励：</span>
-										<ul v-for="(item,index) in activityRules">
-											<li v-if="item.ruleType==2">{{index+1}}. {{item.memberName}}会员（{{item.reward}} 倍）</li>
+										<ul v-for="(item,index) in memberRules" v-if="memberRules.length>0">
+											<li >{{index+1}}. {{item.memberName}}会员（{{item.reward}} 倍）</li>
 										</ul>
+										<span v-if="memberRules.length==0">暂无</span>
 									</div>
 								</div>
 								<div class="detail-msg">
 									<div class="msg-title">红包信息</div>
 									<span class="msg-info msf-info-width">标题：{{activityRpInfo.rpTitle}}</span>
 									<span class="msg-info msf-info-width">祝福文字：{{activityRpInfo.rpWish}}</span>
-									<span class="msg-info msf-info-width">显示图片：<img class="show-img pointer" :src="activityRpInfo.rpLogoUrl"  @click="onClick_seeImage(infoObj.shopLogo)"></span>
+									<span class="msg-info msf-info-width">显示图片：<img class="show-img pointer" :src="activityRpInfo.rpLogoUrl"  @click="onClick_seeImage(activityRpInfo.rpLogoUrl)"></span>
 								</div>
 							</div>
 
 						</div>
 						<common-footer></common-footer>
-
-
 
 					</div>
 				</div>
@@ -110,7 +110,8 @@
 				g: g,
 				activityInfo: {},
 				activityRpInfo: {},
-				activityRules: [],
+				memberRules: [],
+				regionRules: [],
 				totalQrCodeNum: 0,
 				remainQrCodeNum: 0,
 				totalMakedAmount: 0,
@@ -138,7 +139,8 @@
 				var activityDetail = g.data.activityDetailPool;
 				this.activityInfo = activityDetail.activityInfo;
 				this.activityRpInfo = activityDetail.activityRpInfo;
-				this.activityRules = activityDetail.activityRules;
+				this.memberRules = activityDetail.memberRules;
+				this.regionRules = activityDetail.regionRules;
 				this.totalQrCodeNum = activityDetail.totalQrCodeNum;
 				this.remainQrCodeNum = activityDetail.remainQrCodeNum;
 				this.totalMakedAmount = activityDetail.totalMakedAmount;

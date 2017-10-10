@@ -116,8 +116,8 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('shopId') && (this.shopId = $dObj.shopId);
 	$dObj.hasOwnProperty('orderType') && (this.orderType = $dObj.orderType);
 	$dObj.hasOwnProperty('orderTypeDesc') && (this.orderTypeDesc = $dObj.orderTypeDesc);
-	$dObj.hasOwnProperty('qrcodeBuyNum') && (this.qrcodeRefundNum = $dObj.qrcodeBuyNum);
-	$dObj.hasOwnProperty('buyUnitPrice') && (this.refundUnitPrice = $dObj.buyUnitPrice);
+	$dObj.hasOwnProperty('qrcodeRefundNum') && (this.qrcodeRefundNum = $dObj.qrcodeRefundNum);
+	$dObj.hasOwnProperty('refundUnitPrice') && (this.refundUnitPrice = $dObj.refundUnitPrice);
 	$dObj.hasOwnProperty('orderTotalAmount') && (this.orderAmount = $dObj.orderTotalAmount);
 	$dObj.hasOwnProperty('payWay') && (this.payWay = $dObj.payWay);
 	$dObj.hasOwnProperty('payWayDesc') && (this.payWayDesc = $dObj.payWayDesc);

@@ -74,7 +74,7 @@
 									<div class="upload-box">
 										<span class="company">品牌授权书：</span>
 										<div v-for="item in infoObj.brandList" class="enterprise-msg" v-if="infoObj.brandList.length>0">
-											<img :src="item.brandAuthorize" alt="" @click="onClick_seeImage(item.brandAuthorize)">
+											<img :src="item.brandAuthorize" alt="" @click="onClick_seeImage(item.brandAuthorize)" class="pointer">
 											<span>{{item.brandName}}</span>
 										</div>
 										<div v-if="infoObj.brandList.length==0">暂无</div>
