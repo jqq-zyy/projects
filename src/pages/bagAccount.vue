@@ -173,27 +173,26 @@
 								 @click="onClick_closeBtn"/>
 						</div>
 						<div class="pop-tit"></div>
-						<div class="pop-body">
-							<div>审核退款申请：
-								<label><input type="radio" v-model="auditStatus" value="2">通过申请</label>
-								<label><input type="radio" v-model="auditStatus" value="-1">拒绝申请</label>
+						<div class="pop-body button-box">						<div :class="['m-margin-top',auditStatus==-1?'':'text-center']">审核退款申请：
+								<label class="label-left">
+									<input type="radio" class="refuse-check"v-model="auditStatus" value="2">通过申请</label>
+								<label class="label-right">
+									<input type="radio" class="refuse-check"v-model="auditStatus" value="-1">拒绝申请</label>
 							</div>
-							<div class="m-title" v-show="auditStatus==-1"><span class="name">请输入拒绝原因：</span>
+							<div class="m-title" v-show="auditStatus==-1"><span class="">请输入拒绝原因：</span>
 								<textarea name="" id="" cols="30" rows="10" class="describle-reasons"
 										  v-model="refuseContent" @focus="onFocus_refuseInput"></textarea>
 								<div v-show="isShow_hasError">拒绝原因不能为空</div>
 							</div>
-
-							<div class="m-title button-box" v-show="auditStatus==-1">
-								<div class="save-button pointer bg-btn" @click="onClick_closeBtn">暂不拒绝</div>
-								<div class="save-button pointer bg-btn" @click="onClick_sumbitBtn">确认拒绝并告知商户</div>
+							<div class="button-box m-margin-up"   v-show="auditStatus==-1">
+								<div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不拒绝</div>
+								<div class="refuse-button pointer bg-btn" @click="onClick_sumbitBtn">确认拒绝并告知商户</div>
 							</div>
-							<div class="m-title button-box" v-show="auditStatus==2">
-								<div class="save-button pointer bg-btn" @click="onClick_closeBtn">暂不通过</div>
-								<div class="save-button pointer bg-btn" @click="onClick_sumbitBtn">确认通过并告知商户</div>
+							<div class=" button-box m-margin-up"   v-show="auditStatus==2">
+								<div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不通过</div>
+								<div class="refuse-button pointer bg-btn" @click="onClick_sumbitBtn">确认通过并告知商户</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</transition>

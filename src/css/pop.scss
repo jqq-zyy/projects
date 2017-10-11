@@ -398,3 +398,16 @@ div.reset-pop {
 .m-margin-top{
   margin-top: 20px;
 }
+.m-margin-up{
+  margin-top: 50px;
+}
+
+.label-left,.label-right{
+  margin-left: 10px;
+  .refuse-check {
+    margin-right: 6px;
+  }
+}
+.label-right{
+  margin-left: 50px;
+}

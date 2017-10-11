@@ -1,15 +1,16 @@
-.g-chart{
+.g-chart {
   overflow: hidden;
-  background-color: #fff;
+  background-color: #ffffff;
   margin-bottom: 50px;
 }
-.chart-nav{
+
+.chart-nav {
   height: 60px;
   border-bottom: 1px solid #c1c5cf;
-  .chart-nav-left{
+  .chart-nav-left {
 	width: 370px;
 	float: left;
-	span{
+	span {
 	  display: inline-block;
 	  width: 86px;
 	  text-align: center;
@@ -17,50 +18,50 @@
 	  cursor: pointer;
 	  font-size: 14px;
 	}
-	span:hover{
+	span:hover {
 	  color: #01aaef;
 	  font-size: 16px;
 	}
-	.select-time{
+	.select-time {
 	  color: #01aaef;
 	  font-size: 16px;
 	}
-	span:nth-of-type(1){
+	span:nth-of-type(1) {
 	  margin-left: 10px;
 	}
-	.chart-today,.chart-yesterdat{
+	.chart-today, .chart-yesterdat {
 	  width: 60px;
 	}
   }
 
-  .chart-nav-right{
+  .chart-nav-right {
 	float: left;
 	width: 580px;
-	.chart-nav-time{
+	.chart-nav-time {
 	  width: 276px;
 	  height: 30px;
 	  line-height: 30px;
 	  border: 1px solid #c1c5cf;
 	  margin: 15px 20px 0 40px;
-	  -webkit-border-radius:5px 0 0 5px;
-	  -moz-border-radius:5px 0 0 5px;
-	  border-radius:5px 0 0 5px;
+	  -webkit-border-radius: 5px 0 0 5px;
+	  -moz-border-radius: 5px 0 0 5px;
+	  border-radius: 5px 0 0 5px;
 	  cursor: pointer;
 	  float: left;
-	  span{
+	  span {
 		width: 40px;
 		text-align: center;
 		display: inline-block;
 		background: #c1c5cf;
-		color: #fff;
+		color: #ffffff;
 		float: left;
-		&:nth-of-type(1){
-		  -webkit-border-radius:5px 0 0 5px;
-		  -moz-border-radius:5px 0 0 5px;
-		  border-radius:5px 0 0 5px;
+		&:nth-of-type(1) {
+		  -webkit-border-radius: 5px 0 0 5px;
+		  -moz-border-radius: 5px 0 0 5px;
+		  border-radius: 5px 0 0 5px;
 		}
 	  }
-	  div{
+	  div {
 		color: #c1c5cf;
 		float: left;
 		width: 95px;
@@ -79,13 +80,11 @@
 	  text-align: center;
 	  line-height: 30px;
 	  width: 60px;
-	  -webkit-border-radius:5px;
-	  -moz-border-radius:5px;
-	  border-radius:5px;
+	  border-radius: 2px;
 	  cursor: pointer;
 	  margin-top: 15px;
 	}
-	.chart-nav-select{
+	.chart-nav-select {
 	  border: 1px solid #01aaef;
 	  width: 90px;
 	  text-align: center;
@@ -96,55 +95,62 @@
 	}
   }
 }
-.chart-detail{
+
+.chart-detail {
   width: 968px;
-  p{
+  p {
 	margin-top: 20px;
 	font-size: 16px;
 	margin-left: 20px;
   }
-  img{
+  img {
 	display: block;
 	height: 205px;
 	width: 880px;
 	margin: 40px 0 40px 30px;
   }
-  .chart-last-left,.chart-last-right{
+  .chart-last-left, .chart-last-right {
 	float: left;
 	width: 474px;
-	img{
+	img {
 	  width: 440px;
 	}
   }
-  .chart-last-right{
+  .chart-last-right {
 	margin-left: 20px;
   }
 }
 
-
-.pop-edit{
+.pop-edit {
   min-width: 300px;
   width: 374px;
 }
 
-.pop-edit .show-recharge-tips{
+.pop-edit .show-recharge-tips {
   margin-left: 40px;
   text-align: left;
   margin-bottom: 10px;
 }
 
-.pop-edit .tree-box{
-  label{
+.pop-edit .tree-box {
+  padding-top: 20px;
+  label {
 	margin-right: 30px;
-	line-height: 30px;
+	line-height: 32px;
 	cursor: pointer;
-	input{
+	input {
 	  vertical-align: top;
 	  margin-top: 9px;
-	  margin-right: 2px;
+	  margin-right: 6px;
 	}
   }
-  .button{
+  .button-box {
+	width: 100%;
+	display: flex;
+	align-content: center;
+	justify-content: space-around;
+  }
+  .activity-btn {
 	height: 36px;
 	line-height: 36px;
 	text-align: center;
@@ -154,4 +160,5 @@
 	cursor: pointer;
 	margin-top: 30px;
   }
+
 }
