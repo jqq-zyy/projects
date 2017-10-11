@@ -27,11 +27,12 @@
 											<span>从</span>
 											<div>结束时间</div>
 										</div>
-										<div class="chart-nav-search hb-fill-middle2-rev">
+										<div class="chart-nav-search pointer border-btn hb-fill-middle2-rev">
 											查询
 										</div>
 
-										<div class="chart-nav-select hb-fill-middle2-bg" @click="onClick_selctBtn()">
+										<div class="chart-nav-select pointer border-btn hb-fill-middle2-bg"
+											 @click="onClick_selctBtn()">
 											选择活动
 										</div>
 									</div>
@@ -59,7 +60,7 @@
 											<span>从</span>
 											<div>结束时间</div>
 										</div>
-										<div class="chart-nav-search hb-fill-middle2-rev">
+										<div class="chart-nav-search pointer border-btn hb-fill-middle2-rev">
 											查询
 										</div>
 
@@ -89,7 +90,7 @@
 											<span>从</span>
 											<div>结束时间</div>
 										</div>
-										<div class="chart-nav-search hb-fill-middle2-rev">
+										<div class="pointer border-btn chart-nav-search hb-fill-middle2-rev">
 											查询
 										</div>
 									</div>
@@ -118,7 +119,7 @@
 											<span>从</span>
 											<div>结束时间</div>
 										</div>
-										<div class="chart-nav-search hb-fill-middle2-rev">
+										<div class="pointer border-btn chart-nav-search hb-fill-middle2-rev">
 											查询
 										</div>
 
@@ -148,7 +149,7 @@
 							<img :src="g.config.path.images+'/close.png'"
 								 @click="onClick_closeBtn"/>
 						</div>
-						<div class="step-about-tit show-recharge-tips">
+						<div class="pop-tit">
 							选择想查看的活动
 						</div>
 						<div class="pop-body tree-box">
@@ -176,9 +177,9 @@
 							<label for="ac8">
 								<input type="checkbox" id="ac8">活动4
 							</label>
-							<div data-v-c638997c="">
-								<div class="button hb-fill-middle2-bg">取消</div>
-								<div class="button hb-fill-middle2-rev">保存</div>
+							<div class="button-box">
+								<div class="activity-btn pointer border-btn hb-fill-middle2-bg">取消</div>
+								<div class="activity-btn pointer bg-btn hb-fill-middle2-rev">保存</div>
 							</div>
 						</div>
 					</div>
@@ -376,7 +377,7 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common";
 	@import "../css/myActivity";
-
+	@import "../css/pop";
 </style>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>

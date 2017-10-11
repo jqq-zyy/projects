@@ -7,11 +7,13 @@
 						<div class="login-body">
 							<div class="m-title">
 								<p class="header">运营管理后台</p></div>
-							<div class="m-title">
+							<div class="m-title r-position">
+								<img :src="g.config.path.images+'/user.png'" class="user-img" alt="">
 								<input class="user" type="text" v-model="logonObj.logon"
 									   @keyup.enter="onClick_logonBtn"
 									   @focus="onFocus_input" placeholder="请输入用户名或手机号"></div>
-							<div class="m-title">
+							<div class="m-title r-position">
+								<img :src="g.config.path.images+'/pwd.png'" class="user-img" alt="">
 								<input class="pwd" type="password" v-model="pwd" @keyup.enter="onClick_logonBtn"
 									   @focus="onFocus_input" placeholder="请输入密码">
 							</div>
@@ -131,15 +133,16 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/login.scss";
 	@import "../css/pop.scss";
-
-	.user {
-
-		background: #ffffff url("../../assets/images/user.png") no-repeat left center;
+	.r-position {
+		position: relative;
 	}
 
-	.pwd {
-		background: #ffffff url("../../assets/images/pwd.png") no-repeat left center;
+	.user-img {
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
+
 
 	.pwd-box {
 		display: inline-block;
@@ -156,8 +159,8 @@
 			margin-top: 25px;
 			overflow: hidden;
 			input {
-				height: 40px;
-				line-height: 40px;
+				height: 38px;
+				line-height: 38px;
 				width: 220px;
 				float: left;
 				border: 1px solid #dbdee7;

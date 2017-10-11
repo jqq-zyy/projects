@@ -1,6 +1,6 @@
 <template>
 	<div class="nav-navicon">
-		<div>
+		<div class="nav-container">
 			<header class="header">
 				运营管理后台
 			</header>
@@ -140,5 +140,8 @@
 	}
 	.content-blue {
 		color: #0189c0 !important;
+	}
+	.nav-container{
+		width: 240px;
 	}
 </style>
