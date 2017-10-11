@@ -281,7 +281,10 @@
             },
             onChange_currentPage($page, $pageSize){
                 this.dataObj.page = $page;
-                this.dataObj.pageSize = $pageSize;
+                if($pageSize!=this.dataObj.pageSize){
+                    this.dataObj.pageSize = $pageSize;
+                    this.dataObj.page = 1
+                }
                 this.onUpdate_bagList()
             },
             onUpdate_bagList(){

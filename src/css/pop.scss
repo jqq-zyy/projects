@@ -378,3 +378,23 @@ div.reset-pop {
   line-height: 42px;
   width: 80px;
 }
+.refuse-button{
+  //width: 130px;
+  padding: 0 20px;
+  height: 36px;
+  box-sizing: border-box;
+  line-height: 36px;
+}
+.refuse-button:last-child{
+  margin-left: 50px;
+}
+.describle-reasons{
+  width: 300px;
+  outline: none;
+  resize: none;
+  border: 1px solid #dbdee7;
+  padding: 10px;
+}
+.m-margin-top{
+  margin-top: 20px;
+}

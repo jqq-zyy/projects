@@ -142,14 +142,15 @@
 						</div>
 						<div class="pop-tit"></div>
 						<div class="pop-body">
-							<div class="m-title"><span class="name">请输入拒绝原因：</span>
+							<div class="m-title">
+								<span class="">请输入拒绝原因：</span>
 								<textarea name="" id="" cols="30" rows="10" class="describle-reasons"
 										  v-model="refuseContent" @focus="onFocus_refuseInput"></textarea>
 								<div v-show="isShow_hasError">拒绝原因不能为空</div>
 							</div>
-							<div class="m-title button-box">
-								<div class="save-button pointer bg-btn" @click="onClick_closeBtn">暂不拒绝</div>
-								<div class="save-button pointer bg-btn" @click="onClick_sumbitBtn">确认拒绝并告知商户</div>
+							<div class="button-box" style="margin-top: 20px">
+								<div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不拒绝</div>
+								<div class="refuse-button pointer bg-btn" @click="onClick_sumbitBtn">确认拒绝并告知商户</div>
 							</div>
 						</div>
 

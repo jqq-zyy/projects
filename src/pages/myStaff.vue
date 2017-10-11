@@ -194,9 +194,10 @@
 				{
 					this.searchObj.page = $page;
 				}
-				if ($pageSize)
+				if ($pageSize!=this.searchObj.pageSize)
 				{
 					this.searchObj.pageSize = $pageSize;
+					this.searchObj.page = 1;
 				}
 				this.onUpdate_orderList()
 			},

@@ -79,7 +79,6 @@
 									" @click="onClick_exportBtn">导出全部
 								</div>
 							</div>
-
 							<div class="recharge-table admin-calendar-table ">
 								<table>
 									<thead>
@@ -354,9 +353,10 @@
 				{
 					this.searchObj.page = $page;
 				}
-				if ($pageSize)
+				if ($pageSize!=this.searchObj.pageSize)
 				{
 					this.searchObj.pageSize = $pageSize;
+					this.searchObj.page = 1;
 				}
 				this.onUpdate_userList()
 			},
