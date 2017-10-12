@@ -91,10 +91,11 @@
 									  :fixHeader="true"
 									  :leftFixedCols="4"
 									  :rightFixedCols="1"
-									  :rightFooterFixedCols="4"
+									  :leftFooterFixedCols="4"
 									  :eachRowHeight="eachRowHeight"
 									  :eachColWidth="120"
 									  :isShowIdCol="true"
+									  :isShowTotal="true"
 									  @clickBtn="onClick_btn"
 									  @clickHead="onClick_headItem"
 									  @clickBody="onClick_bodyitem">
@@ -197,7 +198,6 @@
 			CommonFooter,
 			CommonPrompt,
 			CommonSort
-
 		},
 		methods: {
 			init(){
@@ -206,11 +206,13 @@
 				this.initList();
 			},
 			initList(){
+				debugger;
 				var obj = {};
 				obj.header = g.data.staticTableHeaderPool.list.concat();
-				obj.body = convertList(g.data.userPool.list);
-				obj.footer = getFooterList();
+				obj.body = convertList(g.data.userPool.list, g.data.staticTableHeaderPool.list,"audit");
+				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.userPool);
 				this.tableData = obj;
+				trace("this.tableDat====", this.tableData);
 				this.totalPage = g.data.userPool.totalPage;
 				g.core.update();
 			},
@@ -246,9 +248,9 @@
 				}
 
 			},
-			onClick_btn($btnId,$itemId)
+			onClick_btn($btnId, $itemId)
 			{
-				trace('$item', $btnId,$itemId);
+				trace('$item', $btnId, $itemId);
 			},
 			onClick_headItem($item)
 			{
@@ -267,7 +269,7 @@
 				{
 					this.searchObj.page = $page;
 				}
-				if ($pageSize!=this.searchObj.pageSize)
+				if ($pageSize != this.searchObj.pageSize)
 				{
 					this.searchObj.pageSize = $pageSize;
 					this.searchObj.page = 1;
@@ -419,7 +421,7 @@
 	}
 </script>
 
-<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
+<style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common.scss";
 	@import "../css/myBill.scss";
 

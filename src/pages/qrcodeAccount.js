@@ -1,7 +1,8 @@
 /**
  * Created by billy on 2017/3/13.
  */
-import g from '../global';
+import g from "../global";
+import {updateData} from "./userList";
 export default function (to, next)
 {
 	g.ui.showLoading();
@@ -10,8 +11,8 @@ export default function (to, next)
 	var endTime = startTime;
 	g.net.call("order/queryQrcodeAccountList", {
 		'queryStatus': 0,
-		'startTime':startTime,
-		'endTime':endTime,
+		'startTime': startTime,
+		'endTime': endTime,
 		'page': 1,
 		'pageSize': g.param.pageSizeList[0],
 		'sortField': "",
@@ -19,9 +20,10 @@ export default function (to, next)
 	}).then(($data) =>
 	{
 		g.ui.hideLoading();
+		updateData("qrcodeHeader");
 		g.data.qrcodePool.removeAll();
 		g.data.qrcodePool.update($data);
-		
+
 		next();
 	}, (err) =>
 	{

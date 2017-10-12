@@ -47,9 +47,8 @@ export function initStaticData()
 	var staticData = g.data.staticData;
 	initLang(staticData);
 	navPool.update(staticData["nav.json"]);
-	staticTableHeaderPool.update(staticData["header.json"]);
-}
 
+}
 
 function initLang($staticData)
 {

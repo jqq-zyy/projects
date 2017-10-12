@@ -19,7 +19,6 @@
 				</div>
 			</div>
 
-
 			<div class="middle-header"
 				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:headerHeight+'px'}">
 				<div class="header-row" :style="{height:headerHeight+'px'}">
@@ -106,7 +105,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="footer header-vertical body-row" v-if="tableData.body.length > 1"
+		<div class="footer header-vertical body-row" v-if="tableData.body.length > 1 && isShowTotal"
 			 :style="{height:footerHeight+'px',top:Math.min(offsetTop,topLimit)+eachRowHeight+6+'px',width:getTypeWidth('total')+6+'px'}">
 			<div class="left-header"
 				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px',height:footerHeight+'px'}">
@@ -118,7 +117,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="middle-header"
 				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:footerHeight+'px'}">
 				<div class="header-row" :style="{height:footerHeight+'px'}">
@@ -197,14 +195,6 @@
 				type: Number,
 				default: 0
 			},
-			leftFooterFixedCols: {
-				type: Number,
-				default: 1
-			},
-			rightFooterFixedCols: {
-				type: Number,
-				default: 1
-			},
 			rightFixedCols: {
 				type: Number,
 				default: 0
@@ -230,67 +220,107 @@
 			isShowIdCol: {
 				type: Boolean,
 				default: false
+			},
+			isShowTotal: {
+				type: Boolean,
+				default: false
 			}
 		},
 		computed: {
-			rightCols()
-			{
-				return Math.min(this.rightFixedCols, this.rightFooterFixedCols)
-			},
 			topLimit()
 			{
 				return this.getContentHeight() > 0 && Math.max(this.getContentHeight() - this.bodyHeight -
-								this.headerHeight -
-								15, 0);
+								this.headerHeight - 15, 0);
 			}
 		},
 		methods: {
-
 			checkLeftHeader($item, index)
 			{
 				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index <= this.leftFixedCols;
+				}
 				return isTrue && index < this.leftFixedCols;
 			},
 			checkMiddleHeader($item, index)
 			{
 				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index > this.leftFixedCols && index <= (this.getValidLength("header") -
+							this.rightFixedCols)
+				}
 				return isTrue && index >= this.leftFixedCols && index < (this.getValidLength("header") -
 						this.rightFixedCols)
 			},
 			checkRightHeader($item, index)
 			{
 				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index > (this.getValidLength("header") - this.rightFixedCols)
+				}
 				return isTrue && index >= (this.getValidLength("header") - this.rightFixedCols)
-			},
-
-			checkMiddleBody(key, index)
-			{
-				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
-				return isTrue && index >= this.leftFixedCols && index < (this.getValidLength("header") -
-						this.rightFixedCols)
 			},
 			checkLeftBody(key, index)
 			{
 				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index <= this.leftFixedCols
+				}
 				return isTrue && index < this.leftFixedCols
+			},
+			checkMiddleBody(key, index)
+			{
+				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index > this.leftFixedCols && index <= (this.getValidLength("header") -
+							this.rightFixedCols)
+				}
+				return isTrue && index >= this.leftFixedCols && index < (this.getValidLength("header") -
+						this.rightFixedCols)
 			},
 			checkRightBody(key, index)
 			{
 				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index > (this.getValidLength("header") - this.rightFixedCols)
+				}
 				return isTrue && index >= (this.getValidLength("header") - this.rightFixedCols)
-			},
-			checkMiddleFooter($item, index)
-			{
-				return index > this.leftFooterFixedCols && index <= (this.getValidLength("footer") -
-						this.rightCols)
+
 			},
 			checkLeftFooter($item, index)
 			{
-				return index < this.leftFooterFixedCols;
+				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index <= this.leftFixedCols;
+				}
+				return isTrue && index < this.leftFixedCols;
+			},
+
+			checkMiddleFooter($item, index)
+			{
+				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return index > this.leftFixedCols && index <= (this.getValidLength("footer") -
+							this.rightFixedCols);
+				}
+				return index >= this.leftFixedCols && index < (this.getValidLength("footer") -
+						this.rightFixedCols)
 			},
 			checkRightFooter($item, index)
 			{
-				return index >= (this.getValidLength("footer") - this.rightCols)
+				if (!this.isShowIdCol)
+				{
+					return index > (this.getValidLength("footer") - this.rightFixedCols)
+				}
+				return index >= (this.getValidLength("footer") - this.rightFixedCols)
 			},
 			onClick_headItem($item)
 			{
@@ -398,7 +428,7 @@
 			getScrollLimit()
 			{
 				const width = this.getTypeWidth('total');
-				return width - this.boxWidth;
+				return Math.max(width - this.boxWidth, 0);
 			},
 			getContentHeight()
 			{
@@ -577,7 +607,7 @@
 	.absolute-right {
 		position: absolute;
 		top: 18px;
-		right: 20px;
+		left: 80px;
 	}
 
 	.header,

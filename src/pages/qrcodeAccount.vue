@@ -70,127 +70,151 @@
 									</span>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="admin-calendar-table">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th class="first-col">流水ID</th>
-                                        <th class="s-col" @click="onClick_sortBtn('received_amount')">流水类型
-                                            <common-sort :type="dataObj.sortOrder"
-                                                         :target="'received_amount'"
-                                                         :currentField="dataObj.sortField"
-                                            ></common-sort>
-                                        </th>
-                                        <th @click="onClick_sortBtn('received_amount')" class="pointer m-width">二维码数
-                                            <common-sort :type="dataObj.sortOrder"
-                                                         :target="'received_amount'"
-                                                         :currentField="dataObj.sortField"
-                                            ></common-sort>
-                                        </th>
-                                        <th @click="onClick_sortBtn('received_amount')" class="pointer m-width">
-                                            <div>
-                                                单价
-                                                <common-sort :type="dataObj.sortOrder"
-                                                             :target="'received_amount'"
-                                                             :currentField="dataObj.sortField"
-                                                ></common-sort>
-                                            </div>
-                                        </th>
+                            <hw-table :tableData="tableData"
+                                      :boxWidth="boxWidth"
+                                      :boxHeight="boxHeight"
+                                      :headerHeight="headerHeight"
+                                      :bodyHeight="bodyHeight"
+                                      :footerHeight="footerHeight"
+                                      :fixHeader="true"
+                                      :leftFixedCols="4"
+                                      :rightFixedCols="1"
+                                      :leftFooterFixedCols="4"
+                                      :eachRowHeight="eachRowHeight"
+                                      :eachColWidth="boxWidth/10"
 
-                                        <th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
+                                      :isShowIdCol="true"
+                                      :isShowTotal="true"
+                                      @clickBtn="onClick_btn"
+                                      @clickHead="onClick_headItem"
+                                      @clickBody="onClick_bodyitem">
+                                <div class="relative middle bgc-ff">
+                                    <p v-show="g.data.userPool.list.length==0" class="absolute no-record"
+                                       :style="{left:boxWidth/2+'px'}">
+                                        暂无记录...</p>
+                                </div>
+                            </hw-table>
+                            <!--<div class="admin-calendar-table">-->
+                                <!--<table>-->
+                                    <!--<thead>-->
+                                    <!--<tr>-->
+                                        <!--<th class="first-col">流水ID</th>-->
+                                        <!--<th class="s-col" @click="onClick_sortBtn('received_amount')">流水类型-->
+                                            <!--<common-sort :type="dataObj.sortOrder"-->
+                                                         <!--:target="'received_amount'"-->
+                                                         <!--:currentField="dataObj.sortField"-->
+                                            <!--&gt;</common-sort>-->
+                                        <!--</th>-->
+                                        <!--<th @click="onClick_sortBtn('received_amount')" class="pointer m-width">二维码数-->
+                                            <!--<common-sort :type="dataObj.sortOrder"-->
+                                                         <!--:target="'received_amount'"-->
+                                                         <!--:currentField="dataObj.sortField"-->
+                                            <!--&gt;</common-sort>-->
+                                        <!--</th>-->
+                                        <!--<th @click="onClick_sortBtn('received_amount')" class="pointer m-width">-->
+                                            <!--<div>-->
+                                                <!--单价-->
+                                                <!--<common-sort :type="dataObj.sortOrder"-->
+                                                             <!--:target="'received_amount'"-->
+                                                             <!--:currentField="dataObj.sortField"-->
+                                                <!--&gt;</common-sort>-->
+                                            <!--</div>-->
+                                        <!--</th>-->
 
-                                            <div>
-                                                金额
+                                        <!--<th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">-->
 
-                                                <common-sort :type="dataObj.sortOrder"
-                                                             :target="'activity_start_time'"
-                                                             :currentField="dataObj.sortField"
-                                                ></common-sort>
-                                            </div>
-                                        </th>
-                                        <th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
+                                            <!--<div>-->
+                                                <!--金额-->
 
-                                            <div>
-                                                支付方式
+                                                <!--<common-sort :type="dataObj.sortOrder"-->
+                                                             <!--:target="'activity_start_time'"-->
+                                                             <!--:currentField="dataObj.sortField"-->
+                                                <!--&gt;</common-sort>-->
+                                            <!--</div>-->
+                                        <!--</th>-->
+                                        <!--<th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">-->
 
-                                                <common-sort :type="dataObj.sortOrder"
-                                                             :target="'activity_start_time'"
-                                                             :currentField="dataObj.sortField"
-                                                ></common-sort>
-                                            </div>
-                                        </th>
-                                        <th class="pointer m-width">
-                                            <div>
-                                                状态
-                                                <common-sort :type="dataObj.sortOrder"
-                                                             :target="'activity_end_time'"
-                                                             :currentField="dataObj.sortField"
-                                                ></common-sort>
-                                            </div>
-                                        </th>
-                                        <th class="pointer m-width">
-                                            <div>
-                                                发起人
-                                            </div>
-                                        </th>
-                                        <th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-                                            <div>
-                                                发起时间
-                                                <common-sort :type="dataObj.sortOrder"
-                                                             :target="'create_time'"
-                                                             :currentField="dataObj.sortField"
-                                                ></common-sort>
+                                            <!--<div>-->
+                                                <!--支付方式-->
 
-                                            </div>
-                                        </th>
-                                        <th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-                                            <div>
-                                                企业全称
-                                                <common-sort :type="dataObj.sortOrder"
-                                                             :target="'create_time'"
-                                                             :currentField="dataObj.sortField"
-                                                ></common-sort>
+                                                <!--<common-sort :type="dataObj.sortOrder"-->
+                                                             <!--:target="'activity_start_time'"-->
+                                                             <!--:currentField="dataObj.sortField"-->
+                                                <!--&gt;</common-sort>-->
+                                            <!--</div>-->
+                                        <!--</th>-->
+                                        <!--<th class="pointer m-width">-->
+                                            <!--<div>-->
+                                                <!--状态-->
+                                                <!--<common-sort :type="dataObj.sortOrder"-->
+                                                             <!--:target="'activity_end_time'"-->
+                                                             <!--:currentField="dataObj.sortField"-->
+                                                <!--&gt;</common-sort>-->
+                                            <!--</div>-->
+                                        <!--</th>-->
+                                        <!--<th class="pointer m-width">-->
+                                            <!--<div>-->
+                                                <!--发起人-->
+                                            <!--</div>-->
+                                        <!--</th>-->
+                                        <!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
+                                            <!--<div>-->
+                                                <!--发起时间-->
+                                                <!--<common-sort :type="dataObj.sortOrder"-->
+                                                             <!--:target="'create_time'"-->
+                                                             <!--:currentField="dataObj.sortField"-->
+                                                <!--&gt;</common-sort>-->
 
-                                            </div>
-                                        </th>
-                                        <th class="activity-last-col">{{g.lang("操作")}}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr v-for="item in qrcodeList">
-                                        <td>{{item.id}}</td>
-                                        <td>{{item.orderTypeDesc}}</td>
-                                        <td>{{item.qrcodeRefundNum}}</td>
-                                        <td>{{item.refundUnitPrice}}</td>
-                                        <td>{{item.orderAmount}}</td>
-                                        <td>{{item.payWayDesc}}</td>
-                                        <td>{{item.orderStatusDesc}}</td>
-                                        <td>{{item.applyUserLogon}}</td>
-                                        <td>{{item.createTime}}</td>
-                                        <td>{{item.companyFullName}}</td>
-                                        <td>
-												<span  class ="blue_underline pointer" @click="onClick_qrcodeItem(item.id)"
-                                                      v-show="item.orderStatus==1">审核
-												</span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr v-show="qrcodeList.length>0">
-                                        <td colspan="2"></td>
+                                            <!--</div>-->
+                                        <!--</th>-->
+                                        <!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
+                                            <!--<div>-->
+                                                <!--企业全称-->
+                                                <!--<common-sort :type="dataObj.sortOrder"-->
+                                                             <!--:target="'create_time'"-->
+                                                             <!--:currentField="dataObj.sortField"-->
+                                                <!--&gt;</common-sort>-->
 
-                                        <td>{{resultTotalObj.qrcodeNum}}</td>
-                                        <td></td>
-                                        <td>{{resultTotalObj.qrcodeAmount}}</td>
-                                        <td colspan="6"></td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
+                                            <!--</div>-->
+                                        <!--</th>-->
+                                        <!--<th class="activity-last-col">{{g.lang("操作")}}</th>-->
+                                    <!--</tr>-->
+                                    <!--</thead>-->
+                                    <!--<tbody>-->
+                                    <!--<tr v-for="item in qrcodeList">-->
+                                        <!--<td>{{item.id}}</td>-->
+                                        <!--<td>{{item.orderTypeDesc}}</td>-->
+                                        <!--<td>{{item.qrcodeRefundNum}}</td>-->
+                                        <!--<td>{{item.refundUnitPrice}}</td>-->
+                                        <!--<td>{{item.orderAmount}}</td>-->
+                                        <!--<td>{{item.payWayDesc}}</td>-->
+                                        <!--<td>{{item.orderStatusDesc}}</td>-->
+                                        <!--<td>{{item.applyUserLogon}}</td>-->
+                                        <!--<td>{{item.createTime}}</td>-->
+                                        <!--<td>{{item.companyFullName}}</td>-->
+                                        <!--<td>-->
+												<!--<span  class ="blue_underline pointer" @click="onClick_qrcodeItem(item.id)"-->
+                                                      <!--v-show="item.orderStatus==1">审核-->
+												<!--</span>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    <!--</tbody>-->
+                                    <!--<tfoot>-->
+                                    <!--<tr v-show="qrcodeList.length>0">-->
+                                        <!--<td colspan="2"></td>-->
+
+                                        <!--<td>{{resultTotalObj.qrcodeNum}}</td>-->
+                                        <!--<td></td>-->
+                                        <!--<td>{{resultTotalObj.qrcodeAmount}}</td>-->
+                                        <!--<td colspan="6"></td>-->
+                                    <!--</tr>-->
+                                    <!--</tfoot>-->
+                                <!--</table>-->
+                            <!--</div>-->
 
                             <common-page :index="dataObj.page" :total="totalPage"
                                          @change="onChange_currentPage" v-show="qrcodeList.length>0"></common-page>
-                            <common-prompt v-show="qrcodeList.length==0"></common-prompt>
+                            <!--<common-prompt v-show="qrcodeList.length==0"></common-prompt>-->
                         </div>
                         <common-footer></common-footer>
                     </div>
@@ -238,6 +262,7 @@
 
 <script type="text/ecmascript-6">
     import g from '../global';
+    import {getUserList, convertList, getFooterList} from './userList';
     import MainLayout from './common/mainLayout.vue';
     import CommonNav from './common/CommonNav.vue';
     import CommonTopNav from './common/CommonTopNav.vue';
@@ -290,7 +315,14 @@
                 },
                 currentId:0,
                 auditStatus: 2,
-                refuseContent: ""
+                refuseContent: "",
+                tableData: {},
+                boxWidth: window.innerWidth * 0.81,
+                eachRowHeight: 60,
+                headerHeight: 60,
+                footerHeight: 60,
+                boxHeight: 610,
+                bodyHeight: 420
             }
         },
         components: {
@@ -321,9 +353,16 @@
             initData(){
                 var info = g.data.qrcodePool;
                 this.totalPage = info.totalPage;
-                this.qrcodeList = info.list;
-                this.resultTotalObj.qrcodeNum = info.qrcodeNum;
-                this.resultTotalObj.qrcodeAmount = info.qrcodeAmount;
+                var obj = {};
+                obj.header = g.data.staticTableHeaderPool.list.concat();
+                obj.body = convertList(g.data.qrcodePool.list,g.data.staticTableHeaderPool.list,"qrcode");
+                obj.footer = getFooterList(4,g.data.staticTableHeaderPool.list,g.data.qrcodePool);
+                this.tableData = obj;
+                trace("this.tableDat====",this.tableData);
+
+//                this.qrcodeList = info.list;
+//                this.resultTotalObj.qrcodeNum = info.qrcodeNum;
+//                this.resultTotalObj.qrcodeAmount = info.qrcodeAmount;
             },
             initSearchData(){
                 this.dataObj = {
@@ -341,6 +380,18 @@
                 this.date.endTime = this.date.startTime;
                 this.date.startTimeStr = g.timeTool.getDate(this.date.startTime, true);
                 this.date.endTimeStr = g.timeTool.getDate(this.date.endTime, true);
+            },
+            onClick_btn($btnId, $itemId)
+            {
+                trace('$item', $btnId, $itemId);
+            },
+            onClick_headItem($item)
+            {
+                trace('$item', $item);
+            },
+            onClick_bodyitem($itemId)
+            {
+                trace('$item', $itemId);
             },
             onChange_currentPage($page, $pageSize){
                 this.dataObj.page = $page;
