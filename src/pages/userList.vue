@@ -10,6 +10,7 @@
 							<div class="g-title">商户列表</div>
 							<div class="bar-box">
 								<div class="bar-top">
+
 									<ul>
 										<li>运营状态：</li>
 										<li v-for="(item ,index) in freezeStatusList"
@@ -74,6 +75,7 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
+
 							<div class="all-out">
 								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right
 									" @click="onClick_exportBtn">导出全部
@@ -81,163 +83,32 @@
 							</div>
 
 							<hw-table :tableData="tableData"
-									  :boxWidth="1250"
-									  :boxHeight="500"
-									  :headerHeight="50"
-									  :bodyHeight="400"
-									  :footerHeight="50"
+									  :boxWidth="boxWidth"
+									  :boxHeight="boxHeight"
+									  :headerHeight="headerHeight"
+									  :bodyHeight="bodyHeight"
+									  :footerHeight="footerHeight"
 									  :fixHeader="true"
 									  :leftFixedCols="4"
-									  :rightFixedCols="4"
+									  :rightFixedCols="1"
 									  :rightFooterFixedCols="4"
-									  :eachRowHeight="50"
-									  :eachColWidth="100"
+									  :eachRowHeight="eachRowHeight"
+									  :eachColWidth="120"
 									  :isShowIdCol="true"
 									  @clickBtn="onClick_btn"
 									  @clickHead="onClick_headItem"
-									  @clickbody="onClick_bodyitem">
+									  @clickBody="onClick_bodyitem">
+								<div class="relative middle bgc-ff">
+									<p v-show="g.data.userPool.list.length==0" class="absolute no-record"
+									   :style="{left:boxWidth/2+'px'}">
+										暂无记录...</p>
+								</div>
 							</hw-table>
-
-							<!--<div class="recharge-table admin-calendar-table ">-->
-							<!--<table>-->
-							<!--<thead>-->
-							<!--<tr>-->
-							<!--<th @click="onClick_sortBtn('order_amount')" class="pointer">商户ID-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'order_amount'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th><span>|</span>创建时间</th>-->
-							<!--<th><span>|</span>企业全称</th>-->
-							<!--<th><span>|</span>运营状态</th>-->
-							<!--<th><span>|</span>用户名</th>-->
-							<!--<th><span>|</span>手机号</th>-->
-							<!--<th><span>|</span>认证状态</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--商家红包金额-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--<span>|</span>平台红包金额-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--<span>|</span>平台红包发放数-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--<span>|</span>扫码量-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--<span>|</span>绑定二维码数-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--<span>|</span>导出二维码数-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--<span>|</span>未导出二维码数-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--<span>|</span>已购二维码数-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--<span>|</span>退款二维码数-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer">-->
-							<!--<span>|</span>红包账户余额-->
-							<!--<common-sort :type="searchObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="searchObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th><span>|</span>操作</th>-->
-							<!--</tr>-->
-							<!--</thead>-->
-							<!--<tbody>-->
-							<!--<tr v-for="item in userList">-->
-							<!--<td @click="onClick_userItem(item.id)" class="first-td-child">{{item.id}}</td>-->
-							<!--<td>{{item.createTime}}</td>-->
-							<!--<td>{{item.name}}</td>-->
-							<!--<td>{{item.freezeStatusDesc}}</td>-->
-							<!--<td>{{item.logon}}</td>-->
-							<!--<td>{{item.telphone}}</td>-->
-							<!--<td>{{item.authStatusDesc}}</td>-->
-							<!--<td>{{item.shopAmount}}</td>-->
-							<!--<td>{{item.platformAmount}}</td>-->
-							<!--<td>{{item.rpSendNum}}</td>-->
-							<!--<td>{{item.qrcodeScanNum}}</td>-->
-							<!--<td>{{item.qrcodeBindNum}}</td>-->
-							<!--<td>{{item.qrcodeExportNum}}</td>-->
-							<!--<td>{{item.qrcodeUnExportNum}}</td>-->
-							<!--<td>{{item.qrcodeBuyNum}}</td>-->
-							<!--<td>{{item.qrcodeRefundNum}}</td>-->
-							<!--<td>{{item.rpCurrentAccount}}</td>-->
-							<!--<td>-->
-							<!--<span v-text="onConfirm_operation(item.freezeStatus)"-->
-							<!--@click="onClick_userItem(item.id)" class="pointer blue-content"></span>-->
-							<!--<span v-show="item.authStatus==1"-->
-							<!--@click="onClick_lookItem(item.id)" class="pointer blue-content">审核</span>-->
-							<!--</td>-->
-							<!--</tr>-->
-							<!--</tbody>-->
-							<!--<tfoot>-->
-							<!--<tr v-show="userList.length>0">-->
-							<!--<td colspan="7"></td>-->
-							<!--<td>{{modelObj.shopAllAmount}}</td>-->
-							<!--<td>{{modelObj.platformAllAmount}}</td>-->
-							<!--<td>{{modelObj.rpSendAllNum}}</td>-->
-							<!--<td>{{modelObj.qrcodeScanAllNum}}</td>-->
-							<!--<td>{{modelObj.qrcodeBindAllNum}}</td>-->
-							<!--<td>{{modelObj.qrcodeExportAllNum}}</td>-->
-							<!--<td>{{modelObj.qrcodeUnExportAllNum}}</td>-->
-							<!--<td>{{modelObj.qrcodeBuyAllNum}}</td>-->
-							<!--<td>{{modelObj.qrcodeRefundAllNum}}</td>-->
-							<!--<td>{{modelObj.rpAllCurrentAccount}}</td>-->
-							<!--<td></td>-->
-							<!--</tr>-->
-							<!--</tfoot>-->
-							<!--</table>-->
-							<!--</div>-->
 
 
 							<common-page :index="searchObj.page" :total="totalPage"
 										 @change="onChange_searchItem"
 										 v-show="g.data.userPool.list.length>0"></common-page>
-							<common-prompt v-show="g.data.userPool.list.length==0"></common-prompt>
 
 						</div>
 						<common-footer></common-footer>
@@ -297,10 +168,15 @@
 
 				freezeStatusList: ['全部', '正常', '冻结'],
 				authStatusList: ['全部', '未认证', '已认证'],
-				tableData: {}
+				tableData: {},
+				boxWidth: window.innerWidth * 0.81,
+				eachRowHeight: 60,
+				headerHeight: 60,
+				footerHeight: 60,
+				boxHeight: 610,
+				bodyHeight: 420
 			}
 		},
-		watch: {},
 		computed: {
 			currentSearchType(){
 				for (var i = 0; i < this.typeList.length; i++)
@@ -321,6 +197,7 @@
 			CommonFooter,
 			CommonPrompt,
 			CommonSort
+
 		},
 		methods: {
 			init(){
@@ -330,12 +207,12 @@
 			},
 			initList(){
 				var obj = {};
-
 				obj.header = g.data.staticTableHeaderPool.list.concat();
 				obj.body = convertList(g.data.userPool.list);
 				obj.footer = getFooterList();
 				this.tableData = obj;
 				this.totalPage = g.data.userPool.totalPage;
+				g.core.update();
 			},
 //			initTotal(){
 //				var userPool = g.data.userPool;
@@ -369,17 +246,17 @@
 				}
 
 			},
-			onClick_btn($item)
+			onClick_btn($btnId,$itemId)
 			{
-				trace('$item', $item);
+				trace('$item', $btnId,$itemId);
 			},
 			onClick_headItem($item)
 			{
 				trace('$item', $item);
 			},
-			onClick_bodyitem($item)
+			onClick_bodyitem($itemId)
 			{
-				trace('$item', $item);
+				trace('$item', $itemId);
 			},
 			onClick_searchBtn(){
 				this.searchObj.page = 1;
@@ -541,7 +418,7 @@
 	}
 </script>
 
-<style lang="sass" type="text/scss" rel="stylesheet/scss">
+<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/common.scss";
 	@import "../css/myBill.scss";
 
@@ -565,6 +442,28 @@
 		color: #01aaef;
 	}
 
+	.middle {
+		width: 100%;
+		height: 100%;
+	}
+
+	.relative {
+		position: relative;
+	}
+
+	.bgc-ff {
+		background-color: #ffffff;
+	}
+
+	.no-record {
+		width: 200px;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		top: 50%;
+		margin-left: -100px;
+		margin-top: -25px;
+	}
 </style>
 
 

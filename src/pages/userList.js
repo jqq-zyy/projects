@@ -40,18 +40,22 @@ export function convertList($list)
 	var list = $list.concat();
 	for (var item  of list)
 	{
-		item.btn = [];
 		if (item.authStatus == 1)
 		{
-			item.btn.push({
+			item.btn = {
 				id: "audit",
 				name: "审核"
-			})
+			}
 		}
 		else
 		{
-			item.btn.push({})
+			item.btn = {
+				id: "empty",
+				name: " "
+			}
 		}
+
+
 		delete item.update;
 		delete item.authStatus;
 		delete item.freezeStatus;
@@ -88,11 +92,11 @@ export function getFooterList()
 			if (tmpItem.id == "total")
 			{
 				tmpItem.name = "汇总";
-				tmpItem.colspan = 7;
+				tmpItem.colspan = 4;
 			}
 		}
 	}
-	for (var i = 0; i < 6; i++)
+	for (var i = 0; i < 3; i++)
 	{
 		tmpList.splice(1, 0, {})
 	}

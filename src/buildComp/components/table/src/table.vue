@@ -1,24 +1,24 @@
 <template>
-	<div class="out-box relative auto" :class="[inlineBorder?'out-box-border':'']"
+	<div class="out-box relative" :class="[inlineBorder?'out-box-border':'']"
 		 ref="scrollCon"
 		 :style="{height:boxHeight +'px',width:boxWidth+'px'}">
 		<!--<div class="content-box1" style="height: 700px;"></div>-->
 		<div class="header header-vertical body-row"
-			 :style="{height:headerHeight+'px',top:offsetTop+'px',width:getTypeWidth('total')+'px'}">
+			 :style="{height:headerHeight+'px',top:Math.min(offsetTop,topLimit)-6+'px',width:getTypeWidth('total')+6+'px'}">
 			<div class="left-header"
-				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
+				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
 				<div class="header-row" :style="{height:headerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.header" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkLeftHeader(item,index)">
 						<span>{{item.name}}</span>
 						<hw-icon :iconType="item.sortBy ? item.sortBy == 'desc' ? 'bottom-arrow' : 'top-arrow' : ''"
-								 v-if="item.sortBy"
+								 v-if="item.sortBy" class="absolute-right"
 						></hw-icon>
-
 					</div>
 				</div>
 			</div>
+
 
 			<div class="middle-header"
 				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:headerHeight+'px'}">
@@ -28,7 +28,7 @@
 						 v-if="checkMiddleHeader(item,index)">
 						<span>{{item.name}}</span>
 						<hw-icon :iconType="item.sortBy ? item.sortBy == 'desc' ? 'bottom-arrow' : 'top-arrow' : ''"
-								 v-if="item.sortBy"
+								 v-if="item.sortBy" class="absolute-right"
 						></hw-icon>
 
 					</div>
@@ -36,74 +36,80 @@
 			</div>
 
 			<div class="right-header"
-				 :style="{right:Math.max(getScrollLimit()-offsetLeft+6,0)+'px',width:getTypeWidth('right')+'px',height:headerHeight+'px'}">
+				 :style="{right:Math.max(getScrollLimit()-offsetLeft,0)+'px',width:getTypeWidth('right')+'px',height:headerHeight+'px'}">
 				<div class="header-row" :style="{height:headerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.header" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkRightHeader(item,index)">
 						<span>{{item.name}}</span>
 						<hw-icon :iconType="item.sortBy ? item.sortBy == 'desc' ? 'bottom-arrow' : 'top-arrow' : ''"
-								 v-if="item.sortBy"
+								 v-if="item.sortBy" class="absolute-right"
 						></hw-icon>
 
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="body" :style="{width:getTypeWidth('total')+6+'px',height:bodyHeight+'px'}">
+			<slot v-if="tableData.body.length < 1"></slot>
+			<div class="left-table-body" v-if="tableData.body.length > 1"
+				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
+				<div class="body-row"
+					 v-for="(item,index) in tableData.body" :class="isEven(index)?'bgc-f8':'bgc-ff'"
+					 @click="onClick_body(item.id)"
 
-		<div class="body" :style="{width:getTypeWidth('total')+'px',height:bodyHeight+'px'}"
-			 v-if="tableData.body.length > 1">
-			<div class="left-body"
-				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
-				<div class="body-row" v-for="item in tableData.body" @click="onClick_body(item.id)"
 					 :style="{height: eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item" v-if="checkLeftBody(key,index)"
 						 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
 							<span v-if="key==='btn'">
-								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)">
+								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)"
+										:style="{width: getWidth(value)+'px',height:eachRowHeight+'px',paddingBottom:'30px'}">
 								</hw-btn>
 							</span>
 					</div>
 				</div>
 			</div>
 
-			<div class="middle-body"
+			<div class="middle-table-body" v-if="tableData.body.length > 1"
 				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px'}">
-				<div class="body-row" v-for="item in tableData.body" @click="onClick_body(item.id)"
+				<div class="body-row" v-for="(item,index) in tableData.body" :class="isEven(index)?'bgc-f8':'bgc-ff'"
+					 @click="onClick_body(item.id)"
 					 :style="{height: eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item"
 						 v-if="checkMiddleBody(key,index)"
 						 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
 						<span v-if="key==='btn'">
-							<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)">
+							<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)"
+									:style="{width: getWidth(value)+'px',height:eachRowHeight+'px',paddingBottom:'30px'}">
 							</hw-btn>
 						</span>
 					</div>
 				</div>
 			</div>
-			<div class="right-body"
-				 :style="{right:Math.max(getScrollLimit()-offsetLeft+6,0)+'px',width:getTypeWidth('right')+'px'}">
-				<div class="body-row" v-for="item in tableData.body" @click="onClick_body(item.id)"
+			<div class="right-table-body" v-if="tableData.body.length > 1"
+				 :style="{right:Math.max(getScrollLimit()-offsetLeft,0)+'px',width:getTypeWidth('right')+'px'}">
+				<div class="body-row" v-for="(item,index) in tableData.body" :class="isEven(index)?'bgc-f8':'bgc-ff'"
+					 @click="onClick_body(item.id)"
 					 :style="{height:eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item"
 						 v-if="checkRightBody(key,index)"
 						 :style="{width: getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
 							<span v-if="key==='btn'">
-								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)">
+								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)"
+										:style="{width: getWidth(value)+'px',height:eachRowHeight+'px',paddingBottom:'30px'}">
 								</hw-btn>
 							</span>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<div class="footer header-vertical body-row" v-if="tableData.body.length > 1"
-			 :style="{height:footerHeight+'px',top:offsetTop+'px',width:getTypeWidth('total')+'px'}">
+			 :style="{height:footerHeight+'px',top:Math.min(offsetTop,topLimit)+eachRowHeight+6+'px',width:getTypeWidth('total')+6+'px'}">
 			<div class="left-header"
-				 :style="{left:Math.min(offsetLeft-6,getScrollLimit())+'px',width:getTypeWidth('left')+'px',height:footerHeight+'px'}">
+				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px',height:footerHeight+'px'}">
 				<div class="header-row" :style="{height:footerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
@@ -123,9 +129,8 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="right-header"
-				 :style="{right:Math.max(getScrollLimit()-offsetLeft+6,0)+'px',width:getTypeWidth('right')+'px',height:footerHeight+'px'}">
+				 :style="{right:Math.max(getScrollLimit()-offsetLeft,0)+'px',width:getTypeWidth('right')+'px',height:footerHeight+'px'}">
 				<div class="header-row" :style="{height:footerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
@@ -149,19 +154,13 @@
 				this.$refs.scrollCon.addEventListener('scroll', (e) =>
 				{
 					this.offsetLeft = this.$refs.scrollCon.scrollLeft;
-					if (this.topIsLimit)
-					{
-						return;
-					}
-					this.offsetTop = this.$refs.scrollCon.scrollTop;
-
+					this.offsetTop = Math.min(this.$refs.scrollCon.scrollTop, this.topLimit);
 				});
 			})
 		},
 		data(){
 			return {
 				count: 1,
-//				direction: "vertical",
 				offsetLeft: 0,
 				offsetTop: 0
 			}
@@ -176,7 +175,7 @@
 			},
 			boxWidth: {
 				type: Number,
-				default: 1250
+				default: 1260
 			},
 			boxHeight: {
 				type: Number,
@@ -184,7 +183,7 @@
 			},
 			headerHeight: {
 				type: Number,
-				default: 50
+				default: 60
 			},
 			bodyHeight: {
 				type: Number,
@@ -222,7 +221,7 @@
 			},
 			footerHeight: {
 				type: Number,
-				default: 50
+				default: 60
 			},
 			stripe: {
 				type: Boolean,
@@ -238,10 +237,11 @@
 			{
 				return Math.min(this.rightFixedCols, this.rightFooterFixedCols)
 			},
-			topIsLimit()
+			topLimit()
 			{
-				var totalHeight = this.getContentHeight();
-				return totalHeight - this.offsetTop - this.bodyHeight <= 0;
+				return this.getContentHeight() > 0 && Math.max(this.getContentHeight() - this.bodyHeight -
+								this.headerHeight -
+								15, 0);
 			}
 		},
 		methods: {
@@ -281,7 +281,7 @@
 			},
 			checkMiddleFooter($item, index)
 			{
-				return index >= this.leftFooterFixedCols && index < (this.getValidLength("footer") -
+				return index > this.leftFooterFixedCols && index <= (this.getValidLength("footer") -
 						this.rightCols)
 			},
 			checkLeftFooter($item, index)
@@ -403,7 +403,7 @@
 			{
 				return $index % 2 == 0;
 			}
-		},
+		}
 
 	};
 
@@ -431,70 +431,55 @@
 
 	.out-box {
 		font-size: 14px;
-		border: 1px solid #444444;
-	}
-
-	.auto {
+		/*border: 1px solid #444444;*/
 		overflow: auto;
 	}
 
-	.hidden {
-		overflow: hidden;
-	}
-
-	.header, .body {
-		white-space: nowrap;
+	.header, .body, .footer {
 		position: relative;
 	}
 
 	.header {
-		z-index: 1000;
-		box-shadow: 0px 3px 3px #999999;
+		z-index: 10;
+		/*box-shadow: 0px 3px 3px #999999;*/
 	}
 
 	.body {
-		z-index: 995;
+		z-index: 5;
 	}
 
-	.left-body,
+	.left-table-body,
 	.left-header {
-		z-index: 999;
-		box-shadow: -2px 1px 4px #999999;
+		z-index: 9;
+		box-shadow: 1px 0 0 #999999;
 		/*background-color: #ffff00 !important;*/
 	}
 
-	.right-body,
+	.right-table-body,
 	.right-header {
-		z-index: 999;
-		box-shadow: -2px 1px 4px #999999;
+		z-index: 9;
+		box-shadow: -1px 0 0 #999999;
 		/*background-color: #ff3300 !important;*/
 	}
 
-	.left-header,
-	.middle-header,
-	.right-header {
-		white-space: nowrap;
-	}
-
 	.middle-header {
-		z-index: 998;
+		z-index: 8;
 	}
 
-	.middle-body {
-		z-index: 990;
+	.middle-table-body {
+		z-index: 0;
 	}
 
 	.body-col, .header-col {
-		display: inline-block;
+		/*display: inline-block;*/
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
+		position: relative;
 	}
 
 	.absolute {
 		position: absolute;
-		top: 0;
-		left: 0;
 	}
 
 	.relative {
@@ -511,18 +496,22 @@
 		left: 0;
 	}
 
-	.left-body, .middle-body, .left-header, .middle-header, .right-header, .right-body {
+	.left-table-body, .middle-table-body, .right-table-body,
+	.left-header, .middle-header, .right-header {
 		position: absolute;
 		top: 0;
 		background-color: #ffffff;
 	}
 
-	.left-body, .left-header {
+	.left-header, .middle-header, .right-header {
+		background-color: #eceef4;
+	}
+
+	.left-table-body, .left-header {
 		left: 0;
 	}
 
-	.body-row {
-		white-space: nowrap;
+	.body-row, .header-row {
 		position: relative;
 		display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
 		display: -moz-box; /* Firefox 17- */
@@ -538,26 +527,19 @@
 	}
 
 	.out-box-border .body-col, .out-box-border .header-col {
-		border: 1px solid #444444;
-		border-right-color: transparent;
-		border-bottom-color: transparent;
-	}
-
-	.footer {
-		position: relative;
-		border-top: 1px solid #444444;
+		/*border: 1px solid #444444;*/
+		/*border-right-color: transparent;*/
+		/*border-bottom-color: transparent;*/
 	}
 
 	.out-box-border .footer .header-col {
 		border-top-color: transparent;
 	}
 
-	.left-header, .left-body {
-		box-shadow: 3px 0 4px #eeeeee;
-	}
-
 	.header-col, .body-col {
 		padding-left: 6px;
+		padding-top: 17px
+
 	}
 
 	.transparent {
@@ -566,10 +548,59 @@
 
 	.body-col span, .header-col span {
 		display: inline-block;
-		width: 50px;
 		text-align: center;
 		word-wrap: break-word;
 	}
+
+	.header-col span {
+		width: 70px;
+		height: 40px;
+		line-height: 20px;
+	}
+
+	.footer .header-col span, .body-col span {
+		width: 100px;
+		height: 20px;
+		line-height: 20px;
+	}
+
+	.body-row:hover {
+		color: #01aaef;
+		background: #eeeeee;
+	}
+
+	.absolute-right {
+		position: absolute;
+		top: 18px;
+		right: 20px;
+	}
+
+
+
+
+
+	.header,
+	.body,
+	.footer {
+		border: 1px solid #dbdee7;
+		border-bottom-width: 0;
+		border-left-width: 0;
+	}
+	.out-box{
+		border-top:1px solid #cccccc ;
+	}
+	.footer {
+		border-bottom: 1px solid #dbdee7;
+	}
+
+	.header, .footer {
+		background-color: #eceef4;
+	}
+
+	.bgc-f8 {
+		background-color: #f8f8f8;
+	}
+
 </style>
 
 
@@ -605,7 +636,3 @@
 <!--width:-->
 <!--height:-->
 <!--}-->
-
-
-
-
