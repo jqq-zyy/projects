@@ -104,14 +104,14 @@
 									" @click="onClick_exportBtn">导出全部
 								</div>
 							</div>
-							<div class="admin-calendar-table">
+							<div class="admin-calendar-table activity-table">
 								<table>
 									<thead>
 									<tr>
 										<th class="first-col">{{g.lang("活动名称")}}</th>
 										<th class="s-col"><span>|</span>企业全称</th>
 										<th><span>|</span>品牌名称</th>
-										<th @click="onClick_sortBtn('received_amount')" class="pointer m-width">
+										<th @click="onClick_sortBtn('received_amount')" class="pointer">
 											<span>|</span>
 											状态
 											<common-sort :type="dataObj.sortOrder"
@@ -120,7 +120,7 @@
 											></common-sort>
 
 										</th>
-										<th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
+										<th @click="onClick_sortBtn('activity_start_time')" class="pointer">
 											<span>|</span>
 											创建时间
 
@@ -129,7 +129,7 @@
 														 :currentField="dataObj.sortField"
 											></common-sort>
 										</th>
-										<th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
+										<th @click="onClick_sortBtn('activity_start_time')" class="pointer">
 											<span>|</span>
 											{{g.lang("开始日期")}}
 
@@ -138,7 +138,7 @@
 														 :currentField="dataObj.sortField"
 											></common-sort>
 										</th>
-										<th class="pointer m-width">
+										<th class="pointer ">
 											<span>|</span>
 											{{g.lang("结束日期")}}
 											<common-sort :type="dataObj.sortOrder"
@@ -351,7 +351,11 @@
 			},
 			onChange_currentPage($page, $pageSize){
 				this.dataObj.page = $page;
-				this.dataObj.pageSize = $pageSize;
+				if($pageSize!=this.dataObj.pageSize){
+					this.dataObj.pageSize = $pageSize;
+					this.dataObj.page = 1
+				}
+
 				this.onUpdate_activityList()
 			},
 			onUpdate_activityList(){

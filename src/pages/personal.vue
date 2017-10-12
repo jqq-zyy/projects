@@ -138,5 +138,6 @@
 		min-height: 500px;
 		padding: 20px;
 	}
+
 </style>
 

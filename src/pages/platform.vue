@@ -38,27 +38,29 @@
                                     </ul>
                                 </div>
                                 <div class="bar-bottom">
-                                    <div class="date-box">
-                                        <span class="creat-time">创建时间：从</span>
-                                        <div class="date-from">
-                                            <input type="text" class="startTime date-input pointer"
-                                                   v-model="date.startTimeStr"
-                                                   readonly="true"
-                                                   @click.stop="onClick_showCalendar('start')">
-                                            <hw-date type="date" skin="simple" @change="onClick_chooseDateStart"
-                                                     v-model="isShowStartTime"></hw-date>
-                                        </div>
-                                    </div>
-                                    <span class="goto">至</span>
-                                    <div class="date-box">
-                                        <div class="date-from">
-                                            <input type="text" class="endTime date-input pointer"
-                                                   v-model="date.endTimeStr"
-                                                   readonly="true" @click.stop="onClick_showCalendar('end')">
-                                            <hw-date type="date" skin="simple" @change="onClick_chooseDateEnd"
-                                                     v-model="isShowEndTime"></hw-date>
-                                        </div>
-                                    </div>
+                                   <div class="date-margin">
+                                       <div class="date-box">
+                                           <span class="creat-time">创建时间：从</span>
+                                           <div class="date-from">
+                                               <input type="text" class="startTime date-input pointer"
+                                                      v-model="date.startTimeStr"
+                                                      readonly="true"
+                                                      @click.stop="onClick_showCalendar('start')">
+                                               <hw-date type="date" skin="simple" @change="onClick_chooseDateStart"
+                                                        v-model="isShowStartTime"></hw-date>
+                                           </div>
+                                       </div>
+                                       <span class="goto">至</span>
+                                       <div class="date-box">
+                                           <div class="date-from">
+                                               <input type="text" class="endTime date-input pointer"
+                                                      v-model="date.endTimeStr"
+                                                      readonly="true" @click.stop="onClick_showCalendar('end')">
+                                               <hw-date type="date" skin="simple" @change="onClick_chooseDateEnd"
+                                                        v-model="isShowEndTime"></hw-date>
+                                           </div>
+                                       </div>
+                                   </div>
                                     <div class="drop-box pointer" @click.stop="onClick_dropListBtn">
                                         <div @click.stop="onClick_dropListBtn">
                                             {{currentSearchType}}
@@ -281,7 +283,10 @@
             },
             onChange_currentPage($page, $pageSize){
                 this.dataObj.page = $page;
-                this.dataObj.pageSize = $pageSize;
+                if($pageSize!=this.dataObj.pageSize){
+                    this.dataObj.pageSize = $pageSize;
+                    this.dataObj.page = 1
+                }
                 this.onUpdate_bagList()
             },
             onUpdate_bagList(){

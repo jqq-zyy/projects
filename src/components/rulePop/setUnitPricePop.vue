@@ -11,7 +11,7 @@
             <div class="input-money m-title">
                 <span class="count">数量：</span>
                 <div class="count-set" v-for="(item,index) in priceList">
-                    <div v-if="item.max!='*'">
+                    <div v-if="item.max!='-1'">
                         <div class="count-left">
                             <input type="number" :value="item.min" @change="onChange_range($event,index,'min')"> ~
                             <input type="number" :value="item.max" @change="onChange_range($event,index,'max')"></div>
@@ -21,7 +21,7 @@
                         <span @click="onClick_pushBtn(index)" class="push-line pointer">+</span><span v-show="index!=0"
                                                                             @click="onClick_deleteBtn(index)" class="push-line pointer">-</span>
                     </div>
-                    <div class="count-set" v-if="item.max=='*'">
+                    <div class="count-set" v-if="item.max=='-1'">
                         <div class="count-left">
                             <input type="number" :value="item.min" @change="onChange_range($event,index,'min')">
                             以上
@@ -54,7 +54,7 @@
                 priceList: [{
                     min: 1
                 }, {
-                    max: "*"
+                    max: "-1"
                 }]
             }
         },
@@ -74,28 +74,27 @@
                         g.ui.toast("请填写全部内容");
                         return
                     }
-                    if (isNaN(this.priceList[i].min) || this.priceList[i].min < 0 || (isNaN(this.priceList[i].max)&this.priceList[i].max!="*" || this.priceaList[i].max < 0)) {
+                    if (isNaN(this.priceList[i].min) || this.priceList[i].min < 0 || (isNaN(this.priceList[i].max)||this.priceList[i].max < 0&&this.priceList[i].max!=-1)) {
                         g.ui.toast("数量区间应为整数且不能小于0");
                         return
                     }
-
                     if (isNaN(this.priceList[i].unitPrice) || this.priceList[i].unitPrice < 0 || (this.priceList[i].unitPrice.toString().indexOf(".") > 0 && this.priceList[i].unitPrice.toString().split(".")[1].length > 2)) {
                         g.ui.toast("二维码价格应为精确到小数点后两位的正数");
                         return
                     }
-                    if(this.priceList[i].min>this.priceList[i].max){
+                    if(this.priceList[i].min>this.priceList[i].max&&this.priceList[i].max!=-1){
                         g.ui.toast("数量区间最小值不得大于最大值");
                         return
 
                     }
                     if (this.priceList[i - 1] && this.priceList[i - 1].max) {
-                        if (this.priceList[i].min-1 != this.priceList[i - 1].max) {
+                        if (this.priceList[i].min != this.priceList[i - 1].max) {
                             g.ui.toast("数量区间不能间断");
                             return
                         }
                     }
                     if(this.priceList[i + 1] && this.priceList[i + 1].min){
-                        if (this.priceList[i + 1].min-1 != this.priceList[i].max) {
+                        if (this.priceList[i + 1].min != this.priceList[i].max) {
                             g.ui.toast("数量区间不能间断");
                             return
                         }
@@ -122,7 +121,7 @@
             onClick_pushBtn($index){
                 var max, min;
                 if (this.priceList[$index].max) {
-                    min = this.priceList[$index].max - 0 + 1
+                    min = this.priceList[$index].max
                 }
                 var obj = {}
                 obj.min = min;
