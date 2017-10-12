@@ -294,27 +294,32 @@
 			},
 			onClick_headItem($item)
 			{
+				var itemData = g.data.staticTableHeaderPool.getDataById($item.id);
+				var list = g.data.staticTableHeaderPool.list;
+				if ($item.sortBy)
+				{
+					if ($item.sortBy == "desc")
+					{
+						itemData.update({
+							sortBy: "asc"
+						})
 
-//				if ($item.supportSort)
-//				{
-//					if (flag)
-//					{
-//						this.tableData.body = this.tableData.body.sort(function (a, b)
-//						{
-//							return a[$item.id] - b[$item.id]
-//						})
-//						flag = false;
-//					}
-//					else
-//					{
-//						this.tableData.body = this.tableData.body.sort(function (a, b)
-//						{
-//							return b[$item.id] - a[$item.id];
-//						});
-//						flag = true;
-//					}
-//
-//				}
+					}
+					else
+					{
+						itemData.update({
+							sortBy: "desc"
+						})
+					}
+				}
+				for (var item of list)
+				{
+					if (item.sortBy && item.id !== $item.id)
+					{
+						item.sortBy = "desc";
+					}
+				}
+				g.core.update();
 				this.$emit('clickHead', $item);
 			},
 			onClick_body($id)
@@ -575,10 +580,6 @@
 		right: 20px;
 	}
 
-
-
-
-
 	.header,
 	.body,
 	.footer {
@@ -586,9 +587,11 @@
 		border-bottom-width: 0;
 		border-left-width: 0;
 	}
-	.out-box{
-		border-top:1px solid #cccccc ;
+
+	.out-box {
+		border-top: 1px solid #cccccc;
 	}
+
 	.footer {
 		border-bottom: 1px solid #dbdee7;
 	}
