@@ -51,7 +51,7 @@
 		</div>
 		<div class="body" :style="{width:getTypeWidth('total')+6+'px',height:bodyHeight+'px'}">
 			<slot v-if="tableData.body.length < 1"></slot>
-			<div class="left-table-body" v-if="tableData.body.length > 1"
+			<div class="left-table-body" v-if="tableData.body.length >= 1"
 				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
 				<div class="body-row"
 					 v-for="(item,index) in tableData.body" :class="isEven(index)?'bgc-f8':'bgc-ff'"
@@ -69,8 +69,7 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="middle-table-body" v-if="tableData.body.length > 1"
+			<div class="middle-table-body" v-if="tableData.body.length >= 1"
 				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px'}">
 				<div class="body-row" v-for="(item,index) in tableData.body" :class="isEven(index)?'bgc-f8':'bgc-ff'"
 					 @click="onClick_body(item.id)"
@@ -87,7 +86,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="right-table-body" v-if="tableData.body.length > 1"
+			<div class="right-table-body" v-if="tableData.body.length >= 1"
 				 :style="{right:Math.max(getScrollLimit()-offsetLeft,0)+'px',width:getTypeWidth('right')+'px'}">
 				<div class="body-row" v-for="(item,index) in tableData.body" :class="isEven(index)?'bgc-f8':'bgc-ff'"
 					 @click="onClick_body(item.id)"
@@ -105,7 +104,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="footer header-vertical body-row" v-if="tableData.body.length > 1 && isShowTotal"
+		<div class="footer header-vertical body-row" v-if="tableData.body.length >= 1 && isShowTotal"
 			 :style="{height:footerHeight+'px',top:Math.min(offsetTop,topLimit)+eachRowHeight+6+'px',width:getTypeWidth('total')+6+'px'}">
 			<div class="left-header"
 				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px',height:footerHeight+'px'}">

@@ -87,7 +87,6 @@
 									  :fixHeader="true"
 									  :leftFixedCols="4"
 									  :rightFixedCols="1"
-									  :leftFooterFixedCols="4"
 									  :eachRowHeight="eachRowHeight"
 									  :eachColWidth="boxWidth/12"
 									  :isShowIdCol="true"
@@ -96,7 +95,7 @@
 									  @clickHead="onClick_headItem"
 									  @clickBody="onClick_bodyitem">
 								<div class="relative middle bgc-ff">
-									<p v-show="g.data.userPool.list.length==0" class="absolute no-record"
+									<p v-show="g.data.bagDetailPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">
 										暂无记录...</p>
 								</div>

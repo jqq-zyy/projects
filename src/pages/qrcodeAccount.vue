@@ -79,17 +79,15 @@
                                       :fixHeader="true"
                                       :leftFixedCols="4"
                                       :rightFixedCols="1"
-                                      :leftFooterFixedCols="4"
                                       :eachRowHeight="eachRowHeight"
                                       :eachColWidth="boxWidth/10"
-
                                       :isShowIdCol="true"
                                       :isShowTotal="true"
                                       @clickBtn="onClick_btn"
                                       @clickHead="onClick_headItem"
                                       @clickBody="onClick_bodyitem">
                                 <div class="relative middle bgc-ff">
-                                    <p v-show="g.data.userPool.list.length==0" class="absolute no-record"
+                                    <p v-show="g.data.qrcodePool.list.length==0" class="absolute no-record"
                                        :style="{left:boxWidth/2+'px'}">
                                         暂无记录...</p>
                                 </div>

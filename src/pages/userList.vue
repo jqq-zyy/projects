@@ -91,7 +91,6 @@
 									  :fixHeader="true"
 									  :leftFixedCols="4"
 									  :rightFixedCols="1"
-									  :leftFooterFixedCols="4"
 									  :eachRowHeight="eachRowHeight"
 									  :eachColWidth="120"
 									  :isShowIdCol="true"
