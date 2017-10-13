@@ -117,14 +117,12 @@
 									  :bodyHeight="bodyHeight"
 									  :footerHeight="footerHeight"
 									  :fixHeader="true"
-									  :leftFixedCols="4"
-									  :rightFixedCols="1"
+									  :leftFixedCols="9"
 									  :eachRowHeight="eachRowHeight"
-									  :eachColWidth="boxWidth/10"
+									  :eachColWidth="boxWidth/9"
 									  :isShowTotal="true"
-									  @clickBtn="onClick_btn"
 									  @clickHead="onClick_headItem"
-									  @clickBody="onClick_bodyitem">
+									  @clickBody="onClick_bodyItem">
 								<div class="relative middle bgc-ff">
 
 									<p v-show="g.data.activityPool.list.length==0" class="absolute no-record"
@@ -133,116 +131,6 @@
 								</div>
 							</hw-table>
 
-							<!--<div class="admin-calendar-table activity-table">-->
-							<!--<table>-->
-							<!--<thead>-->
-							<!--<tr>-->
-							<!--<th class="first-col">{{g.lang("活动名称")}}</th>-->
-							<!--<th class="s-col"><span>|</span>企业全称</th>-->
-							<!--<th><span>|</span>品牌名称</th>-->
-							<!--<th @click="onClick_sortBtn('received_amount')" class="pointer">-->
-							<!--<span>|</span>-->
-							<!--状态-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'received_amount'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('activity_start_time')" class="pointer">-->
-							<!--<span>|</span>-->
-							<!--创建时间-->
-
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'activity_start_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('activity_start_time')" class="pointer">-->
-							<!--<span>|</span>-->
-							<!--{{g.lang("开始日期")}}-->
-
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'activity_start_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th class="pointer ">-->
-							<!--<span>|</span>-->
-							<!--{{g.lang("结束日期")}}-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'activity_end_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
-							<!--<span>|</span>-->
-							<!--绑定二维码数-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
-							<!--<span>|</span>-->
-							<!--累计扫码数-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
-							<!--<span>|</span>-->
-							<!--红包领取金额-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
-							<!--<span>|</span>-->
-							<!--平台红包领取金额-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--&lt;!&ndash;<th class="activity-last-col"><span>|</span>{{g.lang("操作")}}</th>&ndash;&gt;-->
-							<!--</tr>-->
-							<!--</thead>-->
-							<!--<tbody>-->
-							<!--<tr v-for="item in activityList">-->
-							<!--<td @click="onClick_detailBtn(item.id)" class="first-td-child">-->
-							<!--{{item.activityName}}-->
-							<!--</td>-->
-							<!--<td>{{item.companyName}}</td>-->
-							<!--<td>{{item.brandName}}</td>-->
-							<!--<td>{{item.activityStatusDesc}}</td>-->
-							<!--<td>{{item.createTime}}</td>-->
-							<!--<td>{{item.startTime}}</td>-->
-							<!--<td>{{item.endTime}}</td>-->
-							<!--<td>{{item.qrCodeNum}}</td>-->
-							<!--<td>{{item.totalScanCount}}</td>-->
-							<!--<td>{{item.useRpAmount}}</td>-->
-							<!--<td>{{item.useRpAmount}}</td>-->
-							<!--&lt;!&ndash;<td>&ndash;&gt;-->
-							<!--&lt;!&ndash;<span v-text="onConfirm_operation(item.freezeStatus)"&ndash;&gt;-->
-							<!--&lt;!&ndash;@click="onClick_activityItem(item.id)" class="blue-content pointer"></span>&ndash;&gt;-->
-							<!--&lt;!&ndash;</td>&ndash;&gt;-->
-							<!--</tr>-->
-							<!--</tbody>-->
-							<!--<tfoot>-->
-							<!--<tr v-show="activityList.length>0">-->
-							<!--<td colspan="7"></td>-->
-							<!--<td>{{resultTotalObj.totalQrCodeNum}}</td>-->
-							<!--<td>{{resultTotalObj.totalScanCount}}</td>-->
-							<!--<td>{{resultTotalObj.RpAmount}}</td>-->
-							<!--<td>{{resultTotalObj.platformAmount}}</td>-->
-							<!--</tr>-->
-							<!--</tfoot>-->
-							<!--</table>-->
-							<!--</div>-->
 							<common-page :index="dataObj.page" :total="totalPage"
 										 @change="onChange_currentPage" v-show="activityList.length>0"></common-page>
 							<!--<common-prompt v-show="activityList.length==0"></common-prompt>-->
@@ -346,19 +234,17 @@
 			init(){
 				this.initSearchData();
 				this.initData();
-
 			},
 			initData(){
 
-				debugger;
 				var info = g.data.activityPool;
 				this.totalPage = info.totalPage;
 				var obj = {};
 				obj.header = g.data.staticTableHeaderPool.list.concat();
-				obj.body = convertList(g.data.activityPool.list,g.data.staticTableHeaderPool.list);
-				obj.footer = getFooterList(4,g.data.staticTableHeaderPool.list,g.data.activityPool);
+				obj.body = convertList(g.data.activityPool.list, g.data.staticTableHeaderPool.list);
+				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.activityPool);
 				this.tableData = obj;
-				trace("this.tableData===",this.tableData)
+				trace("this.tableData===", this.tableData)
 //				this.activityList = info.list;
 //				this.statusList = g.data.activityStatusPool.list;
 //				this.resultTotalObj.totalQrCodeNum = info.totalQrCodeNum;
@@ -390,17 +276,13 @@
 				}
 
 			},
-			onClick_btn($btnId, $itemId)
-			{
-				trace('$item', $btnId, $itemId);
-			},
 			onClick_headItem($item)
 			{
-				trace('$item', $item);
+				this.onClick_sortBtn($item);
 			},
-			onClick_bodyitem($itemId)
+			onClick_bodyItem($itemId)
 			{
-				trace('$item', $itemId);
+				this.onClick_detailBtn($itemId)
 			},
 			onChange_currentPage($page, $pageSize){
 				this.dataObj.page = $page;
@@ -476,7 +358,6 @@
 			onClick_searchBtn(){
 				this.onUpdate_activityList()
 			},
-
 			onUpdate_allData(){
 				g.net.call("activity/getActivityOverview", this.dataObj).then(($data) =>
 				{
@@ -496,18 +377,21 @@
 					query: {"activityId": $id}
 				}
 			},
-			onClick_sortBtn($field){
-				if (this.dataObj.sortOrder == "desc")
+			onClick_sortBtn($item){
+				if ($item.sortBy)
 				{
-					this.dataObj.sortOrder = "asc"
+					if ($item.sortBy == "desc")
+					{
+						this.dataObj.sortOrder = "asc"
+					}
+					else
+					{
+						this.dataObj.sortOrder = "desc"
+					}
+					this.dataObj.page = 1;
+					this.dataObj.sortField = $item.params;
+					this.onUpdate_activityList();
 				}
-				else
-				{
-					this.dataObj.sortOrder = "desc"
-				}
-				this.dataObj.page = 1;
-				this.dataObj.sortField = $field;
-				this.onUpdate_activityList();
 			},
 			onClick_dropList(){
 				if (this.isShow_dropList)
@@ -540,10 +424,6 @@
 				{
 					return "解冻"
 				}
-			},
-			onClick_activityItem($id){
-				g.url = ("/activitydetail?id=" + $id)
-
 			},
 			onClick_exportBtn(){
 

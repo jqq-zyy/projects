@@ -1,0 +1,83 @@
+.user-detail-box {
+  background: none;
+  .detail-msg {
+    margin-bottom: 25px;
+    background: #ffffff;
+    border: 1px solid #dbdee7;
+    border-radius: 2px;
+    padding: 10px 20px;
+    overflow: hidden;
+    .msg-title {
+      line-height: 36px;
+      font-size: 16px;
+    }
+    .msg-info {
+      width: 30%;
+      float: left;
+      line-height: 36px;
+      font-size: 14px;
+    }
+    .msf-info-width {
+      width: 45%;
+    }
+    .status-btn {
+      padding: 0 10px;
+      line-height: 32px;
+      height: 32px;
+      margin-left: 10px;
+      display: inline-block;
+      text-indent: 0;
+    }
+    .upload-box {
+      overflow: hidden;
+      margin-bottom: 20px;
+      .company {
+        float: left;
+        width: 130px;
+        text-align: right;
+        font-size: 14px;
+      }
+      .enterprise-msg {
+        float: left;
+        margin-right: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        img {
+          width: 100px;
+          height: 100px;
+          object-fit: contain;
+        }
+        span {
+          margin-top: 10px;
+        }
+      }
+
+    }
+    .enterprise-name {
+      line-height: 36px;
+      font-size: 14px;
+    }
+  }
+  .status-button-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .applicate-btn {
+      height: 36px;
+      line-height: 36px;
+      padding: 0 20px;
+      text-indent: 0;
+    }
+    .applicate-btn:first-child {
+      margin-right: 50px;
+    }
+  }
+}
+
+
+
+
+

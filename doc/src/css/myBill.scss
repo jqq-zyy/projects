@@ -1,0 +1,144 @@
+.bill-bar {
+  height: 74px;
+  //line-height: 74px;
+  font-size: 24px;
+  padding-left: 50px;
+  background: #ffffff;
+  color: #4a4a4a;
+  span {
+	font-size: 22px;
+	margin-left: 20px;
+  }
+  .warn-money {
+	width: 180px;
+	height: 42px;
+	line-height: 42px;
+	color: #01aaef;
+	padding: 0 16px;
+	border: 1px solid #dbdee7;
+	outline: none;
+	margin: 0 10px;
+  }
+  .recharge-btn {
+	width: 112px;
+	height: 40px;
+	line-height: 40px;
+	display: inline-block;
+	margin-left: 65px;
+  }
+  .recharge-button {
+	margin-left: 76px;
+	font-size: 16px;
+	width: 112px;
+	height: 40px;
+	display: inline-block;
+	line-height: 40px;
+	text-decoration: underline;
+	color: #979797;
+  }
+}
+
+.warn-bar {
+  height: 130px;
+  line-height: 130px;
+}
+
+.admin-calendar-table {
+  .money-from {
+	text-decoration: underline;
+  }
+  .drop-icon {
+	width: 20px;
+	display: inline-block;
+	text-align: center;
+	transform: rotate(-90deg);
+  }
+  .rotate {
+	width: 20px;
+	display: inline-block;
+	text-align: center;
+	transform: rotate(90deg);
+  }
+  .droplist {
+	position: absolute;
+	width: 130px;
+	background: #ffffff;
+	border: 1px solid #efefef;
+	border-radius: 4px;
+	z-index: 3;
+	left: 20%;
+	top: 100%;
+	li {
+	  width: 100%;
+	  line-height: 40px;
+	  padding-left: 18px;
+	  text-align: left;
+	  font-weight: normal;
+	}
+	li:hover {
+	  background: #f4f4f4;
+	}
+  }
+}
+
+.bill-content {
+  border: 1px solid #dbdee7;
+  background: #ffffff;
+  border-radius: 4px;
+}
+
+.bill-box {
+  border-top: 1px solid #dbdee7;
+  background: #ffffff;
+  border-radius: 4px;
+  ul {
+	padding: 30px 50px;
+	overflow: hidden;
+	li {
+	  width: 50%;
+	  height: 72px;
+	  float: left;
+	  text-align: justify;
+	  padding-right: 10%;
+	  color: #979797;
+	  font-size: 14px;
+	  span {
+		width: 50px;
+		line-height: 50px;
+		text-align: center;
+		font-size: 30px;
+		font-weight: bold;
+		color: #dbdee7;
+		height: 50px;
+		float: left;
+		border-radius: 50%;
+		border: 1px solid #dbdee7;
+		margin-right: 22px;
+	  }
+	}
+	li:nth-child(2n) {
+	  padding-left: 10%;
+	  padding-right: 0;
+
+	  border-left: 1px solid #dbdee7;
+	}
+  }
+
+}
+
+@media screen and (max-width: 1500px) {
+  div.bar-box {
+	.bar-bottonm-spcial {
+	  height: 100px;
+	  div.data-box {
+		.data-input {
+		  width: 125px;
+		}
+		.goto {
+		  float: left;
+		  margin: 0 8px;
+		}
+	  }
+	}
+  }
+}

@@ -61,8 +61,6 @@
   },
   {
 	"name": "操作",
-	"id": "btn",
-	"sortBy": "desc",
-	"params": "create_time"
+	"id": "btn"
   }
 ]

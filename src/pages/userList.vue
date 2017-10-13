@@ -205,10 +205,9 @@
 				this.initList();
 			},
 			initList(){
-				debugger;
 				var obj = {};
 				obj.header = g.data.staticTableHeaderPool.list.concat();
-				obj.body = convertList(g.data.userPool.list, g.data.staticTableHeaderPool.list,"audit");
+				obj.body = convertList(g.data.userPool.list, g.data.staticTableHeaderPool.list, "audit");
 				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.userPool);
 				this.tableData = obj;
 				trace("this.tableDat====", this.tableData);
@@ -249,15 +248,15 @@
 			},
 			onClick_btn($btnId, $itemId)
 			{
-				trace('$item', $btnId, $itemId);
+				this.onClick_userItem($itemId);
 			},
 			onClick_headItem($item)
 			{
-				trace('$item', $item);
+				this.onClick_sortBtn($item)
 			},
 			onClick_bodyitem($itemId)
 			{
-				trace('$item', $itemId);
+				this.onClick_userItem($itemId);
 			},
 			onClick_searchBtn(){
 				this.searchObj.page = 1;
@@ -282,7 +281,6 @@
 				this.searchObj[this.currentType] = this.inputContent;
 				getUserList(this.searchObj).then(() =>
 				{
-					debugger;
 					this.initList();
 					g.ui.hideLoading();
 				});
@@ -319,21 +317,22 @@
 				this.isShow_dropList = false;
 
 			},
-			onClick_sortBtn($field){
-				if (this.searchObj.sortOrder == "desc")
+			onClick_sortBtn($item){
+				if ($item.sortBy)
 				{
-					this.searchObj.sortOrder = "asc"
+					if ($item.sortBy == "desc")
+					{
+						this.searchObj.sortOrder = "asc"
+					}
+					else
+					{
+						this.searchObj.sortOrder = "desc"
+					}
+					this.searchObj.page = 1;
+					this.searchObj.sortField = $item.params;
+					this.onUpdate_userList();
 				}
-				else
-				{
-					this.searchObj.sortOrder = "desc"
-				}
-				this.searchObj.page = 1;
-				this.searchObj.sortField = $field;
-				this.onUpdate_userList();
-
 			},
-
 			onClick_showCalendar(str){
 				if (str == 'start')
 				{
@@ -393,28 +392,29 @@
 				this.freezeCount = Number(this.freezeCount) + Number($refundCount);
 				this.onChange_searchItem(1)
 			},
-			onConfirm_operation($type){
-				if ($type == 1)
-				{
-					return "冻结"
-				}
-				else
-				{
-					return "解冻"
-				}
-			},
-			onClick_userItem($type, $id){
-				g.url = ("/userdetail?id=" + $id)
-			},
-			onClick_lookItem($id){
+//			onConfirm_operation($type){
+//				if ($type == 1)
+//				{
+//					return "冻结"
+//				}
+//				else
+//				{
+//					return "解冻"
+//				}
+//			},
+			onClick_userItem($id){
 				g.url = ("/userdetail?id=" + $id)
 			},
 			onClick_exportBtn(){
 			},
-			onClick_userItem($id){
-				g.url = ("/userdetail?id=" + $id)
+//			onClick_lookItem($id){
+//				g.url = ("/userdetail?id=" + $id)
+//			},
 
-			}
+//			onClick_userItem($id){
+//				g.url = ("/userdetail?id=" + $id)
+//
+//			}
 
 		}
 	}

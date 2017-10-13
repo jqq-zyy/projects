@@ -10,7 +10,6 @@
 	"id": "orderTypeDesc",
 	"sortBy": "desc",
 	"params": "create_time"
-
   },
   {
 	"name": "金额",
@@ -50,8 +49,6 @@
   {
 	"name": "操作",
 	"id": "btn",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "platformAllAmount"
+	"sortBy": "desc"
   }
 ]

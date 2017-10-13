@@ -1,0 +1,46 @@
+.bounce-transition{
+  display: inline-block;
+}
+.bounce-enter-active {
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  animation: bounce-in .5s ;
+  -webkit-animation: bounce-in .5s ;
+  -o-animation: bounce-in .5s ;
+  -moz-animation: bounce-in .5s ;
+}
+.bounce-leave-active {
+  transform-origin: 0 100%;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  animation: bounce-in .5s reverse;
+  -webkit-animation: bounce-in .5s reverse;
+  -o-animation: bounce-in .5s reverse;
+  -moz-animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+	transform: scale(0);
+  }
+  50% {
+	transform: scale(1.1);
+  }
+  100% {
+	transform: scale(1);
+  }
+}
+
+
+.message-transition{
+  transtion:all .3s ease;
+  display: inline-block;
+}
+
+.message-enter-active,.message-leave-active {
+  height:0;
+}

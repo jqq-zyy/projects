@@ -69,99 +69,7 @@
 									 @click="onClick_exportBtn">导出全部
 								</div>
 							</div>
-							<!--<div class="admin-calendar-table">-->
 
-							<!--<table>-->
-							<!--<thead>-->
-							<!--<tr>-->
-							<!--<th class="first-col">流水ID</th>-->
-							<!--<th class="s-col" @click="onClick_sortBtn('received_amount')">流水类型-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'received_amount'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('received_amount')" class="pointer m-width">金额-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'received_amount'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">-->
-
-							<!--<div>-->
-							<!--支付方式-->
-
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'activity_start_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</div>-->
-							<!--</th>-->
-							<!--<th class="pointer m-width">-->
-							<!--<div>-->
-							<!--状态-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'activity_end_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-							<!--</div>-->
-							<!--</th>-->
-							<!--<th class="pointer m-width">-->
-							<!--<div>-->
-							<!--发起人-->
-							<!--</div>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
-							<!--<div>-->
-							<!--发起时间-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-
-							<!--</div>-->
-							<!--</th>-->
-							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
-							<!--<div>-->
-							<!--企业全称-->
-							<!--<common-sort :type="dataObj.sortOrder"-->
-							<!--:target="'create_time'"-->
-							<!--:currentField="dataObj.sortField"-->
-							<!--&gt;</common-sort>-->
-
-							<!--</div>-->
-							<!--</th>-->
-							<!--<th class="activity-last-col">{{g.lang("操作")}}</th>-->
-							<!--</tr>-->
-							<!--</thead>-->
-							<!--<tbody>-->
-							<!--<tr v-for="item in bagList">-->
-							<!--<td>{{item.id}}</td>-->
-							<!--<td>{{item.orderTypeDesc}}</td>-->
-							<!--<td>{{item.orderAmount}}</td>-->
-							<!--<td>{{item.payWayDesc}}</td>-->
-							<!--<td>{{item.orderStatusDesc}}</td>-->
-							<!--<td>{{item.applyUserLogon}}</td>-->
-							<!--<td>{{item.createTime}}</td>-->
-							<!--<td>{{item.companyFullName}}</td>-->
-							<!--<td>-->
-							<!--<span class ="blue_underline pointer"@click="onClick_qrcodeItem(item.id)"-->
-							<!--v-show="item.orderStatus==1">审核-->
-							<!--</span>-->
-							<!--</td>-->
-
-							<!--</tr>-->
-							<!--</tbody>-->
-							<!--<tfoot>-->
-							<!--<tr v-show="bagList.length>0">-->
-							<!--<td colspan="2"></td>-->
-							<!--<td>{{rpAmount}}</td>-->
-							<!--<td colspan="6"></td>-->
-							<!--</tr>-->
-							<!--</tfoot>-->
-							<!--</table>-->
-							<!--</div>-->
 							<hw-table :tableData="tableData"
 									  :boxWidth="boxWidth"
 									  :boxHeight="boxHeight"
@@ -169,14 +77,12 @@
 									  :bodyHeight="bodyHeight"
 									  :footerHeight="footerHeight"
 									  :fixHeader="true"
-									  :leftFixedCols="4"
-									  :rightFixedCols="1"
+									  :leftFixedCols="9"
 									  :eachRowHeight="eachRowHeight"
 									  :eachColWidth="boxWidth/9"
 									  :isShowIdCol="true"
 									  @clickBtn="onClick_btn"
-									  @clickHead="onClick_headItem"
-									  @clickBody="onClick_bodyitem">
+									  @clickHead="onClick_headItem">
 								<div class="relative middle bgc-ff">
 									<p v-show="g.data.bagPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">
@@ -185,7 +91,6 @@
 							</hw-table>
 							<common-page :index="dataObj.page" :total="totalPage"
 										 @change="onChange_currentPage" v-show="bagList.length>=1"></common-page>
-							<!--<common-prompt v-show="bagList.length==0"></common-prompt>-->
 						</div>
 						<common-footer></common-footer>
 					</div>
@@ -352,11 +257,11 @@
 			},
 			onClick_btn($btnId, $itemId)
 			{
-				trace('$item', $btnId, $itemId);
+				this.onClick_qrcodeItem($itemId);
 			},
 			onClick_headItem($item)
 			{
-				trace('$item', $item);
+				this.onClick_sortBtn($item);
 			},
 			onClick_bodyitem($itemId)
 			{
@@ -441,8 +346,12 @@
 			onClick_searchBtn(){
 				this.onUpdate_qrcodeList()
 			},
-			onClick_sortBtn($field){
-				if (this.dataObj.sortOrder == "desc")
+			onClick_sortBtn($item){
+				if (!$item.sortBy)
+				{
+					return;
+				}
+				if ($item.sortBy == "desc")
 				{
 					this.dataObj.sortOrder = "asc"
 				}
@@ -451,7 +360,7 @@
 					this.dataObj.sortOrder = "desc"
 				}
 				this.dataObj.page = 1;
-				this.dataObj.sortField = $field;
+				this.dataObj.sortField = $item.params;
 				this.onUpdate_qrcodeList();
 			},
 			onClick_dropList(){

@@ -270,9 +270,10 @@ body, textarea, input, button, select, keygen, legend {
 ::-webkit-scrollbar
 {
   width: 5px;
-  height: 5px;
+  height: 8px;
   background-color: #F5F5F5;
 }
+
 
 /*定义滚动条轨道 内阴影+圆角*/
 ::-webkit-scrollbar-track
