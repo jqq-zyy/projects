@@ -207,7 +207,7 @@
 			initList(){
 				var obj = {};
 				obj.header = g.data.staticTableHeaderPool.list.concat();
-				obj.body = convertList(g.data.userPool.list, g.data.staticTableHeaderPool.list, "audit");
+				obj.body = convertList(g.data.userPool.list, g.data.staticTableHeaderPool.list, "userList");
 				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.userPool);
 				this.tableData = obj;
 				trace("this.tableDat====", this.tableData);

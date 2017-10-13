@@ -64,9 +64,9 @@
 					<div class="body-col" v-for="(value,key,index) in item" v-if="checkLeftBody(key,index)"
 						 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
-							<span v-if="key==='btn'">
-								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)"
-										:style="{width: getWidth(value)+'px',height:eachRowHeight+'px',paddingBottom:'30px'}">
+							<span v-if="key==='btn'" :style="{paddingBottom:'30px'}">
+								<hw-btn @click.stop="onClick_itemBtn(btnItem.id,item.id)" v-for="btnItem in value"
+										:text="btnItem.name" class="margin-10">
 								</hw-btn>
 							</span>
 					</div>
@@ -83,11 +83,11 @@
 						 v-if="checkMiddleBody(key,index)"
 						 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
-						<span v-if="key==='btn'">
-							<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)"
-									:style="{width: getWidth(value)+'px',height:eachRowHeight+'px',paddingBottom:'30px'}">
-							</hw-btn>
-						</span>
+						<span v-if="key==='btn'" :style="{paddingBottom:'30px'}">
+								<hw-btn @click.stop="onClick_itemBtn(btnItem.id,item.id)" v-for="btnItem in value"
+										:text="btnItem.name" class="margin-10">
+								</hw-btn>
+							</span>
 					</div>
 				</div>
 			</div>
@@ -102,9 +102,9 @@
 						 v-if="checkRightBody(key,index)"
 						 :style="{width: getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
-							<span v-if="key==='btn'">
-								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)"
-										:style="{width: getWidth(value)+'px',height:eachRowHeight+'px',paddingBottom:'30px'}">
+							<span v-if="key==='btn'" :style="{paddingBottom:'30px'}">
+								<hw-btn v-for="btnItem in value" @click.stop="onClick_itemBtn(btnItem.id,item.id)"
+										:text="btnItem.name" class="margin-10">
 								</hw-btn>
 							</span>
 					</div>
@@ -662,6 +662,9 @@
 	.body-row-hover {
 		color: #01aaef;
 		background-color: #eeeeee;
+	}
+	.margin-10{
+		margin-left: 10px;
 	}
 
 </style>

@@ -46,22 +46,35 @@ export function updateData($data)
 }
 
 var hash = {
-	"audit": {
-		condition: "authStatus",
-		support: "审核",
-		against: ""
-	},
-	"qrcode": {
-		condition: "orderStatus",
-		support: "审核",
-		against: ""
-	}
+	"userList": [
+		{
+			id: "audit",
+			condition: "authStatus",
+			support: "审核",
+			against: ""
+		},
+		{
+			id: "freeze",
+			condition: "freezeStatus",
+			support: "冻结",
+			against: "解冻"
+		}
+	],
+	"account": [
+		{
+			id: "audit",
+			condition: "orderStatus",
+			support: "审核",
+			against: ""
+		},
+	]
 
 }
 
 export function convertList($list, $headerList, $type)
 {
-	var list = $list.concat();
+
+	var list = $list.slice(0);
 	var idList = [];
 	for (var item of $headerList)
 	{
@@ -70,21 +83,15 @@ export function convertList($list, $headerList, $type)
 
 	for (var item  of list)
 	{
+		item.btn = [];
 		if ($type)
 		{
-			if (item[hash[$type].condition] == 1)
+			for (var typeItem of hash[$type])
 			{
-				item.btn = {
-					id: $type,
-					name: hash[$type].support
-				}
-			}
-			else
-			{
-				item.btn = {
-					id: "un" + $type,
-					name: hash[$type].against
-				}
+				var obj = {};
+				obj.id = typeItem.id;
+				obj.name = item[typeItem.condition] == 1 ? typeItem.support : typeItem.against
+				item.btn.push(obj);
 			}
 		}
 

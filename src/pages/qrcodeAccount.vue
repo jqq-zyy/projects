@@ -238,7 +238,7 @@
 				this.totalPage = info.totalPage;
 				var obj = {};
 				obj.header = g.data.staticTableHeaderPool.list.concat();
-				obj.body = convertList(g.data.qrcodePool.list, g.data.staticTableHeaderPool.list, "qrcode");
+				obj.body = convertList(g.data.qrcodePool.list, g.data.staticTableHeaderPool.list, "account");
 				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.qrcodePool);
 				this.tableData = obj;
 				trace("this.tableDat====", this.tableData);
