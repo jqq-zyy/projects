@@ -79,7 +79,8 @@
 									  :fixHeader="true"
 									  :leftFixedCols="9"
 									  :eachRowHeight="eachRowHeight"
-									  :eachColWidth="boxWidth/9"
+									  :eachColWidth="boxWidth/9.01"
+
 									  :isShowIdCol="true"
 									  @clickBtn="onClick_btn"
 									  @clickHead="onClick_headItem">

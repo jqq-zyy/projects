@@ -117,9 +117,9 @@
 									  :bodyHeight="bodyHeight"
 									  :footerHeight="footerHeight"
 									  :fixHeader="true"
-									  :leftFixedCols="9"
+									  :leftFixedCols="10"
 									  :eachRowHeight="eachRowHeight"
-									  :eachColWidth="boxWidth/9"
+									  :eachColWidth="boxWidth/10"
 									  :isShowTotal="true"
 									  @clickHead="onClick_headItem"
 									  @clickBody="onClick_bodyItem">

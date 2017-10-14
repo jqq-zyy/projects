@@ -4,7 +4,7 @@
 		 :style="{height:boxHeight +'px',width:boxWidth+'px'}">
 		<!--<div class="content-box1" style="height: 700px;"></div>-->
 		<div class="header header-vertical body-row"
-			 :style="{height:headerHeight+'px',top:Math.min(offsetTop,topLimit)-6+'px',width:getTypeWidth('total')+6+'px'}">
+			 :style="{height:headerHeight+'px',top:offsetTop+'px',width:getTypeWidth('total')+6+'px'}">
 			<div class="left-header"
 				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
 				<div class="header-row" :style="{height:headerHeight+'px'}">
@@ -18,6 +18,7 @@
 						></hw-icon>
 					</div>
 				</div>
+
 			</div>
 
 			<div class="middle-header"
@@ -51,10 +52,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="body" :style="{width:getTypeWidth('total')+6+'px',height:bodyHeight+'px'}">
+
+		<div class="body relative"
+			 :style="{width:getTypeWidth('total')+6+'px',height:bodyHeight+'px'}">
 			<slot v-if="tableData.body.length < 1"></slot>
 			<div class="left-table-body" v-if="tableData.body.length >= 1"
-				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
+				 :style="leftStyles">
 				<div class="body-row"
 					 v-for="(item,index) in tableData.body"
 					 :class="[isEven(index)?'bgc-f8':'bgc-ff',currHover==item.id?'body-row-hover':'']"
@@ -73,7 +76,7 @@
 				</div>
 			</div>
 			<div class="middle-table-body" v-if="tableData.body.length >= 1"
-				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px'}">
+				 :style="middleStyles">
 				<div class="body-row" v-for="(item,index) in tableData.body"
 					 :class="[isEven(index)?'bgc-f8':'bgc-ff',currHover==item.id?'body-row-hover':'']"
 					 @click="onClick_body(item.id)" @mouseover="onMouseOver_bodyItem(item.id)"
@@ -92,7 +95,7 @@
 				</div>
 			</div>
 			<div class="right-table-body" v-if="tableData.body.length >= 1"
-				 :style="{right:Math.max(getScrollLimit()-offsetLeft,0)+'px',width:getTypeWidth('right')+'px'}">
+				 :style="rightStyles">
 				<div class="body-row" v-for="(item,index) in tableData.body"
 					 :class="[isEven(index)?'bgc-f8':'bgc-ff',currHover==item.id?'body-row-hover':'']"
 					 @click="onClick_body(item.id)" @mouseover="onMouseOver_bodyItem(item.id)"
@@ -111,8 +114,10 @@
 				</div>
 			</div>
 		</div>
+
+
 		<div class="footer header-vertical body-row" v-if="tableData.body.length >= 1 && isShowTotal"
-			 :style="{height:footerHeight+'px',top:Math.min(offsetTop,topLimit)+eachRowHeight+6+'px',width:getTypeWidth('total')+6+'px'}">
+			 :style="{height:footerHeight+'px',bottom:Math.max(-eachRowHeight-offsetTop-7,-180)+'px',width:getTypeWidth('total')+6+'px'}">
 			<div class="left-header"
 				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px',height:footerHeight+'px'}">
 				<div class="header-row" :style="{height:footerHeight+'px'}">
@@ -158,7 +163,7 @@
 				this.$refs.scrollCon.addEventListener('scroll', (e) =>
 				{
 					this.offsetLeft = this.$refs.scrollCon.scrollLeft;
-					this.offsetTop = Math.min(this.$refs.scrollCon.scrollTop, this.topLimit);
+					this.offsetTop = this.$refs.scrollCon.scrollTop;
 				});
 			})
 		},
@@ -239,6 +244,42 @@
 			{
 				return this.getContentHeight() > 0 && Math.max(this.getContentHeight() - this.bodyHeight -
 								this.headerHeight - 15, 0);
+			},
+			leftStyles()
+			{
+				var style = {
+					left: Math.min(this.offsetLeft, this.getScrollLimit()) + 'px',
+					width: this.getTypeWidth('left') + 'px',
+				}
+				if (this.isShowTotal)
+				{
+					style.marginBottom = this.eachRowHeight + 'px';
+				}
+				return style;
+			},
+			middleStyles()
+			{
+				var style = {
+					left: this.getTypeWidth('left') + 'px',
+					width: this.getTypeWidth('middle') + 'px',
+				};
+				if (this.isShowTotal)
+				{
+					style.marginBottom = this.eachRowHeight + 'px';
+				}
+				return style;
+			},
+			rightStyles()
+			{
+				var style = {
+					right: Math.max(this.getScrollLimit() - this.offsetLeft, 0) + 'px',
+					width: this.getTypeWidth('right') + 'px',
+				};
+				if (this.isShowTotal)
+				{
+					style.marginBottom = this.eachRowHeight + 'px';
+				}
+				return style;
 			}
 		},
 		methods: {
@@ -494,7 +535,11 @@
 		overflow: auto;
 	}
 
-	.header, .body, .footer {
+	.header, .footer {
+		position: absolute;
+	}
+
+	.body {
 		position: relative;
 	}
 
@@ -624,8 +669,6 @@
 		line-height: 20px;
 	}
 
-
-
 	.absolute-right {
 		position: absolute;
 		top: 18px;
@@ -659,11 +702,13 @@
 	.light-color {
 		color: #01aaef;
 	}
+
 	.body-row-hover {
 		color: #01aaef;
 		background-color: #eeeeee;
 	}
-	.margin-10{
+
+	.margin-10 {
 		margin-left: 10px;
 	}
 
