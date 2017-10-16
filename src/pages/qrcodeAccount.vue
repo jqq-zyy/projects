@@ -75,85 +75,64 @@
                                     <thead>
                                     <tr>
                                         <th class="first-col">流水ID</th>
-                                        <th class="s-col" @click="onClick_sortBtn('received_amount')">流水类型
+                                        <th class="s-col" @click="onClick_sortBtn('received_amount')"><span>|</span>流水类型
                                             <common-sort :type="dataObj.sortOrder"
                                                          :target="'received_amount'"
                                                          :currentField="dataObj.sortField"
                                             ></common-sort>
                                         </th>
-                                        <th @click="onClick_sortBtn('received_amount')" class="pointer m-width">二维码数
+                                        <th @click="onClick_sortBtn('received_amount')" class="pointer m-width"><span>|</span>二维码数
                                             <common-sort :type="dataObj.sortOrder"
                                                          :target="'received_amount'"
                                                          :currentField="dataObj.sortField"
                                             ></common-sort>
                                         </th>
                                         <th @click="onClick_sortBtn('received_amount')" class="pointer m-width">
-                                            <div>
-                                                单价
+                                            <span>|</span>单价
                                                 <common-sort :type="dataObj.sortOrder"
                                                              :target="'received_amount'"
-                                                             :currentField="dataObj.sortField"
-                                                ></common-sort>
-                                            </div>
+                                                             :currentField="dataObj.sortField"></common-sort>
                                         </th>
 
                                         <th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
-
-                                            <div>
-                                                金额
-
+                                            <span>|</span>金额
+                                            <common-sort :type="dataObj.sortOrder"
+                                                             :target="'activity_start_time'"
+                                                             :currentField="dataObj.sortField"></common-sort>
+                                        </th>
+                                        <th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
+                                            <span>|</span>支付方式
                                                 <common-sort :type="dataObj.sortOrder"
                                                              :target="'activity_start_time'"
                                                              :currentField="dataObj.sortField"
                                                 ></common-sort>
-                                            </div>
-                                        </th>
-                                        <th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
-
-                                            <div>
-                                                支付方式
-
-                                                <common-sort :type="dataObj.sortOrder"
-                                                             :target="'activity_start_time'"
-                                                             :currentField="dataObj.sortField"
-                                                ></common-sort>
-                                            </div>
                                         </th>
                                         <th class="pointer m-width">
-                                            <div>
-                                                状态
+                                            <span>|</span>状态
                                                 <common-sort :type="dataObj.sortOrder"
                                                              :target="'activity_end_time'"
                                                              :currentField="dataObj.sortField"
                                                 ></common-sort>
-                                            </div>
                                         </th>
                                         <th class="pointer m-width">
-                                            <div>
-                                                发起人
-                                            </div>
+                                            <span>|</span>发起人
                                         </th>
                                         <th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-                                            <div>
-                                                发起时间
+                                            <span>|</span> 发起时间
                                                 <common-sort :type="dataObj.sortOrder"
                                                              :target="'create_time'"
                                                              :currentField="dataObj.sortField"
                                                 ></common-sort>
 
-                                            </div>
                                         </th>
                                         <th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-                                            <div>
-                                                企业全称
+                                            <span>|</span> 企业全称
                                                 <common-sort :type="dataObj.sortOrder"
                                                              :target="'create_time'"
                                                              :currentField="dataObj.sortField"
                                                 ></common-sort>
-
-                                            </div>
                                         </th>
-                                        <th class="activity-last-col">{{g.lang("操作")}}</th>
+                                        <th class="activity-last-col"><span>|</span>{{g.lang("操作")}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
