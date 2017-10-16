@@ -4,31 +4,33 @@
 		 :style="{height:boxHeight +'px',width:boxWidth+'px'}">
 		<!--<div class="content-box1" style="height: 700px;"></div>-->
 		<div class="header header-vertical body-row"
-			 :style="{height:headerHeight+'px',top:Math.min(offsetTop,topLimit)-6+'px',width:getTypeWidth('total')+6+'px'}">
+			 :style="{height:headerHeight+'px',top:offsetTop+'px',width:getTypeWidth('total')+6+'px'}">
 			<div class="left-header"
 				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
 				<div class="header-row" :style="{height:headerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.header" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
+
 						 v-if="checkLeftHeader(item,index)">
 						<span>{{item.name}}</span>
 						<hw-icon :iconType="item.sortBy ? item.sortBy == 'desc' ? 'bottom-arrow' : 'top-arrow' : ''"
-								 v-if="item.sortBy" class="absolute-right"
+								 v-if="item.sortBy" class="absolute-right" :class="currSort==item.id?'light-color':''"
 						></hw-icon>
 					</div>
 				</div>
-			</div>
 
+			</div>
 
 			<div class="middle-header"
 				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:headerHeight+'px'}">
 				<div class="header-row" :style="{height:headerHeight+'px'}">
 					<div class="header-col" v-for="(item,index) in tableData.header" @click="onClick_headItem(item)"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
+						 :class="currSort==item.id?'light-color':''"
 						 v-if="checkMiddleHeader(item,index)">
 						<span>{{item.name}}</span>
 						<hw-icon :iconType="item.sortBy ? item.sortBy == 'desc' ? 'bottom-arrow' : 'top-arrow' : ''"
-								 v-if="item.sortBy" class="absolute-right"
+								 v-if="item.sortBy" class="absolute-right" :class="currSort==item.id?'light-color':''"
 						></hw-icon>
 
 					</div>
@@ -43,86 +45,93 @@
 						 v-if="checkRightHeader(item,index)">
 						<span>{{item.name}}</span>
 						<hw-icon :iconType="item.sortBy ? item.sortBy == 'desc' ? 'bottom-arrow' : 'top-arrow' : ''"
-								 v-if="item.sortBy" class="absolute-right"
+								 v-if="item.sortBy" class="absolute-right" :class="currSort==item.id?'light-color':''"
 						></hw-icon>
 
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="body" :style="{width:getTypeWidth('total')+6+'px',height:bodyHeight+'px'}">
-			<slot v-if="tableData.body.length < 1"></slot>
-			<div class="left-table-body" v-if="tableData.body.length > 1"
-				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px'}">
-				<div class="body-row"
-					 v-for="(item,index) in tableData.body" :class="isEven(index)?'bgc-f8':'bgc-ff'"
-					 @click="onClick_body(item.id)"
 
+		<div class="body relative"
+			 :style="{width:getTypeWidth('total')+6+'px',height:bodyHeight+'px'}">
+			<slot v-if="tableData.body.length < 1"></slot>
+			<div class="left-table-body" v-if="tableData.body.length >= 1"
+				 :style="leftStyles">
+				<div class="body-row"
+					 v-for="(item,index) in tableData.body"
+					 :class="[isEven(index)?'bgc-f8':'bgc-ff',currHover==item.id?'body-row-hover':'']"
+					 @click="onClick_body(item.id)" @mouseover="onMouseOver_bodyItem(item.id)"
+					 @mouseout="onMouseOut_bodyItem(item.id)"
 					 :style="{height: eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item" v-if="checkLeftBody(key,index)"
 						 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
-							<span v-if="key==='btn'">
-								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)"
-										:style="{width: getWidth(value)+'px',height:eachRowHeight+'px',paddingBottom:'30px'}">
+							<span v-if="key==='btn'" :style="{paddingBottom:'30px'}">
+								<hw-btn @click.stop="onClick_itemBtn(btnItem.id,item.id)" v-for="btnItem in value"
+										:text="btnItem.name" class="margin-10">
 								</hw-btn>
 							</span>
 					</div>
 				</div>
 			</div>
-
-			<div class="middle-table-body" v-if="tableData.body.length > 1"
-				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px'}">
-				<div class="body-row" v-for="(item,index) in tableData.body" :class="isEven(index)?'bgc-f8':'bgc-ff'"
-					 @click="onClick_body(item.id)"
+			<div class="middle-table-body" v-if="tableData.body.length >= 1"
+				 :style="middleStyles">
+				<div class="body-row" v-for="(item,index) in tableData.body"
+					 :class="[isEven(index)?'bgc-f8':'bgc-ff',currHover==item.id?'body-row-hover':'']"
+					 @click="onClick_body(item.id)" @mouseover="onMouseOver_bodyItem(item.id)"
+					 @mouseout="onMouseOut_bodyItem(item.id)"
 					 :style="{height: eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item"
 						 v-if="checkMiddleBody(key,index)"
 						 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
-						<span v-if="key==='btn'">
-							<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)"
-									:style="{width: getWidth(value)+'px',height:eachRowHeight+'px',paddingBottom:'30px'}">
-							</hw-btn>
-						</span>
+						<span v-if="key==='btn'" :style="{paddingBottom:'30px'}">
+								<hw-btn @click.stop="onClick_itemBtn(btnItem.id,item.id)" v-for="btnItem in value"
+										:text="btnItem.name" class="margin-10">
+								</hw-btn>
+							</span>
 					</div>
 				</div>
 			</div>
-			<div class="right-table-body" v-if="tableData.body.length > 1"
-				 :style="{right:Math.max(getScrollLimit()-offsetLeft,0)+'px',width:getTypeWidth('right')+'px'}">
-				<div class="body-row" v-for="(item,index) in tableData.body" :class="isEven(index)?'bgc-f8':'bgc-ff'"
-					 @click="onClick_body(item.id)"
+			<div class="right-table-body" v-if="tableData.body.length >= 1"
+				 :style="rightStyles">
+				<div class="body-row" v-for="(item,index) in tableData.body"
+					 :class="[isEven(index)?'bgc-f8':'bgc-ff',currHover==item.id?'body-row-hover':'']"
+					 @click="onClick_body(item.id)" @mouseover="onMouseOver_bodyItem(item.id)"
+					 @mouseout="onMouseOut_bodyItem(item.id)"
 					 :style="{height:eachRowHeight+'px'}">
 					<div class="body-col" v-for="(value,key,index) in item"
 						 v-if="checkRightBody(key,index)"
 						 :style="{width: getWidth(value)+'px',height:eachRowHeight+'px'}">
 						<span v-if="key !== 'btn'">{{getName(value)}}</span>
-							<span v-if="key==='btn'">
-								<hw-btn :text="value.name" @click.stop="onClick_itemBtn(value.id,item.id)"
-										:style="{width: getWidth(value)+'px',height:eachRowHeight+'px',paddingBottom:'30px'}">
+							<span v-if="key==='btn'" :style="{paddingBottom:'30px'}">
+								<hw-btn v-for="btnItem in value" @click.stop="onClick_itemBtn(btnItem.id,item.id)"
+										:text="btnItem.name" class="margin-10">
 								</hw-btn>
 							</span>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="footer header-vertical body-row" v-if="tableData.body.length > 1"
-			 :style="{height:footerHeight+'px',top:Math.min(offsetTop,topLimit)+eachRowHeight+6+'px',width:getTypeWidth('total')+6+'px'}">
+
+
+		<div class="footer header-vertical body-row" v-if="tableData.body.length >= 1 && isShowTotal"
+			 :style="{height:footerHeight+'px',bottom:Math.max(-eachRowHeight-offsetTop-7,-180)+'px',width:getTypeWidth('total')+6+'px'}">
 			<div class="left-header"
 				 :style="{left:Math.min(offsetLeft,getScrollLimit())+'px',width:getTypeWidth('left')+'px',height:footerHeight+'px'}">
 				<div class="header-row" :style="{height:footerHeight+'px'}">
-					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
+					<div class="header-col" v-for="(item,index) in tableData.footer"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkLeftFooter(item,index)">
 						<span :class="item.name===undefined?'transparent':''">{{item.name===undefined?"空":item.name}}</span>
 					</div>
 				</div>
 			</div>
-
 			<div class="middle-header"
 				 :style="{width:getTypeWidth('middle')+'px',left:getTypeWidth('left')+'px',height:footerHeight+'px'}">
 				<div class="header-row" :style="{height:footerHeight+'px'}">
-					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
+					<div class="header-col" v-for="(item,index) in tableData.footer"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkMiddleFooter(item,index)">
 						<span :class="item.name===undefined?'transparent':''">{{item.name===undefined?"空":item.name}}</span>
@@ -132,7 +141,7 @@
 			<div class="right-header"
 				 :style="{right:Math.max(getScrollLimit()-offsetLeft,0)+'px',width:getTypeWidth('right')+'px',height:footerHeight+'px'}">
 				<div class="header-row" :style="{height:footerHeight+'px'}">
-					<div class="header-col" v-for="(item,index) in tableData.footer" @click="onClick_headItem(item)"
+					<div class="header-col" v-for="(item,index) in tableData.footer"
 						 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 						 v-if="checkRightFooter(item,index)">
 						<span :class="item.name===undefined?'transparent':''">{{item.name===undefined?"空":item.name}}</span>
@@ -154,7 +163,7 @@
 				this.$refs.scrollCon.addEventListener('scroll', (e) =>
 				{
 					this.offsetLeft = this.$refs.scrollCon.scrollLeft;
-					this.offsetTop = Math.min(this.$refs.scrollCon.scrollTop, this.topLimit);
+					this.offsetTop = this.$refs.scrollCon.scrollTop;
 				});
 			})
 		},
@@ -162,7 +171,9 @@
 			return {
 				count: 1,
 				offsetLeft: 0,
-				offsetTop: 0
+				offsetTop: 0,
+				currSort: "",
+				currHover: ""
 			}
 		},
 		props: {
@@ -197,14 +208,6 @@
 				type: Number,
 				default: 0
 			},
-			leftFooterFixedCols: {
-				type: Number,
-				default: 1
-			},
-			rightFooterFixedCols: {
-				type: Number,
-				default: 1
-			},
 			rightFixedCols: {
 				type: Number,
 				default: 0
@@ -230,92 +233,190 @@
 			isShowIdCol: {
 				type: Boolean,
 				default: false
+			},
+			isShowTotal: {
+				type: Boolean,
+				default: false
 			}
 		},
 		computed: {
-			rightCols()
-			{
-				return Math.min(this.rightFixedCols, this.rightFooterFixedCols)
-			},
 			topLimit()
 			{
 				return this.getContentHeight() > 0 && Math.max(this.getContentHeight() - this.bodyHeight -
-								this.headerHeight -
-								15, 0);
+								this.headerHeight - 15, 0);
+			},
+			leftStyles()
+			{
+				var style = {
+					left: Math.min(this.offsetLeft, this.getScrollLimit()) + 'px',
+					width: this.getTypeWidth('left') + 'px',
+				}
+				if (this.isShowTotal)
+				{
+					style.marginBottom = this.eachRowHeight + 'px';
+				}
+				return style;
+			},
+			middleStyles()
+			{
+				var style = {
+					left: this.getTypeWidth('left') + 'px',
+					width: this.getTypeWidth('middle') + 'px',
+				};
+				if (this.isShowTotal)
+				{
+					style.marginBottom = this.eachRowHeight + 'px';
+				}
+				return style;
+			},
+			rightStyles()
+			{
+				var style = {
+					right: Math.max(this.getScrollLimit() - this.offsetLeft, 0) + 'px',
+					width: this.getTypeWidth('right') + 'px',
+				};
+				if (this.isShowTotal)
+				{
+					style.marginBottom = this.eachRowHeight + 'px';
+				}
+				return style;
 			}
 		},
 		methods: {
-
 			checkLeftHeader($item, index)
 			{
 				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index <= this.leftFixedCols;
+				}
 				return isTrue && index < this.leftFixedCols;
 			},
 			checkMiddleHeader($item, index)
 			{
 				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index > this.leftFixedCols && index <= (this.getValidLength("header") -
+							this.rightFixedCols)
+				}
 				return isTrue && index >= this.leftFixedCols && index < (this.getValidLength("header") -
 						this.rightFixedCols)
 			},
 			checkRightHeader($item, index)
 			{
 				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index > (this.getValidLength("header") - this.rightFixedCols)
+				}
 				return isTrue && index >= (this.getValidLength("header") - this.rightFixedCols)
-			},
-
-			checkMiddleBody(key, index)
-			{
-				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
-				return isTrue && index >= this.leftFixedCols && index < (this.getValidLength("header") -
-						this.rightFixedCols)
 			},
 			checkLeftBody(key, index)
 			{
 				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index <= this.leftFixedCols
+				}
 				return isTrue && index < this.leftFixedCols
+			},
+			checkMiddleBody(key, index)
+			{
+				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index > this.leftFixedCols && index <= (this.getValidLength("header") -
+							this.rightFixedCols)
+				}
+				return isTrue && index >= this.leftFixedCols && index < (this.getValidLength("header") -
+						this.rightFixedCols)
 			},
 			checkRightBody(key, index)
 			{
 				var isTrue = !this.isShowIdCol ? key != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index > (this.getValidLength("header") - this.rightFixedCols)
+				}
 				return isTrue && index >= (this.getValidLength("header") - this.rightFixedCols)
-			},
-			checkMiddleFooter($item, index)
-			{
-				return index > this.leftFooterFixedCols && index <= (this.getValidLength("footer") -
-						this.rightCols)
+
 			},
 			checkLeftFooter($item, index)
 			{
-				return index < this.leftFooterFixedCols;
+				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return isTrue && index <= this.leftFixedCols;
+				}
+				return isTrue && index < this.leftFixedCols;
+			},
+
+			checkMiddleFooter($item, index)
+			{
+				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
+				if (!this.isShowIdCol)
+				{
+					return index > this.leftFixedCols && index <= (this.getValidLength("footer") -
+							this.rightFixedCols);
+				}
+				return index >= this.leftFixedCols && index < (this.getValidLength("footer") -
+						this.rightFixedCols)
 			},
 			checkRightFooter($item, index)
 			{
-				return index >= (this.getValidLength("footer") - this.rightCols)
+				if (!this.isShowIdCol)
+				{
+					return index > (this.getValidLength("footer") - this.rightFixedCols)
+				}
+				return index >= (this.getValidLength("footer") - this.rightFixedCols)
 			},
 			onClick_headItem($item)
 			{
-
-//				if ($item.supportSort)
-//				{
-//					if (flag)
-//					{
-//						this.tableData.body = this.tableData.body.sort(function (a, b)
-//						{
-//							return a[$item.id] - b[$item.id]
-//						})
-//						flag = false;
-//					}
-//					else
-//					{
-//						this.tableData.body = this.tableData.body.sort(function (a, b)
-//						{
-//							return b[$item.id] - a[$item.id];
-//						});
-//						flag = true;
-//					}
-//
-//				}
+				if (this.currSort == $item.id)
+				{
+					this.currSort = "";
+				}
+				else
+				{
+					this.currSort = $item.id;
+				}
 				this.$emit('clickHead', $item);
+				var itemData = g.data.staticTableHeaderPool.getDataById($item.id);
+				var list = g.data.staticTableHeaderPool.list;
+				if ($item.sortBy)
+				{
+					if ($item.sortBy == "desc")
+					{
+						itemData.update({
+							sortBy: "asc"
+						})
+
+					}
+					else
+					{
+						itemData.update({
+							sortBy: "desc"
+						})
+					}
+				}
+				for (var item of list)
+				{
+					if (item.sortBy && item.id !== $item.id)
+					{
+						item.sortBy = "desc";
+					}
+				}
+				g.core.update();
+
+			},
+			onMouseOver_bodyItem($itemId)
+			{
+				this.currHover = $itemId;
+			},
+			onMouseOut_bodyItem($itemId)
+			{
+				this.currHover = "";
 			},
 			onClick_body($id)
 			{
@@ -393,7 +494,7 @@
 			getScrollLimit()
 			{
 				const width = this.getTypeWidth('total');
-				return width - this.boxWidth;
+				return Math.max(width - this.boxWidth, 0);
 			},
 			getContentHeight()
 			{
@@ -404,7 +505,6 @@
 				return $index % 2 == 0;
 			}
 		}
-
 	};
 
 	function getDirection(e)
@@ -435,7 +535,11 @@
 		overflow: auto;
 	}
 
-	.header, .body, .footer {
+	.header, .footer {
+		position: absolute;
+	}
+
+	.body {
 		position: relative;
 	}
 
@@ -538,7 +642,8 @@
 
 	.header-col, .body-col {
 		padding-left: 6px;
-		padding-top: 17px
+		padding-top: 17px;
+		cursor: pointer;
 
 	}
 
@@ -564,20 +669,11 @@
 		line-height: 20px;
 	}
 
-	.body-row:hover {
-		color: #01aaef;
-		background: #eeeeee;
-	}
-
 	.absolute-right {
 		position: absolute;
 		top: 18px;
-		right: 20px;
+		left: 80px;
 	}
-
-
-
-
 
 	.header,
 	.body,
@@ -586,9 +682,11 @@
 		border-bottom-width: 0;
 		border-left-width: 0;
 	}
-	.out-box{
-		border-top:1px solid #cccccc ;
+
+	.out-box {
+		border-top: 1px solid #cccccc;
 	}
+
 	.footer {
 		border-bottom: 1px solid #dbdee7;
 	}
@@ -599,6 +697,19 @@
 
 	.bgc-f8 {
 		background-color: #f8f8f8;
+	}
+
+	.light-color {
+		color: #01aaef;
+	}
+
+	.body-row-hover {
+		color: #01aaef;
+		background-color: #eeeeee;
+	}
+
+	.margin-10 {
+		margin-left: 10px;
 	}
 
 </style>

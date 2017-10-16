@@ -1,0 +1,72 @@
+[
+  {
+	"name": "流水ID",
+	"id": "id"
+  },
+  {
+	"name": "流水类型",
+	"id": "orderType",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "商家红包金额",
+	"id": "shopAmount",
+	"sortBy": "desc",
+	"params": "create_time",
+	"calTotal": "shopRpAmount"
+  },
+  {
+	"name": "平台红包金额",
+	"id": "platformAmount",
+	"sortBy": "desc",
+	"params": "create_time",
+	"calTotal": "platformRpAmount"
+  },
+  {
+	"name": "状态",
+	"id": "statusDesc",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "用户",
+	"id": "alipayAccount"
+  },
+  {
+	"name": "扫码设备",
+	"id": "mobileType",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "地区",
+	"id": "cityName",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "扫码时间",
+	"id": "createTime",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "活动名称",
+	"id": "activityName",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "品牌名称",
+	"id": "rpBrand",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "企业全称",
+	"id": "companyFullName",
+	"sortBy": "desc",
+	"params": "create_time"
+  }
+]

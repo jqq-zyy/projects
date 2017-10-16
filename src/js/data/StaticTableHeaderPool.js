@@ -58,8 +58,10 @@ function createData($dObj)
 	var d = {};
 	d.id = 0;
 	d.name = "";
+	d.showIdCol = "";
 	d.sortBy = "";
 	d.params = "";
+	d.calTotal = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -68,7 +70,9 @@ function createData($dObj)
 function updateData($dObj)
 {
 	$dObj.hasOwnProperty('id') && (this.id = $dObj.id);
+	$dObj.hasOwnProperty('showIdCol') && (this.showIdCol = $dObj.showIdCol);
 	$dObj.hasOwnProperty('name') && (this.name = $dObj.name);
 	$dObj.hasOwnProperty('sortBy') && (this.sortBy = $dObj.sortBy);
 	$dObj.hasOwnProperty('params') && (this.params = $dObj.params);
+	$dObj.hasOwnProperty('calTotal') && (this.calTotal = $dObj.calTotal);
 }

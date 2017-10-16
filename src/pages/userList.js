@@ -5,6 +5,7 @@ import g from "../global";
 export default function (to, next)
 {
 	var obj = {};
+
 	var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
 	obj.page = 1;
 	obj.pageSize = 10;
@@ -12,6 +13,7 @@ export default function (to, next)
 	obj.endTime = obj.startTime;
 	getUserList(obj).then(function ()
 	{
+		updateData("userHeader");
 		next();
 	})
 }
@@ -35,94 +37,153 @@ export function getUserList($param)
 	return promise;
 }
 
-export function convertList($list)
+export function updateData($data)
 {
-	var list = $list.concat();
-	for (var item  of list)
-	{
-		if (item.authStatus == 1)
-		{
-			item.btn = {
-				id: "audit",
-				name: "审核"
-			}
-		}
-		else
-		{
-			item.btn = {
-				id: "empty",
-				name: " "
-			}
-		}
-
-
-		delete item.update;
-		delete item.authStatus;
-		delete item.freezeStatus;
-	}
-	return list
+	var staticData = g.data.staticData;
+	var staticTableHeaderPool = g.data.staticTableHeaderPool;
+	staticTableHeaderPool.removeAll();
+	staticTableHeaderPool.update(staticData[$data + ".json"]);
 }
 
-export function getFooterList()
-{
-	var resultList = [];
-	var userPool = g.data.userPool;
-	var target = {
-		shopAllAmount: userPool.shopAllAmount,
-		platformAllAmount: userPool.platformAllAmount,
-		rpSendAllNum: userPool.rpSendAllNum,
-		qrcodeScanAllNum: userPool.qrcodeScanAllNum,
-		qrcodeBindAllNum: userPool.qrcodeBindAllNum,
-		qrcodeExportAllNum: userPool.qrcodeExportAllNum,
-		qrcodeUnExportAllNum: userPool.qrcodeUnExportAllNum,
-		qrcodeBuyAllNum: userPool.qrcodeBuyAllNum,
-		qrcodeRefundAllNum: userPool.qrcodeRefundAllNum,
-		rpAllCurrentAccount: userPool.rpAllCurrentAccount,
-	};
+var hash = {
+	"userList": [
+		{
+			id: "audit",
+			condition: "authStatus",
+			support: "审核",
+			against: ""
+		},
+		{
+			id: "freeze",
+			condition: "freezeStatus",
+			support: "冻结",
+			against: "解冻"
+		}
+	],
+	"account": [
+		{
+			id: "audit",
+			condition: "orderStatus",
+			support: "审核",
+			against: ""
+		},
+	]
 
-	var tmpList = getTmpList();
-	for (var tmpItem of tmpList)
+}
+
+export function convertList($list, $headerList, $type)
+{
+
+	var list = $list.slice(0);
+	var idList = [];
+	for (var item of $headerList)
 	{
-		for (var key in target)
+		idList.push(item.id)
+	}
+
+	for (var item  of list)
+	{
+		item.btn = [];
+		if ($type)
 		{
-			if (tmpItem.id == key)
+			for (var typeItem of hash[$type])
 			{
-				tmpItem.name = target[key]
+				var obj = {};
+				obj.id = typeItem.id;
+				obj.name = item[typeItem.condition] == 1 ? typeItem.support : typeItem.against
+				item.btn.push(obj);
 			}
-			if (tmpItem.id == "total")
+		}
+
+		for (var key in item)
+		{
+			if (idList.indexOf(key) < 0)
 			{
-				tmpItem.name = "汇总";
-				tmpItem.colspan = 4;
+				delete item[key];
 			}
 		}
 	}
-	for (var i = 0; i < 3; i++)
+
+	return list;
+}
+
+export function getFooterList($leftFixedCol, $headerList, $targetPool)
+{
+
+	var resultList = [];
+	var targetPool = $targetPool;
+	for (var i = 1; i < $headerList.length; i++)
 	{
-		tmpList.splice(1, 0, {})
-	}
-	tmpList.push({});
-	return tmpList;
-	function getTmpList()
-	{
-		var results = [];
-		var idList = [
-			"total",
-			"shopAllAmount",
-			"platformAllAmount",
-			"rpSendAllNum",
-			"qrcodeScanAllNum",
-			"qrcodeBindAllNum",
-			"qrcodeExportAllNum",
-			"qrcodeUnExportAllNum",
-			"qrcodeBuyAllNum",
-			"qrcodeRefundAllNum",
-			"rpAllCurrentAccount"]
-		for (var id of idList)
+		var obj = {};
+		if ($headerList[i].calTotal !== "")
 		{
-			var tmpObj = {};
-			tmpObj.id = id;
-			results.push(tmpObj)
+			obj.id = $headerList[i].calTotal;
+			obj.name = targetPool[obj.id];
 		}
-		return results;
+		resultList.push(obj);
 	}
+	resultList.unshift({id: "id", name: "汇总", colspan: $leftFixedCol});
+	if ($headerList[0].showIdCol === "no")
+	{
+		resultList.splice(1, 1, {id: "total", name: "汇总", colspan: $leftFixedCol})
+	}
+	return resultList;
+	// 	var target = {
+// 		shopAllAmount: userPool.shopAllAmount,
+// 		platformAllAmount: userPool.platformAllAmount,
+// 		rpSendAllNum: userPool.rpSendAllNum,
+// 		qrcodeScanAllNum: userPool.qrcodeScanAllNum,
+// 		qrcodeBindAllNum: userPool.qrcodeBindAllNum,
+// 		qrcodeExportAllNum: userPool.qrcodeExportAllNum,
+// 		qrcodeUnExportAllNum: userPool.qrcodeUnExportAllNum,
+// 		qrcodeBuyAllNum: userPool.qrcodeBuyAllNum,
+// 		qrcodeRefundAllNum: userPool.qrcodeRefundAllNum,
+// 		rpAllCurrentAccount: userPool.rpAllCurrentAccount,
+// 	};
+//
+// 	var tmpList = getTmpList();
+// 	for (var tmpItem of tmpList)
+// 	{
+// 		for (var key in target)
+// 		{
+// 			if (tmpItem.id == key)
+// 			{
+// 				tmpItem.name = target[key]
+// 			}
+// 			if (tmpItem.id == "total")
+// 			{
+// 				tmpItem.name = "汇总";
+// 				tmpItem.colspan = 4;
+// 			}
+// 		}
+// 	}
+// 	for (var i = 0; i < 3; i++)
+// 	{
+// 		tmpList.splice(1, 0, {})
+// 	}
+// 	tmpList.push({});
+// 	return tmpList;
+// 	function getTmpList()
+// 	{
+// 		var results = [];
+// 		var idList = [
+// 			"total",
+// 			"shopAllAmount",
+// 			"platformAllAmount",
+// 			"rpSendAllNum",
+// 			"qrcodeScanAllNum",
+// 			"qrcodeBindAllNum",
+// 			"qrcodeExportAllNum",
+// 			"qrcodeUnExportAllNum",
+// 			"qrcodeBuyAllNum",
+// 			"qrcodeRefundAllNum",
+// 			"rpAllCurrentAccount"]
+// 		for (var id of idList)
+// 		{
+// 			var tmpObj = {};
+// 			tmpObj.id = id;
+// 			results.push(tmpObj)
+// 		}
+// 		return results;
+// 	}
 }

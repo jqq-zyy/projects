@@ -91,10 +91,10 @@
 									  :fixHeader="true"
 									  :leftFixedCols="4"
 									  :rightFixedCols="1"
-									  :rightFooterFixedCols="4"
 									  :eachRowHeight="eachRowHeight"
 									  :eachColWidth="120"
 									  :isShowIdCol="true"
+									  :isShowTotal="true"
 									  @clickBtn="onClick_btn"
 									  @clickHead="onClick_headItem"
 									  @clickBody="onClick_bodyitem">
@@ -197,7 +197,6 @@
 			CommonFooter,
 			CommonPrompt,
 			CommonSort
-
 		},
 		methods: {
 			init(){
@@ -208,9 +207,10 @@
 			initList(){
 				var obj = {};
 				obj.header = g.data.staticTableHeaderPool.list.concat();
-				obj.body = convertList(g.data.userPool.list);
-				obj.footer = getFooterList();
+				obj.body = convertList(g.data.userPool.list, g.data.staticTableHeaderPool.list, "userList");
+				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.userPool);
 				this.tableData = obj;
+				trace("this.tableDat====", this.tableData);
 				this.totalPage = g.data.userPool.totalPage;
 				g.core.update();
 			},
@@ -246,17 +246,17 @@
 				}
 
 			},
-			onClick_btn($btnId,$itemId)
+			onClick_btn($btnId, $itemId)
 			{
-				trace('$item', $btnId,$itemId);
+				this.onClick_userItem($itemId);
 			},
 			onClick_headItem($item)
 			{
-				trace('$item', $item);
+				this.onClick_sortBtn($item)
 			},
 			onClick_bodyitem($itemId)
 			{
-				trace('$item', $itemId);
+				this.onClick_userItem($itemId);
 			},
 			onClick_searchBtn(){
 				this.searchObj.page = 1;
@@ -267,7 +267,7 @@
 				{
 					this.searchObj.page = $page;
 				}
-				if ($pageSize!=this.searchObj.pageSize)
+				if ($pageSize != this.searchObj.pageSize)
 				{
 					this.searchObj.pageSize = $pageSize;
 					this.searchObj.page = 1;
@@ -281,7 +281,6 @@
 				this.searchObj[this.currentType] = this.inputContent;
 				getUserList(this.searchObj).then(() =>
 				{
-					debugger;
 					this.initList();
 					g.ui.hideLoading();
 				});
@@ -318,21 +317,22 @@
 				this.isShow_dropList = false;
 
 			},
-			onClick_sortBtn($field){
-				if (this.searchObj.sortOrder == "desc")
+			onClick_sortBtn($item){
+				if ($item.sortBy)
 				{
-					this.searchObj.sortOrder = "asc"
+					if ($item.sortBy == "desc")
+					{
+						this.searchObj.sortOrder = "asc"
+					}
+					else
+					{
+						this.searchObj.sortOrder = "desc"
+					}
+					this.searchObj.page = 1;
+					this.searchObj.sortField = $item.params;
+					this.onUpdate_userList();
 				}
-				else
-				{
-					this.searchObj.sortOrder = "desc"
-				}
-				this.searchObj.page = 1;
-				this.searchObj.sortField = $field;
-				this.onUpdate_userList();
-
 			},
-
 			onClick_showCalendar(str){
 				if (str == 'start')
 				{
@@ -392,34 +392,35 @@
 				this.freezeCount = Number(this.freezeCount) + Number($refundCount);
 				this.onChange_searchItem(1)
 			},
-			onConfirm_operation($type){
-				if ($type == 1)
-				{
-					return "冻结"
-				}
-				else
-				{
-					return "解冻"
-				}
-			},
-			onClick_userItem($type, $id){
-				g.url = ("/userdetail?id=" + $id)
-			},
-			onClick_lookItem($id){
+//			onConfirm_operation($type){
+//				if ($type == 1)
+//				{
+//					return "冻结"
+//				}
+//				else
+//				{
+//					return "解冻"
+//				}
+//			},
+			onClick_userItem($id){
 				g.url = ("/userdetail?id=" + $id)
 			},
 			onClick_exportBtn(){
 			},
-			onClick_userItem($id){
-				g.url = ("/userdetail?id=" + $id)
+//			onClick_lookItem($id){
+//				g.url = ("/userdetail?id=" + $id)
+//			},
 
-			}
+//			onClick_userItem($id){
+//				g.url = ("/userdetail?id=" + $id)
+//
+//			}
 
 		}
 	}
 </script>
 
-<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
+<style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common.scss";
 	@import "../css/myBill.scss";
 

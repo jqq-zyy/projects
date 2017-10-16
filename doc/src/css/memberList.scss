@@ -1,0 +1,39 @@
+
+.member-list-table {
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 20px 15px;
+  .col-6 {
+	width: 50%;
+
+	padding: 0 15px;
+	float: left;
+	.panel{
+	  margin-bottom: 20px;
+	  .panel-heading{
+		text-align: center;
+		height: 40px;
+		line-height: 40px;
+	  }
+	  .panel-body{
+		padding: 15px;
+		height: auto;
+		.flot-chat{
+		  height: 300px;
+		  width: 500px;
+		  margin: auto;
+		}
+	  }
+	}
+  }
+}
+.panel-border{
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.heading-border{
+  border-bottom: 1px solid #efefef;
+  background: #fcfcfc;
+}
+

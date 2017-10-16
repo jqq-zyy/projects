@@ -17,8 +17,8 @@
 									<ul>
 										<li>状态：</li>
 										<li class="type-item pointer" v-for="(item,index) in statusList"
-											 @click="onClick_changeType(index)"
-											 :class="{'acticity-process':isCurrentType(index)}">
+											@click="onClick_changeType(index)"
+											:class="{'acticity-process':isCurrentType(index)}">
 											{{item}}
 										</li>
 									</ul>
@@ -32,7 +32,8 @@
 													   v-model="date.startTimeStr"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('start')">
-												<hw-date type="date" skin="simple" @change="onClick_chooseDateStart" v-model="isShowStartTime"></hw-date>
+												<hw-date type="date" skin="simple" @change="onClick_chooseDateStart"
+														 v-model="isShowStartTime"></hw-date>
 											</div>
 										</div>
 										<span class="goto">至</span>
@@ -41,7 +42,8 @@
 												<input type="text" class="endTime date-input pointer"
 													   v-model="date.endTimeStr"
 													   readonly="true" @click.stop="onClick_showCalendar('end')">
-												<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd" v-model="isShowEndTime"></hw-date>
+												<hw-date type="date" skin="simple" @change="onClick_chooseDateEnd"
+														 v-model="isShowEndTime"></hw-date>
 											</div>
 
 										</div>
@@ -58,108 +60,38 @@
 										</ul>
 									</div>
 									<input type="text" v-model="inputContent" class="search-input">
-									<span class="btn pointer search-btn border-btn hb-fill-middle2-bg" @click="onClick_searchBtn">查找</span>
+									<span class="btn pointer search-btn border-btn hb-fill-middle2-bg"
+										  @click="onClick_searchBtn">查找</span>
 								</div>
 							</div>
 							<div class="all-out">
-								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right" @click="onClick_exportBtn">导出全部</div>
+								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right"
+									 @click="onClick_exportBtn">导出全部
+								</div>
 							</div>
-							<div class="admin-calendar-table">
 
-								<table>
-									<thead>
-									<tr>
-										<th class="first-col">流水ID</th>
-										<th class="s-col" @click="onClick_sortBtn('received_amount')">流水类型
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'received_amount'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('received_amount')" class="pointer m-width">金额
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'received_amount'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('activity_start_time')" class="pointer m-width">
+							<hw-table :tableData="tableData"
+									  :boxWidth="boxWidth"
+									  :boxHeight="boxHeight"
+									  :headerHeight="headerHeight"
+									  :bodyHeight="bodyHeight"
+									  :footerHeight="footerHeight"
+									  :fixHeader="true"
+									  :leftFixedCols="9"
+									  :eachRowHeight="eachRowHeight"
+									  :eachColWidth="boxWidth/9.01"
 
-											<div>
-												支付方式
-
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'activity_start_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-											</div>
-										</th>
-										<th class="pointer m-width">
-											<div>
-												状态
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'activity_end_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-											</div>
-										</th>
-										<th class="pointer m-width">
-											<div>
-												发起人
-											</div>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<div>
-												发起时间
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'create_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-
-											</div>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<div>
-												企业全称
-												<common-sort :type="dataObj.sortOrder"
-															 :target="'create_time'"
-															 :currentField="dataObj.sortField"
-												></common-sort>
-
-											</div>
-										</th>
-										<th class="activity-last-col">{{g.lang("操作")}}</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr v-for="item in bagList">
-										<td>{{item.id}}</td>
-										<td>{{item.orderTypeDesc}}</td>
-										<td>{{item.orderAmount}}</td>
-										<td>{{item.payWayDesc}}</td>
-										<td>{{item.orderStatusDesc}}</td>
-										<td>{{item.applyUserLogon}}</td>
-										<td>{{item.createTime}}</td>
-										<td>{{item.companyFullName}}</td>
-										<td>
-												<span class ="blue_underline pointer"@click="onClick_qrcodeItem(item.id)"
-													  v-show="item.orderStatus==1">审核
-												</span>
-										</td>
-
-									</tr>
-									</tbody>
-									<tfoot>
-									<tr v-show="bagList.length>0">
-										<td colspan="2"></td>
-										<td>{{rpAmount}}</td>
-										<td colspan="6"></td>
-									</tr>
-									</tfoot>
-								</table>
-							</div>
+									  :isShowIdCol="true"
+									  @clickBtn="onClick_btn"
+									  @clickHead="onClick_headItem">
+								<div class="relative middle bgc-ff">
+									<p v-show="g.data.bagPool.list.length==0" class="absolute no-record"
+									   :style="{left:boxWidth/2+'px'}">
+										暂无记录...</p>
+								</div>
+							</hw-table>
 							<common-page :index="dataObj.page" :total="totalPage"
 										 @change="onChange_currentPage" v-show="bagList.length>=1"></common-page>
-							<common-prompt v-show="bagList.length==0"></common-prompt>
 						</div>
 						<common-footer></common-footer>
 					</div>
@@ -173,22 +105,25 @@
 								 @click="onClick_closeBtn"/>
 						</div>
 						<div class="pop-tit"></div>
-						<div class="pop-body button-box">						<div :class="['m-margin-top',auditStatus==-1?'':'text-center']">审核退款申请：
+						<div class="pop-body button-box">
+							<div :class="['m-margin-top',auditStatus==-1?'':'text-center']">审核退款申请：
 								<label class="label-left">
-									<input type="radio" class="refuse-check"v-model="auditStatus" value="2">通过申请</label>
+									<input type="radio" class="refuse-check" v-model="auditStatus"
+										   value="2">通过申请</label>
 								<label class="label-right">
-									<input type="radio" class="refuse-check"v-model="auditStatus" value="-1">拒绝申请</label>
+									<input type="radio" class="refuse-check" v-model="auditStatus"
+										   value="-1">拒绝申请</label>
 							</div>
 							<div class="m-title" v-show="auditStatus==-1"><span class="">请输入拒绝原因：</span>
 								<textarea name="" id="" cols="30" rows="10" class="describle-reasons"
 										  v-model="refuseContent" @focus="onFocus_refuseInput"></textarea>
 								<div v-show="isShow_hasError">拒绝原因不能为空</div>
 							</div>
-							<div class="button-box m-margin-up"   v-show="auditStatus==-1">
+							<div class="button-box m-margin-up" v-show="auditStatus==-1">
 								<div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不拒绝</div>
 								<div class="refuse-button pointer bg-btn" @click="onClick_sumbitBtn">确认拒绝并告知商户</div>
 							</div>
-							<div class=" button-box m-margin-up"   v-show="auditStatus==2">
+							<div class=" button-box m-margin-up" v-show="auditStatus==2">
 								<div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不通过</div>
 								<div class="refuse-button pointer bg-btn" @click="onClick_sumbitBtn">确认通过并告知商户</div>
 							</div>
@@ -198,10 +133,12 @@
 			</transition>
 		</div>
 	</main-layout>
+
 </template>
 
 <script type="text/ecmascript-6">
 	import g from '../global';
+	import {getUserList, convertList, getFooterList} from './userList';
 	import MainLayout from './common/mainLayout.vue';
 	import CommonNav from './common/CommonNav.vue';
 	import CommonTopNav from './common/CommonTopNav.vue';
@@ -221,10 +158,10 @@
 				isShowStartTime: false,
 				isShowEndTime: false,
 				isShow_hasError: false,
-				isShow_refusePop:false,
+				isShow_refusePop: false,
 				g: g,
 				totalPage: 1,
-				statusList: ["全部", "未付款","付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
+				statusList: ["全部", "未付款", "付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
 				bagList: [],
 				currentType: "",
 				inputContent: "",
@@ -249,10 +186,16 @@
 					}
 				],
 				rpAmount: 0,
-				currentId:0,
+				currentId: 0,
 				auditStatus: 2,
-				refuseContent: ""
-
+				refuseContent: "",
+				tableData: {},
+				boxWidth: window.innerWidth * 0.81,
+				eachRowHeight: 60,
+				headerHeight: 60,
+				footerHeight: 60,
+				boxHeight: 610,
+				bodyHeight: 420
 			}
 		},
 		components: {
@@ -285,8 +228,15 @@
 			initData(){
 				var info = g.data.bagPool;
 				this.totalPage = info.totalPage;
-				this.bagList = info.list;
-				this.rpAmount = info.rpAmount;
+				var obj = {};
+				obj.header = g.data.staticTableHeaderPool.list.concat();
+				obj.body = convertList(g.data.bagPool.list, g.data.staticTableHeaderPool.list, "account");
+				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.bagPool);
+				this.tableData = obj;
+				trace("this.tableDat====", this.tableData);
+
+//				this.bagList = info.list;
+//				this.rpAmount = info.rpAmount;
 
 			},
 			initSearchData(){
@@ -306,9 +256,22 @@
 				this.date.startTimeStr = g.timeTool.getDate(this.date.startTime, true);
 				this.date.endTimeStr = g.timeTool.getDate(this.date.endTime, true);
 			},
+			onClick_btn($btnId, $itemId)
+			{
+				this.onClick_qrcodeItem($itemId);
+			},
+			onClick_headItem($item)
+			{
+				this.onClick_sortBtn($item);
+			},
+			onClick_bodyitem($itemId)
+			{
+				trace('$item', $itemId);
+			},
 			onChange_currentPage($page, $pageSize){
 				this.dataObj.page = $page;
-				if($pageSize!=this.dataObj.pageSize){
+				if ($pageSize != this.dataObj.pageSize)
+				{
 					this.dataObj.pageSize = $pageSize;
 					this.dataObj.page = 1
 				}
@@ -384,8 +347,12 @@
 			onClick_searchBtn(){
 				this.onUpdate_qrcodeList()
 			},
-			onClick_sortBtn($field){
-				if (this.dataObj.sortOrder == "desc")
+			onClick_sortBtn($item){
+				if (!$item.sortBy)
+				{
+					return;
+				}
+				if ($item.sortBy == "desc")
 				{
 					this.dataObj.sortOrder = "asc"
 				}
@@ -394,7 +361,7 @@
 					this.dataObj.sortOrder = "desc"
 				}
 				this.dataObj.page = 1;
-				this.dataObj.sortField = $field;
+				this.dataObj.sortField = $item.params;
 				this.onUpdate_qrcodeList();
 			},
 			onClick_dropList(){
@@ -466,7 +433,6 @@
 				this.isShowEndTime = false;
 			},
 
-
 			onClick_qrcodeItem($id){
 				this.isShow_refusePop = true;
 				this.currentId = $id;
@@ -483,8 +449,8 @@
 			updateOrderAuth(){
 				g.net.call("order/updateOrderRefundAudit", {
 					"orderId": this.currentId,
-					"auditStatus":this.auditStatus,
-					"remark":this.refuseContent
+					"auditStatus": this.auditStatus,
+					"remark": this.refuseContent
 				}).then(($data) =>
 				{
 					this.isShow_refusePop = false;

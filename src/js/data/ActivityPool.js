@@ -114,11 +114,8 @@ function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
-	d.shopId = 0;
 	d.activityName = '';
-	d.companyName = '';
 	d.brandName = '';
-	d.activityStatus = 0;
 	d.activityStatusDesc = 0;
 	d.createTime = "";
 	d.startTime = "";
@@ -129,6 +126,10 @@ function createData($dObj)
 	d.totalScanCount = 0;
 	d.useRpAmount = 0;
 	d.useRpAmountDesc = 0;
+	d.platformRpReceiveAmount= 0;
+	d.activityStatus = 0;
+	d.shopId = 0;
+	d.companyName = '';
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -151,5 +152,6 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('useRpAmountDesc') && (this.useRpAmountDesc = $dObj.useRpAmountDesc);
 	$dObj.hasOwnProperty('activityStartTimeDesc') && (this.startTime = $dObj.activityStartTimeDesc);
 	$dObj.hasOwnProperty('activityEndTimeDesc') && (this.endTime = $dObj.activityEndTimeDesc);
+	$dObj.hasOwnProperty('platformRpReceiveAmount') && (this.platformRpReceiveAmount = $dObj.platformRpReceiveAmount);
 
 }

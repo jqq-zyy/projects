@@ -1,0 +1,67 @@
+[
+  {
+	"name": "活动Id",
+	"id": "id",
+	"showIdCol": "no"
+  },
+  {
+	"name": "活动名称",
+	"id": "activityName"
+  },
+  {
+	"name": "品牌名称",
+	"id": "brandName"
+  },
+  {
+	"name": "状态",
+	"id": "activityStatusDesc",
+	"sortBy": "desc",
+	"params": "activity_status"
+  },
+  {
+	"name": "创建时间",
+	"id": "createTime",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "开始日期",
+	"id": "startTime",
+	"sortBy": "desc",
+	"params": "start_time"
+  },
+  {
+	"name": "结束日期",
+	"id": "endTime",
+	"sortBy": "desc",
+	"params": "end_time"
+  },
+  {
+	"name": "绑定二维码数",
+	"id": "qrCodeNum",
+	"sortBy": "desc",
+	"params": "qrCodeNum",
+	"calTotal": "totalQrCodeNum"
+  },
+  {
+	"name": "累计扫码数",
+	"id": "totalScanCount",
+	"sortBy": "desc",
+	"params": "create_time",
+	"calTotal": "totalScanCount"
+  },
+  {
+	"name": "红包领取金额",
+	"id": "useRpAmount",
+	"sortBy": "desc",
+	"params": "create_time",
+	"calTotal": "totalUseRpAmount"
+  },
+  {
+	"name": "平台红包领取金额",
+	"id": "platformRpReceiveAmount",
+	"sortBy": "desc",
+	"params": "create_time",
+	"calTotal": "totalUseRpAmountDesc"
+  }
+]
