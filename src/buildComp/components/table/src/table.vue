@@ -152,7 +152,6 @@
 	</div>
 </template>
 
-
 <script type="text/ecmascript-6">
 	let flag = true, _lastTop = 0, _lastLeft = 0;
 	export default{
@@ -544,30 +543,30 @@
 	}
 
 	.header {
-		z-index: 10;
+		z-index: 2;
 		/*box-shadow: 0px 3px 3px #999999;*/
 	}
 
 	.body {
-		z-index: 5;
+		z-index: 0;
 	}
 
 	.left-table-body,
 	.left-header {
-		z-index: 9;
+		z-index: 1;
 		box-shadow: 1px 0 0 #999999;
 		/*background-color: #ffff00 !important;*/
 	}
 
 	.right-table-body,
 	.right-header {
-		z-index: 9;
+		z-index: 1;
 		box-shadow: -1px 0 0 #999999;
 		/*background-color: #ff3300 !important;*/
 	}
 
 	.middle-header {
-		z-index: 8;
+		z-index: -1;
 	}
 
 	.middle-table-body {

@@ -86,8 +86,8 @@
 			onClick_logonBtn(){
 				if (g.core.onMode("testData"))
 				{
-					this.logonObj.logon = "admin";
-					this.pwd = "1qaz2wsx";
+					// this.logonObj.logon = "admin";
+					// this.pwd = "1qaz2wsx";
 				}
 				if (this.logonObj.logon == "" || this.pwd == "")
 				{
@@ -95,6 +95,12 @@
 				}
 
 				this.onConfirm_login()
+
+
+
+
+
+
 			},
 			onConfirm_login(){
 				this.logonObj.password = sha256(this.pwd);

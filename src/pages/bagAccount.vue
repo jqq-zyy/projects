@@ -66,7 +66,7 @@
 							</div>
 							<div class="all-out">
 								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right"
-									 @click="onClick_exportBtn">导出全部
+									 @click="onClick_exportAllBtn">导出全部
 								</div>
 							</div>
 
@@ -117,16 +117,20 @@
 							<div class="m-title" v-show="auditStatus==-1"><span class="">请输入拒绝原因：</span>
 								<textarea name="" id="" cols="30" rows="10" class="describle-reasons"
 										  v-model="refuseContent" @focus="onFocus_refuseInput"></textarea>
-								<div v-show="isShow_hasError">拒绝原因不能为空</div>
+								<div class="err-msg" v-text="errMsg"></div>
 							</div>
-							<div class="button-box m-margin-up" v-show="auditStatus==-1">
+							<div class="button-box m-margin-up" v-show="auditStatus==-1" style="margin-top: 0">
 								<div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不拒绝</div>
 								<div class="refuse-button pointer bg-btn" @click="onClick_sumbitBtn">确认拒绝并告知商户</div>
 							</div>
-							<div class=" button-box m-margin-up" v-show="auditStatus==2">
+							<div class=" button-box m-margin-up" v-show="auditStatus==2" style="margin-top: 40px">
 								<div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不通过</div>
 								<div class="refuse-button pointer bg-btn" @click="onClick_sumbitBtn">确认通过并告知商户</div>
 							</div>
+
+
+
+
 						</div>
 					</div>
 				</div>
@@ -157,7 +161,6 @@
 				isShow_dropList: false,
 				isShowStartTime: false,
 				isShowEndTime: false,
-				isShow_hasError: false,
 				isShow_refusePop: false,
 				g: g,
 				totalPage: 1,
@@ -165,6 +168,7 @@
 				bagList: [],
 				currentType: "",
 				inputContent: "",
+				errMsg: "",
 				date: {
 					startTime: 0,
 					startTimeStr: "",
@@ -220,24 +224,27 @@
 		},
 		methods: {
 			init(){
-				this.initDate();
+				if( !g.data.messagePool.orderId){
+					this.initDate();
+				}else{
+					this.currentType = 'orderId';
+					this.inputContent =g.data.messagePool.orderId;
+					g.data.messagePool.update({'orderId':""});
+				}
+
 				this.initData();
 				this.initSearchData();
 
 			},
 			initData(){
 				var info = g.data.bagPool;
+				this.bagList = info.list;
 				this.totalPage = info.totalPage;
 				var obj = {};
 				obj.header = g.data.staticTableHeaderPool.list.concat();
 				obj.body = convertList(g.data.bagPool.list, g.data.staticTableHeaderPool.list, "account");
 				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.bagPool);
 				this.tableData = obj;
-				trace("this.tableDat====", this.tableData);
-
-//				this.bagList = info.list;
-//				this.rpAmount = info.rpAmount;
-
 			},
 			initSearchData(){
 				this.dataObj = {
@@ -249,6 +256,11 @@
 					sortField: "create_time",
 					sortOrder: "desc"
 				}
+			},
+			initRefundObj(){
+				this.auditStatus = 2;
+				this.refuseContent = "";
+				this.errMsg = "";
 			},
 			initDate(){
 				this.date.startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
@@ -345,6 +357,7 @@
 				this.onUpdate_qrcodeList()
 			},
 			onClick_searchBtn(){
+				this.dataObj.page = 1;
 				this.onUpdate_qrcodeList()
 			},
 			onClick_sortBtn($item){
@@ -376,6 +389,7 @@
 			},
 			onClick_closeBtn(){
 				this.isShow_refusePop = false;
+				this.initRefundObj();
 			},
 			isCurrentType($type){
 				if (this.activityStatusList.indexOf($type) > -1)
@@ -441,7 +455,7 @@
 			onClick_sumbitBtn(){
 				if (this.refuseContent.trim() == "")
 				{
-					this.isShow_hasError = true;
+					this.errMsg = "拒绝原因不能为空";
 					return
 				}
 				this.updateOrderAuth();
@@ -453,8 +467,8 @@
 					"remark": this.refuseContent
 				}).then(($data) =>
 				{
-					this.isShow_refusePop = false;
 					this.onUpdate_qrcodeList();
+					this.initRefundObj();
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -463,10 +477,25 @@
 			onFocus_refuseInput(){
 				this.isShow_hasError = false;
 			},
-			onClick_exportBtn(){
-
+			onClick_exportAllBtn(){
+				window.open(g.webParam.url.server
+						+ "/export/exportRpAccountTradeList?page=0&pageSize=0&startTime="
+						+ this.date.startTimeStr
+						+ "&endTime=" + this.date.endTimeStr
+						+ "&sortField=" + this.dataObj.sortField
+						+ "&sortOrder=" + this.dataObj.sortOrder
+						+ "&queryStatus=" + this.dataObj.queryStatus
+						+ "&" + this.currentType + "=" + this.inputContent
+				)
+				trace(g.webParam.url.server
+						+ "/export/exportRpAccountTradeList?page=0&pageSize=0&startTime="
+						+ this.date.startTimeStr
+						+ "&endTime=" + this.date.endTimeStr
+						+ "&sortField=" + this.dataObj.sortField
+						+ "&sortOrder=" + this.dataObj.sortOrder
+						+ "&queryStatus=" + this.dataObj.queryStatus
+						+ "&" + this.currentType + "=" + this.inputContent)
 			}
-
 		}
 
 	}
@@ -480,6 +509,12 @@
 	.my-activity .me-checkbox-core {
 		margin-left: 10px;
 		margin-right: 10px;
+	}
+	.err-msg{
+		color:red;
+		padding-left:120px;
+		height:40px;
+
 	}
 </style>
 

@@ -1,8 +1,11 @@
 <template>
     <div class="affix-box default-pos-type" v-show="isShow_addPop">
         <div class="img-box">
-            <div :style="{backgroundImage:'url('+imageUrl+')'}" class="img-url">
+            <div class="img-bottom-box">
+                <div :style="{backgroundImage:'url('+imageUrl+')'}" class="img-url">
+                </div>
             </div>
+
             <div class="show-close-btn">
                 <img :src="g.config.path.images+'/close.png'"
                      @click="onClick_closeBtn"/>
@@ -47,7 +50,12 @@
         background-repeat:no-repeat;
         background-position:center;
     }
-
+    .img-bottom-box{
+        width:90%;
+        height:90%;
+        margin:auto;
+        margin-top:5%;
+    }
 </style>
 
 

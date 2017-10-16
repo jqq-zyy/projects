@@ -17,9 +17,10 @@ var WEB_CONFIG = {
 		domain: "",
 		server: "http://test.service.xq.mms.yundingdang.com/rp-mms-web-admin",
 		socket: "http://test.service.xq.mms.yundingdang.com/rp-mms-web-admin/message",
-		// server: "http://192.168.12.4:8085/rp-mms-web-admin",
+		//server: "http://192.168.12.4:8085/rp-mms-web-admin",
 		// socket: "http://192.168.12.4:8085/rp-mms-web-admin",
 		//server: "http://192.168.12.4:8084/mms-web",
+
 		//server: "",
 		adminPage: ""
 		
@@ -51,7 +52,7 @@ var WEB_CONFIG = {
 	},
 
 	file: {
-		staticData: "{$data}/staticData_1716387665014939.data",
+		staticData: "{$data}/staticData_502808367563328.data",
 
 	},
 

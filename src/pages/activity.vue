@@ -36,8 +36,8 @@
 													   v-model="dataObj.activitySQueryBeginTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_SQueryBeginTime')">
-												<span class="date-del"
-													  @click.stop="onClick_resetTime('activitySQueryBeginTime')">X</span>
+												<img class="date-del" :src="g.config.path.images+'/close2.png'"
+													  @click.stop="onClick_resetTime('activitySQueryBeginTime')">
 												<hw-date type="date" skin="simple"
 														 @change="onClick_chooseSQueryBeginTime"
 														 v-model="isShow_dataObj.isShow_SQueryBeginTime"></hw-date>
@@ -50,8 +50,8 @@
 													   v-model="dataObj.activitySQueryEndTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_SQueryEndTime')">
-												<span class="date-del"
-													  @click.stop="onClick_resetTime('activitySQueryEndTime')">X</span>
+												<img class="date-del" :src="g.config.path.images+'/close2.png'"
+													  @click.stop="onClick_resetTime('activitySQueryEndTime')">
 												<hw-date type="date" skin="simple" @change="onClick_chooseSQueryEndTime"
 														 v-model="isShow_dataObj.isShow_SQueryEndTime"></hw-date>
 											</div>
@@ -65,8 +65,8 @@
 													   v-model="dataObj.activityEQueryStartTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_EQueryStartTime')">
-												<span class="date-del"
-													  @click.stop="onClick_resetTime('activityEQueryStartTime')">X</span>
+												<img class="date-del" :src="g.config.path.images+'/close2.png'"
+													  @click.stop="onClick_resetTime('activityEQueryStartTime')">
 												<hw-date type="date" skin="simple"
 														 @change="onClick_chooseEQueryStartTime"
 														 v-model="isShow_dataObj.isShow_EQueryStartTime"></hw-date>
@@ -79,8 +79,8 @@
 													   v-model="dataObj.activityEQueryEndTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_EQueryEndTime')">
-												<span class="date-del"
-													  @click.stop="onClick_resetTime('activityEQueryEndTime')">X</span>
+												<img class="date-del" :src="g.config.path.images+'/close2.png'"
+													  @click.stop="onClick_resetTime('activityEQueryEndTime')">
 												<hw-date type="date" skin="simple" @change="onClick_chooseEQueryEndTime"
 														 v-model="isShow_dataObj.isShow_EQueryEndTime"></hw-date>
 											</div>
@@ -239,28 +239,19 @@
 
 				var info = g.data.activityPool;
 				this.totalPage = info.totalPage;
+				this.activityList = info.list;
 				var obj = {};
 				obj.header = g.data.staticTableHeaderPool.list.concat();
 				obj.body = convertList(g.data.activityPool.list, g.data.staticTableHeaderPool.list);
 				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.activityPool);
 				this.tableData = obj;
-				trace("this.tableData===", this.tableData)
-//				this.activityList = info.list;
-//				this.statusList = g.data.activityStatusPool.list;
-//				this.resultTotalObj.totalQrCodeNum = info.totalQrCodeNum;
-//				this.resultTotalObj.totalScanCount = info.totalScanCount;
-//				this.resultTotalObj.RpAmount = info.totalUseRpAmount;
-//				this.resultTotalObj.platformAmount = info.totalUseRpAmountDesc;
+				this.statusList = g.data.activityStatusPool.list;
 			},
 			initDate(){
 				this.dataObj.activitySQueryBeginTime = g.timeTool.getDate(this.dataObj.activitySQueryBeginTime, true);
 				this.dataObj.activitySQueryEndTime = this.dataObj.activitySQueryBeginTime;
 				this.dataObj.activityEQueryStartTime = this.dataObj.activitySQueryBeginTime;
 				this.dataObj.activityEQueryEndTime = this.dataObj.activitySQueryBeginTime;
-				// this.activitySQueryBeginTime = g.timeTool.getDate(this.dataObj.activitySQueryBeginTime, true);
-				// this.activitySQueryEndTime = this.activitySQueryBeginTime;
-				// this.activityEQueryStartTime = this.activitySQueryBeginTime;
-				// this.activityEQueryEndTime = this.activitySQueryBeginTime;
 			},
 			initSearchData(){
 				this.dataObj = {
@@ -356,6 +347,7 @@
 				this.onUpdate_activityList()
 			},
 			onClick_searchBtn(){
+				this.dataObj.page = 1;
 				this.onUpdate_activityList()
 			},
 			onUpdate_allData(){

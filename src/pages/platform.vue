@@ -79,8 +79,8 @@
                                 </div>
                             </div>
                             <div class="all-out">
-                                <div @click="onClick_exportBtn"
-                                     class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right">导出全部
+                                <div
+                                     class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right" @click="onClick_exportAllBtn">导出全部
                                 </div>
                                 <div @click="onClick_addBtn"
                                      class=" pointer all-out-btn border-btn hb-fill-middle2-bg float-right"
@@ -271,7 +271,7 @@
                     'beginTimeEnd': '',
                     'page': 1,
                     'pageSize': g.param.pageSizeList[0],
-                    'sortField': "",
+                    'sortField': "create_time",
                     'sortOrder': "desc"
                 }
             },
@@ -372,7 +372,8 @@
                 return false
             },
             onClick_searchBtn(){
-                this.onUpdate_bagList()
+                this.dataObj.page = 1;
+                this.onUpdate_bagList();
             },
             onClick_sortBtn($field){
                 if (this.dataObj.sortOrder == "desc") {
@@ -394,8 +395,26 @@
                 }
             },
 
-            onClick_exportBtn(){
-
+            onClick_exportAllBtn(){
+                window.open(g.webParam.url.server
+                        +"/export/exportPlatformAccountList?page=0&pageSize=0&beginTimeStart="
+                        + this.date.startTimeStr
+                        + "&beginTimeEnd="+this.date.endTimeStr
+                        +"&sortField="+this.dataObj.sortField
+                        +"&sortOrder="+this.dataObj.sortOrder
+                        +"&orderStatus="+this.dataObj.orderStatus
+                        +"&orderTypes="+this.dataObj.orderTypes
+                        +"&"+this.currentType+"="+this.inputContent
+                )
+                trace(g.webParam.url.server
+                        +"/export/exportPlatformAccountList?page=0&pageSize=0&beginTimeStart="
+                        + this.date.startTimeStr
+                        + "&beginTimeEnd="+this.date.endTimeStr
+                        +"&sortField="+this.dataObj.sortField
+                        +"&sortOrder="+this.dataObj.sortOrder
+                        +"&orderStatus="+this.dataObj.orderStatus
+                        +"&orderTypes="+this.dataObj.orderTypes
+                        +"&"+this.currentType+"="+this.inputContent)
             },
             onClick_showCalendar(str){
                 if (str == 'start') {

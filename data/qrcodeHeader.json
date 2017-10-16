@@ -7,45 +7,43 @@
 	"name": "流水类型",
 	"id": "orderTypeDesc",
 	"sortBy": "desc",
-	"params": "create_time"
+	"params": "order_type"
   },
   {
 	"name": "二维码数",
 	"id": "qrcodeRefundNum",
 	"sortBy": "desc",
-	"params": "create_time",
+	"params": "qrcode_count",
 	"calTotal":"qrcodeNum"
   },
   {
 	"name": "单价",
 	"id": "refundUnitPrice",
 	"sortBy": "desc",
-	"params": "create_time"
+	"params": "unit_price"
   },
   {
 	"name": "金额",
 	"id": "orderAmount",
 	"sortBy": "desc",
-	"params": "create_time",
+	"params": "order_total_amount",
 	"calTotal":"qrcodeAmount"
   },
   {
 	"name": "支付方式",
 	"id": "payWayDesc",
 	"sortBy": "desc",
-	"params": "create_time"
+	"params": "pay_way"
   },
   {
 	"name": "状态",
 	"id": "orderStatusDesc",
 	"sortBy": "desc",
-	"params": "create_time"
+	"params": "order_status"
   },
   {
 	"name": "发起人",
-	"id": "applyUserLogon",
-	"sortBy": "desc",
-	"params": "create_time"
+	"id": "applyUserLogon"
   },
   {
 	"name": "发起时间",
@@ -57,7 +55,7 @@
 	"name": "企业全称",
 	"id": "companyFullName",
 	"sortBy": "desc",
-	"params": "create_time"
+	"params": "company_full_name"
   },
   {
 	"name": "操作",
