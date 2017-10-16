@@ -112,7 +112,6 @@
 										</th>
 										<th class="pointer m-width">
 											<span>|</span>用户
-
 										</th>
 										<th @click="onClick_sortBtn('create_time')">
 											<span>|</span>
