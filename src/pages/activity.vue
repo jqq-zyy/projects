@@ -122,8 +122,10 @@
 									  :eachColWidth="boxWidth/10"
 									  :isShowTotal="true"
 									  @clickHead="onClick_headItem"
-									  @clickBody="onClick_bodyItem">
-								<div class="relative middle bgc-ff">
+									  @clickBody="onClick_bodyItem"
+									  lightColsList="[1]">
+
+								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
 
 									<p v-show="g.data.activityPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">
