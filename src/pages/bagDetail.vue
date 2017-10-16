@@ -93,7 +93,7 @@
 									  :isShowTotal="true"
 									  @clickHead="onClick_headItem"
 							>
-								<div class="relative middle bgc-ff">
+								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
 									<p v-show="g.data.bagDetailPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">
 										暂无记录...</p>

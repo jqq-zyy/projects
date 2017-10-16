@@ -97,8 +97,10 @@
 									  :isShowTotal="true"
 									  @clickBtn="onClick_btn"
 									  @clickHead="onClick_headItem"
-									  @clickBody="onClick_bodyitem">
-								<div class="relative middle bgc-ff">
+									  @clickBody="onClick_bodyitem"
+									  lightColsList="[0]">
+
+								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
 									<p v-show="g.data.userPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">
 										暂无记录...</p>

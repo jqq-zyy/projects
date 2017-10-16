@@ -84,7 +84,7 @@
 									  :isShowIdCol="true"
 									  @clickBtn="onClick_btn"
 									  @clickHead="onClick_headItem">
-								<div class="relative middle bgc-ff">
+								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
 									<p v-show="g.data.bagPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">
 										暂无记录...</p>
