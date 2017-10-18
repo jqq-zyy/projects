@@ -8,7 +8,7 @@
 					<div class="admin-data-items">
 						<div class="right-body personal-box">
 							<div class="g-title"><span>平台财务流水</span>/新建平台流水</div>
-							<div class="admin-calendar-table" style="background: #ffffff">
+							<div class="admin-calendar-table">
 								<div class="base-info">基本信息</div>
 								<div class="base-master">
 									<p>发起人: </p>
@@ -41,8 +41,8 @@
 									<input type="text" placeholder="支付宝账号" v-model="paramObj.targetAccount">
 								</div>
 								<div class="base-operate">
-									<div class="button hb-fill-middle2-bg" @click="onClick_resetBtn">取消</div>
-									<div class="button hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
+									<div class="button border-btn hb-fill-middle2-bg" @click="onClick_resetBtn">取消</div>
+									<div class="button bg-btn hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
 								</div>
 
 							</div>

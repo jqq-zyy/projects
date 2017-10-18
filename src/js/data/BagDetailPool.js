@@ -91,17 +91,18 @@ function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
+	d.orderType="";
 	d.shopAmount = 0;
 	d.platformAmount = 0;
-	d.status = 0;
 	d.statusDesc = "";
 	d.alipayAccount = "";
 	d.mobileType = "";
 	d.cityName = "";
 	d.createTime = "";
 	d.activityName = "";
-	d.companyFullName = "";
 	d.rpBrand = "";
+	d.companyFullName = "";
+	d.status = 0;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;

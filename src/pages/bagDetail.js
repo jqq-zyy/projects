@@ -2,6 +2,7 @@
  * Created by billy on 2017/3/13.
  */
 import g from '../global';
+import {updateData} from "./userList";
 export default function (to, next)
 {
 	g.ui.showLoading();
@@ -17,6 +18,7 @@ export default function (to, next)
 	}).then(($data) =>
 	{
 		g.ui.hideLoading();
+		updateData("bagDetailHeader");
 		g.data.bagDetailPool.removeAll();
 		g.data.bagDetailPool.update($data);
 		next();

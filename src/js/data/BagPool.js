@@ -84,17 +84,17 @@ function createData($dObj)
 {
 	var d = {};
 	d.id = 0;
-	d.shopId = 0;
-	d.orderType = 0;
 	d.orderTypeDesc = "";
 	d.orderAmount = 0;
-	d.payWay = 0;
 	d.payWayDesc = "";
-	d.orderStatus = 0;
 	d.orderStatusDesc = "";
+	d.applyUserLogon = "";
 	d.createTime = "";
 	d.companyFullName = "";
-	d.applyUserLogon = "";
+	d.payWay = 0;
+	d.orderStatus = 0;
+	d.orderType = 0;
+	d.shopId = 0;
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;

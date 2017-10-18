@@ -294,6 +294,7 @@
 					"auditRecordId":this.infoObj.auditRecordId
 				}).then(($data) =>
 				{
+					this.isShow_refusePop = false;
 					queryShopDetail(this.shopId,this.init)
 				}, (err) =>
 				{

@@ -84,6 +84,11 @@
 				this.loginErrMsg = '';
 			},
 			onClick_logonBtn(){
+				if (g.core.onMode("testData"))
+				{
+					this.logonObj.logon = "admin";
+					this.pwd = "1qaz2wsx";
+				}
 				if (this.logonObj.logon == "" || this.pwd == "")
 				{
 					return
@@ -97,9 +102,9 @@
 				g.net.call("user/adminLogin", this.logonObj).then(($data) =>
 				{
 					this.onSave_userInfo($data);
-					socketManager.connectSocket();
-
+//					socketManager.connectSocket();
 					g.data.save("loginTime", g.timeTool.getNowStamp());
+					g.event.dispatchEvent("APP_IS_LOGIN");
 				}, (err) =>
 				{
 					g.func.dealErr(err);
@@ -113,7 +118,7 @@
 				obj.telphone = $data.telphone;
 				g.data.save("userInfo", obj);
 				//g.func.getUnreadMsg('login');
-				g.event.dispatchEvent("APP_IS_LOGIN");
+				g.event.dispatchEvent("+");
 
 			},
 

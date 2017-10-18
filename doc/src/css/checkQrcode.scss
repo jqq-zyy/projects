@@ -1,0 +1,49 @@
+.search-code-box {
+  padding: 18px 0;
+  .search-name {
+	float: left;
+	line-height: 38px;
+  }
+  input {
+	width: 300px;
+	height: 36px;
+	line-height: 36px;
+	padding-left: 30px;
+	border-radius: 2px;
+	border: 1px solid #dbdee7;
+	margin: 0 15px;
+	background: #ffffff url("../../assets/images/search.png") no-repeat 10px center;
+	float: left;
+  }
+  .search {
+	margin-left: 10px;
+	height: 36px;
+	line-height: 36px;
+  }
+}
+
+.check-detail {
+  background: #ffffff;
+  border: 1px solid #dbdee7;
+  border-radius: 2px;
+  margin-top: 25px;
+  padding: 10px 20px;
+  overflow: hidden;
+  .msg-title {
+	line-height: 36px;
+	font-size: 16px;
+  }
+  .msg-info{
+	width: 30%;
+	float: left;
+	line-height: 30px;
+	font-size: 14px;
+  }
+  .cert-img{
+	margin-left: 10px;
+	vertical-align: middle;
+  }
+  .text-color{
+	color: #01aaef;
+  }
+}

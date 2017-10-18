@@ -1,0 +1,54 @@
+[
+  {
+	"name": "流水ID",
+	"id": "id",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "流水类型",
+	"id": "orderTypeDesc",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "金额",
+	"id": "orderAmount",
+	"sortBy": "desc",
+	"params": "create_time",
+	"calTotal": "shopAllAmount"
+  },
+  {
+	"name": "支付方式",
+	"id": "payWayDesc",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "状态",
+	"id": "orderStatusDesc",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "发起人",
+	"id": "applyUserLogon"
+  },
+  {
+	"name": "发起时间",
+	"id": "createTime",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "企业全称",
+	"id": "companyFullName",
+	"sortBy": "desc",
+	"params": "create_time"
+  },
+  {
+	"name": "操作",
+	"id": "btn",
+	"sortBy": "desc"
+  }
+]

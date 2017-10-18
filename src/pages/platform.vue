@@ -124,12 +124,12 @@
             </div>
             <transition name="bounce">
                 <div class="affix-box default-pos-type" v-show="isShow_detailPop">
-                    <div class="pop-edit-password pop-edit">
+                    <div class="pop-edit-password pop-edit platform-pop">
                         <div class="show-close-btn">
                             <img :src="g.config.path.images+'/close.png'"
                                  @click="onClick_closeBtn"/>
                         </div>
-                        <div class="step-about-tit show-recharge-tips">
+                        <div class="pop-tit pop-tit-center">
                             平台流水详情
                         </div>
                         <div class="pop-body tree-box">

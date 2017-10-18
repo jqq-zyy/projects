@@ -78,123 +78,140 @@
 									" @click="onClick_exportBtn">导出全部
 								</div>
 							</div>
-							<div class="admin-calendar-table">
-								<table>
-									<thead>
-									<tr>
-										<th class="">流水ID</th>
-										<th class="" @click="onClick_sortBtn('received_amount')"><span>|</span>流水类型
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'received_amount'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('received_amount')" class=" "><span>|</span>商家红包金额
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'received_amount'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('activity_start_time')" class=" ">
-											<span>|</span> 平台红包金额
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'activity_start_time'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
-										</th>
-										<th class="pointer m-width">
-											<span>|</span>状态
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'activity_end_time'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
+							<hw-table :tableData="tableData"
+									  :boxWidth="boxWidth"
+									  :boxHeight="boxHeight"
+									  :headerHeight="headerHeight"
+									  :bodyHeight="bodyHeight"
+									  :footerHeight="footerHeight"
+									  :fixHeader="true"
+									  :leftFixedCols="12"
+									  :rightFixedCols="0"
+									  :eachRowHeight="eachRowHeight"
+									  :eachColWidth="boxWidth/12"
+									  :isShowIdCol="true"
+									  :isShowTotal="true"
+									  @clickHead="onClick_headItem"
+							>
+								<div class="relative middle bgc-ff">
+									<p v-show="g.data.bagDetailPool.list.length==0" class="absolute no-record"
+									   :style="{left:boxWidth/2+'px'}">
+										暂无记录...</p>
+								</div>
+							</hw-table>
+							<!--<div class="admin-calendar-table">-->
+							<!--<table>-->
+							<!--<thead>-->
+							<!--<tr>-->
+							<!--<th class="">流水ID</th>-->
+							<!--<th class="" @click="onClick_sortBtn('received_amount')"><span>|</span>流水类型-->
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'received_amount'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
+							<!--</th>-->
+							<!--<th @click="onClick_sortBtn('received_amount')" class=" "><span>|</span>商家红包金额-->
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'received_amount'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
+							<!--</th>-->
+							<!--<th @click="onClick_sortBtn('activity_start_time')" class=" ">-->
+							<!--<span>|</span> 平台红包金额-->
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'activity_start_time'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
+							<!--</th>-->
+							<!--<th class="pointer m-width">-->
+							<!--<span>|</span>状态-->
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'activity_end_time'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
+							<!--</th>-->
+							<!--<th class="pointer m-width">-->
+							<!--<span>|</span>用户-->
 
-										</th>
-										<th class="pointer m-width">
-											<span>|</span>用户
+							<!--</th>-->
+							<!--<th @click="onClick_sortBtn('create_time')">-->
+							<!--<span>|</span>-->
+							<!--扫码设备-->
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'create_time'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
 
-										</th>
-										<th @click="onClick_sortBtn('create_time')">
-											<span>|</span>
-											扫码设备
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
-
-										</th>
-										<th @click="onClick_sortBtn('create_time')">
-											<span>|</span>地区
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
+							<!--</th>-->
+							<!--<th @click="onClick_sortBtn('create_time')">-->
+							<!--<span>|</span>地区-->
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'create_time'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
 
 
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<span>|</span>扫码时间
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
+							<!--</th>-->
+							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
+							<!--<span>|</span>扫码时间-->
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'create_time'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
 
-										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<span>|</span>活动名称
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<span>|</span>品牌名称
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
-										</th>
-										<th @click="onClick_sortBtn('create_time')" class="pointer m-width">
-											<span>|</span>企业全称
+							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
+							<!--<span>|</span>活动名称-->
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'create_time'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
+							<!--</th>-->
+							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
+							<!--<span>|</span>品牌名称-->
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'create_time'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
+							<!--</th>-->
+							<!--<th @click="onClick_sortBtn('create_time')" class="pointer m-width">-->
+							<!--<span>|</span>企业全称-->
 
-											<common-sort :type="dataObj.sortOrder"
-														 :target="'create_time'"
-														 :currentField="dataObj.sortField"
-											></common-sort>
-										</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr v-for="item in bagDetailList">
-										<td>{{item.id}}</td>
-										<td></td>
-										<td>{{item.shopAmount}}</td>
-										<td>{{item.platformAmount}}</td>
-										<td>{{item.statusDesc}}</td>
-										<td>{{item.alipayAccount}}</td>
-										<td>{{item.mobileType}}</td>
-										<td>{{item.cityName}}</td>
-										<td>{{item.createTime}}</td>
-										<td>{{item.activityName}}</td>
-										<td>{{item.rpBrand}}</td>
-										<td>{{item.companyFullName}}</td>
-									</tr>
-									</tbody>
-									<tfoot>
-									<tr>
-										<td colspan="2"></td>
-										<td>{{shopRpAmount}}</td>
-										<td>{{platformRpAmount}}</td>
-										<td colspan="8"></td>
-									</tr>
-									</tfoot>
-								</table>
-							</div>
+							<!--<common-sort :type="dataObj.sortOrder"-->
+							<!--:target="'create_time'"-->
+							<!--:currentField="dataObj.sortField"-->
+							<!--&gt;</common-sort>-->
+							<!--</th>-->
+							<!--</tr>-->
+							<!--</thead>-->
+							<!--<tbody>-->
+							<!--<tr v-for="item in bagDetailList">-->
+							<!--<td>{{item.id}}</td>-->
+							<!--<td></td>-->
+							<!--<td>{{item.shopAmount}}</td>-->
+							<!--<td>{{item.platformAmount}}</td>-->
+							<!--<td>{{item.statusDesc}}</td>-->
+							<!--<td>{{item.alipayAccount}}</td>-->
+							<!--<td>{{item.mobileType}}</td>-->
+							<!--<td>{{item.cityName}}</td>-->
+							<!--<td>{{item.createTime}}</td>-->
+							<!--<td>{{item.activityName}}</td>-->
+							<!--<td>{{item.rpBrand}}</td>-->
+							<!--<td>{{item.companyFullName}}</td>-->
+							<!--</tr>-->
+							<!--</tbody>-->
+							<!--<tfoot>-->
+							<!--<tr>-->
+							<!--<td colspan="2"></td>-->
+							<!--<td>{{shopRpAmount}}</td>-->
+							<!--<td>{{platformRpAmount}}</td>-->
+							<!--<td colspan="8"></td>-->
+							<!--</tr>-->
+							<!--</tfoot>-->
+							<!--</table>-->
+							<!--</div>-->
 							<common-page :index="dataObj.page" :total="totalPage"
 										 @change="onChange_currentPage" v-show="bagDetailList.length>0"></common-page>
-							<common-prompt v-show="bagDetailList.length==0"></common-prompt>
-
-
-
+							<!--<common-prompt v-show="bagDetailList.length==0"></common-prompt>-->
 
 
 						</div>
@@ -209,6 +226,7 @@
 
 <script type="text/ecmascript-6">
 	import g from '../global';
+	import {getUserList, convertList, getFooterList} from './userList';
 	import MainLayout from './common/mainLayout.vue';
 	import CommonNav from './common/CommonNav.vue';
 	import CommonTopNav from './common/CommonTopNav.vue';
@@ -259,8 +277,14 @@
 				resultTotalObj: {
 					shopRpAmount: 0,
 					platformRpAmount: 0
-				}
-
+				},
+				tableData: {},
+				boxWidth: window.innerWidth * 0.81,
+				eachRowHeight: 60,
+				headerHeight: 60,
+				footerHeight: 60,
+				boxHeight: 610,
+				bodyHeight: 420
 			}
 		},
 		components: {
@@ -293,9 +317,15 @@
 			initData(){
 				var info = g.data.bagDetailPool;
 				this.totalPage = info.totalPage;
-				this.bagDetailList = info.list;
-				this.resultTotalObj.shopRpAmount = info.shopRpAmount;
-				this.resultTotalObj.platformRpAmount = info.platformRpAmount;
+				var obj = {};
+				obj.header = g.data.staticTableHeaderPool.list.concat();
+				obj.body = convertList(g.data.bagDetailPool.list, g.data.staticTableHeaderPool.list);
+				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.bagDetailPool);
+				this.tableData = obj;
+				trace("this.tableDat====", this.tableData);
+//				this.bagDetailList = info.list;
+//				this.resultTotalObj.shopRpAmount = info.shopRpAmount;
+//				this.resultTotalObj.platformRpAmount = info.platformRpAmount;
 			},
 			initSearchData(){
 				this.dataObj = {
@@ -314,9 +344,15 @@
 				this.date.startTimeStr = g.timeTool.getDate(this.date.startTime, true);
 				this.date.endTimeStr = g.timeTool.getDate(this.date.endTime, true);
 			},
+
+			onClick_headItem($item)
+			{
+				this.onClick_sortBtn($item);
+			},
 			onChange_currentPage($page, $pageSize){
 				this.dataObj.page = $page;
-				if($pageSize!=this.dataObj.pageSize){
+				if ($pageSize != this.dataObj.pageSize)
+				{
 					this.dataObj.pageSize = $pageSize;
 					this.dataObj.page = 1
 				}
@@ -368,8 +404,12 @@
 			onClick_searchBtn(){
 				this.onUpdate_qrcodeList()
 			},
-			onClick_sortBtn($field){
-				if (this.dataObj.sortOrder == "desc")
+			onClick_sortBtn($item){
+				if (!$item.sortBy)
+				{
+					return;
+				}
+				if ($item.sortBy == "desc")
 				{
 					this.dataObj.sortOrder = "asc"
 				}
@@ -378,7 +418,7 @@
 					this.dataObj.sortOrder = "desc"
 				}
 				this.dataObj.page = 1;
-				this.dataObj.sortField = $field;
+				this.dataObj.sortField = $item.params;
 				this.onUpdate_qrcodeList();
 			},
 			onClick_dropList(){
