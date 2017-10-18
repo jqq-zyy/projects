@@ -97,6 +97,11 @@ export default class ActivityPool {
 		return _hash[$id];
 	}
 
+	removeList(){
+		_list = [];
+		_hash = Object.create(null);
+	}
+	
 	removeAll()
 	{
 		_list = [];
@@ -115,6 +120,7 @@ function createData($dObj)
 	var d = {};
 	d.id = 0;
 	d.activityName = '';
+	d.companyName = '';
 	d.brandName = '';
 	d.activityStatusDesc = 0;
 	d.createTime = "";
@@ -129,7 +135,7 @@ function createData($dObj)
 	d.platformRpReceiveAmount= 0;
 	d.activityStatus = 0;
 	d.shopId = 0;
-	d.companyName = '';
+
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
@@ -140,7 +146,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('activityId') && (this.id = $dObj.activityId);
 	$dObj.hasOwnProperty('shopId') && (this.shopId = $dObj.shopId);
 	$dObj.hasOwnProperty('activityName') && (this.activityName = $dObj.activityName);
-	$dObj.hasOwnProperty('brandName') && (this.brandName = $dObj.brandName);
+	$dObj.hasOwnProperty('rpBrand') && (this.brandName = $dObj.rpBrand);
 	$dObj.hasOwnProperty('companyFullName') && (this.companyName = $dObj.companyFullName);
 	$dObj.hasOwnProperty('activityStatus') && (this.activityStatus = $dObj.activityStatus);
 	$dObj.hasOwnProperty('activityStatusDesc') && (this.activityStatusDesc = $dObj.activityStatusDesc);

@@ -11,6 +11,9 @@ export default function (to, next)
 	obj.pageSize = 10;
 	obj.startTime = g.timeTool.getDate(startTime, true);
 	obj.endTime = obj.startTime;
+	obj.freezeStatus=0;
+	obj.authStatus= 0;
+
 	getUserList(obj).then(function ()
 	{
 		updateData("userHeader");
@@ -22,7 +25,7 @@ export function getUserList($param)
 	g.ui.showLoading();
 	var promise = new Promise(function (resolved, rejected)
 	{
-		g.net.call("user/queryShopList", $param).then(($data) =>
+		g.net.call("user/queryShopStatisticList", $param).then(($data) =>
 		{
 			g.ui.hideLoading();
 			g.data.userPool.removeAll();

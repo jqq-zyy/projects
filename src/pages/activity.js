@@ -8,9 +8,12 @@ export default function (to, next)
 	g.ui.showLoading();
 
 	var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
-	g.net.call("activity/queryActivityStatisticOverview", {
+	g.net.call("activity/queryActivitiesStatisticOverview", {
 		'page': 1,
 		'pageSize': g.param.pageSizeList[0],
+		activityStatus: 0,
+		sortField: "create_time",
+		sortOrder: "desc"
 
 	}).then(($data) =>
 	{
@@ -25,10 +28,4 @@ export default function (to, next)
 		g.func.dealErr(err);
 	});
 }
-
-
-
-
-
-
 
