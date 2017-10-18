@@ -372,6 +372,7 @@
                 return false
             },
             onClick_searchBtn(){
+                this.dataObj.page = 1;
                 this.onUpdate_bagList()
             },
             onClick_sortBtn($field){

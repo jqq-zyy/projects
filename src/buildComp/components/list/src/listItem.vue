@@ -2,7 +2,7 @@
 	<li @mouseenter="onMouseEnter_item(itemData,$event)"
 		@mouseleave="onMouseLeave_item(itemData,$event)">
 		<div>
-			<hw-icon v-if="showArrow" @click="onClick_item(itemData,$event)"
+			<hw-icon v-if="showArrow  && isValid(itemData)" @click="onClick_item(itemData,$event)" class="pointer"
 					 :iconClass="isValid(itemData) ? currIdList.indexOf(itemData.id) >= 0 ?'icon-xiajiantou':'icon-youjiantou':''"
 			></hw-icon>
 
@@ -11,7 +11,7 @@
 					@click="onClick_icon(itemData)"
 			></hw-icon>
 
-			<span @click="onClick_icon(itemData)">{{itemData.name}}</span>
+			<span @click="onClick_icon(itemData)" class="pointer">{{itemData.name}}</span>
 		</div>
 		<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft">
 			<list-item :data="child" v-for="child in itemData.children" :showArrow="showArrow" :checkedList="checkedChildren"

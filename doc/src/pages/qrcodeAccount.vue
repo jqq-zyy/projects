@@ -407,6 +407,7 @@
                 this.onUpdate_qrcodeList()
             },
             onClick_searchBtn(){
+                this.dataObj.page = 1;
                 this.onUpdate_qrcodeList()
             },
             onClick_sortBtn($field){

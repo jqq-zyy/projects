@@ -75,7 +75,7 @@
 
 							<div class="all-out">
 								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right
-									" @click="onClick_exportBtn">导出全部
+									" @click="onClick_exportAllBtn">导出全部
 								</div>
 							</div>
 							<hw-table :tableData="tableData"
@@ -93,7 +93,7 @@
 									  :isShowTotal="true"
 									  @clickHead="onClick_headItem"
 							>
-								<div class="relative middle bgc-ff">
+								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
 									<p v-show="g.data.bagDetailPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">
 										暂无记录...</p>
@@ -323,9 +323,7 @@
 				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.bagDetailPool);
 				this.tableData = obj;
 				trace("this.tableDat====", this.tableData);
-//				this.bagDetailList = info.list;
-//				this.resultTotalObj.shopRpAmount = info.shopRpAmount;
-//				this.resultTotalObj.platformRpAmount = info.platformRpAmount;
+				this.bagDetailList = info.list;
 			},
 			initSearchData(){
 				this.dataObj = {
@@ -402,6 +400,7 @@
 				this.onUpdate_qrcodeList()
 			},
 			onClick_searchBtn(){
+				this.dataObj.page = 1
 				this.onUpdate_qrcodeList()
 			},
 			onClick_sortBtn($item){
@@ -490,8 +489,24 @@
 			onClick_qrcodeItem($type){
 
 			},
-			onClick_exportBtn(){
-
+			onClick_exportAllBtn(){
+				window.open(g.webParam.url.server
+						+ "/export/exportRpReceiveList?page=0&pageSize=0&startTime="
+						+ this.date.startTimeStr
+						+ "&endTime=" + this.date.endTimeStr
+						+ "&sortField=" + this.dataObj.sortField
+						+ "&sortOrder=" + this.dataObj.sortOrder
+						+ "&status=" + this.dataObj.status
+						+ "&" + this.currentType + "=" + this.inputContent
+				)
+				trace(g.webParam.url.server
+						+ "/export/exportRpReceiveList?page=0&pageSize=0&startTime="
+						+ this.date.startTimeStr
+						+ "&endTime=" + this.date.endTimeStr
+						+ "&sortField=" + this.dataObj.sortField
+						+ "&sortOrder=" + this.dataObj.sortOrder
+						+ "&status=" + this.dataObj.status
+						+ "&" + this.currentType + "=" + this.inputContent)
 			}
 
 		}

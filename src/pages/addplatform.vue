@@ -1,35 +1,36 @@
 <template>
-	<main-layout :isLoad="isLoad">
-		<div slot="content" class="content-box">
-			<div class="admin-main-wrap">
-				<common-nav></common-nav>
-				<div class="right-content-wrap">
-					<common-top-nav></common-top-nav>
-					<div class="admin-data-items">
-						<div class="right-body personal-box">
-							<div class="g-title"><span>平台财务流水</span>/新建平台流水</div>
-							<div class="admin-calendar-table">
-								<div class="base-info">基本信息</div>
-								<div class="base-master">
-									<p>发起人: </p>
-									<span>{{paramObj.applyUserLogon}}</span></div>
+
+    <main-layout :isLoad="isLoad">
+        <div slot="content" class="content-box">
+            <div class="admin-main-wrap">
+                <common-nav :nav="'platform'"></common-nav>
+                <div class="right-content-wrap">
+                    <common-top-nav></common-top-nav>
+                    <div class="admin-data-items">
+                        <div class="right-body personal-box">
+                            <div class="g-title"><span>平台财务流水</span>/新建平台流水</div>
+                            <div class="admin-calendar-table add-platform">
+                                <div class="base-info">基本信息</div>
+                                <div class="base-master">
+                                    <p>发起人: </p>
+                                    <span>{{paramObj.applyUserLogon}}</span></div>
+                                <div>
+                                    <p>流水类型：</p>
+                                    <label for="recharge">
+                                        <input type="radio" name="status" v-model="paramObj.orderType" value="21"
+                                               id="recharge">平台红包充值
+                                    </label>
+                                    <label for="cash">
+                                        <input type="radio" name="status" v-model="paramObj.orderType" value="40"
+                                               id="cash">提现支出
+                                    </label>
+                                </div>
 								<div>
-									<p>流水类型：</p>
-									<label for="recharge">
-										<input type="radio" name="status" v-model="paramObj.orderType" value="21"
-											   id="recharge">平台红包充值
-									</label>
-									<label for="cash">
-										<input type="radio" name="status" v-model="paramObj.orderType" value="40"
-											   id="cash">提现支出
-									</label>
-								</div>
-								<div>
-									<p>流水金额：</p>
-									<input type="text" v-model="paramObj.amount">
-								</div>
-								<div>
-									<p>备注：</p>
+                                    <p>流水金额：</p>
+                                    <input type="text" v-model="paramObj.amount">
+                                </div>
+                                <div>
+                                    <p>备注：</p>
 									<textarea id="" cols="30" rows="10" v-model="paramObj.remark"
 											  placeholder="不超过50字"></textarea></div>
 								<div class="base-way">
@@ -160,9 +161,6 @@
 	@import "../css/personlInfo.scss";
 
 </style>
-
-
-
 
 
 

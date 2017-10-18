@@ -80,7 +80,6 @@ export function convertList($list, $headerList, $type)
 	{
 		idList.push(item.id)
 	}
-
 	for (var item  of list)
 	{
 		item.btn = [];
@@ -90,7 +89,8 @@ export function convertList($list, $headerList, $type)
 			{
 				var obj = {};
 				obj.id = typeItem.id;
-				obj.name = item[typeItem.condition] == 1 ? typeItem.support : typeItem.against
+				obj.name = item[typeItem.condition] == 1 ? typeItem.support : typeItem.against;
+				obj.className = "light-color"
 				item.btn.push(obj);
 			}
 		}

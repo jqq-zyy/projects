@@ -4,6 +4,7 @@
 var _list = [];
 var _hash = Object.create(null);
 var _totalPage = 0;
+var _orderId = "";
 
 export default class MessagePool {
 	constructor()
@@ -12,11 +13,17 @@ export default class MessagePool {
 
 	update($dObj)
 	{
+		debugger
+
+		$dObj.hasOwnProperty('orderId') && (_orderId = $dObj.orderId);
 		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
-		for (var item of $dObj.data)
-		{
-			this.add(item,$dObj.count);
+		if($dObj.data){
+			for (var item of $dObj.data)
+			{
+				this.add(item,$dObj.count);
+			}
 		}
+		
 	}
 
 	add($dObj)
@@ -48,6 +55,11 @@ export default class MessagePool {
 		return _totalPage;
 	}
 
+	get orderId()
+	{
+		return _orderId;
+	}
+
 	getDataById($id)
 	{
 		return _hash[$id];
@@ -70,6 +82,7 @@ function createData($dObj)
 	d.pendTypeDesc = "";
 	d.companyFullName = "";
 	d.pendType = 0;
+	d.relationId = "";
 	d.shopId = "";
 	d.update = updateData.bind(d);
 	d.update($dObj);
@@ -85,6 +98,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('companyFullName') && (this.companyFullName = $dObj.companyFullName);
 	$dObj.hasOwnProperty('pendType') && (this.pendType = $dObj.pendType);
 	$dObj.hasOwnProperty('shopId') && (this.shopId = $dObj.shopId);
+	$dObj.hasOwnProperty('relationId') && (this.relationId = $dObj.relationId);
 }
 
 

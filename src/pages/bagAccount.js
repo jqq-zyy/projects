@@ -6,18 +6,22 @@ import {updateData} from "./userList";
 export default function (to, next)
 {
 	g.ui.showLoading();
-	var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
-	startTime = g.timeTool.getDate(startTime, true);
-	var endTime = startTime;
-	g.net.call("order/queryRpAccountList", {
-		'queryStatus': 0,
-		'startTime': startTime,
-		'endTime': endTime,
-		'page': 1,
-		'pageSize': g.param.pageSizeList[0],
-		'sortField': "",
-		'sortOrder': ""
-	}).then(($data) =>
+	var obj={};
+	obj.page = 1;
+	obj.pageSize = g.param.pageSizeList[0];
+	obj.sortField = "";
+	obj.sortOrder= "";
+	obj.queryStatus= 0;
+	if( g.data.messagePool.orderId){
+		obj.orderId = g.data.messagePool.orderId;
+		obj.startTime= "";
+		obj.endTime = "";
+	}else{
+		var startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
+		obj.startTime = g.timeTool.getDate(startTime, true);
+		obj.endTime = obj.startTime;
+	}
+	g.net.call("order/queryRpAccountList", obj).then(($data) =>
 	{
 		g.ui.hideLoading();
 		updateData("bagHeader");
@@ -30,6 +34,14 @@ export default function (to, next)
 		g.func.dealErr(err);
 	});
 }
+
+
+
+
+
+
+
+
 
 
 

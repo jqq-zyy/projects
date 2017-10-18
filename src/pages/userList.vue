@@ -97,8 +97,10 @@
 									  :isShowTotal="true"
 									  @clickBtn="onClick_btn"
 									  @clickHead="onClick_headItem"
-									  @clickBody="onClick_bodyitem">
-								<div class="relative middle bgc-ff">
+									  @clickBody="onClick_bodyitem"
+									  lightColsList="[0]">
+
+								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
 									<p v-show="g.data.userPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">
 										暂无记录...</p>
@@ -165,7 +167,6 @@
 						name: "企业全称"
 					}
 				],
-
 				freezeStatusList: ['全部', '正常', '冻结'],
 				authStatusList: ['全部', '未认证', '已认证'],
 				tableData: {},
@@ -214,19 +215,6 @@
 				this.totalPage = g.data.userPool.totalPage;
 				g.core.update();
 			},
-//			initTotal(){
-//				var userPool = g.data.userPool;
-//				this.modelObj.shopAllAmount = userPool.shopAllAmount;
-//				this.modelObj.platformAllAmount = userPool.platformAllAmount;
-//				this.modelObj.rpSendAllNum = userPool.rpSendAllNum;
-//				this.modelObj.qrcodeScanAllNum = userPool.qrcodeScanAllNum;
-//				this.modelObj.qrcodeBindAllNum = userPool.qrcodeBindAllNum;
-//				this.modelObj.qrcodeExportAllNum = userPool.qrcodeExportAllNum;
-//				this.modelObj.qrcodeUnExportAllNum = userPool.qrcodeUnExportAllNum;
-//				this.modelObj.qrcodeBuyAllNum = userPool.qrcodeBuyAllNum;
-//				this.modelObj.qrcodeRefundAllNum = userPool.qrcodeRefundAllNum;
-//				this.modelObj.rpAllCurrentAccount = userPool.rpAllCurrentAccount;
-//			},
 			initDate(){
 				this.date.startTime = g.timeTool.getNowStamp() - g.timeTool.getPastSecond();
 				this.date.endTime = this.date.startTime;
@@ -362,10 +350,6 @@
 				}
 			},
 
-//			onChange_date($timeStamp)
-//			{
-//				trace('$timeStamp========', $timeStamp);
-//			},
 			onClick_chooseDateStart($timeStamp){
 				this.date.startTime = $timeStamp;
 				this.date.startTimeStr = g.timeTool.getDate($timeStamp, true);

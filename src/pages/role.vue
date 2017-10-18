@@ -57,7 +57,7 @@
                                 <span class="name">权限名称：</span>
                                 <input type="text" placeholder="请输入职务名称" v-model="roleName">
                             </div>
-                            <div class="m-title">
+                            <div class="m-title power-box">
                                 <span class="name">权限范围：</span>
                                 <hw-list :listData="powerList" :checkedList="selectKeys" :showArrow="true"
                                          @change="onChange_list"></hw-list>
@@ -217,5 +217,8 @@
             -moz-border-radius: 3px;
     }
 
+    }
+    .power-box{
+        height:300px;
     }
 </style>
