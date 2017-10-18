@@ -26,7 +26,7 @@ export default class UserPool {
         $obj.hasOwnProperty('total') && (_total = $obj.total);
         $obj.hasOwnProperty('totalPage') && (_totalPage = $obj.totalPage);
         if (model) {
-            model.hasOwnProperty('shopAllAmount') && (_shopAllAmount = $obj.shopAllAmount);
+            model.hasOwnProperty('shopAllAmount') && (_shopAllAmount = model.shopAllAmount);
             model.hasOwnProperty('platformAllAmount') && (_platformAllAmount = model.platformAllAmount);
             model.hasOwnProperty('rpSendAllNum') && (_rpSendAllNum = model.rpSendAllNum);
             model.hasOwnProperty('qrcodeScanAllNum') && (_qrcodeScanAllNum = model.qrcodeScanAllNum);
@@ -37,6 +37,7 @@ export default class UserPool {
             model.hasOwnProperty('qrcodeRefundAllNum') && (_qrcodeRefundAllNum = model.qrcodeRefundAllNum);
             model.hasOwnProperty('rpAllCurrentAccount') && (_rpAllCurrentAccount = model.rpAllCurrentAccount);
         }
+
 
         for (var item of $obj.data) {
             this.add(item);
@@ -113,7 +114,11 @@ export default class UserPool {
     getDataById($id) {
         return _hash[$id];
     }
-
+    removeList(){
+        _list = [];
+        _hash = Object.create(null);
+    }
+    
     removeAll() {
         _list = [];
         _hash = Object.create(null);

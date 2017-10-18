@@ -1,67 +1,73 @@
 [
   {
-	"name": "活动Id",
-	"id": "id",
-	"showIdCol": "no"
+    "name": "活动Id",
+    "id": "id",
+    "showIdCol": "no"
   },
   {
-	"name": "活动名称",
-	"id": "activityName"
+    "name": "活动名称",
+    "id": "activityName"
   },
   {
-	"name": "品牌名称",
-	"id": "brandName"
+    "name": "企业全称",
+    "id": "companyName",
+    "sortBy": "desc",
+    "params": "company_full_name"
   },
   {
-	"name": "状态",
-	"id": "activityStatusDesc",
-	"sortBy": "desc",
-	"params": "activity_status"
+    "name": "品牌名称",
+    "id": "brandName"
   },
   {
-	"name": "创建时间",
-	"id": "createTime",
-	"sortBy": "desc",
-	"params": "create_time"
+    "name": "状态",
+    "id": "activityStatusDesc",
+    "sortBy": "desc",
+    "params": "activity_status"
   },
   {
-	"name": "开始日期",
-	"id": "startTime",
-	"sortBy": "desc",
-	"params": "start_time"
+    "name": "创建时间",
+    "id": "createTime",
+    "sortBy": "desc",
+    "params": "create_time"
   },
   {
-	"name": "结束日期",
-	"id": "endTime",
-	"sortBy": "desc",
-	"params": "end_time"
+    "name": "开始日期",
+    "id": "startTime",
+    "sortBy": "desc",
+    "params": "activity_start_time"
   },
   {
-	"name": "绑定二维码数",
-	"id": "qrCodeNum",
-	"sortBy": "desc",
-	"params": "qrCodeNum",
-	"calTotal": "totalQrCodeNum"
+    "name": "结束日期",
+    "id": "endTime",
+    "sortBy": "desc",
+    "params": "activity_end_time"
   },
   {
-	"name": "累计扫码数",
-	"id": "totalScanCount",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "totalScanCount"
+    "name": "绑定二维码数",
+    "id": "qrCodeNum",
+    "sortBy": "desc",
+    "params": "qrcode_bind_num",
+    "calTotal": "totalQrCodeNum"
   },
   {
-	"name": "红包领取金额",
-	"id": "useRpAmount",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "totalUseRpAmount"
+    "name": "累计扫码数",
+    "id": "totalScanCount",
+    "sortBy": "desc",
+    "params": "qrcode_scan_num",
+    "calTotal": "totalScanCount"
   },
   {
-	"name": "平台红包领取金额",
-	"id": "platformRpReceiveAmount",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "totalUseRpAmountDesc"
+    "name": "红包领取金额",
+    "id": "useRpAmount",
+    "sortBy": "desc",
+    "params": "rp_receive_amount",
+    "calTotal": "totalUseRpAmount"
+  },
+  {
+    "name": "平台红包领取金额",
+    "id": "platformRpReceiveAmount",
+    "sortBy": "desc",
+    "params": "rp_platform_amount",
+    "calTotal": "totalUseRpAmountDesc"
   }
 ]

@@ -130,7 +130,7 @@
                             </div>
                             <div class="button-box m-margin-up" style="margin-top: 40px" v-show="auditStatus==2">
                                 <div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不通过</div>
-                                <div class="refuse-button pointer bg-btn" @click="onClick_sumbitBtn">确认通过并告知商户</div>
+                                <div class="refuse-button pointer bg-btn" @click="updateOrderAuth">确认通过并告知商户</div>
                             </div>
                         </div>
 

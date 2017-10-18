@@ -1,108 +1,114 @@
 [
   {
-	"name": "商户ID",
-	"id": "id",
-	"sortBy": "desc",
-	"params": "create_time"
+    "name": "商户ID",
+    "id": "id",
+    "sortBy": "desc",
+    "params": "shop_id"
   },
   {
-	"name": "创建时间",
-	"id": "createTime"
+    "name": "创建时间",
+    "id": "createTime"
   },
   {
-	"name": "企业全称",
-	"id": "name"
+    "name": "企业全称",
+    "id": "name"
   },
   {
-	"name": "运营状态",
-	"id": "freezeStatusDesc"
+    "name": "运营状态",
+    "id": "freezeStatusDesc",
+    "sortBy": "desc",
+    "params": "freeze_status"
   },
   {
-	"name": "用户名",
-	"id": "logon"
+    "name": "用户名",
+    "id": "logon"
   },
   {
-	"name": "手机号",
-	"id": "telphone"
+    "name": "手机号",
+    "id": "telphone"
   },
   {
-	"name": "认证状态",
-	"id": "authStatusDesc",
-	"sortBy": "desc",
-	"params": "create_time"
+    "name": "认证状态",
+    "id": "authStatusDesc",
+    "sortBy": "desc",
+    "params": "auth_status"
   },
   {
-	"name": "商家红包金额",
-	"id": "shopAmount",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "shopAllAmount"
+    "name": "商家红包金额",
+    "id": "shopAmount",
+    "sortBy": "desc",
+    "params": "shop_amount",
+    "calTotal": "shopAllAmount"
   },
   {
-	"name": "平台红包金额",
-	"id": "platformAmount",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "platformAllAmount"
+    "name": "平台红包金额",
+    "id": "platformAmount",
+    "sortBy": "desc",
+    "params": "platform_amount",
+    "calTotal": "platformAllAmount"
   },
   {
-	"name": "平台红包发放数",
-	"id": "rpSendNum",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "rpSendAllNum"
+    "name": "平台红包发放数",
+    "id": "rpSendNum",
+    "sortBy": "desc",
+    "params": "rp_send_num",
+    "calTotal": "rpSendAllNum"
   },
   {
-	"name": "扫码量",
-	"id": "qrcodeScanNum",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "qrcodeScanAllNum"
+    "name": "扫码量",
+    "id": "qrcodeScanNum",
+    "sortBy": "desc",
+    "params": "qrcode_scan_num",
+    "calTotal": "qrcodeScanAllNum"
   },
   {
-	"name": "绑定二维码数",
-	"id": "qrcodeBindNum",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "qrcodeBindAllNum"
+    "name": "绑定二维码数",
+    "id": "qrcodeBindNum",
+    "sortBy": "desc",
+    "params": "qrcode_bind_num",
+    "calTotal": "qrcodeBindAllNum"
   },
   {
-	"name": "导出二维码数",
-	"id": "qrcodeExportNum",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "qrcodeExportAllNum"
+    "name": "导出二维码数",
+    "id": "qrcodeExportNum",
+    "sortBy": "desc",
+    "params": "qrcode_export_num",
+    "calTotal": "qrcodeExportAllNum"
   },
   {
-	"name": "未导出二维码数",
-	"id": "qrcodeUnExportNum",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "qrcodeUnExportAllNum"
+    "name": "未导出二维码数",
+    "id": "qrcodeUnExportNum",
+    "sortBy": "desc",
+    "params": "qrcode_un_export_num",
+    "calTotal": "qrcodeUnExportAllNum"
   },
   {
-	"name": "已购二维码数",
-	"id": "qrcodeBuyNum",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "qrcodeBuyAllNum"
+    "name": "已购二维码数",
+    "id": "qrcodeBuyNum",
+    "sortBy": "desc",
+    "params": "qrcode_buy_num",
+    "calTotal": "qrcodeBuyAllNum"
   },
   {
-	"name": "退款二维码数",
-	"id": "qrcodeRefundNum",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "qrcodeRefundAllNum"
+    "name": "退款二维码数",
+    "id": "qrcodeRefundNum",
+    "sortBy": "desc",
+    "params": "qrcode_refund_num",
+    "calTotal": "qrcodeRefundAllNum"
   },
   {
-	"name": "红包账户余额",
-	"id": "rpCurrentAccount",
-	"sortBy": "desc",
-	"params": "create_time",
-	"calTotal": "rpAllCurrentAccount"
+    "name": "红包账户余额",
+    "id": "rpCurrentAccount",
+    "sortBy": "desc",
+    "params": "rp_current_account",
+    "calTotal": "rpAllCurrentAccount"
   },
   {
-	"name": "操作",
-	"id": "btn"
+    "name": "操作",
+    "id": "btn"
   }
 ]
+
+
+
+

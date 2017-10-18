@@ -36,7 +36,7 @@
 													   v-model="dataObj.activitySQueryBeginTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_SQueryBeginTime')">
-												<img class="date-del" :src="g.config.path.images+'/close2.png'"
+												<img class="date-del" :src="g.config.path.images+'/close.png'"
 													  @click.stop="onClick_resetTime('activitySQueryBeginTime')">
 												<hw-date type="date" skin="simple"
 														 @change="onClick_chooseSQueryBeginTime"
@@ -50,7 +50,7 @@
 													   v-model="dataObj.activitySQueryEndTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_SQueryEndTime')">
-												<img class="date-del" :src="g.config.path.images+'/close2.png'"
+												<img class="date-del" :src="g.config.path.images+'/close.png'"
 													  @click.stop="onClick_resetTime('activitySQueryEndTime')">
 												<hw-date type="date" skin="simple" @change="onClick_chooseSQueryEndTime"
 														 v-model="isShow_dataObj.isShow_SQueryEndTime"></hw-date>
@@ -65,7 +65,7 @@
 													   v-model="dataObj.activityEQueryStartTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_EQueryStartTime')">
-												<img class="date-del" :src="g.config.path.images+'/close2.png'"
+												<img class="date-del" :src="g.config.path.images+'/close.png'"
 													  @click.stop="onClick_resetTime('activityEQueryStartTime')">
 												<hw-date type="date" skin="simple"
 														 @change="onClick_chooseEQueryStartTime"
@@ -79,7 +79,7 @@
 													   v-model="dataObj.activityEQueryEndTime"
 													   readonly="true"
 													   @click.stop="onClick_showCalendar('isShow_EQueryEndTime')">
-												<img class="date-del" :src="g.config.path.images+'/close2.png'"
+												<img class="date-del" :src="g.config.path.images+'/close.png'"
 													  @click.stop="onClick_resetTime('activityEQueryEndTime')">
 												<hw-date type="date" skin="simple" @change="onClick_chooseEQueryEndTime"
 														 v-model="isShow_dataObj.isShow_EQueryEndTime"></hw-date>
@@ -107,7 +107,7 @@
 							</div>
 							<div class="all-out">
 								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right
-									" @click="onClick_exportBtn">导出全部
+									" @click="onClick_exportAllBtn">导出全部
 								</div>
 							</div>
 							<hw-table :tableData="tableData"
@@ -123,9 +123,7 @@
 									  :isShowTotal="true"
 									  @clickHead="onClick_headItem"
 									  @clickBody="onClick_bodyItem"
-									  lightColsList="[1]">
-
-								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
+									  :lightColsList="[1]">								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
 
 									<p v-show="g.data.activityPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">
@@ -260,8 +258,8 @@
 					page: 1,
 					pageSize: g.param.pageSizeList[0],
 					activityStatus: "",
-					// sortField: "create_time",
-					// sortOrder: "desc",
+					sortField: "create_time",
+					sortOrder: "desc",
 					activitySQueryBeginTime: '',
 					activitySQueryEndTime: '',
 					activityEQueryStartTime: '',
@@ -285,19 +283,30 @@
 					this.dataObj.page = 1
 				}
 
-				this.onUpdate_activityList()
+				this.onUpdate_activityList(true)
 			},
-			onUpdate_activityList(){
+			onUpdate_activityList($isByPage){
 				g.ui.showLoading();
 				this.dataObj.activityStatus = this.activityStatus.join(",");
 				this.dataObj.companyFullName = "";
 				this.dataObj.activityName = "";
 				this.dataObj.applyUserLogon = "";
 				this.dataObj[this.currentType] = this.inputContent;
-				g.net.call("activity/queryActivityStatisticByPage", this.dataObj).then(($data) =>
+				var url = "";
+				if($isByPage){
+					url = "activity/queryActivitiesStatisticList"
+				}else{
+					url = "activity/queryActivitiesStatisticOverview"
+				}
+				g.net.call(url, this.dataObj).then(($data) =>
 				{
-					g.data.activityPool.removeAll();
-					g.data.activityPool.update($data);
+					if($isByPage){
+						g.data.activityPool.removeList();
+					}else{
+						g.data.activityPool.removeAll();
+					}
+
+					g.data.activityPool.update($data.resultPageList);
 					g.ui.hideLoading();
 					this.initData();
 					this.dataObj[this.currentType] = "";
@@ -384,7 +393,9 @@
 					}
 					this.dataObj.page = 1;
 					this.dataObj.sortField = $item.params;
-					this.onUpdate_activityList();
+					this.onUpdate_activityList(true);
+
+
 				}
 			},
 			onClick_dropList(){
@@ -418,9 +429,6 @@
 				{
 					return "解冻"
 				}
-			},
-			onClick_exportBtn(){
-
 			},
 			onClick_showCalendar($str){
 				trace(this.isShow_dataObj)
@@ -487,6 +495,30 @@
 			onClick_resetTime($resetType){
 				this.dataObj[$resetType] = "";
 				this[$resetType] = "";
+
+			},
+			onClick_exportAllBtn(){
+				window.open(g.webParam.url.server
+						+ "/export/exportActivityStatisticList?page=0&pageSize=0&activityStatus="
+						+ this.activityStatus.join(",")
+						+ "&activitySQueryBeginTime=" + this.dataObj.activitySQueryBeginTime
+						+ "&activitySQueryEndTime=" + this.dataObj.activitySQueryEndTime
+						+ "&activityEQueryStartTime=" + this.dataObj.activityEQueryStartTime
+						+ "&activityEQueryEndTime=" + this.dataObj.activityEQueryEndTime
+						+ "&sortField=" + this.dataObj.sortField
+						+ "&sortOrder=" + this.dataObj.sortOrder
+						+ "&" + this.currentType + "=" + this.inputContent
+				)
+				trace(g.webParam.url.server
+						+ "/export/exportActivityStatisticList?page=0&pageSize=0&activityStatus="
+						+ this.activityStatus.join(",")
+						+ "&activitySQueryBeginTime=" + this.dataObj.activitySQueryBeginTime
+						+ "&activitySQueryEndTime=" + this.dataObj.activitySQueryEndTime
+						+ "&activityEQueryStartTime=" + this.dataObj.activityEQueryStartTime
+						+ "&activityEQueryEndTime=" + this.dataObj.activityEQueryEndTime
+						+ "&sortField=" + this.dataObj.sortField
+						+ "&sortOrder=" + this.dataObj.sortOrder
+						+ "&" + this.currentType + "=" + this.inputContent)
 
 			}
 		}

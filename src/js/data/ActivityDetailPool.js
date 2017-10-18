@@ -29,6 +29,7 @@ export default class ActivityDetailPool {
 		$dObj.hasOwnProperty('activityRules') && (_activityRules = $dObj.activityRules);
 		$dObj.hasOwnProperty('memberRules') && (_memberRules = $dObj.memberRules);
 		$dObj.hasOwnProperty('regionRules') && (_regionRules = $dObj.regionRules);
+		$dObj.hasOwnProperty('regionRules') && (_regionRules = $dObj.regionRules);
 	}
 
 	get totalQrCodeNum()

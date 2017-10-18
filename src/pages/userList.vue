@@ -98,7 +98,7 @@
 									  @clickBtn="onClick_btn"
 									  @clickHead="onClick_headItem"
 									  @clickBody="onClick_bodyitem"
-									  lightColsList="[0]">
+									  :lightColsList="[0]">
 
 								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
 									<p v-show="g.data.userPool.list.length==0" class="absolute no-record"
@@ -106,8 +106,6 @@
 										暂无记录...</p>
 								</div>
 							</hw-table>
-
-
 							<common-page :index="searchObj.page" :total="totalPage"
 										 @change="onChange_searchItem"
 										 v-show="g.data.userPool.list.length>0"></common-page>
@@ -211,7 +209,6 @@
 				obj.body = convertList(g.data.userPool.list, g.data.staticTableHeaderPool.list, "userList");
 				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.userPool);
 				this.tableData = obj;
-				trace("this.tableDat====", this.tableData);
 				this.totalPage = g.data.userPool.totalPage;
 				g.core.update();
 			},
@@ -260,19 +257,34 @@
 					this.searchObj.pageSize = $pageSize;
 					this.searchObj.page = 1;
 				}
-				this.onUpdate_userList()
+				this.onUpdate_userList(true)
 			},
-			onUpdate_userList(){
+			onUpdate_userList($isByPage){
 				g.ui.showLoading();
 				this.searchObj.startTime = this.date.startTimeStr;
 				this.searchObj.endTime = this.date.endTimeStr;
 				this.searchObj[this.currentType] = this.inputContent;
-				getUserList(this.searchObj).then(() =>
+				var url ;
+				if($isByPage){
+					url = "user/queryShopStatisticListByPage";
+				}else{
+					url = "user/queryShopStatisticList";
+				}
+				g.net.call(url, this.searchObj).then(($data) =>
 				{
+					if($isByPage){
+						g.data.userPool.removeList();
+					}else{
+						g.data.userPool.removeAll();
+					}
+					g.data.userPool.update($data);
 					this.initList();
+					this.searchObj[this.currentType] = "";
 					g.ui.hideLoading();
+				}, (err) =>
+				{
+					g.func.dealErr(err);
 				});
-				this.searchObj[this.currentType] = "";
 			},
 			onClick_dropListBtn(){
 				if (this.isShow_dropList)
@@ -318,7 +330,8 @@
 					}
 					this.searchObj.page = 1;
 					this.searchObj.sortField = $item.params;
-					this.onUpdate_userList();
+					this.onUpdate_userList(true);
+
 				}
 			},
 			onClick_showCalendar(str){
