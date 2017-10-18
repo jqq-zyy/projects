@@ -54,21 +54,33 @@ var hash = {
 			id: "audit",
 			condition: "authStatus",
 			support: "审核",
-			against: ""
+			against: "",
+			status:1
 		},
 		{
 			id: "freeze",
 			condition: "freezeStatus",
 			support: "冻结",
-			against: "解冻"
+			against: "解冻",
+			status:1
 		}
 	],
-	"account": [
+	"qrcodeAccount": [
 		{
 			id: "audit",
-			condition: "orderStatus",
+			condition: "orderType",
 			support: "审核",
-			against: ""
+			against: "",
+			status:30
+		},
+	],
+	"bagAccount": [
+		{
+			id: "audit",
+			condition: "orderType",
+			support: "审核",
+			against: "",
+			status:31
 		},
 	]
 
@@ -76,7 +88,7 @@ var hash = {
 
 export function convertList($list, $headerList, $type)
 {
-
+	debugger;
 	var list = $list.slice(0);
 	var idList = [];
 	for (var item of $headerList)
@@ -92,7 +104,7 @@ export function convertList($list, $headerList, $type)
 			{
 				var obj = {};
 				obj.id = typeItem.id;
-				obj.name = item[typeItem.condition] == 1 ? typeItem.support : typeItem.against;
+				obj.name = item[typeItem.condition] == typeItem.status ? typeItem.support : typeItem.against;
 				obj.className = "light-color"
 				item.btn.push(obj);
 			}
