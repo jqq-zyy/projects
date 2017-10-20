@@ -10,8 +10,8 @@
 							<div class="g-title">查询二维码</div>
 							<div class=" bar-box">
 								<div class="search-code-box">
-									<span class="search-name">二维码ID:</span>
-									<input type="text" class="search-input" v-model="qrcodeId">
+									<span class="search-name">二维码编码:</span>
+									<input type="text" class="search-input" v-model="qrcodeId" placeholder="请输入二维码编码">
 									<span class="btn pointer search border-btn hb-fill-middle2-bg"   @click="onClick_searchBtn">查找</span>
 								</div>
 							</div>
