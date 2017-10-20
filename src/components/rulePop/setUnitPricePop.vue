@@ -1,5 +1,5 @@
 <template>
-    <div class="pop-edit-password pop-edit">
+    <div class="pop-edit-password pop-edit price-pop">
         <div class="show-close-btn">
             <img :src="g.config.path.images+'/close.png'"
                  @click="onClick_closeBtn"/>
@@ -21,8 +21,10 @@
                         <span @click="onClick_pushBtn(index)" class="push-line pointer">+</span><span v-show="index!=0"
                                                                                                       @click="onClick_deleteBtn(index)"
                                                                                                       class="push-line pointer">-</span>
+
+
                     </div>
-                    <div class="count-set" v-if="item.max=='-1'">
+                    <div class="" v-if="item.max=='-1'">
                         <div class="count-left">
                             <input type="number" v-model="item.min" >
                             以上
@@ -36,7 +38,7 @@
                 </div>
             </div>
             <!--<p class="count-tips">请输入有效数量</p>-->
-            <div class="m-title button-box">
+            <div class="button-box clearfix">
                 <div class="button pointer border-btn hb-fill-middle2-bg" @click="onClick_closeBtn">取消</div>
                 <div class="button pointer bg-btn hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
             </div>
