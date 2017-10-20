@@ -13,23 +13,25 @@
                 <div class="count-set" v-for="(item,index) in priceList">
                     <div v-if="item.max!='-1'">
                         <div class="count-left">
-                            <input type="number" :value="item.min" @change="onChange_range($event,index,'min')"> ~
-                            <input type="number" :value="item.max" @change="onChange_range($event,index,'max')"></div>
+                            <input type="number" v-model="item.min" > ~
+                            <input type="number" v-model="item.max"></div>
                         <div class="count-right">
-                            单价：¥ <input type="number" :value="item.unitPrice" @change="onChange_unitPrice($event,index)">元 / 个
+                            单价：¥ <input type="number" v-model="item.unitPrice">元 / 个
                         </div>
                         <span @click="onClick_pushBtn(index)" class="push-line pointer">+</span><span v-show="index!=0"
-                                                                            @click="onClick_deleteBtn(index)" class="push-line pointer">-</span>
+                                                                                                      @click="onClick_deleteBtn(index)"
+                                                                                                      class="push-line pointer">-</span>
                     </div>
                     <div class="count-set" v-if="item.max=='-1'">
                         <div class="count-left">
-                            <input type="number" :value="item.min" @change="onChange_range($event,index,'min')">
+                            <input type="number" v-model="item.min" >
                             以上
                         </div>
                         <div class="count-right">
-                            单价：¥ <input type="number" :value="item.unitPrice">元 / 个
+                            单价：¥ <input type="number" v-model="item.unitPrice">元 / 个
                         </div>
                     </div>
+
 
                 </div>
             </div>
@@ -58,23 +60,30 @@
                 }]
             }
         },
+        props: {
+            price: {
+                default: []
+            }
+        },
         watch: {},
         methods: {
             init(){
-                if( g.data.rulePool.dataList.length>0){
-                    this.priceList = g.data.rulePool.dataList.slice(0);
-                }
+                this.priceList = __merge(this.priceList,this.price,true);
+
             },
             onClick_closeBtn(){
                 this.$emit('close');
+                this.init();
             },
             onClick_saveBtn(){
+                debugger
+
                 for (var i = 0; i < this.priceList.length; i++) {
                     if (!this.priceList[i].min || !this.priceList[i].max || !this.priceList[i].unitPrice) {
                         g.ui.toast("请填写全部内容");
                         return
                     }
-                    if (isNaN(this.priceList[i].min) || this.priceList[i].min < 0 || (isNaN(this.priceList[i].max)||this.priceList[i].max < 0&&this.priceList[i].max!=-1)) {
+                    if (isNaN(this.priceList[i].min) || this.priceList[i].min < 0 || (isNaN(this.priceList[i].max) || this.priceList[i].max < 0 && this.priceList[i].max != -1)) {
                         g.ui.toast("数量区间应为整数且不能小于0");
                         return
                     }
@@ -82,7 +91,7 @@
                         g.ui.toast("二维码价格应为精确到小数点后两位的正数");
                         return
                     }
-                    if(this.priceList[i].min>this.priceList[i].max&&this.priceList[i].max!=-1){
+                    if (this.priceList[i].min == this.priceList[i].max && this.priceList[i].max != -1) {
                         g.ui.toast("数量区间最小值不得大于最大值");
                         return
 
@@ -93,7 +102,7 @@
                             return
                         }
                     }
-                    if(this.priceList[i + 1] && this.priceList[i + 1].min){
+                    if (this.priceList[i + 1] && this.priceList[i + 1].min) {
                         if (this.priceList[i + 1].min != this.priceList[i].max) {
                             g.ui.toast("数量区间不能间断");
                             return
@@ -104,7 +113,10 @@
                 g.net.call("config/updateQrcodeUnitPrice", {
                     'data': data
                 }).then(($data) => {
-                    g.data.rulePool.update(this.priceList)
+                    var obj={};
+                    obj.qrcodeUnitParamResultList = this.priceList;
+
+                    g.data.rulePool.update(obj);
                     this.$emit('close');
                     this.$emit('init');
                 }, (err) => {

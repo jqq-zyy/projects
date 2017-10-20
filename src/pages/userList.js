@@ -88,7 +88,7 @@ var hash = {
 
 export function convertList($list, $headerList, $type)
 {
-	debugger;
+	
 	var list = $list.slice(0);
 	var idList = [];
 	for (var item of $headerList)

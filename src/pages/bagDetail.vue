@@ -249,7 +249,7 @@
 				totalPage: 1,
 				statusList: ["全部", "成功", "失败"],
 				bagDetailList: [],
-				currentType: "",
+				currentType: "receiveId",
 				inputContent: "",
 				date: {
 					startTime: 0,

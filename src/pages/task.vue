@@ -124,6 +124,10 @@
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
     @import "../css/common.scss";
+    .gray td{
+        color:#999 !important;
+
+    }
 </style>
 
 

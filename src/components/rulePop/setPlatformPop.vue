@@ -15,7 +15,7 @@
                 <span>倍</span>
             </div>
             <p class="count-tipes">精确到小数点后一位</p>
-            <div class="m-title button-box" >
+            <div class="m-title button-box">
                 <div class="button pointer border-btn hb-fill-middle2-bg" @click=" onClick_closeBtn">取消</div>
                 <div class="button pointer bg-btn hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
             </div>
@@ -46,7 +46,7 @@
                 else if (isNaN($val) || $val < 0) {
                     this.min = $oldVal;
                     return
-                } else if ($val > this.max) {
+                } else if (Number($val) > Number(this.max)) {
                     this.min = this.max;
                     return
                 }
@@ -59,10 +59,12 @@
                 else if (isNaN($val) || $val < 0) {
                     this.max = $oldVal;
                     return
-                } else if ($val < this.min) {
+                } else if (Number($val) < Number(this.min)) {
                     this.max = this.min;
                     return
+
                 }
+
             }
         },
         methods: {
@@ -72,6 +74,10 @@
             },
             onClick_closeBtn(){
                 this.$emit('close');
+                this.init();
+
+
+
             },
             onClick_saveBtn(){
                 if (!this.min || !this.max) {

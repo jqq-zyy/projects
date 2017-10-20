@@ -178,7 +178,7 @@
 				// activityEQueryStartTime: '',
 				// activityEQueryEndTime: '',
 				dataObj: {},
-				currentType: "",
+				currentType: "activityName",
 				inputContent: "",
 				typeList: [
 					{

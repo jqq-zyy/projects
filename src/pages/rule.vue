@@ -89,7 +89,7 @@
             <!--设置二维码单价-->
             <transition name="bounce">
                 <div class="affix-box default-pos-type" v-show="isShow_refusePop === 'ewm-price'">
-                    <set-unit-price-pop @init="init" @close="onClick_closeBtn" ></set-unit-price-pop>
+                    <set-unit-price-pop @init="init" @close="onClick_closeBtn" :price ="dataList"></set-unit-price-pop>
                 </div>
             </transition>
 
@@ -131,7 +131,7 @@
                 maxQrcodeScanNum: 0,
                 max: 0,
                 min: 0,
-                platformRpSupport: false
+                platformRpSupport: false,
 
             }
         },

@@ -100,7 +100,7 @@
 			},
 
 			onClick_promptBtn(){
-				g.url = ("/task")
+				g.url = ("/")
 			},
 			onUpdate_messageNum($data){
 

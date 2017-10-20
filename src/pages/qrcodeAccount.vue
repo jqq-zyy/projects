@@ -167,7 +167,7 @@
                 totalPage: 1,
                 statusList: ["全部", "未付款", "付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
                 qrcodeList: [],
-                currentType: "",
+                currentType: "orderId",
                 inputContent: "",
                 errMsg: "",
                 date: {

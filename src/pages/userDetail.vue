@@ -91,7 +91,7 @@
 									<div>
 										<span class="msg-info">全部活动数：{{infoObj.activityTotalNum}}</span>
 										<span class="msg-info">进行中的活动数：{{infoObj.activityIngNum}}</span>
-										<span class="msg-info">全部活动数：{{infoObj.activityFreezeNum}}</span>
+										<span class="msg-info">冻结中的活动数：{{infoObj.activityFreezeNum}}</span>
 									</div>
 								</div>
 
