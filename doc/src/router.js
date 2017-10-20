@@ -95,7 +95,7 @@ export default [
 		preload: LoginMain
 	}, {
 
-		path: '/task',
+		path: '/',
 		name: "待办任务",
 		component: UpcoimgTask,
 		preload: UpcoimgTaskMain

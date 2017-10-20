@@ -13,8 +13,7 @@ export default class MessagePool {
 
 	update($dObj)
 	{
-		debugger
-
+		
 		$dObj.hasOwnProperty('orderId') && (_orderId = $dObj.orderId);
 		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
 		if($dObj.data){

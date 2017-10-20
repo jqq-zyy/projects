@@ -151,7 +151,8 @@
 				},
 				searchObj: {},
 				totalPage: 0,
-				currentType: "",
+				currentType: "logon",
+
 				inputContent: "",
 				typeList: [
 					{

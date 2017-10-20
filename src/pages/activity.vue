@@ -33,14 +33,14 @@
 											<span class="creat-time">开始时间：从</span>
 											<div class="date-from">
 												<input type="text" class="startTime date-input pointer"
-													   v-model="dataObj.activitySQueryBeginTime"
+													   v-model="dataObj.activitySQueryStartTime"
 													   readonly="true"
-													   @click.stop="onClick_showCalendar('isShow_SQueryBeginTime')">
+													   @click.stop="onClick_showCalendar('isShow_SQueryStartTime')">
 												<img class="date-del" :src="g.config.path.images+'/close.png'"
-													  @click.stop="onClick_resetTime('activitySQueryBeginTime')">
+													  @click.stop="onClick_resetTime('activitySQueryStartTime')">
 												<hw-date type="date" skin="simple"
-														 @change="onClick_chooseSQueryBeginTime"
-														 v-model="isShow_dataObj.isShow_SQueryBeginTime"></hw-date>
+														 @change="onClick_chooseSQueryStartTime"
+														 v-model="isShow_dataObj.isShow_SQueryStartTime"></hw-date>
 											</div>
 										</div>
 										<span class="goto">至</span>
@@ -164,7 +164,7 @@
 				isLoad: false,
 				isShow_dropList: false,
 				isShow_dataObj: {
-					isShow_SQueryBeginTime: false,
+					isShow_SQueryStartTime: false,
 					isShow_SQueryEndTime: false,
 					isShow_EQueryStartTime: false,
 					isShow_EQueryEndTime: false
@@ -178,7 +178,7 @@
 				// activityEQueryStartTime: '',
 				// activityEQueryEndTime: '',
 				dataObj: {},
-				currentType: "",
+				currentType: "activityName",
 				inputContent: "",
 				typeList: [
 					{
@@ -248,10 +248,10 @@
 				this.statusList = g.data.activityStatusPool.list;
 			},
 			initDate(){
-				this.dataObj.activitySQueryBeginTime = g.timeTool.getDate(this.dataObj.activitySQueryBeginTime, true);
-				this.dataObj.activitySQueryEndTime = this.dataObj.activitySQueryBeginTime;
-				this.dataObj.activityEQueryStartTime = this.dataObj.activitySQueryBeginTime;
-				this.dataObj.activityEQueryEndTime = this.dataObj.activitySQueryBeginTime;
+				this.dataObj.activitySQueryStartTime = g.timeTool.getDate(this.dataObj.activitySQueryStartTime, true);
+				this.dataObj.activitySQueryEndTime = this.dataObj.activitySQueryStartTime;
+				this.dataObj.activityEQueryStartTime = this.dataObj.activitySQueryStartTime;
+				this.dataObj.activityEQueryEndTime = this.dataObj.activitySQueryStartTime;
 			},
 			initSearchData(){
 				this.dataObj = {
@@ -260,7 +260,7 @@
 					activityStatus: "",
 					sortField: "create_time",
 					sortOrder: "desc",
-					activitySQueryBeginTime: '',
+					activitySQueryStartTime: '',
 					activitySQueryEndTime: '',
 					activityEQueryStartTime: '',
 					activityEQueryEndTime: ''
@@ -452,15 +452,15 @@
 				}
 				trace(this.isShow_dataObj);
 			},
-			onClick_chooseSQueryBeginTime($timeStamp){
-				this.dataObj.activitySQueryBeginTime = g.timeTool.getDate($timeStamp, true);
+			onClick_chooseSQueryStartTime($timeStamp){
+				this.dataObj.activitySQueryStartTime = g.timeTool.getDate($timeStamp, true);
 				;
 				//this.activitySQueryBeginTime = g.timeTool.getDate($timeStamp, true);
-				if (this.dataObj.activitySQueryBeginTime > this.dataObj.activitySQueryEndTime)
+				if (this.dataObj.activitySQueryStartTime > this.dataObj.activitySQueryEndTime)
 				{
 					this.onClick_chooseSQueryEndTime($timeStamp);
 				}
-				this.isShow_dataObj.isShow_SQueryBeginTime = false;
+				this.isShow_dataObj.isShow_SQueryStartTime = false;
 
 			},
 
@@ -468,9 +468,9 @@
 				this.dataObj.activitySQueryEndTime = g.timeTool.getDate($timeStamp, true);
 				;
 				// this.activitySQueryEndTime = g.timeTool.getDate($timeStamp, true);
-				if (this.dataObj.activitySQueryEndTime < this.dataObj.activitySQueryBeginTime)
+				if (this.dataObj.activitySQueryEndTime < this.dataObj.activitySQueryStartTime)
 				{
-					this.onClick_chooseSQueryBeginTime($timeStamp);
+					this.onClick_chooseSQueryStartTime($timeStamp);
 				}
 				this.isShow_dataObj.isShow_SQueryEndTime = false;
 			},
@@ -501,7 +501,7 @@
 				window.open(g.webParam.url.server
 						+ "/export/exportActivityStatisticList?page=0&pageSize=0&activityStatus="
 						+ this.activityStatus.join(",")
-						+ "&activitySQueryBeginTime=" + this.dataObj.activitySQueryBeginTime
+						+ "&activitySQueryStartTime=" + this.dataObj.activitySQueryStartTime
 						+ "&activitySQueryEndTime=" + this.dataObj.activitySQueryEndTime
 						+ "&activityEQueryStartTime=" + this.dataObj.activityEQueryStartTime
 						+ "&activityEQueryEndTime=" + this.dataObj.activityEQueryEndTime
@@ -512,7 +512,7 @@
 				trace(g.webParam.url.server
 						+ "/export/exportActivityStatisticList?page=0&pageSize=0&activityStatus="
 						+ this.activityStatus.join(",")
-						+ "&activitySQueryBeginTime=" + this.dataObj.activitySQueryBeginTime
+						+ "&activitySQueryStartTime=" + this.dataObj.activitySQueryStartTime
 						+ "&activitySQueryEndTime=" + this.dataObj.activitySQueryEndTime
 						+ "&activityEQueryStartTime=" + this.dataObj.activityEQueryStartTime
 						+ "&activityEQueryEndTime=" + this.dataObj.activityEQueryEndTime

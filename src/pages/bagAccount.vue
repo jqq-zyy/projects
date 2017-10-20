@@ -165,7 +165,7 @@
 				totalPage: 1,
 				statusList: ["全部", "未付款", "付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
 				bagList: [],
-				currentType: "",
+				currentType: "orderId",
 				inputContent: "",
 				errMsg: "",
 				date: {
@@ -198,8 +198,7 @@
 				headerHeight: 60,
 				footerHeight: 60,
 				boxHeight: 610,
-				bodyHeight: 420
-			}
+				bodyHeight: 420			}
 		},
 		components: {
 			MainLayout,
@@ -241,7 +240,7 @@
 				this.totalPage = info.totalPage;
 				var obj = {};
 				obj.header = g.data.staticTableHeaderPool.list.concat();
-				obj.body = convertList(g.data.bagPool.list, g.data.staticTableHeaderPool.list, "account");
+				obj.body = convertList(g.data.bagPool.list, g.data.staticTableHeaderPool.list, "bagAccount");
 				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.bagPool);
 				this.tableData = obj;
 			},

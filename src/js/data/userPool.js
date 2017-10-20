@@ -28,7 +28,7 @@ export default class UserPool {
         if (model) {
             model.hasOwnProperty('shopAllAmount') && (_shopAllAmount = model.shopAllAmount);
             model.hasOwnProperty('platformAllAmount') && (_platformAllAmount = model.platformAllAmount);
-            model.hasOwnProperty('rpSendAllNum') && (_rpSendAllNum = model.rpSendAllNum);
+            model.hasOwnProperty('platformRpSendAllNum') && (_rpSendAllNum = model.platformRpSendAllNum);
             model.hasOwnProperty('qrcodeScanAllNum') && (_qrcodeScanAllNum = model.qrcodeScanAllNum);
             model.hasOwnProperty('qrcodeBindAllNum') && (_qrcodeBindAllNum = model.qrcodeBindAllNum);
             model.hasOwnProperty('qrcodeExportAllNum') && (_qrcodeExportAllNum = model.qrcodeExportAllNum);
@@ -174,7 +174,7 @@ function updateData($dObj) {
     $dObj.hasOwnProperty('authStatusDesc') && (this.authStatusDesc = $dObj.authStatusDesc);
     $dObj.hasOwnProperty('shopAmount') && (this.shopAmount = $dObj.shopAmount);
     $dObj.hasOwnProperty('platformAmount') && (this.platformAmount = $dObj.platformAmount);
-    $dObj.hasOwnProperty('rpSendNum') && (this.rpSendNum = $dObj.rpSendNum);
+    $dObj.hasOwnProperty('platformRpSendNum') && (this.rpSendNum = $dObj.platformRpSendNum);
     $dObj.hasOwnProperty('qrcodeScanNum') && (this.qrcodeScanNum = $dObj.qrcodeScanNum);
     $dObj.hasOwnProperty('qrcodeBindNum') && (this.qrcodeBindNum = $dObj.qrcodeBindNum);
     $dObj.hasOwnProperty('qrcodeExportNum') && (this.qrcodeExportNum = $dObj.qrcodeExportNum);
@@ -205,3 +205,7 @@ function updateData($dObj) {
     // }
 
 }
+
+
+
+

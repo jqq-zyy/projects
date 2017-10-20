@@ -167,7 +167,7 @@
                 totalPage: 1,
                 statusList: ["全部", "未付款", "付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
                 qrcodeList: [],
-                currentType: "",
+                currentType: "orderId",
                 inputContent: "",
                 errMsg: "",
                 date: {
@@ -243,7 +243,7 @@
                 this.totalPage = info.totalPage;
                 var obj = {};
                 obj.header = g.data.staticTableHeaderPool.list.concat();
-                obj.body = convertList(g.data.qrcodePool.list, g.data.staticTableHeaderPool.list, "account");
+                obj.body = convertList(g.data.qrcodePool.list, g.data.staticTableHeaderPool.list, "qrcodeAccount");
                 obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.qrcodePool);
                 this.tableData = obj;
                this.qrcodeList = info.list;

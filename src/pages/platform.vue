@@ -213,7 +213,12 @@
                     name: "发起人"
                 }],
 
-                currentType: '',
+                currentType: 'orderId',
+
+
+
+
+
                 inputContent: "",
                 platformList: [],
                 currnetPlatform: {},

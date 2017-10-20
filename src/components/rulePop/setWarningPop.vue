@@ -56,6 +56,7 @@
 			},
 			onClick_closeBtn(){
 				this.$emit('close');
+				this.init();
 			},
 			onClick_saveWarningBtn(){
 				if(!this.warningAmount){
