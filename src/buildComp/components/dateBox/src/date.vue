@@ -382,8 +382,7 @@
 				{
 					date[key] = int(this.date[key])
 				}
-				var dateArr = [date.year, date.month, date.day];
-				var dateStamp = int(new Date(dateArr).getTime() / 1000);
+				var dateStamp = int(new Date(date.year, (date.month - 1), date.day).getTime() / 1000);
 				var stamp = dateStamp + date.hour * 60 * 60 + date.minute * 60 + date.second;
 				return stamp;
 			},
