@@ -104,6 +104,7 @@
 			},
 			onConfirm_login(){
 				this.logonObj.password = sha256(this.pwd);
+				trace(sha256(this.pwd))
 				//this.logonObj.password = this.pwd;
 				g.net.call("user/adminLogin", this.logonObj).then(($data) =>
 				{

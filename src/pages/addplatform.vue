@@ -53,6 +53,58 @@
                     </div>
                 </div>
             </div>
+            <!--账户充值成功-->
+            <transition name="bounce">
+                <div class="affix-box default-pos-type" v-show="isShow_successBox">
+                    <div class="pop-edit-password pop-edit">
+                        <div class="show-close-btn">
+                            <img :src="g.config.path.images+'/close.png'"
+                                 @click="onClick_backBtn"/>
+                        </div>
+                        <div class="pop-tit pop-tit-center">确认充值</div>
+                        <div class="pop-body add-staff-body">
+                            <div class="m-title ">
+                                <p class="text-center color">请确认充值金额</p>
+                                <p class="text-center recharge">充值金额：<span>{{paramObj.amount}}</span>元</p>
+                            </div>
+                            <div class="m-title msg-box staff-button">
+                                <div class="staff-btn pointer border-btn hb-fill-middle2-bg" @click="onClick_backBtn">
+                                    返回
+                                </div>
+                                <div class="staff-btn pointer bg-btn hb-fill-middle2-rev "
+                                     @click="onClick_goRechargeBtn">
+                                    前去充值
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </transition>
+            <!--账户充值确认刷新-->
+            <transition name="bounce">
+                <div class="affix-box default-pos-type" v-show="isShow_confirmBox">
+                    <div class="pop-edit-password pop-edit">
+                        <div class="show-close-btn">
+                            <img :src="g.config.path.images+'/close.png'"
+                                 @click="onClick_closeBtn"/>
+                        </div>
+                        <div class="pop-tit pop-tit-center"></div>
+                        <div class="pop-body add-staff-body">
+                            <div class="m-title ">
+                                <p class="text-center color">充值成功后请刷新页面</p>
+                            </div>
+                            <div class="m-title msg-box staff-button">
+                                <div class="confirm-button pointer bg-btn hb-fill-middle2-rev "
+                                     @click="onClick_refresh">
+                                    刷新页面
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </transition>
         </div>
     </main-layout>
 </template>
@@ -70,6 +122,8 @@
         data(){
             return {
                 isLoad: false,
+                isShow_successBox: false,
+                isShow_confirmBox: false,
                 g: g,
                 paramObj: {
                     orderType: 21,
@@ -126,21 +180,52 @@
             onClick_saveBtn(){
                 if (!this.paramObj.amount) {
                     g.ui.toast("请填写流水金额")
+                    return
                 }
                 else if (this.paramObj.remarks == "") {
                     g.ui.toast("请填写备注")
+                    return
                 }
                 else if (this.paramObj.account == "") {
                     g.ui.toast("请填写账号")
+                    return
                 }
                 var obj = {};
-                g.net.call("order/addPlatformAccountOrder",  this.paramObj).then(($data) => {
-                    g.url = ("/platform");
+                g.net.call("order/addPlatformAccountOrder", this.paramObj).then(($data) => {
+                    if (this.paramObj.orderType == 21) {
+                        g.data.save('pay', $data.payForm);
+                        this.orderId = $data.orderId;
+                        this.isShow_successBox = true;
+                    } else {
+                        g.ui.toast("新建提现流水成功")
+                        g.url = ("/platform");
+                    }
+
                 }, (err) => {
                     g.func.dealErr(err);
                 });
             },
-
+            onClick_backBtn(){
+                g.net.call("order/closeAdminOrder", {
+                    'orderId': this.orderId
+                }).then(($obj) => {
+                    this.isShow_successBox = false;
+                }, (err) => {
+                    g.func.dealErr(err);
+                });
+            },
+            onClick_goRechargeBtn(){
+                this.isShow_successBox = false;
+                this.isShow_confirmBox = true;
+                window.open(g.path.domain + '/pay.html');
+            },
+            onClick_refresh(){
+                g.url = ("/platform");
+            },
+            onClick_closeBtn(){
+                this.isShow_successBox = false;
+                this.isShow_confirmBox = false;
+            }
         }
     }
 </script>

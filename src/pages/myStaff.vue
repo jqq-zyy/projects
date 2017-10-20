@@ -175,7 +175,7 @@
 					"logon": "",
 					"roleId": "",
 					"telphone":"",
-					"password": sha256(888888)
+					"password": sha256('888888')
 				}
 			},
 			initSearchData(){

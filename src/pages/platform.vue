@@ -270,8 +270,8 @@
             },
             initSearchData(){
                 this.dataObj = {
-                    'orderTypes': "",
-                    'orderStatus': "",
+                    'orderTypes': "0",
+                    'orderStatus': "0",
                     'beginTimeStart': '',
                     'beginTimeEnd': '',
                     'page': 1,

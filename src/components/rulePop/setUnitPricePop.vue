@@ -69,6 +69,7 @@
         methods: {
             init(){
                 this.priceList = __merge(this.priceList,this.price,true);
+                trace(this.priceList)
 
             },
             onClick_closeBtn(){
@@ -76,8 +77,6 @@
                 this.init();
             },
             onClick_saveBtn(){
-                debugger
-
                 for (var i = 0; i < this.priceList.length; i++) {
                     if (!this.priceList[i].min || !this.priceList[i].max || !this.priceList[i].unitPrice) {
                         g.ui.toast("请填写全部内容");
@@ -115,7 +114,6 @@
                 }).then(($data) => {
                     var obj={};
                     obj.qrcodeUnitParamResultList = this.priceList;
-
                     g.data.rulePool.update(obj);
                     this.$emit('close');
                     this.$emit('init');
