@@ -63,15 +63,15 @@
                         </div>
                         <div class="pop-tit pop-tit-center">确认充值</div>
                         <div class="pop-body add-staff-body">
-                            <div class="m-title ">
+                            <div class="pay-success ">
                                 <p class="text-center color">请确认充值金额</p>
                                 <p class="text-center recharge">充值金额：<span>{{paramObj.amount}}</span>元</p>
                             </div>
-                            <div class="m-title msg-box staff-button">
-                                <div class="staff-btn pointer border-btn hb-fill-middle2-bg" @click="onClick_backBtn">
+                            <div class="m-title msg-box button-box">
+                                <div class="button pointer border-btn hb-fill-middle2-bg" @click="onClick_backBtn">
                                     返回
                                 </div>
-                                <div class="staff-btn pointer bg-btn hb-fill-middle2-rev "
+                                <div class="button pointer bg-btn hb-fill-middle2-rev "
                                      @click="onClick_goRechargeBtn">
                                     前去充值
                                 </div>
@@ -91,11 +91,11 @@
                         </div>
                         <div class="pop-tit pop-tit-center"></div>
                         <div class="pop-body add-staff-body">
-                            <div class="m-title ">
-                                <p class="text-center color">充值成功后请刷新页面</p>
+                            <div class="pay-success">
+                                充值成功后请刷新页面
                             </div>
-                            <div class="m-title msg-box staff-button">
-                                <div class="confirm-button pointer bg-btn hb-fill-middle2-rev "
+                            <div class="m-title msg-box button-box">
+                                <div class="refresh-btn pointer bg-btn hb-fill-middle2-rev "
                                      @click="onClick_refresh">
                                     刷新页面
                                 </div>
@@ -123,7 +123,7 @@
             return {
                 isLoad: false,
                 isShow_successBox: false,
-                isShow_confirmBox: false,
+                isShow_confirmBox: true,
                 g: g,
                 paramObj: {
                     orderType: 21,
