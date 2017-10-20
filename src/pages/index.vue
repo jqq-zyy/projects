@@ -6,10 +6,8 @@
 				<div class="right-content-wrap">
 					<common-top-nav @click="onClick_msgContent"></common-top-nav>
 					<div class="admin-data-items">
-						<p class="right-header">
-							系统通知
-						</p>
 						<div class="right-body">
+							<p class="g-title">系统通知</p>
 							<div class="activity-bar">
 								<div class="activity-bar-top">
 								<span class="type-item pointer " @click="onClick_changeType('')"
@@ -31,26 +29,30 @@
 								</div>
 							</div>
 
-							<div class="admin-calendar-table">
+							<div class="admin-calendar-table" style="background: #ffffff">
 								<table>
+									<thead>
 									<tr>
-										<td class="first-col">标题</td>
-										<td>内容</td>
-										<td>类型</td>
-										<td @click="onClick_sortBtn('send_time')" class="pointer">发送时间
+										<th class="first-col">标题</th>
+										<th><span>|</span>内容</th>
+										<th><span>|</span>类型</th>
+										<th @click="onClick_sortBtn('send_time')" class="pointer"><span>|</span>发送时间
 
 											<common-sort :type="dataObj.sortOrder"
 														 :target="'send_time'"
 														 :currentField="dataObj.sortField"
 											></common-sort>
-										</td>
+										</th>
 									</tr>
+									</thead>
+									<tbody>
 									<tr v-for="item in messageList" @click="onClick_msgContent(item.id)">
 										<td>{{item.title}}</td>
 										<td v-html="item.content" class="message-box"></td>
 										<td v-text="onGet_typeContent(item.type)"></td>
 										<td>{{item.time}}</td>
 									</tr>
+									</tbody>
 									<!--</transition>-->
 								</table>
 							</div>
@@ -66,7 +68,7 @@
 						<div class="pop-edit-password add-level-pop refund-pop">
 							<div class="show-close-btn">
 								<img :src="g.config.path.images+'/close.png'"
-									 @click="onClick_closeBtn"/>
+									 @click="onClick_closeBtn" />
 							</div>
 							<div class="step-about-tit show-recharge-tips">
 								系统通知
@@ -168,7 +170,8 @@
 			},
 			onChange_currentPage($page, $pageSize){
 				this.dataObj.page = $page;
-				if($pageSize!=this.dataObj.pageSize){
+				if ($pageSize != this.dataObj.pageSize)
+				{
 					this.dataObj.pageSize = $pageSize;
 					this.dataObj.page = 1
 				}
@@ -269,12 +272,13 @@
 		white-space: nowrap;
 		overflow: hidden;
 	}
-	.msg-content{
-		width:334px;
-		height:150px;
-		border:1px solid #ccc;
-		float:left;
-		padding:10px;
+
+	.msg-content {
+		width: 334px;
+		height: 150px;
+		border: 1px solid #cccccc;
+		float: left;
+		padding: 10px;
 
 	}
 </style>

@@ -58,6 +58,9 @@ div.mint-popup {
   background: #f2f4f9;
   border-bottom: 1px solid #d0d3dc;
 }
+.pop-tit-center{
+  text-align: center;
+}
 
 .pop-edit {
   min-width: 600px;
@@ -74,7 +77,6 @@ div.mint-popup {
       margin-top: 20px;
       line-height: 40px;
       color: #4a4a4a;
-      overflow: auto;
       .push-line {
         display: inline-block;
         width:15px;
@@ -410,4 +412,8 @@ div.reset-pop {
 }
 .label-right{
   margin-left: 50px;
+}
+
+.platform-pop{
+  max-width: 600px;
 }

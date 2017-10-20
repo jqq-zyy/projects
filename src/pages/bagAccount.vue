@@ -69,7 +69,6 @@
 									 @click="onClick_exportAllBtn">导出全部
 								</div>
 							</div>
-
 							<hw-table :tableData="tableData"
 									  :boxWidth="boxWidth"
 									  :boxHeight="boxHeight"

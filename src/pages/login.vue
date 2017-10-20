@@ -173,13 +173,12 @@
 			input {
 				height: 38px;
 				line-height: 38px;
-				width: 220px;
+				width: 230px;
 				float: left;
 				border: 1px solid #dbdee7;
 				border-radius: 2px;
-				padding-left: 50px;
+				padding-left: 40px;
 				font-size: 14px;
-
 			}
 		}
 		.header {

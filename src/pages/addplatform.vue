@@ -1,9 +1,9 @@
 <template>
+
     <main-layout :isLoad="isLoad">
         <div slot="content" class="content-box">
             <div class="admin-main-wrap">
                 <common-nav :nav="'platform'"></common-nav>
-
                 <div class="right-content-wrap">
                     <common-top-nav></common-top-nav>
                     <div class="admin-data-items">
@@ -25,28 +25,28 @@
                                                id="cash">提现支出
                                     </label>
                                 </div>
-                                <div>
+								<div>
                                     <p>流水金额：</p>
                                     <input type="text" v-model="paramObj.amount">
                                 </div>
                                 <div>
                                     <p>备注：</p>
 									<textarea id="" cols="30" rows="10" v-model="paramObj.remark"
-                                              placeholder="不超过50字"></textarea></div>
-                                <div class="base-way">
-                                    <p>支付方式：</p>
-                                    <span>支付宝</span>
-                                </div>
-                                <div class="base-origin">
-                                    <p>来源账户：</p>
-                                    <input type="text" placeholder="支付宝账号" v-model="paramObj.targetAccount">
-                                </div>
-                                <div class="base-operate">
-                                    <div class="button hb-fill-middle2-bg" @click="onClick_resetBtn">取消</div>
-                                    <div class="button hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
-                                </div>
+											  placeholder="不超过50字"></textarea></div>
+								<div class="base-way">
+									<p>支付方式：</p>
+									<span>支付宝</span>
+								</div>
+								<div class="base-origin float-left">
+									<p>来源账户：</p>
+									<input type="text" placeholder="支付宝账号" v-model="paramObj.targetAccount">
+								</div>
+								<div class="base-operate">
+									<div class="button border-btn hb-fill-middle2-bg" @click="onClick_resetBtn">取消</div>
+									<div class="button bg-btn hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
+								</div>
 
-                            </div>
+							</div>
 
                         </div>
                         <common-footer></common-footer>
@@ -231,10 +231,10 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-    @import "../css/common.scss";
+	@import "../css/common.scss";
 </style>
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
-    @import "../css/personlInfo.scss";
+	@import "../css/personlInfo.scss";
 
 </style>
 

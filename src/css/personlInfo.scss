@@ -83,7 +83,7 @@
 	text-indent: 1em;
 	margin-bottom: 20px;
 	overflow: hidden;
-	p{
+	p {
 	  display: inline-block;
 	  width: 90px;
 	  text-align: right;
@@ -108,19 +108,19 @@
 	  padding: 5px;
 	  border: 1px solid #cccccc;
 	}
-	textarea::-webkit-input-placeholder,input::-webkit-input-placeholder {
+	textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
 	  font-size: 14px;
 	  color: #cccccc;
 	}
-	textarea:-ms-input-placeholder,input:-ms-input-placeholder {
+	textarea:-ms-input-placeholder, input:-ms-input-placeholder {
 	  font-size: 14px;
 	  color: #cccccc;
 	}
-	textarea:-ms-input-placeholder,input:-ms-input-placeholder {
+	textarea:-ms-input-placeholder, input:-ms-input-placeholder {
 	  font-size: 14px;
 	  color: #cccccc;
 	}
-	textarea::-webkit-input-placeholder,input::-webkit-input-placeholder {
+	textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
 	  font-size: 14px;
 	  color: #cccccc;
 	}
@@ -129,9 +129,9 @@
 	font-size: 16px;
   }
   .base-origin {
-	float: right;
-	margin-right: 150px;
-	input{
+	float: left;
+	margin-left: 250px;
+	input {
 	  font-size: 14px;
 	}
   }
@@ -140,37 +140,34 @@
   }
 
   .base-operate {
+	clear: both;
 	float: left;
-	width: 100%;
+	width: 686px;
+	display: flex;
+	justify-content: center;
 	.button {
 	  text-align: center;
-	  float: left;
-	  border: 1px solid #01aaef;
-	  text-indent: 0;
 	  line-height: 36px;
-	  margin-left: 286px;
 	  cursor: pointer;
-	  &:nth-last-of-type(1){
-		float: right;
-		margin-left: 0;
-		margin-right: 376px;
-	  }
+	  text-indent: 0;
+	}
+	.button:last-child{
+	  margin-left: 100px;
 	}
   }
-  label{
+  label {
 	cursor: pointer;
   }
 }
 
-.pop-edit{
+.pop-edit {
   overflow: hidden;
-  .show-recharge-tips{
-	text-align: center;
+  .show-recharge-tips {
 	margin-top: 20px;
-
   }
 
 }
 .add-platform {
 	background: #ffffff;
 }
+
