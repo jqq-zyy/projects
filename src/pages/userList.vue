@@ -78,7 +78,7 @@
 
 							<div class="all-out">
 								<div class=" pointer all-out-btn bg-btn hb-fill-middle2-rev float-right
-									" @click="onClick_exportBtn">导出全部
+									" @click="onClick_exportAllBtn">导出全部
 								</div>
 							</div>
 
@@ -403,7 +403,27 @@
 			onClick_userItem($id){
 				g.url = ("/userdetail?id=" + $id)
 			},
-			onClick_exportBtn(){
+			onClick_exportAllBtn(){
+				window.open(g.webParam.url.server
+						+ "/export/exportShopsStatisticList?page=0&pageSize=0"
+						+ "&freezeStatus=" + this.searchObj.freezeStatus
+						+ "&authStatus=" + this.searchObj.authStatus
+						+ "&startTime=" + this.date.startTimeStr
+						+ "&endTime=" + this.date.endTimeStr
+						+ "&sortField=" + this.searchObj.sortField
+						+ "&sortOrder=" + this.searchObj.sortOrder
+						+ "&" + this.currentType + "=" + this.inputContent
+				)
+				trace(g.webParam.url.server
+						+ "/export/exportShopsStatisticList?page=0&pageSize=0"
+						+ "&freezeStatus=" + this.searchObj.freezeStatus
+						+ "&authStatus=" + this.searchObj.authStatus
+						+ "&startTime=" + this.date.startTimeStr
+						+ "&endTime=" + this.date.endTimeStr
+						+ "&sortField=" + this.searchObj.sortField
+						+ "&sortOrder=" + this.searchObj.sortOrder
+						+ "&" + this.currentType + "=" + this.inputContent)
+
 			},
 //			onClick_lookItem($id){
 //				g.url = ("/userdetail?id=" + $id)

@@ -465,6 +465,7 @@
 					"remark": this.refuseContent
 				}).then(($data) =>
 				{
+					this.isShow_refusePop = false;
 					this.onUpdate_qrcodeList();
 					this.initRefundObj();
 				}, (err) =>

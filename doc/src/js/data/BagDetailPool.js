@@ -110,8 +110,8 @@ function createData($dObj)
 function updateData($dObj)
 {
 	$dObj.hasOwnProperty('receiveId') && (this.id = $dObj.receiveId);
-	$dObj.hasOwnProperty('shopAmount') && (this.shopAmount = $dObj.shopAmount/100);
-	$dObj.hasOwnProperty('platformRewardAmount') && (this.platformAmount = $dObj.platformRewardAmount/100);
+	$dObj.hasOwnProperty('shopAmount') && (this.shopAmount = $dObj.shopAmount);
+	$dObj.hasOwnProperty('platformRewardAmount') && (this.platformAmount = $dObj.platformRewardAmount);
 	$dObj.hasOwnProperty('receiveStatus') && (this.status = $dObj.receiveStatus);
 	$dObj.hasOwnProperty('receiveStatusDesc') && (this.statusDesc = $dObj.receiveStatusDesc);
 	$dObj.hasOwnProperty('receiverAlipayAccount') && (this.alipayAccount = $dObj.receiverAlipayAccount);
