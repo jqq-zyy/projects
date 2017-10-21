@@ -85,8 +85,6 @@
 									  :bodyHeight="bodyHeight"
 									  :footerHeight="footerHeight"
 									  :fixHeader="true"
-									  :leftFixedCols="12"
-									  :rightFixedCols="0"
 									  :eachRowHeight="eachRowHeight"
 									  :eachColWidth="boxWidth/12"
 									  :isShowIdCol="true"

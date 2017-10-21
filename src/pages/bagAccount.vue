@@ -76,7 +76,6 @@
 									  :bodyHeight="bodyHeight"
 									  :footerHeight="footerHeight"
 									  :fixHeader="true"
-									  :leftFixedCols="9"
 									  :eachRowHeight="eachRowHeight"
 									  :eachColWidth="boxWidth/9.01"
 

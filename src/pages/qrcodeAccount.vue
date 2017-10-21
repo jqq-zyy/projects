@@ -77,8 +77,6 @@
                                       :bodyHeight="bodyHeight"
                                       :footerHeight="footerHeight"
                                       :fixHeader="true"
-                                      :leftFixedCols="11"
-                                      :rightFixedCols="0"
                                       :eachRowHeight="eachRowHeight"
                                       :eachColWidth="boxWidth/11"
                                       :isShowIdCol="true"
