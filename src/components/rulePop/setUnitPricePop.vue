@@ -86,14 +86,13 @@
                         g.ui.toast("数量区间应为整数且不能小于0");
                         return
                     }
-                    if (isNaN(this.priceList[i].unitPrice) || this.priceList[i].unitPrice < 0 || (this.priceList[i].unitPrice.toString().indexOf(".") > 0 && this.priceList[i].unitPrice.toString().split(".")[1].length > 2)) {
+                    if (isNaN(this.priceList[i].unitPrice) || this.priceList[i].unitPrice <= 0 || (this.priceList[i].unitPrice.toString().indexOf(".") > 0 && this.priceList[i].unitPrice.toString().split(".")[1].length > 2)) {
                         g.ui.toast("二维码价格应为精确到小数点后两位的正数");
                         return
                     }
                     if (this.priceList[i].min == this.priceList[i].max && this.priceList[i].max != -1) {
                         g.ui.toast("数量区间最小值不得大于最大值");
                         return
-
                     }
                     if (this.priceList[i - 1] && this.priceList[i - 1].max) {
                         if (this.priceList[i].min != this.priceList[i - 1].max) {

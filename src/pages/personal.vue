@@ -108,7 +108,7 @@
 				}
 				g.net.call("user/updateAdminPassword", {
 					"userId": g.data.get("userInfo").userId,
-					"oldPassword": this.oldPwd,
+					"oldPassword": sha256(this.oldPwd),
 					"newPassword": sha256(this.newPwd)
 				}).then(($data)=>
 				{

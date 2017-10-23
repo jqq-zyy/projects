@@ -123,7 +123,7 @@
             return {
                 isLoad: false,
                 isShow_successBox: false,
-                isShow_confirmBox: true,
+                isShow_confirmBox: false,
                 g: g,
                 paramObj: {
                     orderType: 21,
