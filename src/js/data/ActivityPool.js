@@ -152,12 +152,13 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('activityStatusDesc') && (this.activityStatusDesc = $dObj.activityStatusDesc);
 	$dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
 	$dObj.hasOwnProperty('createTimeDesc') && (this.createTimeDesc = $dObj.createTimeDesc);
-	$dObj.hasOwnProperty('qrCodeNum') && (this.qrCodeNum = $dObj.qrCodeNum);
-	$dObj.hasOwnProperty('totalScanCount') && (this.totalScanCount = $dObj.totalScanCount);
-	$dObj.hasOwnProperty('useRpAmount') && (this.useRpAmount = $dObj.useRpAmount);
-	$dObj.hasOwnProperty('useRpAmountDesc') && (this.useRpAmountDesc = $dObj.useRpAmountDesc);
+	$dObj.hasOwnProperty('qrcodeBindNum') && (this.qrCodeNum = $dObj.qrcodeBindNum);
+	$dObj.hasOwnProperty('qrcodeScanNum') && (this.totalScanCount = $dObj.qrcodeScanNum);
+	$dObj.hasOwnProperty('rpReceiveAmountDesc') && (this.useRpAmount = $dObj.rpReceiveAmountDesc);
+	$dObj.hasOwnProperty('rpReceiveAmountDesc') && (this.useRpAmountDesc = $dObj.rpReceiveAmountDesc);
 	$dObj.hasOwnProperty('activityStartTimeDesc') && (this.startTime = $dObj.activityStartTimeDesc);
 	$dObj.hasOwnProperty('activityEndTimeDesc') && (this.endTime = $dObj.activityEndTimeDesc);
-	$dObj.hasOwnProperty('platformRpReceiveAmount') && (this.platformRpReceiveAmount = $dObj.platformRpReceiveAmount);
+	$dObj.hasOwnProperty('rpPlatformAmountDesc') && (this.platformRpReceiveAmount = $dObj.rpPlatformAmountDesc);
+
 
 }
