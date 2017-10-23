@@ -95,7 +95,6 @@ div.mint-popup {
         text-align: justify;
         border: 1px solid #dbdee7;
         border-radius: 2px;
-        color: #979797;
       }
       .multiple {
         width: 100px;
@@ -336,19 +335,23 @@ div.reset-pop {
   width: 640px;
 }
 .set-code-price {
+  .input-money{
+    height: auto;
+    max-height: 320px;
+    overflow-y: auto;
+  }
   .count {
     float: left;
   }
   .count-set {
     float: left;
-    width: 90%;
+    //width: 90%;
     margin-left: 45px;
     margin-bottom: 25px;
     &:nth-of-type(1) {
       margin-left: 0;
     }
     .count-left, .count-right {
-      width: 44%;
       float: left;
       input {
         width: 80px;
@@ -358,8 +361,11 @@ div.reset-pop {
       }
     }
     .count-left {
-      width: 215px;
+      width: 212px;
       margin-right: 10px;
+    }
+    .count-right{
+     margin-right: 10px;
     }
   }
   .count-tips {
