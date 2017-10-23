@@ -117,13 +117,13 @@
 									  :bodyHeight="bodyHeight"
 									  :footerHeight="footerHeight"
 									  :fixHeader="true"
-									  :leftFixedCols="10"
 									  :eachRowHeight="eachRowHeight"
-									  :eachColWidth="boxWidth/10"
+									  :eachColWidth="boxWidth/11"
 									  :isShowTotal="true"
 									  @clickHead="onClick_headItem"
 									  @clickBody="onClick_bodyItem"
-									  :lightColsList="[1]">								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
+									  :lightColsList="[1]">
+								<div class="relative middle bgc-ff" :style="{minHeight:bodyHeight+'px'}">
 
 									<p v-show="g.data.activityPool.list.length==0" class="absolute no-record"
 									   :style="{left:boxWidth/2+'px'}">

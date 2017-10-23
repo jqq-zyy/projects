@@ -8,7 +8,7 @@
             设置二维码单价
         </div>
         <div class="pop-body set-code-price">
-            <div class="input-money m-title">
+            <div class="input-money m-title ">
                 <span class="count">数量：</span>
                 <div class="count-set" v-for="(item,index) in priceList">
                     <div v-if="item.max!='-1'">
@@ -18,11 +18,9 @@
                         <div class="count-right">
                             单价：¥ <input type="number" v-model="item.unitPrice">元 / 个
                         </div>
-                        <span @click="onClick_pushBtn(index)" class="push-line pointer">+</span><span v-show="index!=0"
-                                                                                                      @click="onClick_deleteBtn(index)"
-                                                                                                      class="push-line pointer">-</span>
-
-
+                        <span @click="onClick_pushBtn(index)" class="push-line pointer">+</span>
+                        <span v-show="index!=0" @click="onClick_deleteBtn(index)"
+                              class="push-line pointer">-</span>
                     </div>
                     <div class="" v-if="item.max=='-1'">
                         <div class="count-left">
@@ -146,19 +144,3 @@
         }
     }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

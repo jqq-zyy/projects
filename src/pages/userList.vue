@@ -92,7 +92,7 @@
 									  :leftFixedCols="4"
 									  :rightFixedCols="1"
 									  :eachRowHeight="eachRowHeight"
-									  :eachColWidth="120"
+									  :eachColWidth="200"
 									  :isShowIdCol="true"
 									  :isShowTotal="true"
 									  @clickBtn="onClick_btn"
@@ -265,17 +265,23 @@
 				this.searchObj.startTime = this.date.startTimeStr;
 				this.searchObj.endTime = this.date.endTimeStr;
 				this.searchObj[this.currentType] = this.inputContent;
-				var url ;
-				if($isByPage){
+				var url;
+				if ($isByPage)
+				{
 					url = "user/queryShopStatisticListByPage";
-				}else{
+				}
+				else
+				{
 					url = "user/queryShopStatisticList";
 				}
 				g.net.call(url, this.searchObj).then(($data) =>
 				{
-					if($isByPage){
+					if ($isByPage)
+					{
 						g.data.userPool.removeList();
-					}else{
+					}
+					else
+					{
 						g.data.userPool.removeAll();
 					}
 					g.data.userPool.update($data);
