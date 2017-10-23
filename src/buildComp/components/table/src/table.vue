@@ -76,7 +76,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="header-row" :style="{height:footerHeight+'px'}">
+			<div class="header-row" :style="{height:footerHeight+'px'}"  v-if="tableData.body.length >= 1 && isShowTotal">
 				<div class="header-col" v-for="(item,index) in tableData.footer"
 					 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 					 v-if="checkLeftFooter(item,index)">
@@ -113,7 +113,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="header-row" :style="{height:footerHeight+'px'}">
+			<div class="header-row" :style="{height:footerHeight+'px'}"  v-if="tableData.body.length >= 1 && isShowTotal">
 				<div class="header-col" v-for="(item,index) in tableData.footer"
 					 :style="{width:getWidth(item)+'px',height:eachRowHeight+'px'}"
 					 v-if="checkRightFooter(item,index)">

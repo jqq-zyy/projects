@@ -51,7 +51,7 @@
     "name": "平台红包发放数",
     "id": "rpSendNum",
     "sortBy": "desc",
-    "params": "rp_send_num",
+    "params": "platform_rp_send_num",
     "calTotal": "rpSendAllNum"
   },
   {

@@ -260,7 +260,7 @@
 				typeList: [
 					{
 						id: 'receiveId',
-						name: '领取id'
+						name: '流水ID'
 					}, {
 						id: "brandName",
 						name: '品牌名称'
@@ -301,6 +301,7 @@
 					if (this.typeList[i].id == this.currentType)
 					{
 						return this.typeList[i].name
+
 					}
 				}
 			}
