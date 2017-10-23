@@ -10,7 +10,7 @@
 					<div class="admin-data-items">
 						<div class="right-body">
 							<p class="g-title">
-								二维码账户
+								红包账户
 							</p>
 							<div class="bar-box">
 								<div class="bar-top">

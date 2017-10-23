@@ -332,29 +332,34 @@ div.reset-pop {
   text-indent: 7em;
 }
 
-.pop-edit .set-code-price {
+.price-pop{
+  width: 640px;
+}
+.set-code-price {
   .count {
     float: left;
   }
   .count-set {
     float: left;
     width: 90%;
-    margin-left: 9%;
+    margin-left: 45px;
     margin-bottom: 25px;
     &:nth-of-type(1) {
       margin-left: 0;
     }
     .count-left, .count-right {
-      width: 48%;
+      width: 44%;
       float: left;
       input {
         width: 80px;
         height: 36px;
+        margin: 0 5px;
 
       }
     }
     .count-left {
-      width: 42%;
+      width: 215px;
+      margin-right: 10px;
     }
   }
   .count-tips {
