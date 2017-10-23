@@ -294,6 +294,7 @@
 					"auditRecordId":this.infoObj.auditRecordId
 				}).then(($data) =>
 				{
+					g.ui.toast("审核成功");
 					this.isShow_refusePop = false;
 					queryShopDetail(this.shopId,this.init)
 				}, (err) =>
