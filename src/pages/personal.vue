@@ -32,17 +32,17 @@
 							<div class="m-title">
 								<span class="name ">旧密码：</span>
 								<input type="password"
-									   placeholder="" v-model="oldPwd">
+									   placeholder="请输入当前密码" v-model="oldPwd" >
 							</div>
 							<div class="m-title">
 								<span class="name">新密码：</span>
 								<input class="input-code" type="password"
-									   placeholder="" v-model="newPwd">
+									   placeholder="请输入新的密码" v-model="newPwd">
 							</div>
 							<div class="m-title">
 								<span class="name">确认密码：</span>
 								<input class="input-code" type="password"
-									   placeholder="" v-model="confirmPwd">
+									   placeholder="请再次输入密码" v-model="confirmPwd">
 							</div>
 							<div class="m-title">
 								<span class="pointer save-mod bg-btn hb-fill-middle2-rev" @click="onClick_saveBtn">保存修改</span>
