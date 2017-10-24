@@ -21,6 +21,10 @@ import BagDetailPool from "./BagDetailPool";
 import PlatformPool from "./PlatformPool";
 import RulePool from "./RulePool";
 import StaticTableHeaderPool from "./StaticTableHeaderPool";
+import NewMemberEchartsPool from "./NewMemberEchartsPool";
+import QrcodeCountEchartsPool from "./QrcodeCountEchartsPool";
+import ScanTimeEchartsPool from "./ScanTimeEchartsPool";
+import StatisticsPool from "./StatisticsPool";
 
 export var userInfo = new UserInfo(); //用户信息
 export var langPool = new LangPool(); //语言包数据池
@@ -41,6 +45,10 @@ export var bagDetailPool = new BagDetailPool(); //红包详情
 export var platformPool = new PlatformPool(); //平台财务信息
 export var rulePool = new RulePool(); //平台活动规则
 export var staticTableHeaderPool = new StaticTableHeaderPool(); //平台活动规则
+export var newMemberEchartsPool = new NewMemberEchartsPool(); //新扫码消费者图表数据池
+export var qrcodeCountEchartsPool = new QrcodeCountEchartsPool(); //扫码次数图表数据池
+export var scanTimeEchartsPool = new ScanTimeEchartsPool(); //扫码时间段数据池
+export var statisticsPool = new StatisticsPool(); //数据统计
 
 export function initStaticData()
 {
@@ -70,7 +78,11 @@ export function removeAll()
 	powerPool.removeAll();
 	activityDetailPool.removeAll();
 	messagePool.removeAll();
-	unReadMsgPool.removeAll()
+	unReadMsgPool.removeAll();
+	newMemberEchartsPool.removeAll();
+	qrcodeCountEchartsPool.removeAll();
+	scanTimeEchartsPool.removeAll();
+	statisticsPool .removeAll();
 }
 
 

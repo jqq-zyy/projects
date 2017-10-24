@@ -16,7 +16,7 @@ export default class QRcodePool {
 	update($dObj)
 	{
 		if($dObj.model){
-			$dObj.model.hasOwnProperty('qrcodeNum') && (_qrcodeNum = $dObj.model.qrcodeNum);
+			$dObj.model.hasOwnProperty('qrcodeCount') && (_qrcodeNum = $dObj.model.qrcodeCount);
 			$dObj.model.hasOwnProperty('qrcodeAmount') && (_qrcodeAmount = $dObj.model.qrcodeAmount);
 		}
 

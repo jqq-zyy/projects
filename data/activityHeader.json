@@ -68,6 +68,6 @@
     "id": "platformRpReceiveAmount",
     "sortBy": "desc",
     "params": "rp_platform_amount",
-    "calTotal": "totalUseRpAmountDesc"
+    "calTotal": "rpPlatformAmount"
   }
 ]

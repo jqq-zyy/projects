@@ -29,6 +29,7 @@ import Addplatform from "./pages/addplatform.vue";
 import AddplatformMain from "./pages/addplatform";
 import Platform from "./pages/platform.vue";
 import PlatformMain from "./pages/platform";
+import ChartMain from "./pages/chart";
 import Chart from "./pages/chart.vue";
 import Rule from "./pages/rule.vue";
 import RuleMain from "./pages/rule";
@@ -79,8 +80,8 @@ export default [
 	}, {
 		path: '/chart',
 		name: "图表分析",
-		component: Chart
-//		preload: ChartMain
+		component: Chart,
+		preload: ChartMain
 	},
 	{
 		path: '/rule',

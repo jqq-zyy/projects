@@ -8,7 +8,7 @@ var _total = 0;
 var _totalQrCodeNum = 0;
 var _totalScanCount = 0;
 var _totalUseRpAmount = 0;
-var _totalUseRpAmountDesc = 0;
+var _rpPlatformAmount = 0;
 
 export default class ActivityPool {
 	constructor()
@@ -21,10 +21,11 @@ export default class ActivityPool {
 		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
 		if ($dObj.model)
 		{
-			$dObj.model.hasOwnProperty('totalQrCodeNum') && (_totalQrCodeNum = $dObj.model.totalQrCodeNum);
-			$dObj.model.hasOwnProperty('totalScanCount') && (_totalScanCount = $dObj.model.totalScanCount);
-			$dObj.model.hasOwnProperty('totalUseRpAmount') && (_totalUseRpAmount = $dObj.model.totalUseRpAmount);
-			$dObj.model.hasOwnProperty('totalUseRpAmountDesc') && (_totalUseRpAmountDesc = $dObj.model.totalUseRpAmountDesc);
+			$dObj.model.hasOwnProperty('qrcodeBindNum') && (_totalQrCodeNum = $dObj.model.qrcodeBindNum);
+			$dObj.model.hasOwnProperty('qrcodeScanNum') && (_totalScanCount = $dObj.model.qrcodeScanNum);
+			$dObj.model.hasOwnProperty('rpReceiveAmount') && (_totalUseRpAmount = $dObj.model.rpReceiveAmount);
+			$dObj.model.hasOwnProperty('rpPlatformAmount') && (_rpPlatformAmount = $dObj.model.rpPlatformAmount);
+
 		}
 		for (var item of $dObj.data)
 		{
@@ -71,16 +72,12 @@ export default class ActivityPool {
 	{
 		return _totalUseRpAmount;
 	}
-
-	get totalUseRpAmountDesc()
+	
+	get rpPlatformAmount()
 	{
-		return _totalUseRpAmountDesc;
+		return _rpPlatformAmount;
 	}
-
-	get completeCount()
-	{
-		return _completeCount;
-	}
+	
 
 	get totalPage()
 	{
@@ -111,7 +108,7 @@ export default class ActivityPool {
 		_totalQrCodeNum = 0;
 		_totalScanCount = 0;
 		_totalUseRpAmount = 0;
-		_totalUseRpAmountDesc = 0;
+		_rpPlatformAmount = 0;
 	}
 }
 
@@ -135,7 +132,6 @@ function createData($dObj)
 	d.platformRpReceiveAmount= 0;
 	d.activityStatus = 0;
 	d.shopId = 0;
-
 	d.update = updateData.bind(d);
 	d.update($dObj);
 	return d;
