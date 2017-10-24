@@ -17,7 +17,6 @@ export default class ActivityPool {
 
 	update($dObj)
 	{
-
 		$dObj.hasOwnProperty('totalPage') && (_totalPage = $dObj.totalPage);
 		if ($dObj.model)
 		{

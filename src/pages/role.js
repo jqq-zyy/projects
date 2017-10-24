@@ -3,10 +3,12 @@
  */
 export default function (to, next)
 {
+	g.ui.showLoading();
 	g.net.calls("permission/getRoleListByAdmin","permission/getPermissionList").then(($list) =>
 	{
 		g.data.rolePool.update($list[0]);
 		g.data.powerPool.update($list[1]);
+		g.ui.hideLoading();
 		next();
 	}, (err) =>
 	{
