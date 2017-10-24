@@ -15,9 +15,10 @@
                             <div class="bar-box">
                                 <div class="bar-top">
                                     <ul>
-                                        <li>总收入：{{totalAmount}}</li>
-                                        <li>总支出：{{payAmount}}</li>
-                                        <li>余额：{{balanceAmount}}</li>
+                                        <li>总收入：{{totalIncome}}元</li>
+                                        <li>总支出：{{totalPay}}元</li>
+                                        <li>二维码账户余额：{{qrcodeBalance}}个</li>
+                                        <li>红包账户余额：{{rpBalance}}元</li>
                                     </ul>
                                     <ul>
                                         <li>流水类型:</li>
@@ -214,11 +215,6 @@
                 }],
 
                 currentType: 'orderId',
-
-
-
-
-
                 inputContent: "",
                 platformList: [],
                 currnetPlatform: {},
@@ -231,9 +227,10 @@
                     endTime: 0
                 },
                 dataObj: {},
-                totalAmount: 0,
-                payAmount: 0,
-                balanceAmount: 0
+                totalIncome: 0,
+                totalPay: 0,
+                qrcodeBalance: 0,
+                rpBalance: 0
             }
         },
         computed: {
@@ -264,9 +261,11 @@
                 var info = g.data.platformPool;
                 this.totalPage = info.totalPage;
                 this.platformList = info.list;
-                this.totalAmount = info.totalIncome;
-                this.payAmount = info.totalDisburse;
-                this.balanceAmount = info.balance;
+                this.totalIncome = info.totalIncome;
+                this.totalPay = info.totalPay;
+                this.qrcodeBalance = info.qrcodeBalance;
+                this.rpBalance = info.rpBalance;
+
             },
             initSearchData(){
                 this.dataObj = {

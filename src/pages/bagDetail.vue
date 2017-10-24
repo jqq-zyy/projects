@@ -85,8 +85,6 @@
 									  :bodyHeight="bodyHeight"
 									  :footerHeight="footerHeight"
 									  :fixHeader="true"
-									  :leftFixedCols="12"
-									  :rightFixedCols="0"
 									  :eachRowHeight="eachRowHeight"
 									  :eachColWidth="boxWidth/12"
 									  :isShowIdCol="true"
@@ -262,7 +260,7 @@
 				typeList: [
 					{
 						id: 'receiveId',
-						name: '领取id'
+						name: '流水ID'
 					}, {
 						id: "brandName",
 						name: '品牌名称'
@@ -303,6 +301,7 @@
 					if (this.typeList[i].id == this.currentType)
 					{
 						return this.typeList[i].name
+
 					}
 				}
 			}

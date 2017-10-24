@@ -6,8 +6,9 @@ var _hash = Object.create(null);
 var _totalPage = 0;
 var _total = 0;
 var _totalIncome = 0;
-var _totalDisburse = 0;
-var _balance = 0;
+var _totalPay = 0;
+var _qrcodeBalance = 0;
+var _rpBalance = 0;
 var _typeData = {};
 
 export default class PlatformPool {
@@ -19,10 +20,10 @@ export default class PlatformPool {
 	{
 		if($dObj.hasOwnProperty('statisticData')){
 			$dObj.statisticData.hasOwnProperty('totalIncome') && (_totalIncome = $dObj.statisticData.totalIncome);
-			$dObj.statisticData.hasOwnProperty('totalDisburse') && (_totalDisburse = $dObj.statisticData.totalDisburse);
-			$dObj.statisticData.hasOwnProperty('balance') && (_balance = $dObj.statisticData.balance);
+			$dObj.statisticData.hasOwnProperty('totalPay') && (_totalPay = $dObj.statisticData.totalPay);
+			$dObj.statisticData.hasOwnProperty('qrcodeBalance') && (_qrcodeBalance = $dObj.statisticData.qrcodeBalance);
+			$dObj.statisticData.hasOwnProperty('rpBalance') && (_rpBalance = $dObj.statisticData.rpBalance);
 		}
-
 		if($dObj.hasOwnProperty('resultPageList')){
 			$dObj.resultPageList.hasOwnProperty('totalPage') && (_totalPage = $dObj.resultPageList.totalPage);
 			for (var item of $dObj.resultPageList.data)
@@ -53,14 +54,19 @@ export default class PlatformPool {
 		return _totalIncome;
 	}
 
-	get totalDisburse()
+	get totalPay()
 	{
-		return _totalDisburse;
+		return _totalPay;
 	}
 
-	get balance()
+	get qrcodeBalance()
 	{
-		return _balance;
+		return _qrcodeBalance;
+	}
+
+	get rpBalance()
+	{
+		return _rpBalance;
 	}
 
 	get typeData()
@@ -91,8 +97,9 @@ export default class PlatformPool {
 		_totalPage = 0;
 		_total = 0;
 		_totalIncome = 0;
-		_totalDisburse = 0;
-		_balance = 0;
+		_totalPay = 0;
+		_qrcodeBalance = 0;
+		_rpBalance = 0;
 		_typeData = {};
 	}
 }

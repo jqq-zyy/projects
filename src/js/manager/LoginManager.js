@@ -74,7 +74,7 @@ export function logout($toLogin = true, $goLogin = false)
  */
 export function goLogin($beBack = false, $goLogin = true)
 {
-	var backPath = "/user"; //跳转的地址：默认首页
+	var backPath = "/"; //跳转的地址：默认首页
 	var currPath = g.url; //当前页地址
 
 	if (isLogin)
