@@ -146,7 +146,9 @@
 								<span class="">请输入拒绝原因：</span>
 								<textarea name="" id="" cols="30" rows="10" class="describle-reasons"
 										  v-model="refuseContent" @focus="onFocus_refuseInput"></textarea>
-								<div v-show="isShow_hasError">拒绝原因不能为空</div>
+								<div class="refuse-reason" >
+									<span v-show="isShow_hasError">拒绝原因不能为空</span>
+								</div>
 							</div>
 							<div class="button-box" style="margin-top: 20px">
 								<div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不拒绝</div>
