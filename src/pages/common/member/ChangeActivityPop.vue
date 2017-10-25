@@ -77,6 +77,11 @@
         },
         watch: {
             contactList($val){
+                debugger
+
+
+
+
 
                 if (this.contactList.length == this.activityList.length) {
                     this.checked = true;
@@ -109,7 +114,7 @@
             onClick_dropItem($shopId, $name){
                 this.currentSearchType = $name;
                 this.isShow_dropList = false;
-                this.contactList = [];
+
                 this.onUpdate_activityList($shopId);
 
             },
@@ -120,7 +125,7 @@
                     g.data.activityPool.removeAll();
                     g.data.activityPool.update($data);
                     this.activityList = g.data.activityPool.list;
-
+                    this.contactList = [];
                 }, (err) => {
                     g.func.dealErr(err);
                 });

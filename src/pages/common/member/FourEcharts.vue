@@ -124,6 +124,8 @@ w<template>
                     this.scanEchartsX = g.data.statisticsPool.scanEchartsX;
                     this.mapList = g.data.statisticsPool.mapList;
                     this.sexList = g.data.statisticsPool.sexList;
+                    this.cityList=[0];
+
                     g.ui.hideLoading();
 
                 }, (err) => {

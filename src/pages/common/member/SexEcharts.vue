@@ -61,11 +61,10 @@
                                 itemStyle: {
                                     normal: {
                                         label: {
-                                            show: false
+                                            show: true,
+                                            formatter: '{b} : {c} ({d}%)'
                                         },
-                                        labelLine: {
-                                            show: false
-                                        }
+                                        labelLine :{show:true}
                                     },
                                     emphasis: {
                                         label: {
@@ -86,8 +85,6 @@
                 eCharts("echartsSex", eCharts_pie, dataList, '', () => {},6);
 
             }
-
-
         }
     }
 </script>
