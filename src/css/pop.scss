@@ -149,6 +149,11 @@ div.mint-popup {
         color: #a4a4a4;
       }
       .code-price {
+
+
+
+
+
         font-size: 14px;
         color: #979797;
         margin-left: 25px;
@@ -426,4 +431,41 @@ div.reset-pop {
 
 .platform-pop{
   max-width: 600px;
+}
+
+.activity-pop-box {
+  z-index: 1 !important;
+  .choose-activity-pop {
+    min-width: 500px;
+    .pop-body {
+      min-height: 430px;
+      position: relative;
+      .m-name{
+        font-weight: normal;
+        font-size: 14px;
+      }
+      .avtivity-list-box {
+        width: 270px;
+        height: auto;
+        max-height: 210px;
+        overflow-y: auto;
+        margin-left: 97px;
+        div{
+          line-height: 30px;
+        }
+      }
+      .all-label{
+        width: 270px;
+      }
+      .drop-box{
+        margin-top: 0;
+      }
+      .choose-box{
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        margin-left: -65px;
+      }
+    }
+  }
 }

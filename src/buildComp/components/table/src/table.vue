@@ -129,48 +129,7 @@
 	export default{
 		name: "hw-table",
 		created(){
-			this.$nextTick(() =>
-			{
-				var self = this;
-				if (this.isShowTotal && this.tableData.body.length >= 1)
-				{
-					this.$refs.footer.addEventListener('scroll', (e) =>
-					{
-						self.offsetLeft = self.$refs.footer.scrollLeft;
-						self.$refs.scrollCon.scrollLeft = self.offsetLeft;
-						self.$refs.header.scrollLeft = self.offsetLeft;
-					});
-
-				}
-				else
-				{
-					this.$refs.scrollCon.addEventListener('scroll', (e) =>
-					{
-						self.offsetLeft = self.$refs.scrollCon.scrollLeft;
-						self.$refs.header.scrollLeft = self.offsetLeft;
-					})
-				}
-
-				if (this.rightFixedCols === 0)
-				{
-					this.$refs.scrollCon.addEventListener('scroll', (e) =>
-					{
-						self.offsetTop = self.$refs.scrollCon.scrollTop;
-						self.$refs.leftTable && (self.$refs.leftTable.scrollTop = self.offsetTop);
-//						self.$refs.rightTable.scrollTop = self.offsetTop;
-					});
-				}
-				else
-				{
-					this.$refs.rightTable.addEventListener('scroll', (e) =>
-					{
-						self.offsetTop = self.$refs.rightTable.scrollTop;
-						self.$refs.leftTable && (self.$refs.leftTable.scrollTop = self.offsetTop);
-						self.$refs.scrollCon && (self.$refs.scrollCon.scrollTop = self.offsetTop);
-					});
-				}
-
-			})
+			this.init()
 		},
 		data()
 		{
@@ -252,7 +211,56 @@
 				}
 			}
 		},
+		updated()
+		{
+			this.init();
+		},
 		methods: {
+			init()
+			{
+				this.$nextTick(() =>
+				{
+					var self = this;
+					if (this.isShowTotal && this.tableData.body.length >= 1)
+					{
+						this.$refs.footer.addEventListener('scroll', (e) =>
+						{
+							self.offsetLeft = self.$refs.footer.scrollLeft;
+							self.$refs.scrollCon.scrollLeft = self.offsetLeft;
+							self.$refs.header.scrollLeft = self.offsetLeft;
+						});
+
+					}
+					else
+					{
+						this.$refs.scrollCon.addEventListener('scroll', (e) =>
+						{
+							self.offsetLeft = self.$refs.scrollCon.scrollLeft;
+							self.$refs.header.scrollLeft = self.offsetLeft;
+						})
+					}
+
+					if (this.rightFixedCols === 0)
+					{
+						this.$refs.scrollCon.addEventListener('scroll', (e) =>
+						{
+							self.offsetTop = self.$refs.scrollCon.scrollTop;
+							self.$refs.leftTable && (self.$refs.leftTable.scrollTop = self.offsetTop);
+//						self.$refs.rightTable.scrollTop = self.offsetTop;
+						});
+					}
+					else
+					{
+						this.$refs.rightTable.addEventListener('scroll', (e) =>
+						{
+							self.offsetTop = self.$refs.rightTable.scrollTop;
+							self.$refs.leftTable && (self.$refs.leftTable.scrollTop = self.offsetTop);
+							self.$refs.scrollCon && (self.$refs.scrollCon.scrollTop = self.offsetTop);
+						});
+					}
+
+				})
+			},
 			checkLeftHeader($item, index)
 			{
 				var isTrue = !this.isShowIdCol ? $item.id != 'id' ? true : false : true;
