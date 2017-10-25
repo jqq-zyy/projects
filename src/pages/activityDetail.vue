@@ -15,11 +15,11 @@
 									<span class="msg-info msf-info-width">创建时间:{{activityInfo.createTime}}</span>
 									<span class="msg-info msf-info-width">基础红包设定：
 										<span v-if="activityRpInfo.fixedAmount">
-											固定金额：{{activityRpInfo.fixedAmount}}元/个
+											固定金额：{{activityRpInfo.fixedAmount/100}}元/个
 
 										</span>
 										<span  v-if="activityRpInfo.randomMin">
-											随机金额：{{activityRpInfo.randomMin}}~{{activityRpInfo.randomMax}}元/个（平均金额{{activityRpInfo.randomAvg}}元/个）
+											随机金额：{{activityRpInfo.randomMin/100}}~{{activityRpInfo.randomMax/100}}元/个（平均金额{{activityRpInfo.randomAvg/100}}元/个）
 
 										</span>
 									</span>
@@ -29,7 +29,7 @@
 										  <!--@click="onClick_changeStatus(activityInfo.freezeStatus)"></span>-->
 									<span class="msg-info msf-info-width">开始时间：<span v-text="currentActivity(activityInfo.activityStartTimeStr)"></span></span>
 									<span class="msg-info msf-info-width">结束时间：<span v-text="currentActivity(activityInfo.activityEndTimeStr)"></span></span>
-									<span class="msg-info msf-info-width">剩余数量/二维码数量：{{remainQrCodeNum}}/{{totalQrCodeNum}}</span>
+									<span class="msg-info msf-info-width">剩余数量/总二维码数量：{{remainQrCodeNum}}/{{totalQrCodeNum}}</span>
 									<span class="msg-info msf-info-width">已发放金额：{{totalMakedAmount}}</span>
 									<span class="msg-info msf-info-width" style="width: 100%;">是否接受平台红包：<span v-text="isPlatformReward"></span></span>
 									<div class="msg-info msf-info-width">

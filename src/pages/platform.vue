@@ -17,7 +17,7 @@
                                     <ul>
                                         <li>总收入：{{totalIncome}}元</li>
                                         <li>总支出：{{totalPay}}元</li>
-                                        <li>二维码账户余额：{{qrcodeBalance}}个</li>
+                                        <li>二维码账户余额：{{qrcodeBalance}}元</li>
                                         <li>红包账户余额：{{rpBalance}}元</li>
                                     </ul>
                                     <ul>
