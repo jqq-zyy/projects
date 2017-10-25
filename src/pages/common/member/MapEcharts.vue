@@ -7,9 +7,8 @@
 			<div class="panel-body">
 				<div class="flot-chat">
 					<div class="curve-wrap" id="echartsMap"></div>
-					<div class="city-box">
+					<div class="city-box" v-show="">
 						<ul class="city-list">
-
 							<li class="city-item" v-for="item in cityList">
 								<span class="city-name">
 									{{item.regionName}}

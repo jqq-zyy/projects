@@ -1,13 +1,12 @@
 w<template>
     <div class="echarts-box">
-        <div class="data-bar">
+        <div class="data-bar ">
             <div class="recharge-record-left">
                 <span class="bag-use pointer" v-for="item in dateList"
                       :class="{'current':dateType==item.id}"
                       @click="onClick_dateBtn(item.id)">{{item.type}}</span>
             </div>
-
-            <div class="recharge-record-right">
+            <div class="recharge-record-right float-left">
                 <div class="date-box">
                     <span class="time-range">时间范围：从</span>
                     <div class="date-from">

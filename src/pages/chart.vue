@@ -38,7 +38,8 @@
 	export default {
 		created(){
 			this.isLoad = true;
-			if(_hash){
+			if (_hash)
+			{
 				_hash = Object.create(null);
 			}
 		},
@@ -82,16 +83,17 @@
 		height: 300px;
 		margin: auto;
 	}
-	.echarts-box{
-		overflow: hidden
 
+	.echarts-box {
+		overflow: hidden
 	}
+
 	@media only screen and(max-width: 1500px) {
 		.curve-wrap {
 			//width: 400px;
 			height: 300px;
 			margin: auto;
-	}
+		}
 	}
 </style>
 
