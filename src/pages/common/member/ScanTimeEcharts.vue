@@ -36,8 +36,8 @@
         </div>
         <div class="col col-12">
             <div class="panel">
-                <div class="panel-heading">消费时间断分布
-                    <span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>
+                <div class="panel-heading">消费时间段分布
+                    <!--<span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>-->
                 </div>
                 <div class="panel-body">
                     <div id="echartsBox">

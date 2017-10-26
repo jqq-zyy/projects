@@ -37,7 +37,7 @@
         <div class="col col-12">
             <div class="panel">
                 <div class="panel-heading">扫码次数走势图
-                    <span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>
+                    <!--<span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>-->
                 </div>
                 <div class="panel-body">
                     <div id="echartsBox">

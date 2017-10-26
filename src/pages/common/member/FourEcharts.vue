@@ -69,7 +69,7 @@ w<template>
                 activityList: [],
                 dateList: [],
                 scanEchartsX: [0],
-                cityList:[0],
+                cityList:[],
                 mapList: [0],
                 scanList: [0],
                 sexList: [0],
@@ -123,7 +123,7 @@ w<template>
                     this.scanEchartsX = g.data.statisticsPool.scanEchartsX;
                     this.mapList = g.data.statisticsPool.mapList;
                     this.sexList = g.data.statisticsPool.sexList;
-                    this.cityList=[0];
+                    this.cityList=[];
 
                     g.ui.hideLoading();
 

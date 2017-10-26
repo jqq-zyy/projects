@@ -103,6 +103,7 @@
                 this.shopList = g.data.userPool.list;
             },
             onClick_closeBtn(){
+                this.isShow_dropList = false;
                 this.$emit('close');
             },
             onClick_confirmBtn(){

@@ -91,12 +91,6 @@
 				}
 
 				this.onConfirm_login()
-
-
-
-
-
-
 			},
 			onConfirm_login(){
 				this.logonObj.password = sha256(this.pwd);
