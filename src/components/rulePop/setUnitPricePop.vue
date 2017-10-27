@@ -68,13 +68,20 @@
         watch: {},
         methods: {
             init(){
-                this.priceList = __merge(this.priceList,this.price,true);
-                trace(this.priceList)
+                // this.priceList = __merge(this.priceList,this.price,true);
+                this.priceList = [];
+                for(var i =0;i<this.price.length;i++){
+                    this.priceList.push({});
+                    this.$set(this.priceList[i],'min',this.price[i]['min'])
+                    this.$set(this.priceList[i],'max',this.price[i]['max'])
+                    this.$set(this.priceList[i],'unitPrice',this.price[i]['unitPrice'])
+                }
 
             },
             onClick_closeBtn(){
                 this.$emit('close');
                 this.init();
+
             },
             onClick_saveBtn(){
                 for (var i = 0; i < this.priceList.length; i++) {
@@ -112,7 +119,7 @@
                     'data': data
                 }).then(($data) => {
                     var obj={};
-                    obj.qrcodeUnitParamResultList = this.priceList;
+                    obj.qrcodeUnitParamResultList = __merge([],this.priceList,true);
                     g.data.rulePool.update(obj);
                     this.$emit('close');
                     this.$emit('init');
@@ -120,12 +127,6 @@
                     g.func.dealErr(err);
 
                 });
-            },
-            onChange_range($e, $index, $type){
-                this.priceList[$index][$type] = $e.target.value;
-            },
-            onChange_unitPrice($e, $index){
-                this.priceList[$index].unitPrice = $e.target.value;
             },
             onClick_pushBtn($index){
                 var max, min;
