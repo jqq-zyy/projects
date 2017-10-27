@@ -137,10 +137,11 @@
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/common.scss";
 	@import "../css/animation.scss";
+	@import "../css/pop.scss";
 </style>
 <style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/login.scss";
-	@import "../css/pop.scss";
+
 	.r-position {
 		position: relative;
 	}

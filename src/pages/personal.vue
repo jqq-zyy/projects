@@ -128,9 +128,6 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common.scss";
-	@import "../css/pop.scss";
-
 	.mod-box {
 		border: 1px solid #dbdee7;
 		border-radius: 2px;

@@ -75,9 +75,7 @@
 
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common.scss";
 	@import "../css/memberList.scss";
-
 	.curve-wrap {
 		//width: 500px;
 		height: 300px;
@@ -96,18 +94,3 @@
 		}
 	}
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

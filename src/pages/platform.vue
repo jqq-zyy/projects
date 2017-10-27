@@ -477,9 +477,6 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-    @import "../css/common";
-</style>
-<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
     @import "../css/myActivity";
 
     .my-activity .me-checkbox-core {
@@ -488,5 +485,3 @@
 
     }
 </style>
-
-

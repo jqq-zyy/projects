@@ -445,7 +445,6 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common.scss";
 	@import "../css/myBill.scss";
 
 	.date-input {
@@ -491,10 +490,3 @@
 		margin-top: -25px;
 	}
 </style>
-
-
-
-
-
-
-
