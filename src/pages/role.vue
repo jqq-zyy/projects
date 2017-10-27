@@ -178,11 +178,8 @@
 		}
 	}
 </script>
-<style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common.scss";
+<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/role.scss";
-	@import "../css/pop.scss";
-
 	.function-pop .tree-box {
 		height: 300px;
 		overflow: auto;

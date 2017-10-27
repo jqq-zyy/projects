@@ -1,5 +1,4 @@
 <template>
-
     <main-layout :isLoad="isLoad">
         <div slot="content" class="content-box">
             <div class="admin-main-wrap">
@@ -231,14 +230,5 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common.scss";
-</style>
-<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/personlInfo.scss";
-
 </style>
-
-
-
-
-

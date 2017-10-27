@@ -135,7 +135,6 @@
 			</transition>
 		</div>
 	</main-layout>
-
 </template>
 
 <script type="text/ecmascript-6">
@@ -501,7 +500,6 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common";
 	@import "../css/myActivity";
 
 	.my-activity .me-checkbox-core {

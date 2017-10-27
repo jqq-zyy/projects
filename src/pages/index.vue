@@ -259,7 +259,6 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common.scss";
 	@import "../css/myActivity.scss";
 
 	.my-activity .me-checkbox-core {

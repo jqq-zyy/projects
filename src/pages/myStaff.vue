@@ -341,14 +341,5 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common.scss";
 	@import "../css/myStaff.scss";
-	@import "../css/pop.scss";
 </style>
-
-
-
-
-
-
-

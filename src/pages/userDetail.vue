@@ -363,15 +363,6 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-    @import "../css/common.scss";
-    @import "../css/pop.scss";
+	@import "../css/personlInfo.scss";
+	@import "../css/userDetail.scss";
 </style>
-<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
-    @import "../css/personlInfo.scss";
-    @import "../css/userDetail.scss";
-</style>
-
-
-
-
-
