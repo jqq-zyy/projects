@@ -132,7 +132,7 @@
                 this.onUpdate_echartsData();
             },
             onUpdate_echartsData(){
-            	trace(1);
+
                 g.ui.showLoading()
                 var activityList = this.activityList.join(",");
                 g.net.call("statistic/newMemberStatistic", {

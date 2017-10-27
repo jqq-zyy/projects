@@ -321,7 +321,7 @@
 				obj.body = convertList(g.data.bagDetailPool.list, g.data.staticTableHeaderPool.list);
 				obj.footer = getFooterList(4, g.data.staticTableHeaderPool.list, g.data.bagDetailPool);
 				this.tableData = obj;
-				trace("this.tableDat====", this.tableData);
+
 				this.bagDetailList = info.list;
 			},
 			initSearchData(){
@@ -498,14 +498,7 @@
 						+ "&status=" + this.dataObj.status
 						+ "&" + this.currentType + "=" + this.inputContent
 				)
-				trace(g.webParam.url.server
-						+ "/export/exportRpReceiveList?page=0&pageSize=0&startTime="
-						+ this.date.startTimeStr
-						+ "&endTime=" + this.date.endTimeStr
-						+ "&sortField=" + this.dataObj.sortField
-						+ "&sortOrder=" + this.dataObj.sortOrder
-						+ "&status=" + this.dataObj.status
-						+ "&" + this.currentType + "=" + this.inputContent)
+
 			}
 
 		}

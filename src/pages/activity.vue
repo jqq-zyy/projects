@@ -431,7 +431,7 @@
 				}
 			},
 			onClick_showCalendar($str){
-				trace(this.isShow_dataObj)
+
 				for (var key in this.isShow_dataObj)
 				{
 					if (key == $str)
@@ -450,7 +450,7 @@
 						this.isShow_dataObj[key] = false;
 					}
 				}
-				trace(this.isShow_dataObj);
+
 			},
 			onClick_chooseSQueryStartTime($timeStamp){
 				this.dataObj.activitySQueryStartTime = g.timeTool.getDate($timeStamp, true);
@@ -509,16 +509,7 @@
 						+ "&sortOrder=" + this.dataObj.sortOrder
 						+ "&" + this.currentType + "=" + this.inputContent
 				)
-				trace(g.webParam.url.server
-						+ "/export/exportActivityStatisticList?page=0&pageSize=0&activityStatus="
-						+ this.activityStatus.join(",")
-						+ "&activitySQueryStartTime=" + this.dataObj.activitySQueryStartTime
-						+ "&activitySQueryEndTime=" + this.dataObj.activitySQueryEndTime
-						+ "&activityEQueryStartTime=" + this.dataObj.activityEQueryStartTime
-						+ "&activityEQueryEndTime=" + this.dataObj.activityEQueryEndTime
-						+ "&sortField=" + this.dataObj.sortField
-						+ "&sortOrder=" + this.dataObj.sortOrder
-						+ "&" + this.currentType + "=" + this.inputContent)
+
 
 			}
 		}

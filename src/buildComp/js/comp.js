@@ -12,7 +12,6 @@ import PopUp from "../components/popup";
 import DateBox from "../components/dateBox";
 
 const install = function(Vue, config = {}) {
-	trace('Button.name===', Button);
 	Vue.component(Icon.name, Icon);
 	Vue.component(Button.name, Button);
 	Vue.component(RadioBox.name, RadioBox);

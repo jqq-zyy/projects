@@ -281,15 +281,13 @@
                 else {
                     this.isShow_changeTypePop = true
                 }
-
-
             },
             onClick_closeBtn(){
                 this.initDefault();
 
             },
             onClick_sumbitFreezeBtn(){
-                if (this.freezeContent == "") {
+                if (this.freezeContent.trim() == "") {
                     this.isShow_hasFreezeError = true;
                     return
                 }
@@ -320,7 +318,6 @@
                     g.data.userDetailPool.update(obj);
                     this.init();
                     this.initDefault();
-
                     g.ui.toast("更新商户状态成功")
 
                 }, (err) => {

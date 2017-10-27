@@ -410,15 +410,7 @@
                         +"&orderTypes="+this.dataObj.orderTypes
                         +"&"+this.currentType+"="+this.inputContent
                 )
-                trace(g.webParam.url.server
-                        +"/export/exportPlatformAccountList?page=0&pageSize=0&beginTimeStart="
-                        + this.date.startTimeStr
-                        + "&beginTimeEnd="+this.date.endTimeStr
-                        +"&sortField="+this.dataObj.sortField
-                        +"&sortOrder="+this.dataObj.sortOrder
-                        +"&orderStatus="+this.dataObj.orderStatus
-                        +"&orderTypes="+this.dataObj.orderTypes
-                        +"&"+this.currentType+"="+this.inputContent)
+
             },
             onClick_showCalendar(str){
                 if (str == 'start') {

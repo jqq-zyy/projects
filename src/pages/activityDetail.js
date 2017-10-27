@@ -4,18 +4,20 @@
 export default function (to, next)
 {
 	var id = to.query.id;
+	queryActivityDetail(id,next)
+}
+
+export function queryActivityDetail($id,$callback) {
 	g.net.call("activity/queryActivityDetail",{
-		"activityId":id
+		"activityId":$id
 	}).then(($data) =>
 	{
 		g.data.activityDetailPool.removeAll();
 		g.data.activityDetailPool.update($data);
-		next();
+		$callback();
 	}, (err) =>
 	{
 		g.func.dealErr(err);
-		
+
 	});
 }
-
-

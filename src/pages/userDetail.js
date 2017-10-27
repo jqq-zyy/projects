@@ -8,10 +8,12 @@ export default function (to, next)
 }
 
 export function queryShopDetail($id,$callBack){
+	g.ui.showLoading();
 	g.net.call("user/queryShopDetail",{
 		"shopId":$id
 	}).then(($data) =>
 	{
+		g.ui.hideLoading()
 		g.data.userDetailPool.removeAll();
 		g.data.userDetailPool.update($data);
 		$callBack();
