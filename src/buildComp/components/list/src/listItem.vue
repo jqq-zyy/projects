@@ -11,7 +11,7 @@
 					:iconClass="checkedChildren.indexOf(itemData.id) >= 0?'icon-fangxingxuanzhong':'icon-fangxingweixuanzhong'"
 					@click="onClick_icon(itemData)"
 			></hw-icon>
-			<span @click="onClick_icon(itemData)" class="pointer color-#666">{{itemData.name}}</span>
+			<span @click="onClick_icon(itemData)" class="pointer color-for-span">{{itemData.name}}</span>
 		</div>
 		<ul v-if="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft">
 			<list-item :data="child" v-for="child in itemData.children" :showArrow="showArrow"

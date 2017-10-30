@@ -13,7 +13,7 @@
 						:iconClass="checkedChildren.indexOf(itemData.id) >= 0?'icon-fangxingxuanzhong':'icon-fangxingweixuanzhong'"
 						@click="onClick_icon(itemData)"
 				></hw-icon>
-				<span v-if="itemData.name" @click="onClick_icon(itemData)" class="pointer color-#666">{{itemData
+				<span v-if="itemData.name" @click="onClick_icon(itemData)" class="pointer color-for-span">{{itemData
 					.name}}</span>
 				<img :src="itemData.url" :alt="itemData.alt" v-if="itemData.url">
 			</div>
