@@ -145,7 +145,7 @@
                     return
                 }
                 else if ($val > 2000) {
-                    this.paramObj.amount = $oldVal;
+                    this.paramObj.amount = 2000;
                     return
                 }
             },

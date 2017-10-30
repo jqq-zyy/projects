@@ -45,7 +45,7 @@ var hash = {
     "userList": [
         {
             id: "audit",
-            condition: "authStatus",
+            condition: "authOperate",
             support: "审核",
             against: "",
             status: 1

@@ -159,6 +159,7 @@ function createData($dObj) {
     d.freezeStatus = 0;
     d.btn = [];
     d.authStatus = 0;
+    d.authOperate = 0;
     d.update = updateData.bind(d);
     d.update($dObj);
     return d;
@@ -184,27 +185,15 @@ function updateData($dObj) {
     $dObj.hasOwnProperty('rpCurrentAccount') && (this.rpCurrentAccount = $dObj.rpCurrentAccount);
     $dObj.hasOwnProperty('authStatus') && (this.authStatus = $dObj.authStatus);
     $dObj.hasOwnProperty('freezeStatus') && (this.freezeStatus = $dObj.freezeStatus);
-    // var obj = {
-    //     id: 0,
-    //     name: ""
-    // };
-    // if ($dObj.hasOwnProperty('freezeStatus') == 1) {
-    //     obj.id = 0;
-    //     obj.name = "冻结"
-    //     this.btn.push(obj);
-    // } else {
-    //     obj.id = 1;
-    //     obj.name = "解冻"
-    //     this.btn.push(obj);
-    // }
-    //
-    // if($dObj.hasOwnProperty('authStatus') == 1){
-    //     obj.id = 'auth';
-    //     obj.name = "审核"
-    //     this.btn.push(obj);
-    // }
+    $dObj.hasOwnProperty('authOperate') && (this.authOperate = $dObj.authOperate);
 
 }
+
+
+
+
+
+
 
 
 

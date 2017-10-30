@@ -226,16 +226,18 @@ li, ul {
   min-height: 100%;
   display: flex;
   flex-direction: row;
+  position: relative;
   .right-content-wrap {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: #eceef4;
-    .admin-data-items {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	background: #eceef4;
+	margin-left: 240px;
+	.admin-data-items {
+	  flex: 1;
+	  display: flex;
+	  flex-direction: column;
+	}
   }
 }
 
@@ -743,19 +745,20 @@ li, ul {
     color: #252332;
   }
   .date-from {
-    position: relative;
-    float: left;
-    .date-del {
-      position: absolute;
-      right: 0;
-      top: 8px;
-      cursor: pointer;
-      color: #333333;
-      z-index: 9999;
-      width: 26px;
-      height: 26px;
-      padding: 6px 2px;
-    }
+
+	position: relative;
+	float: left;
+	.date-del {
+	  position: absolute;
+	  right: 0;
+	  top: 8px;
+	  cursor: pointer;
+	  color: #333333;
+	  z-index: 9999;
+	  width: 26px;
+	  height: 26px;
+	  padding: 6px 2px;
+	}
   }
   .date-input {
     width: 145px;
