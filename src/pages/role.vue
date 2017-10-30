@@ -47,7 +47,7 @@
 					<div class="pop-edit-password pop-edit function-pop">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn" />
+								 @click="onClick_closeBtn"/>
 						</div>
 						<div class="pop-tit">
 							添加权限
@@ -60,8 +60,9 @@
 							<div class="m-title power-box">
 								<span class="name">权限范围：</span>
 								<hw-list :listData="powerList" :checkedList="selectKeys" :showArrow="true"
-										 @change="onChange_list" class="role-list"></hw-list>
+										 @change="onChange_list" class="role-list" :noShowRightList="[99]"></hw-list>
 							</div>
+
 							<div class="m-title button-box">
 								<div class="button border-btn pointer hb-fill-middle2-bg" @click="onClick_closeBtn">取消
 								</div>
@@ -76,7 +77,7 @@
 					<div class="pop-edit-password pop-edit function-pop">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn" />
+								 @click="onClick_closeBtn"/>
 						</div>
 						<div class="pop-tit">
 						</div>
