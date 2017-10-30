@@ -16,7 +16,7 @@
 							</span>
 							</div>
 							<div class="admin-data-items">
-								<div class="admin-calendar-table">
+								<div class="admin-calendar-table staff-table">
 									<table>
 										<thead>
 										<tr>
@@ -33,8 +33,8 @@
 											<td>{{item.userName}}</td>
 											<td>{{item.telphone}}</td>
 											<td>{{item.roleName}}</td>
-											<td>{{item.createTime}}</td>
-											<td>{{item.userStatusDesc}}</td>
+											<td :title="item.createTime">{{item.createTime}}</td>
+											<td class="status" style="width: 8%;">{{item.userStatusDesc}}</td>
 											<td>
 												<span class="pointer border-btn hb-fill-middle2-bg role-del-btn"
 													  @click="onClick_editBtn(item.id)">编辑</span>
@@ -80,7 +80,7 @@
 							</div>
 							<div class="m-title">
 								<span class="name">手机号：</span>
-								<input class="input-code" type="text" v-model = "staffObj.telphone">
+								<input class="input-code" type="text" v-model="staffObj.telphone">
 							</div>
 							<div class="m-title">
 								<span class="name">权限：</span>
@@ -104,8 +104,10 @@
 								<input class="input-code" type="text" v-model="confirmPwd">
 							</div>
 							<div class="m-title button-box">
-								<span class="pointer button border-btn hb-fill-middle2-bg"  @click="onClick_closeBtn">取消</span>
-								<span class="button pointer cancel-btn bg-btn hb-fill-middle2-rev" @click="onClick_confirmBtn" >保存</span>
+								<span class="pointer button border-btn hb-fill-middle2-bg"
+									  @click="onClick_closeBtn">取消</span>
+								<span class="button pointer cancel-btn bg-btn hb-fill-middle2-rev"
+									  @click="onClick_confirmBtn">保存</span>
 							</div>
 						</div>
 
@@ -146,8 +148,8 @@
 				roleList: [],
 				roleName: "请选择",
 				staffObj: {},
-				isAdd:false,
-				confirmPwd:""
+				isAdd: false,
+				confirmPwd: ""
 			}
 		},
 		components: {
@@ -174,7 +176,7 @@
 				this.staffObj = {
 					"logon": "",
 					"roleId": "",
-					"telphone":"",
+					"telphone": "",
 					"password": sha256('888888')
 				}
 			},
@@ -194,7 +196,7 @@
 				{
 					this.searchObj.page = $page;
 				}
-				if ($pageSize!=this.searchObj.pageSize)
+				if ($pageSize != this.searchObj.pageSize)
 				{
 					this.searchObj.pageSize = $pageSize;
 					this.searchObj.page = 1;
@@ -239,7 +241,9 @@
 				if (g.data.powerPool.list.length > 0)
 				{
 					this.initRole();
-				}else{
+				}
+				else
+				{
 					getRoleList(this.initRole);
 				}
 				this.initAddData();
@@ -252,7 +256,9 @@
 				if (g.data.powerPool.list.length > 0)
 				{
 					this.initRole();
-				}else{
+				}
+				else
+				{
 					getRoleList(this.initRole);
 				}
 				var staffObj = g.data.staffPool.getDataById($id)
@@ -271,7 +277,8 @@
 			onClick_confirmBtn(){
 				for (var key in this.staffObj)
 				{
-					if(key=="password"&&!this.isAdd){
+					if (key == "password" && !this.isAdd)
+					{
 						continue
 					}
 					if (this.staffObj[key] == "")
@@ -285,10 +292,14 @@
 					g.ui.toast('请填写正确格式的手机');
 					return;
 				}
-				if(this.isAdd){
+				if (this.isAdd)
+				{
 					this.onConfirm_addUser()
-				}else{
-					if(this.confirmPwd){
+				}
+				else
+				{
+					if (this.confirmPwd)
+					{
 						this.staffObj.password = sha256(this.confirmPwd);
 					}
 					this.onConfirm_editUser()
@@ -342,4 +353,11 @@
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../css/myStaff.scss";
+
+	.role-bar {
+		height: 74px;
+		line-height: 74px;
+		font-size: 14px;
+		margin-bottom: 25px;
+	}
 </style>
