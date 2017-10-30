@@ -108,7 +108,7 @@ function doInit($toUrl = "")
 {
 	if ($toUrl != "")
 	{
-		trace("$toUrl=====", $toUrl);
+		
 		g.url = $toUrl;
 	}
 

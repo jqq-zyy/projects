@@ -29,7 +29,7 @@
 			},
 			onChange_pageSize($id)
 			{
-				trace('$id',$id);
+
 				this.pageSize = $id;
 			}
 		}

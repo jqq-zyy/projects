@@ -92,7 +92,32 @@
 					</div>
 				</div>
 			</transition>
+			<!--二次确认删除-->
+			<transition name="bounce">
+				<div class="affix-box default-pos-type" v-show="isShow_confirmPop">
+					<div class="pop-edit-password pop-edit">
+						<div class="show-close-btn">
+							<img :src="g.config.path.images+'/close.png'"
+								 @click="onClick_closeBtn()" />
+						</div>
+						<div class="pop-tit">
+							确认删除
+						</div>
+						<div class="pop-body">
+							<div class="m-title text-center">
+								确认删除吗？
+							</div>
+							<div class="m-title button-box">
+								<span class="pointer button border-btn hb-fill-middle2-bg"
+									  @click="onClick_closeBtn">取消</span>
+								<span class="button pointer cancel-btn bg-btn hb-fill-middle2-rev"
+									  @click="onClick_confirmBtn">保存</span>
+							</div>
+						</div>
 
+					</div>
+				</div>
+			</transition>
 		</div>
 	</main-layout>
 </template>
@@ -119,6 +144,7 @@
 //				isShow_addPop: false,
 				isShow_rolePop: false,
 				isShow_deletePop: false,
+				isShow_confirmPop:false,
 				roleList: [],
 				roleName: "",
 				roleId: "",
@@ -179,10 +205,8 @@
 		}
 	}
 </script>
-<style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common.scss";
+<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/role.scss";
-	@import "../css/pop.scss";
 
 	.function-pop .tree-box {
 		height: 300px;
@@ -208,7 +232,6 @@
 		margin-top: 20px;
 		padding-left: 40px;
 		input {
-
 			width: 240px;
 			height: 40px;
 			box-sizing: border-box;
@@ -224,16 +247,10 @@
 
 	.power-box {
 		height: 300px;
-	}
-
-	.role-list {
-		height: auto;
-		max-height: 258px;
-		overflow-y: auto;
-		li {
-			div {
-				color: #666666;
-			}
+		.role-list {
+			height: auto;
+			max-height: 258px;
+			overflow-y: auto;
 		}
 	}
 </style>

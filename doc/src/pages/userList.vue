@@ -386,7 +386,7 @@
 			},
 			onClick_btn($btnId, $itemId)
 			{
-				trace('$item', $btnId, $itemId);
+
 			},
 			onClick_headItem($item)
 			{

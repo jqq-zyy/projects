@@ -2,7 +2,7 @@
         <div class="col col-6">
             <div class="panel">
                 <div class="panel-heading ">累计消费次数分布
-                    <span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>
+                    <!--<span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>-->
                 </div>
                 <div class="panel-body">
                     <div class="flot-chat">

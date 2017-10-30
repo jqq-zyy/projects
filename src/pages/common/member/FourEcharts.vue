@@ -69,7 +69,7 @@ w<template>
                 activityList: [],
                 dateList: [],
                 scanEchartsX: [0],
-                cityList:[0],
+                cityList:[],
                 mapList: [0],
                 scanList: [0],
                 sexList: [0],
@@ -123,6 +123,8 @@ w<template>
                     this.scanEchartsX = g.data.statisticsPool.scanEchartsX;
                     this.mapList = g.data.statisticsPool.mapList;
                     this.sexList = g.data.statisticsPool.sexList;
+                    this.cityList=[];
+
                     g.ui.hideLoading();
 
                 }, (err) => {
@@ -130,6 +132,10 @@ w<template>
                 });
             },
             onUpdate_CityStatistic($id){
+                if(!$id){
+                    return
+                }
+
                 g.ui.showLoading()
                 var activityList = this.activityList.join(",");
                 g.net.call("statistic/sweepCityStatistic", {

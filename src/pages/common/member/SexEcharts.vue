@@ -4,7 +4,7 @@
         <div class="panel">
 
             <div class="panel-heading">性别统计表
-                <span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>
+                <!--<span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>-->
             </div>
             <div class="panel-body">
                 <div class="flot-chat">
@@ -61,11 +61,10 @@
                                 itemStyle: {
                                     normal: {
                                         label: {
-                                            show: false
+                                            show: true,
+                                            formatter: '{b} : {c} ({d}%)'
                                         },
-                                        labelLine: {
-                                            show: false
-                                        }
+                                        labelLine :{show:true}
                                     },
                                     emphasis: {
                                         label: {
@@ -86,8 +85,6 @@
                 eCharts("echartsSex", eCharts_pie, dataList, '', () => {},6);
 
             }
-
-
         }
     }
 </script>

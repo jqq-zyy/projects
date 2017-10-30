@@ -14,10 +14,10 @@ export default class RulePool {
     }
 
     update($dObj) {
-        $dObj.hasOwnProperty('assertWarningAmount') && (_warningAmount = int($dObj.assertWarningAmount));
-        $dObj.hasOwnProperty('minPlatformRpMulti') && (_min = int($dObj.minPlatformRpMulti));
-        $dObj.hasOwnProperty('maxPlatformRpMulti') && (_max = int($dObj.maxPlatformRpMulti));
-        $dObj.hasOwnProperty('maxQrcodeScanNum') && (_maxQrcodeScanNum = int($dObj.maxQrcodeScanNum));
+        $dObj.hasOwnProperty('assertWarningAmount') && (_warningAmount = $dObj.assertWarningAmount);
+        $dObj.hasOwnProperty('minPlatformRpMulti') && (_min = $dObj.minPlatformRpMulti);
+        $dObj.hasOwnProperty('maxPlatformRpMulti') && (_max = $dObj.maxPlatformRpMulti);
+        $dObj.hasOwnProperty('maxQrcodeScanNum') && (_maxQrcodeScanNum = $dObj.maxQrcodeScanNum);
         $dObj.hasOwnProperty('platformRpSupport') && (_platformRpSupport = $dObj.platformRpSupport);
         $dObj.hasOwnProperty('qrcodeUnitParamResultList') && (_dataList = $dObj.qrcodeUnitParamResultList);
         

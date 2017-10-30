@@ -420,15 +420,7 @@
 						+ "&sortOrder=" + this.searchObj.sortOrder
 						+ "&" + this.currentType + "=" + this.inputContent
 				)
-				trace(g.webParam.url.server
-						+ "/export/exportShopsStatisticList?page=0&pageSize=0"
-						+ "&freezeStatus=" + this.searchObj.freezeStatus
-						+ "&authStatus=" + this.searchObj.authStatus
-						+ "&startTime=" + this.date.startTimeStr
-						+ "&endTime=" + this.date.endTimeStr
-						+ "&sortField=" + this.searchObj.sortField
-						+ "&sortOrder=" + this.searchObj.sortOrder
-						+ "&" + this.currentType + "=" + this.inputContent)
+
 
 			},
 //			onClick_lookItem($id){
@@ -445,7 +437,6 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/common.scss";
 	@import "../css/myBill.scss";
 
 	.date-input {
@@ -491,10 +482,3 @@
 		margin-top: -25px;
 	}
 </style>
-
-
-
-
-
-
-

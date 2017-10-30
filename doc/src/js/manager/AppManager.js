@@ -68,7 +68,7 @@ function initBuildComp()
 
 function initSocket()
 {
-	trace(socketManager)
+	
 	socketManager.init();
 	if (loginManager.isLogin)
 	{

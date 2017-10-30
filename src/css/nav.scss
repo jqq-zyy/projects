@@ -1,6 +1,9 @@
 .nav-navicon {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 240px;
-  //height: 100%;
+  height: 100%;
   background: #2d3463;
   display: flex;
   flex-direction: column;
@@ -47,7 +50,7 @@
 	}
 	.m-height-light {
 	  p {
-		color: #fff;
+		color: #ffffff;
 	  }
 	  .icon-r1 {
 		margin-top: 15px;
@@ -87,7 +90,7 @@
 	  }
 
 	}
-	li:hover{
+	li:hover {
 	  background: #0189c0;
 	}
 	.light-height {

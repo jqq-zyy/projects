@@ -2,12 +2,12 @@
 	<div class="col col-6">
 		<div class="panel">
 			<div class="panel-heading">消费地区分布
-				<span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>
+				<!--<span class="pointer out-btn bg-btn hb-fill-middle2-rev">导出全部</span>-->
 			</div>
 			<div class="panel-body">
 				<div class="flot-chat">
 					<div class="curve-wrap" id="echartsMap"></div>
-					<div class="city-box" v-show="">
+					<div class="city-box" v-show="cityList.length>0">
 						<ul class="city-list">
 							<li class="city-item" v-for="item in cityList">
 								<span class="city-name">
@@ -18,7 +18,6 @@
 								</span>
 							</li>
 						</ul>
-
 					</div>
 				</div>
 			</div>
@@ -101,6 +100,7 @@
 		}
 	}
 </script>
+
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	#echartsMap {
 		width: 80%;
@@ -165,6 +165,11 @@
 
 		#echartsMap {
 			width: 70%;
+
+
+
+
+
 
 		}
 	}

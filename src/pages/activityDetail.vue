@@ -11,8 +11,8 @@
 							<div class="admin-calendar-table user-detail-box">
 								<div class="detail-msg">
 									<div class="msg-title">基本信息</div>
-									<span class="msg-info msf-info-width">活动名称: {{activityInfo.activityName}}</span>
-									<span class="msg-info msf-info-width">创建时间:{{activityInfo.createTime}}</span>
+									<span class="msg-info msf-info-width">活动名称：{{activityInfo.activityName}}</span>
+									<span class="msg-info msf-info-width">创建时间：{{activityInfo.createTime}}</span>
 									<span class="msg-info msf-info-width">基础红包设定：
 										<span v-if="activityRpInfo.fixedAmount">
 											固定金额：{{activityRpInfo.fixedAmount/100}}元/个
@@ -23,10 +23,10 @@
 
 										</span>
 									</span>
-									<span class="msg-info msf-info-width">状态：{{activityInfo.activityStatusStr}}</span>
-									<!--<span class="pointer border-btn status-btn hb-fill-middle2-bg"-->
-										  <!--v-text="onConfirm_freezeStatus(activityInfo.freezeStatus)"-->
-										  <!--@click="onClick_changeStatus(activityInfo.freezeStatus)"></span>-->
+									<span class="msg-info msf-info-width">状态：{{activityInfo.activityStatusStr}}
+									<span class="pointer border-btn status-btn hb-fill-middle2-bg"
+										  v-text="onConfirm_freezeStatus(activityInfo.activityStatus)"
+										  @click="onClick_changeStatus(activityInfo.activityStatus)"></span></span>
 									<span class="msg-info msf-info-width">开始时间：<span v-text="currentActivity(activityInfo.activityStartTimeStr)"></span></span>
 									<span class="msg-info msf-info-width">结束时间：<span v-text="currentActivity(activityInfo.activityEndTimeStr)"></span></span>
 									<span class="msg-info msf-info-width">剩余数量/总二维码数量：{{remainQrCodeNum}}/{{totalQrCodeNum}}</span>
@@ -54,7 +54,6 @@
 									<span class="msg-info msf-info-width">显示图片：<img class="show-img pointer" :src="activityRpInfo.rpLogoUrl"  @click="onClick_seeImage(activityRpInfo.rpLogoUrl)"></span>
 								</div>
 							</div>
-
 						</div>
 						<common-footer></common-footer>
 
@@ -66,20 +65,47 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn" />
+								 @click="onClick_closeBtn"/>
 						</div>
 						<div class="pop-tit"></div>
 						<div class="pop-body">
-							<div class="m-title text-center">确认{{currentTypeDesc}}该活动么</div>
+							<div class="m-title text-center">确认解冻该用户么</div>
 							<div class="m-title button-box">
-								<div class="button pointer border-btn  hb-fill-middle2-bg" @click="onClick_closeBtn">
-									暂不{{currentTypeDesc}}
+								<div class="border-btn pointer button hb-fill-middle2-bg" @click="onClick_closeBtn">
+									暂不解冻
 								</div>
-								<div class="button pointer bg-btn hb-fill-middle2-rev" @click="onClick_confirmChange">
-									确认{{currentTypeDesc}}
+								<div class="bg-btn pointer button hb-fill-middle2-rev" @click="onClick_confirmChange">
+									确认解冻
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</transition>
+			<transition name="bounce">
+				<div class="affix-box default-pos-type" v-show="isShow_freezePop">
+					<div class="pop-edit-password pop-edit">
+						<div class="show-close-btn">
+							<img :src="g.config.path.images+'/close.png'"
+								 @click="onClick_closeBtn"/>
+						</div>
+						<div class="pop-tit"></div>
+						<div class="pop-body">
+							<div class="m-title">
+								<span class="">请输入冻结原因：</span>
+								<textarea name="" cols="30" rows="10" class="describle-reasons"
+										  v-model="freezeContent" @focus="onFocus_refuseInput"></textarea>
+								<div class="refuse-reason">
+									<span v-show="isShow_hasFreezeError">冻结原因不能为空</span>
+								</div>
+							</div>
+							<div class="button-box" style="margin-top: 20px">
+								<div class="refuse-button pointer border-btn" @click="onClick_closeBtn">暂不冻结</div>
+								<div class="refuse-button pointer bg-btn" @click="onClick_sumbitFreezeBtn">确认冻结并告知商户
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</transition>
@@ -95,6 +121,7 @@
 	import CommonTopNav from './common/CommonTopNav.vue';
 	import CommonFooter from './common/CommonFooter.vue';
 	import SeeImage from './common/SeeImage.vue';
+	import {queryActivityDetail} from './activityDetail';
 	export default {
 		created(){
 			this.isLoad = true;
@@ -104,10 +131,13 @@
 			return {
 				isLoad: false,
 				isShow_changeTypePop: false,
+				isShow_freezePop: false,
 				isShow_seeImage:false,
-				currentType: "冻结",
-				currentTypeDesc: "",
+				isShow_hasFreezeError:false,
+				currentType: "",
+				freezeContent: "",
 				g: g,
+				activityId:"",
 				activityInfo: {},
 				activityRpInfo: {},
 				memberRules: [],
@@ -145,6 +175,8 @@
 				this.remainQrCodeNum = activityDetail.remainQrCodeNum;
 				this.totalMakedAmount = activityDetail.totalMakedAmount;
 				this.totalMakedRpCount = activityDetail.totalMakedRpCount;
+				this.activityId = g.vue.router.currentRoute.query.id
+
 			},
 			onClick_seeImage($url){
 				this.currentUrl = $url;
@@ -160,7 +192,7 @@
 				}
 			},
 			onConfirm_freezeStatus($type){
-				if ($type == 1)
+				if ($type != 6)
 				{
 					return "冻结该活动"
 				}
@@ -171,58 +203,64 @@
 			},
 			onClick_changeStatus($type){
 				this.currentType = $type;
-				if ($type == 1)
-				{
-					this.currentTypeDesc = "冻结"
+				if ($type != 6) {
+
+					this.isShow_freezePop = true
 				}
-				else
-				{
-					this.currentTypeDesc = "解冻"
+				else {
+					this.isShow_changeTypePop = true
 				}
-				this.isShow_changeTypePop = true
 
 			},
 			onClick_closeBtn(){
 				this.isShow_changeTypePop = false;
+				this.isShow_freezePop = false;
 				this.isShow_seeImage = false;
+				this.isShow_hasFreezeError = false;
+				this.freezeContent = "";
+
+			},
+			onFocus_refuseInput(){
+				this.isShow_hasFreezeError = false;
+
 			},
 			onClick_confirmChange(){
 				var obj = {};
-				if (this.currentType == 1)
+				var freezeStatus;
+				if (this.currentType != 6)
 				{
-					obj = {
-						"freezeStatus": 0,
-						"freezeStatusDesc": "冻结"
-					}
+					freezeStatus = 3
 				}
 				else
 				{
-					obj = {
-						"freezeStatus": 1,
-						"freezeStatusDesc": "正常"
-					}
+					freezeStatus = 4
 				}
-				/*g.net.call("/getActivityDetail",{
-				 "id":this.shopId
-				 }).then(($data) =>
-				 {*/
-				g.data.userDetailPool.update(obj);
-				this.init();
-				this.isShow_changeTypePop = false;
-//				}, (err) =>
-//				{
-//					g.func.dealErr(err);
-//				});
+				g.net.call("activity/freezeShopActivity", {
+					"activityId": this.activityId,
+					"operateType": freezeStatus,
+					"remark": this.freezeContent
+				}).then(($data) => {
+					queryActivityDetail(this.activityId,this.init)
+					this.onClick_closeBtn();
+					g.ui.toast("更新活动状态成功");
+
+				}, (err) => {
+					g.func.dealErr(err);
+				});
 			},
+			onClick_sumbitFreezeBtn(){
+				if (this.freezeContent.trim() == "") {
+					this.isShow_hasFreezeError = true;
+					return
+				}
+				this.onClick_confirmChange()
+
+			}
 		}
 	}
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-
-	@import "../css/common.scss";
-</style>
-<style lang="sass" type="text/scss" rel="stylesheet/scss" scoped>
 	@import "../css/personlInfo.scss";
 	@import "../css/userDetail.scss";
 
@@ -232,10 +270,6 @@
 		vertical-align: middle;
 
 	}
+
 </style>
-
-
-
-
-
 

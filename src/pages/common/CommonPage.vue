@@ -122,6 +122,8 @@
                 this.$emit('change', this.indexPage, this.currentPageSize);
             },
             onClick_changeSize: function ($size) {
+                this.intentPage = "";
+                this.indexPage = 1;
                 this.currentPageSize = $size;
                 this.upDateOrder();
             }

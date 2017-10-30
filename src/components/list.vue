@@ -3,8 +3,6 @@
 		<li v-for="item of data" @click="onClick_item(item,$index)">{{item.name}}</li>
 	</ul>
 </template>
-<style>
-</style>
 <script>
 	export default{
 		data(){
