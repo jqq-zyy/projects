@@ -100,6 +100,7 @@
 		}
 	}
 </script>
+
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	#echartsMap {
 		width: 80%;
@@ -164,6 +165,11 @@
 
 		#echartsMap {
 			width: 70%;
+
+
+
+
+
 
 		}
 	}

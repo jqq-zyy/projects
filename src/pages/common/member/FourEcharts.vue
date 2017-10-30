@@ -132,6 +132,10 @@ w<template>
                 });
             },
             onUpdate_CityStatistic($id){
+                if(!$id){
+                    return
+                }
+
                 g.ui.showLoading()
                 var activityList = this.activityList.join(",");
                 g.net.call("statistic/sweepCityStatistic", {

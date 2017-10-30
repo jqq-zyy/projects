@@ -8,7 +8,7 @@
   },
   {
 	"id": "activity",
-	"name": "活动列表页",
+	"name": "活动列表",
 	"icon": "bag",
 	"path": "/activity",
 	"highLightList": ["/activity", "/activitydetail"]
@@ -27,7 +27,7 @@
 		"path": "/bag",
 		"highLightList": ["/bag"]
 	  },{
-		"name": "红包账户详情页",
+		"name": "红包账户详情",
 		"path": "/bagdetail",
 		"highLightList": [ "/bagdetail"]
 	  }
