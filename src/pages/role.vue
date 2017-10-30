@@ -98,7 +98,7 @@
 					<div class="pop-edit-password pop-edit">
 						<div class="show-close-btn">
 							<img :src="g.config.path.images+'/close.png'"
-								 @click="onClick_closeBtn()" />
+								 @click="onClick_closeBtn()"/>
 						</div>
 						<div class="pop-tit">
 							确认删除
@@ -144,7 +144,7 @@
 //				isShow_addPop: false,
 				isShow_rolePop: false,
 				isShow_deletePop: false,
-				isShow_confirmPop:false,
+				isShow_confirmPop: false,
 				roleList: [],
 				roleName: "",
 				roleId: "",
@@ -201,7 +201,11 @@
 				{
 					g.func.dealErr(err);
 				});
-			}
+			},
+			onClick_confirmBtn()
+			{
+
+										}
 		}
 	}
 </script>

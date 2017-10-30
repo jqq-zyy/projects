@@ -289,3 +289,22 @@ body, textarea, input, button, select, keygen, legend {
   background-color: #555555;
 }
 
+
+.tree-node {
+  .tree-node-wrap {
+    .padleft {
+      padding-left: 40px;
+
+    }
+
+    .station {
+      display: inline-block;
+      width: 17px;
+      height: 17px;
+    }
+
+    .color-#666 {
+      color: #666666;
+    }
+  }
+}

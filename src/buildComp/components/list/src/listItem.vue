@@ -1,7 +1,7 @@
 <template>
 	<li @mouseenter="onMouseEnter_item(itemData,$event)"
-		@mouseleave="onMouseLeave_item(itemData,$event)">
-		<div v-if="isValid(itemData)" ref="treeNode">
+		@mouseleave="onMouseLeave_item(itemData,$event)" class="tree-node">
+		<div v-if="isValid(itemData)" ref="treeNode" class="tree-node-wrap">
 			<hw-icon v-if="showArrow  && noArrow(itemData)"
 					 @click="onClick_item(itemData,$event)" class="pointer"
 					 :iconClass="isValid(itemData) ? currIdList.indexOf(itemData.id) >= 0 ?'icon-xiajiantou':'icon-youjiantou':''"
@@ -11,8 +11,7 @@
 					:iconClass="checkedChildren.indexOf(itemData.id) >= 0?'icon-fangxingxuanzhong':'icon-fangxingweixuanzhong'"
 					@click="onClick_icon(itemData)"
 			></hw-icon>
-
-			<span @click="onClick_icon(itemData)" class="pointer">{{itemData.name}}</span>
+			<span @click="onClick_icon(itemData)" class="pointer color-#666">{{itemData.name}}</span>
 		</div>
 		<ul v-if="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft">
 			<list-item :data="child" v-for="child in itemData.children" :showArrow="showArrow"
@@ -153,10 +152,10 @@
 		}
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
-	@import "../../../css/base/base.scss";
+<style type="text/scss" lang="sass" rel="stylesheet/scss">
+@import "./../../../css/base/base.scss";
 
-	.padleft {
-		padding-left: 40px;
-	}
+
+
+
 </style>

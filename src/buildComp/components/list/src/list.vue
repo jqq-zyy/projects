@@ -1,10 +1,11 @@
 <template>
-	<ul :vertical="vertical">
-		<li v-for="itemData in list"
+	<ul class="hw-list-wrap">
+		<li v-for="itemData in list" class="tree-node"
 			@mouseenter="onMouseEnter_item(itemData,$event)" @mouseleave="onMouseLeave_item(itemData,$event)">
-			<div v-if="isValid(itemData)">
-				<hw-icon v-if="showArrow  && isValid(itemData)"
-						 @click="onClick_item(itemData,$event)" class="pointer"
+			<div v-show="isValid(itemData)" class="tree-node-wrap">
+				<hw-icon v-if="showArrow  && isValid(itemData)" :ref="itemData.name"
+						 @click="onClick_item(itemData,$event)"
+						 class="pointer"
 						 :iconClass="currIdList.indexOf(itemData.id) >= 0 && isValid(itemData)?'icon-xiajiantou':'icon-youjiantou'"
 				></hw-icon>
 				<div v-if="!(showArrow  && isValid(itemData))" class="station"></div>
@@ -12,16 +13,17 @@
 						:iconClass="checkedChildren.indexOf(itemData.id) >= 0?'icon-fangxingxuanzhong':'icon-fangxingweixuanzhong'"
 						@click="onClick_icon(itemData)"
 				></hw-icon>
-				<span v-if="itemData.name" @click="onClick_icon(itemData)" class="pointer">{{itemData.name}}</span>
+				<span v-if="itemData.name" @click="onClick_icon(itemData)" class="pointer color-#666">{{itemData
+					.name}}</span>
 				<img :src="itemData.url" :alt="itemData.alt" v-if="itemData.url">
 			</div>
-			<ul	v-if="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0"
-					class="padleft">
+			<ul v-if="isValid(itemData)" class="padleft" v-show="currIdList.indexOf(itemData.id) >= 0">
 				<list-item :data="child" v-for="child in itemData.children" :showArrow="showArrow"
 						   @change="onChange_list" :checkedList="checkedChildren"
-						   :noShowRightList="noShowRightList"></list-item>
+						   :noShowRightList="noShowRightList" :ref="itemData.id"></list-item>
 			</ul>
 		</li>
+
 	</ul>
 </template>
 <script type="text/ecmascript-6">
@@ -39,6 +41,16 @@
 			{
 				this.checkedAllChildren(item)
 			}
+//			this.$nextTick(() =>
+//			{
+//				for (var item of this.list)
+//				{
+//					if (this.$refs[item.id] && !this.$refs[item.id][0].nextElementSibling)
+//					{
+//						this.$refs[item.id][0].firstChild.style.display = "none";
+//					}
+//				}
+//			})
 		},
 		data(){
 			return {
@@ -88,13 +100,19 @@
 			'list-item': ListItem,
 			'hw-group': Group
 		},
-		computed: {
-			wrapClass()
+		computed: {},
+		updated()
+		{
+			this.$nextTick(() =>
 			{
-				return [
-					`${prefixCls}-wrap`
-				]
-			}
+				for (var item of this.list)
+				{
+					if (this.$refs[item.id][0].$el && this.$refs[item.id][0].$el.children.length == 0)
+					{
+						this.$refs[item.name][0].$el.style.display = "none";
+					}
+				}
+			})
 		},
 		methods: {
 			onClick_item($item, $event)
@@ -153,17 +171,9 @@
 		}
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
-	@import "../../../css/base/base.scss";
-
-	.padleft {
-		padding-left: 40px;
-
-	}
-
-	.station {
-		display: inline-block;
-		width: 17px;
-		height: 17px;
+<style type="text/scss" lang="sass" rel="stylesheet/scss">
+	/*@import "../../../css/base/base.scss";*/
+	.color-#666 {
+		color: #666666;
 	}
 </style>
