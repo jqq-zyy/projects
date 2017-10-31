@@ -86,7 +86,7 @@
 									  :footerHeight="footerHeight"
 									  :fixHeader="true"
 									  :eachRowHeight="eachRowHeight"
-									  :eachColWidth="boxWidth/12"
+									  :eachColWidth="boxWidth/11"
 									  :isShowIdCol="true"
 									  :isShowTotal="true"
 									  @clickHead="onClick_headItem"

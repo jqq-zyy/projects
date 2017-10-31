@@ -69,7 +69,7 @@
 						</div>
 						<div class="pop-tit"></div>
 						<div class="pop-body">
-							<div class="m-title text-center">确认解冻该用户么</div>
+							<div class="m-title text-center">确认解冻该活动么</div>
 							<div class="m-title button-box">
 								<div class="border-btn pointer button hb-fill-middle2-bg" @click="onClick_closeBtn">
 									暂不解冻

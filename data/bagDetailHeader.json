@@ -6,10 +6,6 @@
     "params": "receive_id"
   },
   {
-    "name": "流水类型",
-    "id": "orderType"
-  },
-  {
     "name": "商家红包金额",
     "id": "shopAmount",
     "sortBy": "desc",

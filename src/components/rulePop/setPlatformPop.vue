@@ -46,9 +46,6 @@
                 else if (isNaN($val) || $val < 0) {
                     this.min = $oldVal;
                     return
-                } else if (Number($val) > Number(this.max)) {
-                    this.min = this.max;
-                    return
                 }
             },
             max($val, $oldVal){
@@ -59,10 +56,6 @@
                 else if (isNaN($val) || $val < 0) {
                     this.max = $oldVal;
                     return
-                } else if (Number($val) < Number(this.min)) {
-                    this.max = this.min;
-                    return
-
                 }
 
             }
@@ -76,12 +69,14 @@
                 this.$emit('close');
                 this.init();
 
-
-
             },
             onClick_saveBtn(){
                 if (!this.min || !this.max) {
-                    g.ui.toast("请填写平台红包金额最新与最大倍数范围");
+                    g.ui.toast("请填写平台红包金额最小与最大倍数范围");
+                    return
+                }
+                if(this.min>this.max){
+                    g.ui.toast("最小倍数需小于最大倍数");
                     return
                 }
                 g.net.call("config/updatePlatformRpAmountRange", {

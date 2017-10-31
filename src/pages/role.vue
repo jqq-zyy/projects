@@ -109,8 +109,8 @@
 							<div class="m-title button-box">
 								<span class="pointer button border-btn hb-fill-middle2-bg"
 									  @click="onClick_closeBtn">取消</span>
-								<span class="button pointer cancel-btn bg-btn hb-fill-middle2-rev"
-									  @click="onClick_confirmBtn">保存</span>
+								<!--<span class="button pointer cancel-btn bg-btn hb-fill-middle2-rev"
+									  @click="onClick_confirmBtn">保存</span>-->
 							</div>
 						</div>
 

@@ -48,7 +48,7 @@ var WEB_CONFIG = {
 	},
 
 	file: {
-		staticData: "{$data}/staticData_502222867012896.data",
+		staticData: "{$data}/staticData_2617108419364299.data",
 
 	},
 

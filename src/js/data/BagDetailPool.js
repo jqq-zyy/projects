@@ -115,7 +115,7 @@ function updateData($dObj)
 	$dObj.hasOwnProperty('platformRewardAmount') && (this.platformAmount = $dObj.platformRewardAmount);
 	$dObj.hasOwnProperty('receiveStatus') && (this.status = $dObj.receiveStatus);
 	$dObj.hasOwnProperty('receiveStatusDesc') && (this.statusDesc = $dObj.receiveStatusDesc);
-	$dObj.hasOwnProperty('receiverAlipayAccount') && (this.alipayAccount = $dObj.receiverAlipayAccount);
+	$dObj.hasOwnProperty('memberNickname') && (this.alipayAccount = $dObj.memberNickname);
 	$dObj.hasOwnProperty('mobileType') && (this.mobileType = $dObj.mobileType);
 	$dObj.hasOwnProperty('cityName') && (this.cityName = $dObj.cityName);
 	$dObj.hasOwnProperty('createTime') && (this.createTime = $dObj.createTime);
