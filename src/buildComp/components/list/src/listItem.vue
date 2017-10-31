@@ -1,8 +1,9 @@
 <template>
 	<li @mouseenter="onMouseEnter_item(itemData,$event)"
-		@mouseleave="onMouseLeave_item(itemData,$event)">
-		<div>
-			<hw-icon v-if="showArrow  && isValid(itemData)" @click="onClick_item(itemData,$event)" class="pointer"
+		@mouseleave="onMouseLeave_item(itemData,$event)" class="tree-node">
+		<div v-if="isValid(itemData)" ref="treeNode" class="tree-node-wrap">
+			<hw-icon v-if="showArrow  && noArrow(itemData)"
+					 @click="onClick_item(itemData,$event)" class="pointer"
 					 :iconClass="isValid(itemData) ? currIdList.indexOf(itemData.id) >= 0 ?'icon-xiajiantou':'icon-youjiantou':''"
 			></hw-icon>
 
@@ -12,10 +13,13 @@
 			></hw-icon>
 
 			<span @click="onClick_icon(itemData)" class="pointer item-color">{{itemData.name}}</span>
+
 		</div>
-		<ul v-show="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft">
-			<list-item :data="child" v-for="child in itemData.children" :showArrow="showArrow" :checkedList="checkedChildren"
-					   @change="onChange_list"></list-item>
+		<ul v-if="isValid(itemData) && currIdList.indexOf(itemData.id) >= 0" class="padleft">
+			<list-item :data="child" v-for="child in itemData.children" :showArrow="showArrow"
+					   :checkedList="checkedChildren"
+					   @change="onChange_list" :noShowRightList="noShowRightList"></list-item>
+
 		</ul>
 	</li>
 
@@ -30,6 +34,10 @@
 			this.itemData = this.data;
 			this.checkedChildren = this.checkedList;
 			this.checkedAllChildren(this.itemData);
+			this.$nextTick(() =>
+			{
+				console.dir(this.$refs.treeNode);
+			})
 		},
 		data(){
 			return {
@@ -47,6 +55,13 @@
 				}
 			},
 			checkedList: {
+				type: Array,
+				default: function ()
+				{
+					return []
+				}
+			},
+			noShowRightList: {
 				type: Array,
 				default: function ()
 				{
@@ -128,13 +143,19 @@
 			},
 			isValid(item)
 			{
-				return Array.isArray(item.children) && item.children.length > 0
+				return Array.isArray(item.children) && item.children.length > 0 &&
+						this.noShowRightList.indexOf(item.menuLevel) < 0;
+			},
+			noArrow(item)
+			{
+				return this.noShowRightList.indexOf(item.menuLevel) >= 0;
 			}
+
 		}
 	}
 </script>
-<style type="text/css" lang="sass" rel="stylesheet/css">
-	@import "../../../css/base/base.scss";
+<style type="text/scss" lang="sass" rel="stylesheet/scss">
+@import "./../../../css/base/base.scss";
 
 	.padleft {
 		padding-left: 40px;

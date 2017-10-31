@@ -907,3 +907,22 @@ li, ul {
   text-decoration: underline;
 
 }
+.tree-node {
+  .tree-node-wrap {
+    .padleft {
+      padding-left: 40px;
+
+    }
+
+    .station {
+      display: inline-block;
+      width: 17px;
+      height: 17px;
+    }
+
+    .color-#666.span {
+      color: #666666;
+    }
+  }
+
+}
