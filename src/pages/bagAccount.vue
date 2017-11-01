@@ -161,7 +161,7 @@
 				isShow_refusePop: false,
 				g: g,
 				totalPage: 1,
-				statusList: ["全部", "未付款", "付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
+				statusList: [],
 				bagList: [],
 				currentType: "orderId",
 				inputContent: "",
@@ -174,18 +174,7 @@
 				},
 				activityStatusList: [0],
 				dataObj: {},
-				typeList: [
-					{
-						id: 'orderId',
-						name: '流水ID'
-					}, {
-						id: "companyFullName",
-						name: '企业全称'
-					}, {
-						id: "applyUserLogon",
-						name: '发起人'
-					}
-				],
+				typeList: [],
 				rpAmount: 0,
 				currentId: 0,
 				auditStatus: 2,
@@ -243,6 +232,8 @@
 				this.tableData = obj;
 			},
 			initSearchData(){
+				this.typeList = g.data.staticSearchObjPool.getDataById('bagAccount').type;
+				this.statusList = g.data.staticSearchObjPool.getDataById('bagAccount').status;
 				this.dataObj = {
 					queryStatus: "",
 					startTime: "",

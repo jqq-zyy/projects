@@ -24,28 +24,30 @@
                                                id="cash">提现支出
                                     </label>
                                 </div>
-								<div>
+                                <div>
                                     <p>流水金额：</p>
                                     <input type="text" v-model="paramObj.amount">
                                 </div>
                                 <div>
                                     <p>备注：</p>
 									<textarea id="" cols="30" rows="10" v-model="paramObj.remark"
-											  placeholder="不超过50字"></textarea></div>
-								<div class="base-way">
-									<p>支付方式：</p>
-									<span>支付宝</span>
-								</div>
-								<div class="base-origin float-left">
-									<p>来源账户：</p>
-									<input type="text" placeholder="支付宝账号" v-model="paramObj.targetAccount">
-								</div>
-								<div class="base-operate">
-									<div class="button border-btn hb-fill-middle2-bg" @click="onClick_resetBtn">取消</div>
-									<div class="button bg-btn hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
-								</div>
+                                              placeholder="不超过50字"></textarea></div>
+                                <div class="base-way">
+                                    <p>支付方式：</p>
+                                    <span>支付宝</span>
+                                </div>
+                                <div class="base-origin float-left" v-if="paramObj.orderType==40">
+                                    <p>目标账户：</p>
 
-							</div>
+                                    <!--<p v-if="paramObj.orderType==21">来源账户：</p>-->
+                                    <input type="text" placeholder="支付宝账号" v-model="paramObj.targetAccount">
+                                </div>
+                                <div class="base-operate">
+                                    <div class="button border-btn hb-fill-middle2-bg" @click="onClick_resetBtn">取消</div>
+                                    <div class="button bg-btn hb-fill-middle2-rev" @click="onClick_saveBtn">保存</div>
+                                </div>
+
+                            </div>
 
                         </div>
                         <common-footer></common-footer>
@@ -140,18 +142,26 @@
                     this.paramObj.amount = $oldVal;
                     return
                 }
-                else if (isNaN($val) || $val < 0) {
-                    this.paramObj.amount = $oldVal;
+                else if (isNaN($val) || $val < 0.1) {
+                    this.paramObj.amount = 0.1;
                     return
                 }
-                else if ($val > 2000) {
+                else if ($val > 2000 && this.paramObj.orderType == 21) {
                     this.paramObj.amount = 2000;
+                    return
+                } else if ($val > 20000 && this.paramObj.orderType == 40) {
+                    this.paramObj.amount = 20000;
                     return
                 }
             },
-            remarks($val, $oldVal){
+            remark($val, $oldVal){
                 if ($val.length > 50) {
-                    this.paramObj.remarks = $oldVal;
+                    this.paramObj.remark = $oldVal;
+                }
+            },
+            orderType($val){
+                if ($val == 21 && this.paramObj.amount > 2000) {
+                    this.paramObj.amount = 2000;
                 }
             }
         },
@@ -159,8 +169,11 @@
             amount(){
                 return this.paramObj.amount
             },
-            remarks(){
-                return this.paramObj.remarks
+            remark(){
+                return this.paramObj.remark
+            },
+            orderType(){
+                return this.paramObj.orderType
             }
         },
         components: {
@@ -181,12 +194,13 @@
                     g.ui.toast("请填写流水金额")
                     return
                 }
-                else if (this.paramObj.remarks == "") {
+                else if (this.paramObj.remark == "") {
                     g.ui.toast("请填写备注")
                     return
                 }
-                else if (this.paramObj.account == "") {
-                    g.ui.toast("请填写账号")
+                else if (this.paramObj.targetAccount == "" && this.paramObj.orderType == 40) {
+
+                    g.ui.toast("请填写目标账号")
                     return
                 }
                 var obj = {};
@@ -230,5 +244,12 @@
 </script>
 
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
-	@import "../css/personlInfo.scss";
+    @import "../css/personlInfo.scss";
 </style>
+
+
+
+
+
+
+

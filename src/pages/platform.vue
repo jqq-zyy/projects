@@ -174,46 +174,9 @@
                 isShowEndTime: false,
                 g: g,
                 totalPage: 1,
-                flowTypeList: [{
-                    code: 0,
-                    name: '全部'
-                },{
-                    code:10,
-                    name:'销售收入'
-                },{
-                    code:'30,31',
-                    name: '退款支出'
-                },{
-                    code:21,
-                    name: '平台账户充值 '
-                },{
-                    code:40,
-                    name:'提现支出'
-                }],
-                statusList: [{
-                    code: 0,
-                    name: '全部'
-                }, {
-                    code: 1,
-                    name: '未处理'
-                }, {
-                    code: 2,
-                    name: '处理中'
-                }, {
-                    code: 3,
-                    name: '处理成功'
-                }, {
-                    code: -1,
-                    name: '处理失败'
-                }],
-                typeList: [{
-                    id: 'orderId',
-                    name: '流水ID'
-                }, {
-                    id: "applyUserLogon",
-                    name: "发起人"
-                }],
-
+                flowTypeList: [],
+                statusList: [],
+                typeList: [],
                 currentType: 'orderId',
                 inputContent: "",
                 platformList: [],
@@ -268,6 +231,9 @@
 
             },
             initSearchData(){
+                this.statusList = g.data.staticSearchObjPool.getDataById('platform').status;
+                this.typeList = g.data.staticSearchObjPool.getDataById('platform').type;
+                this.flowTypeList = g.data.staticSearchObjPool.getDataById('platform').flowTypeList;
                 this.dataObj = {
                     'orderTypes': "0",
                     'orderStatus': "0",

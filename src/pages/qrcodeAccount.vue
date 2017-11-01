@@ -163,7 +163,7 @@
                 isShow_refusePop: false,
                 g: g,
                 totalPage: 1,
-                statusList: ["全部", "未付款", "付款中", "付款成功", "付款失败", "申请退款", "退款中", "退款成功", "退款失败"],
+                statusList: [],
                 qrcodeList: [],
                 currentType: "orderId",
                 inputContent: "",
@@ -176,18 +176,7 @@
                 },
                 activityStatusList: [0],
                 dataObj: {},
-                typeList: [
-                    {
-                        id: 'orderId',
-                        name: '流水ID'
-                    }, {
-                        id: "companyFullName",
-                        name: '企业全称'
-                    }, {
-                        id: "applyUserLogon",
-                        name: '发起人'
-                    }
-                ],
+                typeList: [],
                 resultTotalObj: {
                     qrcodeNum: 0,
                     qrcodeAmount: 0
@@ -254,6 +243,9 @@
                 this.errMsg = "";
             },
             initSearchData(){
+                this.statusList = g.data.staticSearchObjPool.getDataById('qrcodeAccount').status;
+                this.typeList = g.data.staticSearchObjPool.getDataById('qrcodeAccount').type;
+
                 this.dataObj = {
                     queryStatus: "",
                     startTime: "",

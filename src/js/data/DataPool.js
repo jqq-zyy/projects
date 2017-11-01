@@ -25,6 +25,7 @@ import NewMemberEchartsPool from "./NewMemberEchartsPool";
 import QrcodeCountEchartsPool from "./QrcodeCountEchartsPool";
 import ScanTimeEchartsPool from "./ScanTimeEchartsPool";
 import StatisticsPool from "./StatisticsPool";
+import StaticSearchObjPool from "./StaticSearchObjPool";
 
 export var userInfo = new UserInfo(); //用户信息
 export var langPool = new LangPool(); //语言包数据池
@@ -49,6 +50,7 @@ export var newMemberEchartsPool = new NewMemberEchartsPool(); //新扫码消费�
 export var qrcodeCountEchartsPool = new QrcodeCountEchartsPool(); //扫码次数图表数据池
 export var scanTimeEchartsPool = new ScanTimeEchartsPool(); //扫码时间段数据池
 export var statisticsPool = new StatisticsPool(); //数据统计
+export var staticSearchObjPool = new StaticSearchObjPool(); //数据统计
 
 export function initStaticData()
 {
@@ -82,7 +84,8 @@ export function removeAll()
 	newMemberEchartsPool.removeAll();
 	qrcodeCountEchartsPool.removeAll();
 	scanTimeEchartsPool.removeAll();
-	statisticsPool .removeAll();
+	statisticsPool.removeAll();
+	staticSearchObjPool.removeAll();
 }
 
 

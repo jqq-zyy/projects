@@ -180,19 +180,7 @@
 				dataObj: {},
 				currentType: "activityName",
 				inputContent: "",
-				typeList: [
-					{
-						id: 'activityName',
-						name: '活动名称'
-					}, {
-						id: "brandName",
-						name: "品牌名称"
-					}, {
-						id: "companyFullName",
-						name: "企业名称"
-					}
-
-				],
+				typeList: [],
 				activityStatus: [0],
 				resultTotalObj: {
 					totalQrCodeNum: 0,
@@ -236,7 +224,7 @@
 				this.initData();
 			},
 			initData(){
-
+				//init表格数据
 				var info = g.data.activityPool;
 				this.totalPage = info.totalPage;
 				this.activityList = info.list;
@@ -248,12 +236,15 @@
 				this.statusList = g.data.activityStatusPool.list;
 			},
 			initDate(){
+				//init 日期
 				this.dataObj.activitySQueryStartTime = g.timeTool.getDate(this.dataObj.activitySQueryStartTime, true);
 				this.dataObj.activitySQueryEndTime = this.dataObj.activitySQueryStartTime;
 				this.dataObj.activityEQueryStartTime = this.dataObj.activitySQueryStartTime;
 				this.dataObj.activityEQueryEndTime = this.dataObj.activitySQueryStartTime;
 			},
 			initSearchData(){
+				this.typeList = g.data.staticSearchObjPool.getDataById('activity').type
+
 				this.dataObj = {
 					page: 1,
 					pageSize: g.param.pageSizeList[0],
@@ -293,7 +284,7 @@
 				this.dataObj.applyUserLogon = "";
 				this.dataObj[this.currentType] = this.inputContent;
 				var url = "";
-				if($isByPage){
+				if($isByPage){ //分页与查询按钮请求接口不同
 					url = "activity/queryActivitiesStatisticList"
 				}else{
 					url = "activity/queryActivitiesStatisticOverview"

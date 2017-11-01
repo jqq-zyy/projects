@@ -19,6 +19,7 @@ _initList.push(initLogin);
 _initList.push(initStaticData);
 _initList.push(initBuildComp);
 _initList.push(initSocket);
+_initList.push(initSearchObj);
 
 export function init($callback)
 {
@@ -76,6 +77,23 @@ function initSocket()
 	}
 	this.apply();
 }
+function initSearchObj(){
+	var staticData = g.data.staticData;
+	var staticTableHeaderPool = g.data.staticSearchObjPool;
+	staticTableHeaderPool.removeAll();
+	staticTableHeaderPool.update(staticData["searchType.json"]);
+	this.apply();
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

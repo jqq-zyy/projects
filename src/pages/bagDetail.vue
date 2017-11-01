@@ -245,7 +245,7 @@
 				isShowEndTime: false,
 				g: g,
 				totalPage: 1,
-				statusList: ["全部", "成功", "失败"],
+				statusList: [],
 				bagDetailList: [],
 				currentType: "receiveId",
 				inputContent: "",
@@ -257,21 +257,7 @@
 				},
 				activityStatusList: [0],
 				dataObj: {},
-				typeList: [
-					{
-						id: 'receiveId',
-						name: '流水ID'
-					}, {
-						id: "brandName",
-						name: '品牌名称'
-					}, {
-						id: "activityName",
-						name: '活动名称'
-					}, {
-						id: "companyFullName",
-						name: '企业全称'
-					}
-				],
+				typeList: [],
 				resultTotalObj: {
 					shopRpAmount: 0,
 					platformRpAmount: 0
@@ -325,6 +311,8 @@
 				this.bagDetailList = info.list;
 			},
 			initSearchData(){
+				this.statusList = g.data.staticSearchObjPool.getDataById('bagDetail').status;
+				this.typeList = g.data.staticSearchObjPool.getDataById('bagDetail').type;
 				this.dataObj = {
 					status: "",
 					startTime: "",

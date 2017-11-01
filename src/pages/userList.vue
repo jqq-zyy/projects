@@ -152,22 +152,10 @@
 				searchObj: {},
 				totalPage: 0,
 				currentType: "logon",
-
 				inputContent: "",
-				typeList: [
-					{
-						id: 'logon',
-						name: '用户名'
-					}, {
-						id: "telphone",
-						name: "手机号"
-					}, {
-						id: "companyName",
-						name: "企业全称"
-					}
-				],
-				freezeStatusList: ['全部', '正常', '冻结'],
-				authStatusList: ['全部', '未认证', '已认证'],
+				typeList: [],
+				freezeStatusList: [],
+				authStatusList: [],
 				tableData: {},
 				boxWidth: window.innerWidth * 0.81,
 				eachRowHeight: 60,
@@ -220,6 +208,9 @@
 				this.date.endTimeStr = g.timeTool.getDate(this.date.endTime, true);
 			},
 			initSearchData(){
+				this.typeList = g.data.staticSearchObjPool.getDataById('userList').type;
+				this.freezeStatusList = g.data.staticSearchObjPool.getDataById('userList').freezeStatusList;
+				this.authStatusList = g.data.staticSearchObjPool.getDataById('userList').authStatusList;
 				this.searchObj = {
 					'page': 1,
 					'pageSize': g.param.pageSizeList[0],
@@ -420,17 +411,7 @@
 						+ "&sortOrder=" + this.searchObj.sortOrder
 						+ "&" + this.currentType + "=" + this.inputContent
 				)
-
-
-			},
-//			onClick_lookItem($id){
-//				g.url = ("/userdetail?id=" + $id)
-//			},
-
-//			onClick_userItem($id){
-//				g.url = ("/userdetail?id=" + $id)
-//
-//			}
+			}
 
 		}
 	}
