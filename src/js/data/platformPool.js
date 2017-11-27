@@ -9,6 +9,7 @@ var _totalIncome = 0;
 var _totalPay = 0;
 var _qrcodeBalance = 0;
 var _rpBalance = 0;
+var _assetCurrentAmount = 0;
 var _typeData = {};
 
 export default class PlatformPool {
@@ -18,6 +19,7 @@ export default class PlatformPool {
 
 	update($dObj)
 	{
+		$dObj.hasOwnProperty('assetCurrentAmountDesc') && (_assetCurrentAmount = $dObj.assetCurrentAmountDesc);
 		if($dObj.hasOwnProperty('statisticData')){
 			$dObj.statisticData.hasOwnProperty('totalIncome') && (_totalIncome = $dObj.statisticData.totalIncome);
 			$dObj.statisticData.hasOwnProperty('totalPay') && (_totalPay = $dObj.statisticData.totalPay);
@@ -83,6 +85,11 @@ export default class PlatformPool {
 	get total()
 	{
 		return _total;
+	}
+	
+	get assetCurrentAmount()
+	{
+		return _assetCurrentAmount;
 	}
 
 	getDataById($id)

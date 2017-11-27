@@ -25,7 +25,7 @@
 				<div class="body-col" v-for="(value,key,index) in item" v-if="checkLeftBody(key)"
 					 :style="{width:getWidth(value)+'px',height:eachRowHeight+'px'}"
 					 :class="lightColsList.indexOf(index)>= 0?'light-color':''">
-					<span v-if="key !== 'btn'">{{getName(value)}}</span>
+					<span v-if="key !== 'btn'" :title="getName(value)">{{getName(value)}}</span>
 					<span v-if="key==='btn'" :style="{paddingBottom:'30px'}">
 						<hw-btn @click.stop="onClick_itemBtn(btnItem.id,item.id)" v-for="btnItem in value"
 								:text="btnItem.name" class="margin-10" :class="btnItem.className">
@@ -518,7 +518,6 @@
 
 	.body-col span, .header-col span {
 		display: inline-block;
-		text-align: center;
 		word-wrap: break-word;
 	}
 
@@ -529,9 +528,11 @@
 	}
 
 	.footer .header-col span, .body-col span {
-		width: 100px;
-		height: 20px;
-		line-height: 20px;
+		width: 100%;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
 	.absolute-right {

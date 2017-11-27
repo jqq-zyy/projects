@@ -37,7 +37,7 @@ w<template>
         <div class="">
             <scan-count-echarts :scanEchartsX="scanEchartsX" :scanList="scanList"></scan-count-echarts>
             <map-echarts :mapList="mapList" @click="onUpdate_CityStatistic" :cityList="cityList"></map-echarts>
-            <sex-echarts :sexList="sexList"></sex-echarts>
+            <!--<sex-echarts :sexList="sexList"></sex-echarts>-->
         </div>
         <change-activity-pop v-show="isShowActivityList" @close="onClick_closeBtn"
                              @confirm="onConfirm_activityList"></change-activity-pop>
@@ -72,7 +72,7 @@ w<template>
                 cityList:[],
                 mapList: [0],
                 scanList: [0],
-                sexList: [0],
+                // sexList: [0],
                 date: {
                     startTime: 0,
                     startTimeStr: "",
@@ -122,7 +122,7 @@ w<template>
                     this.scanList = g.data.statisticsPool.scanList;
                     this.scanEchartsX = g.data.statisticsPool.scanEchartsX;
                     this.mapList = g.data.statisticsPool.mapList;
-                    this.sexList = g.data.statisticsPool.sexList;
+                    // this.sexList = g.data.statisticsPool.sexList;
                     this.cityList=[];
 
                     g.ui.hideLoading();

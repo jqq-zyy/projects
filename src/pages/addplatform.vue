@@ -26,7 +26,8 @@
                                 </div>
                                 <div>
                                     <p>流水金额：</p>
-                                    <input type="text" v-model="paramObj.amount">
+                                    <input type="text" v-model="paramObj.amount" :placeholder="confirmPlaceholder()">
+
                                 </div>
                                 <div>
                                     <p>备注：</p>
@@ -126,6 +127,7 @@
                 isShow_successBox: false,
                 isShow_confirmBox: false,
                 g: g,
+                currentAmount: 0,
                 paramObj: {
                     orderType: 21,
                     applyUserLogon: "",
@@ -142,17 +144,20 @@
                     this.paramObj.amount = $oldVal;
                     return
                 }
-                else if (isNaN($val) || $val < 0.1) {
-                    this.paramObj.amount = 0.1;
+                else if (isNaN($val)) {
+                    this.paramObj.amount = $oldVal;
                     return
-                }
-                else if ($val > 2000 && this.paramObj.orderType == 21) {
+                } else if ($val > this.currentAmount && this.paramObj.orderType == 40) {
+                    this.paramObj.amount = this.currentAmount;
+                    return
+                } else if ($val > 2000 && this.paramObj.orderType == 21) {
                     this.paramObj.amount = 2000;
                     return
                 } else if ($val > 20000 && this.paramObj.orderType == 40) {
                     this.paramObj.amount = 20000;
                     return
                 }
+
             },
             remark($val, $oldVal){
                 if ($val.length > 50) {
@@ -160,9 +165,9 @@
                 }
             },
             orderType($val){
-                if ($val == 21 && this.paramObj.amount > 2000) {
-                    this.paramObj.amount = 2000;
-                }
+                this.paramObj.amount = "";
+                this.paramObj.remark = "";
+                this.paramObj.targetAccount = "";
             }
         },
         computed: {
@@ -184,14 +189,16 @@
         },
         methods: {
             init(){
+                this.currentAmount = g.data.platformPool.assetCurrentAmount;
                 this.paramObj.applyUserLogon = g.data.get("userInfo").logon
             },
+
             onClick_resetBtn(){
                 g.url = ("/platform")
             },
             onClick_saveBtn(){
-                if (!this.paramObj.amount) {
-                    g.ui.toast("请填写流水金额")
+                if (!this.paramObj.amount || this.paramObj.amount < 0.1) {
+                    g.ui.toast("请填写流水金额且金额不得小于0.1元")
                     return
                 }
                 else if (this.paramObj.remark == "") {
@@ -238,6 +245,15 @@
             onClick_closeBtn(){
                 this.isShow_successBox = false;
                 this.isShow_confirmBox = false;
+            },
+            confirmPlaceholder(){
+                if (this.paramObj.orderType == 40) {
+                    return  "可提现金额" + this.currentAmount
+                } else {
+                    return "请填写充值金额"
+                    // return `可退余额${this.currentAmount}`
+                }
+
             }
         }
     }

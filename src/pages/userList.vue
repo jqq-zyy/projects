@@ -161,7 +161,7 @@
 				eachRowHeight: 60,
 				headerHeight: 60,
 				footerHeight: 60,
-				boxHeight: 610,
+				boxHeight:550,
 				bodyHeight: 420
 			}
 		},
@@ -411,6 +411,16 @@
 						+ "&sortOrder=" + this.searchObj.sortOrder
 						+ "&" + this.currentType + "=" + this.inputContent
 				)
+
+				// window.open(`${g.webParam.url.server}
+				// /export/exportShopsStatisticList?page=0&pageSize=0
+				// &freezeStatus=${this.searchObj.freezeStatus}
+				// &authStatus=${this.searchObj.authStatus}
+				// &startTime=${this.date.startTimeStr}
+				// &endTime=${this.date.endTimeStr}
+				// &sortField=${this.searchObj.sortField}
+				// &sortOrder=${this.searchObj.sortOrder}
+				// &${this.currentType}=${this.inputContent}`)
 			}
 
 		}

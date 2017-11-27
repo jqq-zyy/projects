@@ -35,7 +35,7 @@
 									<div class="msg-info msf-info-width">
 										<span>活动地区：</span>
 										<ul v-for="(item,index) in regionRules" v-if="regionRules.length>0">
-											<li v-if="item.ruleType==2">{{index+1}}. {{item.provinceName}}（{{item.reward}}  倍）</li>
+											<li v-if="item.ruleType==2">{{index+1}}. {{item.provinceName}}<i v-show="item.cityName">/{{item.cityName}}</i>（{{item.reward}}  倍）</li>
 										</ul>
 										<span v-if="regionRules.length==0">暂无</span>
 									</div>

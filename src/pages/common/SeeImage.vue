@@ -39,7 +39,7 @@
 </script>
 <style>
 	.img-box{
-		width:60%;
+		width:80%;
 		height:800px;
 		position:relative;
 	}

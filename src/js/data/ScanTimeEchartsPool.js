@@ -13,7 +13,7 @@ export default class ScanTimeEchartsPool {
 	{
 		for (var item of $dObj)
 			{
-				_timeList.push(item.time);
+				_timeList.push(item.time+":00");
 				_dataList.push(item.value);
 			}
 	}

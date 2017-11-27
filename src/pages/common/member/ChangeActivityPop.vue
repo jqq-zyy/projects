@@ -12,13 +12,13 @@
 				<div class="m-title">
 					<span class="float-left m-name">请选择商户：</span>
 					<div class="drop-box pointer" @click.stop="onClick_dropListBtn">
-						<div @click.stop="onClick_dropListBtn">
+						<div @click.stop="onClick_dropListBtn" class="drop_box" :name="currentSearchType">
 							{{currentSearchType}}
 							<span :class="['pointer','drop-icon',isShow_dropList?'rotate':'']"></span>
 						</div>
 						<ul class="droplist" v-show="isShow_dropList">
 							<li v-for="item in shopList" class="pointer"
-								@click.stop="onClick_dropItem(item.id,item.name)">{{item.name}}
+								@click.stop="onClick_dropItem(item.id,item.name)" :name="item.name">{{item.name}}
 							</li>
 						</ul>
 					</div>
@@ -142,6 +142,13 @@
 </script>
 <style lang="sass" type="text/scss" rel="stylesheet/scss">
 	@import "../../../css/pop.scss";
+    .drop_box,.drop-box .droplist li{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding-right: 10px;
+    }
+
 </style>
 
 

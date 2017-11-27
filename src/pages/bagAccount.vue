@@ -184,7 +184,7 @@
 				eachRowHeight: 60,
 				headerHeight: 60,
 				footerHeight: 60,
-				boxHeight: 610,
+				boxHeight: 550,
 				bodyHeight: 420			}
 		},
 		components: {
