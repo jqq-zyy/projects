@@ -26,6 +26,7 @@ import QrcodeCountEchartsPool from "./QrcodeCountEchartsPool";
 import ScanTimeEchartsPool from "./ScanTimeEchartsPool";
 import StatisticsPool from "./StatisticsPool";
 import StaticSearchObjPool from "./StaticSearchObjPool";
+import EchartDatePartPool from "./EchartDatePartPool";
 
 export var userInfo = new UserInfo(); //用户信息
 export var langPool = new LangPool(); //语言包数据池
@@ -51,12 +52,14 @@ export var qrcodeCountEchartsPool = new QrcodeCountEchartsPool(); //扫码次数
 export var scanTimeEchartsPool = new ScanTimeEchartsPool(); //扫码时间段数据池
 export var statisticsPool = new StatisticsPool(); //数据统计
 export var staticSearchObjPool = new StaticSearchObjPool(); //数据统计
+export var echartDatePartPool = new EchartDatePartPool(); //echarte图标X轴点数间隔
 
 export function initStaticData()
 {
 	var staticData = g.data.staticData;
 	initLang(staticData);
 	navPool.update(staticData["nav.json"]);
+	echartDatePartPool.update(staticData["echartsDatePart.json"]);
 
 }
 

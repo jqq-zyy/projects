@@ -11,7 +11,7 @@ _chartsHash["map"] = require('./chart/map').default;
 
 var _typeList;
 
-export default ($el, $option, $dataList, $xAxis, $func, $id) => {
+export default ($el, $option, $dataList, $xAxis, $func, $id, $part) => {
 
 	if ($el == "")
 	{
@@ -23,7 +23,7 @@ export default ($el, $option, $dataList, $xAxis, $func, $id) => {
 	}
 
 	_typeList = [];
-	var option = createData($option, $dataList, $xAxis);
+	var option = createData($option, $dataList, $xAxis, $part);
 
 // 	debugger;
 	if (!$dataList[0].isSet||!_hash[$id])
@@ -50,12 +50,13 @@ export default ($el, $option, $dataList, $xAxis, $func, $id) => {
  * @param $dataList   [{name:'',list:[],index:0,color:'',lineStyle:{}}]
  * @param $xAxis
  */
-function createData($option, $dataList, $xAxis = [])
+function createData($option, $dataList, $xAxis = [], $part = 0)
 {
 	var option = __merge({}, $option);
 	if ($dataList[0].type !== "map" && $dataList[0].type !== "pie")
 	{
 		option.xAxis[0].data = $xAxis;
+		option.xAxis[0].axisLabel.interval= $part;
 	}
 	option.legend.data = [];
 	option.series = [];

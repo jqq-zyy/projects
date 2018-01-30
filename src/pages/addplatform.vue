@@ -11,10 +11,10 @@
                             <div class="admin-calendar-table add-platform">
                                 <div class="base-info">基本信息</div>
                                 <div class="base-master">
-                                    <p>发起人: </p>
+                                    <p class="title">发起人: </p>
                                     <span>{{paramObj.applyUserLogon}}</span></div>
                                 <div>
-                                    <p>流水类型：</p>
+                                    <p class="title">流水类型：</p>
                                     <label for="recharge">
                                         <input type="radio" name="status" v-model="paramObj.orderType" value="21"
                                                id="recharge">平台红包充值
@@ -25,20 +25,20 @@
                                     </label>
                                 </div>
                                 <div>
-                                    <p>流水金额：</p>
+                                    <p class="title">流水金额：</p>
                                     <input type="text" v-model="paramObj.amount" :placeholder="confirmPlaceholder()">
 
                                 </div>
                                 <div>
-                                    <p>备注：</p>
+                                    <p class="title">备注：</p>
 									<textarea id="" cols="30" rows="10" v-model="paramObj.remark"
                                               placeholder="不超过50字"></textarea></div>
                                 <div class="base-way">
-                                    <p>支付方式：</p>
+                                    <p class="title">支付方式：</p>
                                     <span>支付宝</span>
                                 </div>
                                 <div class="base-origin float-left" v-if="paramObj.orderType==40">
-                                    <p>目标账户：</p>
+                                    <p class="title">目标账户：</p>
 
                                     <!--<p v-if="paramObj.orderType==21">来源账户：</p>-->
                                     <input type="text" placeholder="支付宝账号" v-model="paramObj.targetAccount">

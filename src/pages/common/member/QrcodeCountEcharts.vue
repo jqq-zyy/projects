@@ -84,7 +84,8 @@
                     startTimeStr: "",
                     endTimeStr: "",
                     endTime: 0
-                }
+                },
+                part:0
             }
         },
 
@@ -127,7 +128,7 @@
                     yAxis: 0,
                     areaStyle: {normal: {}},
                     isSet:false
-                }],this.timeList,null,2);
+                }],this.timeList,null,2,this.part);
             },
             onClick_searchBtn(){
                 this.onUpdate_echartsData();
@@ -145,6 +146,7 @@
                     g.data.qrcodeCountEchartsPool.update($data.data);
                     this.dataList = g.data.qrcodeCountEchartsPool.dataList;
                     this.timeList = g.data.qrcodeCountEchartsPool.timeList;
+                    this.part = g.func.changeTimeList(g.data.qrcodeCountEchartsPool.timeList);
 					if(_hash){
 						_hash = Object.create(null);
 					}

@@ -62,3 +62,14 @@ export function dealErr($errObj)
 		}
 	}
 }
+
+export function changeTimeList($list){
+	let partList = g.data.echartDatePartPool.list
+	for(var i =0;i<partList.length;i++){
+		if($list.length>=partList[i].min&&$list.length<=partList[i].max){
+			return partList[i].part
+		}
+	}
+
+	return  0;
+}

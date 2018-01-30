@@ -27,14 +27,14 @@ module.exports = {
 	devServer: {
 		historyApiFallback: true,
 		progress: true,
-		port: 8086,
+		port: 8081,
 		host: '0.0.0.0'
 	},
 	context: path.resolve(__dirname, './src'),
 	entry: {
 		"index": [
 			'webpack/hot/dev-server',
-			'webpack-dev-server/client?http://' + localIp + ':8086',
+			'webpack-dev-server/client?http://' + localIp + ':8081',
 			'./main.js'
 		]
 	},
@@ -84,7 +84,7 @@ module.exports = {
 	devtool: '#eval-source-map',
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
-		new OpenBrowserPlugin({url: 'http://' + localIp + ':8086'})
+		new OpenBrowserPlugin({url: 'http://' + localIp + ':8081'})
 	]
 }
 

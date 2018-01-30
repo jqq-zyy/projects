@@ -34,8 +34,8 @@ export default {
 				}
 			},
 			axisLabel: {
-				interval: 0,
-				rotate: -10,
+				interval:"auto",
+				rotate: -20,
 				textStyle: {color: ['balck', 'red']}
 			},
 			itemStyle: {

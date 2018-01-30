@@ -50,8 +50,16 @@
 								<div class="detail-msg">
 									<div class="msg-title">红包信息</div>
 									<span class="msg-info msf-info-width">标题：{{activityRpInfo.rpTitle}}</span>
-									<span class="msg-info msf-info-width">祝福文字：{{activityRpInfo.rpWish}}</span>
+
 									<span class="msg-info msf-info-width">显示图片：<img class="show-img pointer" :src="activityRpInfo.rpLogoUrl"  @click="onClick_seeImage(activityRpInfo.rpLogoUrl)"></span>
+									<span class="wish-title-box">祝福文字：<i v-show="activityRpInfo.rpWishes.length==0">暂无</i></span>
+
+									<ul class="wish-List" v-show="activityRpInfo.rpWishes.length>0">
+										<li class="pointer light-color " v-for="(item,index) in activityRpInfo.rpWishes" @click="onClick_wishItem(item.id)">{{item.wishTitle}}</li>
+									</ul>
+									<p v-html="currentWish" class="preview" v-show="activityRpInfo.rpWishes.length>0">
+
+									</p>
 								</div>
 							</div>
 						</div>
@@ -136,6 +144,7 @@
 				isShow_hasFreezeError:false,
 				currentType: "",
 				freezeContent: "",
+				currentWish:"",
 				g: g,
 				activityId:"",
 				activityInfo: {},
@@ -255,6 +264,15 @@
 				}
 				this.onClick_confirmChange()
 
+			},
+			onClick_wishItem($id){
+				g.net.call("activity/getActivityRpWishDetail", {
+					"id":$id
+				}).then(($data) => {
+					this.currentWish = $data.rpWish;
+				}, (err) => {
+					g.func.dealErr(err);
+				});
 			}
 		}
 	}
@@ -270,6 +288,44 @@
 		vertical-align: middle;
 
 	}
+	.light-color{
+		color: #01aaef;
+	}
+	.wish-List{
+		display: inline-block;
+		width:250px;
+		max-height:186px;
+		overflow: auto;
+		border: 1px solid #efefef;
+		border-bottom: none;
+		float: left;
+		margin-top:20px;
+		li{
+			border-bottom:1px solid #efefef;
+			line-height: 30px;
+		}
+		li:nth-child(2n){
+			background: #f8f8f8;
+		}
+	}
+	.wish-title-box{
+		display: inline-block;
+		float: left;
+		width:120px;
+		vertical-align: top;
+	}
+	.preview{
+		display: inline-block;
+		float: left;
+		width:450px;
+		min-width: 400px;
+		height:186px;
+		margin:20px;
+		border:1px solid #efefef;
+			p{
 
+			line-height: 40px;
+			}
+	}
 </style>
 

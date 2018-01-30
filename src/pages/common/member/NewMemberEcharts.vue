@@ -84,7 +84,8 @@
                     startTimeStr: "",
                     endTimeStr: "",
                     endTime: 0
-                }
+                },
+                part:0
             }
         },
         components: {
@@ -126,7 +127,7 @@
                     yAxis: 0,
                     areaStyle: {normal: {}},
                     isSet:false
-                }],this.timeList,null,1);
+                }],this.timeList,null,1,this.part);
             },
             onClick_searchBtn(){
                 this.onUpdate_echartsData();
@@ -144,7 +145,8 @@
                     g.data.newMemberEchartsPool.removeAll();
                     g.data.newMemberEchartsPool.update($data.data);
                     this.dataList = g.data.newMemberEchartsPool.dataList;
-                    this.timeList = g.data.newMemberEchartsPool.timeList;
+                    this.timeList =g.data.newMemberEchartsPool.timeList;
+                    this.part = g.func.changeTimeList(g.data.newMemberEchartsPool.timeList);
 					if(_hash){
 						_hash = Object.create(null);
 					};
